@@ -1,0 +1,18 @@
+Supported URLs
+
+http://localhost/citemplate/
+http://localhost/citemplate/user_guide/
+
+http://localhost/citemplate/index.php/login
+http://localhost/citemplate/index.php/register
+http://localhost/citemplate/index.php/logout
+http://localhost/citemplate/index.php/about
+http://localhost/citemplate/index.php/registration      it is the form validation
+
+http://localhost/citemplate/index.php/C_ciauth_admin/nav_admin
+
+http://localhost/citemplate/login
+http://localhost/citemplate/register
+http://localhost/citemplate/#
+
+
