@@ -3,16 +3,65 @@ Supported URLs
 http://localhost/citemplate/
 http://localhost/citemplate/user_guide/
 
-http://localhost/citemplate/index.php/login
-http://localhost/citemplate/index.php/register
-http://localhost/citemplate/index.php/logout
-http://localhost/citemplate/index.php/about
-http://localhost/citemplate/index.php/registration      it is the form validation
-
-http://localhost/citemplate/index.php/C_ciauth_admin/nav_admin
-
 http://localhost/citemplate/login
 http://localhost/citemplate/register
+http://localhost/citemplate/logout
+http://localhost/citemplate/about
+http://localhost/citemplate/registration      it is the form validation
+
+http://localhost/citemplate/C_ciauth_admin/nav_admin
+
 http://localhost/citemplate/#
 
+URL rewriting
+http://softkube.com/blog/url-rewriting-for-codeigniter
+
+ls -l /usr/lib/apache2/modules/
+sudo a2enmod rewrite
+
+Set AllowOveride to all in /etc/apache2/apache2.conf
+
+sudo /etc/init.d/apache2 restart
++ phpinfo
+
+1    Menu
+
+2    Development
+3        phphinfo            /dev/phpinfo
+    
+4   Admin
+5       Config              /admin/config
+6       Database
+7           backup          /database/backup
+8           restore         /database/restore
+9           migration       /database/migration
+10          schema          /database/schema
+11         default table   /database/schema
+12      Lock site           /admin/lock
+13      Users Management    /users
+14      Menu                /C_ciauth_admin/nav_admin
+
+15  CRUD
+16      List                /crud/list
+17      Create              /crud/create
+
+18  Help
+19      About               /help/about
+
+INSERT INTO `ciauth_navigation` (`id`, `order`, `name`, `anchor`, `parent`, `permissions`) VALUES
+(5, 1, 'Configuration', '/admin/config', 4, NULL),
+(6, 2, 'Database', '', NULL, NULL),
+(7, 1, 'Backup', '/database/backup', 6, NULL),
+(8, 1, 'Restore', '/database/restore', 6, NULL),
+(9, 2, 'Migration', '/database/migration', 6, NULL),
+(10, 3, 'Schema', '/database/schema', 6, NULL),
+(11, 4, 'Default tables', '/database/shema', 6, NULL),
+(12, 5, 'Lock site', '/admin/lock', 3, NULL),
+(13, 6, 'Users Management', '/users', 3, NULL),
+(14, 7, 'Menus', '/C_ciauth_admin/nav_admin', 3, NULL),
+(15, 4, 'CRUD', '', NULL, NULL),
+(16, 1, 'List', '/crud/list', 15, NULL),
+(17, 2, 'Create', '/crud/create', 15, NULL),
+(18, 5, 'Help', '', NULL, NULL),
+(19, 1, 'About', '/about', NULL, NULL);
 
