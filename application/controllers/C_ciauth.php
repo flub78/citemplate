@@ -66,7 +66,11 @@ class C_ciauth extends CI_Controller {
         $nav_elements = $this->M_ciauth_nav->get_menus();
         $nav_menu = $nav->walk($nav_elements, 10);
   
-        $data['nav_menu'] = $nav_menu;
+        if ($this->ciauth->is_logged_in()) {
+        	$data['nav_menu'] = $nav_menu;
+        } else {
+        	$data['nav_menu'] = "";
+        }
 
         /*
          * load our V_template and the ciauth basic 
@@ -100,8 +104,12 @@ class C_ciauth extends CI_Controller {
         $nav_elements = $this->M_ciauth_nav->get_menus();
         $nav_menu = $nav->walk($nav_elements, 10);
 
-        $data['nav_menu'] = $nav_menu;
-
+        if ($this->ciauth->is_logged_in()) {
+        	$data['nav_menu'] = $nav_menu;
+        } else {
+        	$data['nav_menu'] = "";
+        }
+        
         /*
          * load our V_template and the ciauth basic 
          */
@@ -143,7 +151,8 @@ class C_ciauth extends CI_Controller {
         $nav_menu = $nav->walk($nav_elements, 10);
 
         $data['nav_menu'] = $nav_menu;
-
+        $data['nav_menu'] = ""; # menu not enabled on login page
+        
         $this->form_validation->set_rules('login_value', 'Username or Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required', array('required' => 'You must provide a %s.'));
 
@@ -212,6 +221,7 @@ class C_ciauth extends CI_Controller {
 
         $nav_elements = $this->M_ciauth_nav->get_menus();
         $nav_menu = $nav->walk($nav_elements, 10);
+        $nav_menu = "";
 
         $data['nav_menu'] = $nav_menu;
         $data['registration_form'] = $registration_form;
