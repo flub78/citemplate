@@ -1,0 +1,81 @@
+Metadata design
+
+
+@startuml
+salt
+{#
+. | Column 2 | Column 3
+Row header 1 | value 1 | value 2
+Row header 2 | A long cell | *
+}
+@enduml
+
+@startuml
+salt
+{#
+Metadadata | * | *
+name | type | length
+table | string | .
+field | string | .
+}
+@enduml
+
+@startuml
+
+Livre "1" *-- "many" Price : has
+
+class Livre {
+  string isbn
+  string title
+  string author
+  string date
+  string description
+  string picture
+}
+
+class Price {
+    int id
+    date start
+    date end
+    float amount
+}
+
+@enduml
+        
+@startuml
+
+
+Table "1" *-- "many" Column : has
+View "1" *-- "many" Table : has
+
+class Table {
+  string name
+  string comment
+  list columns
+}
+
+class Column {
+    string id
+    string type
+    int length
+    string subtype
+    string comment
+}
+
+class View {
+  string name
+  string comment
+  list tables
+  string select
+  string where
+}
+
+enum metadata {
+  string table
+  string field
+}
+
+
+@enduml
+        
+        

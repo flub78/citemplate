@@ -1,0 +1,17 @@
+Install XDEBUG
+
+sudo apt-get install php-pear
+sudo pecl install xdebug
+find / -name 'xdebug.so' 2> /dev/null
+
+cd /etc
+sudo gedit ./php5/apache2/php.ini
+and 
+sudo gedit /etc/php5/cli/php.ini
+zend_extension="/usr/lib/php5/20121212/xdebug.so"
+sudo /etc/init.d/apache2 restart
+
+check XDEBUG in phpinfo
+
+file:///home/frederic/git/citemplate/application/tests/build/coverage/index.html
+http://localhost/citemplate/application/tests/build/coverage/index.html

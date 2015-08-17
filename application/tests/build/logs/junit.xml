@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="CodeIgniter Application Test Suite" tests="16" assertions="24" failures="0" errors="0" time="1.734121">
+    <testsuite name="Ciauth_test" file="/home/frederic/git/citemplate/application/tests/controllers/Ciauth_test.php" fullPackage="Ciauth" tests="4" assertions="8" failures="0" errors="0" time="0.215448">
+      <testcase name="test_index" class="Ciauth_test" file="/home/frederic/git/citemplate/application/tests/controllers/Ciauth_test.php" line="13" assertions="3" time="0.067869"/>
+      <testcase name="test_register" class="Ciauth_test" file="/home/frederic/git/citemplate/application/tests/controllers/Ciauth_test.php" line="21" assertions="2" time="0.063471"/>
+      <testcase name="test_login" class="Ciauth_test" file="/home/frederic/git/citemplate/application/tests/controllers/Ciauth_test.php" line="28" assertions="2" time="0.060256"/>
+      <testcase name="test_method_404" class="Ciauth_test" file="/home/frederic/git/citemplate/application/tests/controllers/Ciauth_test.php" line="35" assertions="1" time="0.023852"/>
+    </testsuite>
+    <testsuite name="Dev_test" file="/home/frederic/git/citemplate/application/tests/controllers/Dev_test.php" fullPackage="Dev" tests="2" assertions="2" failures="0" errors="0" time="0.070600">
+      <testcase name="test_index" class="Dev_test" file="/home/frederic/git/citemplate/application/tests/controllers/Dev_test.php" line="13" assertions="1" time="0.048182"/>
+      <testcase name="test_method_404" class="Dev_test" file="/home/frederic/git/citemplate/application/tests/controllers/Dev_test.php" line="19" assertions="1" time="0.022418"/>
+    </testsuite>
+    <testsuite name="Metadata_test" file="/home/frederic/git/citemplate/application/tests/controllers/Metadata_test.php" fullPackage="Metadata" tests="3" assertions="5" failures="0" errors="0" time="0.142451">
+      <testcase name="test_index" class="Metadata_test" file="/home/frederic/git/citemplate/application/tests/controllers/Metadata_test.php" line="13" assertions="2" time="0.063110"/>
+      <testcase name="test_test" class="Metadata_test" file="/home/frederic/git/citemplate/application/tests/controllers/Metadata_test.php" line="20" assertions="2" time="0.056683"/>
+      <testcase name="test_method_404" class="Metadata_test" file="/home/frederic/git/citemplate/application/tests/controllers/Metadata_test.php" line="28" assertions="1" time="0.022658"/>
+    </testsuite>
+    <testsuite name="Welcome_test" file="/home/frederic/git/citemplate/application/tests/controllers/Welcome_test.php" fullPackage="Welcome" tests="3" assertions="3" failures="0" errors="0" time="0.098007">
+      <testcase name="test_index" class="Welcome_test" file="/home/frederic/git/citemplate/application/tests/controllers/Welcome_test.php" line="13" assertions="1" time="0.050149"/>
+      <testcase name="test_method_404" class="Welcome_test" file="/home/frederic/git/citemplate/application/tests/controllers/Welcome_test.php" line="19" assertions="1" time="0.022690"/>
+      <testcase name="test_APPPATH" class="Welcome_test" file="/home/frederic/git/citemplate/application/tests/controllers/Welcome_test.php" line="25" assertions="1" time="0.025168"/>
+    </testsuite>
+    <testsuite name="Log_helper_test" file="/home/frederic/git/citemplate/application/tests/helpers/Log_helper_test.php" fullPackage="Log.helper" tests="1" assertions="2" failures="0" errors="0" time="1.050945">
+      <testcase name="test_loaded" class="Log_helper_test" file="/home/frederic/git/citemplate/application/tests/helpers/Log_helper_test.php" line="25" assertions="2" time="1.050945"/>
+    </testsuite>
+    <testsuite name="Metadata_helper_test" file="/home/frederic/git/citemplate/application/tests/helpers/Metadata_helper_test.php" fullPackage="Metadata.helper" tests="1" assertions="2" failures="0" errors="0" time="0.056949">
+      <testcase name="test_loaded" class="Metadata_helper_test" file="/home/frederic/git/citemplate/application/tests/helpers/Metadata_helper_test.php" line="20" assertions="2" time="0.056949"/>
+    </testsuite>
+    <testsuite name="Logger_test" file="/home/frederic/git/citemplate/application/tests/libraries/Logger_test.php" fullPackage="Logger" tests="1" assertions="1" failures="0" errors="0" time="0.049179">
+      <testcase name="test_instance" class="Logger_test" file="/home/frederic/git/citemplate/application/tests/libraries/Logger_test.php" line="11" assertions="1" time="0.049179"/>
+    </testsuite>
+    <testsuite name="Metadata_model_test" file="/home/frederic/git/citemplate/application/tests/models/Metadata_model_test.php" fullPackage="Metadata.model" tests="1" assertions="1" failures="0" errors="0" time="0.050542">
+      <testcase name="test_get_category_list" class="Metadata_model_test" file="/home/frederic/git/citemplate/application/tests/models/Metadata_model_test.php" line="12" assertions="1" time="0.050542"/>
+    </testsuite>
+  </testsuite>
+</testsuites>

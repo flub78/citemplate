@@ -3,3 +3,6 @@
 
 # ignore log files
 application/logs/*.php
+
+# ignore test results
+application/tests/build/*

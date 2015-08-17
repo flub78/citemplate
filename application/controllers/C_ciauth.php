@@ -33,8 +33,9 @@ class C_ciauth extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        
-        define('SITE_PATH', $this->config->item('base_url'));
+        if (! defined ('SITE_PATH')) {
+        	define('SITE_PATH', $this->config->item('base_url'));
+        }
         $this->load->helper(array('form', 'url'));
         $this->load->library(array('ciauth', 'form_validation'));
     }
