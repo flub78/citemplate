@@ -32,7 +32,7 @@ if (!defined('BASEPATH'))
 /*
  * BASE_URL
  * This is used to give the path to root of the system.
- * TODOs: set base_url correctly
+ * TODO: set base_url correctly
  */
 # $config['BASE_URL'] = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
 $config['recaptcha_sitekey'] = "6LdlegoTAAAAAD4wEuXR1IIeru34DhdPN1DYKTNH";
