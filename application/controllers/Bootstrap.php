@@ -53,5 +53,28 @@ class Bootstrap extends CI_Controller {
 		$this->load->view('bootstrap/starter', $data);
 	}
 	
+	/**
+	 *
+	 */
+	public function carousel() {
+		$data = array();
+		$this->load->view('bootstrap/carousel', $data);
+	}
+	
+	/**
+	 *
+	 */
+	public function dashboard() {
+		$data = array();
+		$this->load->view('bootstrap/dashboard', $data);
+	}
+
+	/**
+	 *
+	 */
+	public function example($name) {
+		$data = array();
+		$this->load->view('bootstrap/' . $name, $data);
+	}
 	
 }

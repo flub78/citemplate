@@ -35,9 +35,9 @@ $this->load->view('menu');
 		<p>Variable: <?php echo $titi;?></p>
 		<p>HTML variable: <?php echo $html;?></p>
 		<p>Hello: <?php echo $hello?></p>
-		<p>Function call: <?php echo translation('monde');?></p>
+		<p>Function call: <?= translation('monde');?></p>
 		
-		<p>Object method call: <?php echo $livre1->image();?></p>
+		<p>Object method call: <?= $livre1->image();?></p>
 		<p>Object method call: <?php $livre2->display();$livre2->display();?></p>
 	
 	<table>	
