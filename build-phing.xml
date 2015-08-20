@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="TestJenkins" default="ci" basedir=".">
+    <property name="source" value="src" />
+
+    <target name="ci"
+        description="Tâche principale d'intégration continue"
+        depends="clean,qa"
+    />
+
+    <target name="clean" description="Vide les répertoires d'artefacts">
+        <delete dir="${project.basedir}/build/api" />
+        <delete dir="${project.basedir}/build/code-browser" />
+        <delete dir="${project.basedir}/build/coverage" />
+        <delete dir="${project.basedir}/build/logs" />
+        <delete dir="${project.basedir}/build/pdepend" />
+
+        <delete file="${project.basedir}/build/phpmd.xml" />
+        <delete file="${project.basedir}/build/phpcs.xml" />
+
+        <mkdir dir="${project.basedir}/build/api" />
+        <mkdir dir="${project.basedir}/build/code-browser" />
+        <mkdir dir="${project.basedir}/build/coverage" />
+        <mkdir dir="${project.basedir}/build/logs" />
+        <mkdir dir="${project.basedir}/build/pdepend" />
+    </target>
+
+    <target name="qa" description="Lance les outils d'analyse">
+        <phingcall target="phploc" />
+        <phingcall target="pdepend" />
+        <phingcall target="phpmd" />
+        <phingcall target="phpcb" />
+
+        <!-- 
+        <phingcall target="phpunit" />
+
+        <phingcall target="phpcpd" />
+        <phingcall target="phpdoc" />
+        <phingcall target="phpcs" />
+
+         -->
+    </target>
+
+    <target name="phploc">
+        <exec logoutput="true" dir="${project.basedir}" 
+        command="phploc 
+        --log-csv '${project.basedir}/build/logs/phploc.csv'
+        --exclude '${project.basedir}/system' 
+        --exclude '${project.basedir}/assets' 
+        --exclude '${project.basedir}/build' 
+        --exclude '${project.basedir}/user_guide' 
+        --exclude '${project.basedir}/application/third_party' 
+        --exclude '${project.basedir}/application/cache' 
+        --exclude '${project.basedir}/application/logs' 
+        '${project.basedir}'" escape="false" />
+    </target>
+    
+    <target name="pdepend">
+        <exec logoutput="true" dir="${project.basedir}/" command="pdepend --ignore=system --ignore=assets --ignore=build --ignore=user_guide --ignore=application/third_party --ignore=application/cache --ignore=application/logs  --jdepend-chart=build/jdepend-chart.svg --jdepend-xml=build/jdepend-log.xml --overview-pyramid=build/pyramid.svg --summary-xml=build/pdepend-summary.xml ." escape="false" />
+     </target>
+    
+    <target name="phpmd">
+        <exec logoutput="true" dir="${project.basedir}/" command="phpmd application xml cleancode,codesize" escape="false" />
+    </target>
+    
+    <target name="phpcpd">
+        <exec logoutput="true" dir="${project.basedir}/" command="phpcpd --log-pmd=build/logs/phpcpd.xml application" escape="false" />
+    </target>
+    
+    <target name="phpcs">
+        <phpcodesniffer standard="Zend">
+            <fileset dir="${project.basedir}/application">
+                <include name="**/*.php"/>
+            </fileset>
+            <formatter type="checkstyle" outfile="${project.basedir}/build/logs/checkstyle.xml"/>
+        </phpcodesniffer>
+    </target>
+    
+    <target name="phpdoc">
+        <phpdoc title="API Documentation"
+            destdir="${project.basedir}/build/api"
+            sourcecode="false"
+            output="HTML:Smarty:PHP">
+            <fileset dir="${project.basedir}/application">
+                <include name="**/*.php"/>
+            </fileset>
+            <projdocfileset dir=".">
+                <include name="README"/>
+                <include name="INSTALL"/>
+                <include name="CHANGELOG"/>
+            </projdocfileset>
+        </phpdoc>
+    </target>
+    
+    <target name="phpunit">
+         <exec logoutput="true" dir="${project.basedir}/application/tests" command="phpunit" escape="false" />
+    </target>
+    
+    <target name="phpcb">
+        <exec logoutput="true" command="phpcb --log '${project.basedir}/build/logs' --source '${project.basedir}/application' --output '${project.basedir}/build/code-browser'" escape="false" />
+    </target>
+    
+</project>

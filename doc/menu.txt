@@ -49,19 +49,24 @@ sudo /etc/init.d/apache2 restart
 19      About               /help/about
 
 INSERT INTO `ciauth_navigation` (`id`, `order`, `name`, `anchor`, `parent`, `permissions`) VALUES
+(1, 1, 'Dev', '', NULL, NULL),
+(2, 1, 'Phpinfo', '/dev/phpinfo', 1, NULL),
+(3, 2, 'Info', '/dev/info', 1, NULL),
+(4, 3, 'Admin', '', NULL, NULL),
 (5, 1, 'Configuration', '/admin/config', 4, NULL),
-(6, 2, 'Database', '', NULL, NULL),
+(6, 2, 'Database', '', 4, NULL),
 (7, 1, 'Backup', '/database/backup', 6, NULL),
 (8, 1, 'Restore', '/database/restore', 6, NULL),
 (9, 2, 'Migration', '/database/migration', 6, NULL),
 (10, 3, 'Schema', '/database/schema', 6, NULL),
-(11, 4, 'Default tables', '/database/shema', 6, NULL),
-(12, 5, 'Lock site', '/admin/lock', 3, NULL),
-(13, 6, 'Users Management', '/users', 3, NULL),
-(14, 7, 'Menus', '/C_ciauth_admin/nav_admin', 3, NULL),
+(11, 4, 'Default tables', '/database/default', 6, NULL),
+(12, 5, 'Lock site', '/admin/lock', 4, NULL),
+(13, 6, 'Users Management', '/users', 4, NULL),
+(14, 7, 'Menus', '/C_ciauth_admin/nav_admin', 4, NULL),
 (15, 4, 'CRUD', '', NULL, NULL),
 (16, 1, 'List', '/crud/list', 15, NULL),
 (17, 2, 'Create', '/crud/create', 15, NULL),
 (18, 5, 'Help', '', NULL, NULL),
-(19, 1, 'About', '/about', NULL, NULL);
+(19, 1, 'About', '/about', 18, NULL);
+
 

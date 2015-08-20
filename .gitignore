@@ -6,3 +6,9 @@ application/logs/*.php
 
 # ignore test results
 application/tests/build/*
+
+watir/test/*
+watir/screenshots/*
+
+build/logs/*
+

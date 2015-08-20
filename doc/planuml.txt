@@ -77,5 +77,64 @@ enum metadata {
 
 
 @enduml
-        
+   
+@startuml
+
+title Authentication tables
+
+accounts "1" --* "n" groups : belongs to
+accounts "1" --* "n" privileges : has many
+groups "1" --* "n" privileges : has many
+
+profiles "1" -- "1" accounts : has one
+
+class accounts {
+  string [user_id]
+  string email
+  string username
+  string password
+  date creation_date
+  timestamp last_login
+  boolean admin
+  boolean remember_me
+}
+
+note "A user may have many privileges\nA user may belongs to many groups\nA group may have many privileges" as N1
+
+class groups {
+    int [id]
+    string name
+    string description
+}
+
+class privileges {
+  int [id]
+  string name
+  string description
+}
+
+class privileges_groups {
+  int [id]
+  key privileges_id_fk
+  key group_id_fk
+}
+
+class privileges_users {
+  int [id]
+  key privileges_id_fk
+  key user_id_fk
+}
+
+class profiles {
+    int [id]
+    key user_id
+    string first_name
+    string last_name
+    string address
+    string city
+    
+}
+
+@enduml
+     
         

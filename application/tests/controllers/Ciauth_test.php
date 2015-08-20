@@ -10,6 +10,11 @@
 
 class Ciauth_test extends TestCase
 {
+// 	function setUp(){
+// 		@session_start();
+// 		parent::setUp();
+// 	}
+	
 	public function test_index()
 	{
 		$output = $this->request('GET', ['C_ciauth', 'index']);
@@ -30,6 +35,49 @@ class Ciauth_test extends TestCase
 		$output = $this->request('GET', ['C_ciauth', 'login']);
 		$this->assertContains('Please sign in', $output);
 		$this->assertNotContains('A PHP Error was encountered', $output);
+	}
+
+	public function test_logout()
+	{
+		$output = $this->request('GET', ['C_ciauth', 'logout']);
+		# $this->assertContains('Login', $output);
+		# $this->assertNotContains('A PHP Error was encountered', $output);
+	}
+	
+	public function test_about()
+	{
+		$output = $this->request('GET', ['C_ciauth', 'about']);
+		$this->assertContains('About', $output);
+		$this->assertNotContains('A PHP Error was encountered', $output);
+	}
+
+	public function test_recaptcha()
+	{
+		$output = $this->request('GET', ['C_ciauth', 'recaptcha']);
+	}
+
+	public function test_registration()
+	{
+		$output = $this->request('GET', ['C_ciauth', 'registration']);
+	}
+	
+	public function test_process_login_form_ajax()
+	{
+		$output = $this->request('GET', ['C_ciauth', 'process_login_form_ajax']);
+	}
+	
+	public function test_connection()
+	{
+		$this->resetInstance();
+		$this->CI->load->library('ciauth');
+		
+		$this->CI->ciauth->login("testuser", "testuser", false);
+		
+		$output = $this->request('GET', ['C_ciauth', 'about']);
+		$this->assertContains('Welcome', $output);
+		$this->assertNotContains('A PHP Error was encountered', $output);
+
+		$this->CI->ciauth->logout();
 	}
 	
 	public function test_method_404()
