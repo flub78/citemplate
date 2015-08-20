@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites>
-  <testsuite name="Ciauth_library_test" file="/home/frederic/git/citemplate/application/tests/libraries/Ciauth_library_test.php" fullPackage="Ciauth.library" tests="3" assertions="9" failures="0" errors="0" time="0.368448">
-    <testcase name="test_lib" class="Ciauth_library_test" file="/home/frederic/git/citemplate/application/tests/libraries/Ciauth_library_test.php" line="12" assertions="4" time="0.162952"/>
-    <testcase name="test_admin" class="Ciauth_library_test" file="/home/frederic/git/citemplate/application/tests/libraries/Ciauth_library_test.php" line="26" assertions="4" time="0.150242"/>
-    <testcase name="test_get_registration_form" class="Ciauth_library_test" file="/home/frederic/git/citemplate/application/tests/libraries/Ciauth_library_test.php" line="48" assertions="1" time="0.055254"/>
-  </testsuite>
-</testsuites>

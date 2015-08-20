@@ -16,40 +16,65 @@
  *    You should have received a copy of the GNU General Public License
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @filesource Metadata.php
+ * @filesource Bootstrap.php
  * @package controllers
- * Development tools controler
+ * Experiment on Bootsrap framework
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
 /**
- * Development controller
+ * Metadata controller
  * @author frederic
  *
  */
-class Dev extends CI_Controller {
+class Bootstrap extends CI_Controller {
 
 	function __construct() {
 		parent :: __construct();
+		$this->load->helper('metadata');
 	}
 	
 	/**
-	 * Display phpinfo
+	 * Index Page for this controller.
 	 */
-	public function phpinfo()
+	public function index()
 	{
-		phpinfo();
+		$data = array();
+		$this->load->view('bootstrap/basic', $data);
+		
+	}
+	
+	/**
+	 * 
+	 */
+	public function starter() {
+		$data = array();
+		$this->load->view('bootstrap/starter', $data);
+	}
+	
+	/**
+	 *
+	 */
+	public function carousel() {
+		$data = array();
+		$this->load->view('bootstrap/carousel', $data);
+	}
+	
+	/**
+	 *
+	 */
+	public function dashboard() {
+		$data = array();
+		$this->load->view('bootstrap/dashboard', $data);
 	}
 
 	/**
-	 * Display info
+	 *
 	 */
-	public function info()
-	{
-		echo "base_url=" . base_url() . br();
-		echo "site_url=" . site_url() . br();
-		echo "current_url=" . current_url() . br();
+	public function example($name) {
+		$data = array();
+		$this->load->view('bootstrap/' . $name, $data);
 	}
-	
 	
 }
