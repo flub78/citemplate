@@ -23,7 +23,7 @@
 if (!defined('BASEPATH'))
 	exit ('No direct script access allowed');
 
-if (!function_exists('css_url')) {
+if (!function_exists('theme_url')) {
 	/**
 	 * Base URL for the theme
 	 * @return string
@@ -42,7 +42,7 @@ if (!function_exists('css_url')) {
 	 * @return string
 	 */
 	function css_url($nom) {
-		return theme() . "/css/" . $nom . '.css';
+		return theme_url() . "/css/" . $nom . '.css';
 	}
 }
 
@@ -62,7 +62,7 @@ if (!function_exists('bootstrap_url')) {
 	 * Base URL for bootstrap
 	 * @return string
 	 */
-	function boostrap_url() {
+	function bootstrap_url() {
 		return base_url() . 'bootstrap/';
 	}
 }
@@ -73,7 +73,7 @@ if (!function_exists('bootstrap_css')) {
 	 * @param unknown_type $nom
 	 * @return string
 	 */
-	function boostrap_css($name) {
+	function bootstrap_css($name) {
 		return bootstrap_url() . 'css/' . $name . '.css';
 	}
 }
@@ -84,7 +84,7 @@ if (!function_exists('bootstrap_js')) {
 	 * @param unknown_type $name
 	 * @return string
 	 */
-	function boostrap_js($name) {
+	function bootstrap_js($name) {
 		return bootstrap_url() . 'js/' . $name . '.js';
 	}
 }
@@ -107,13 +107,13 @@ if (!function_exists('img_url')) {
 	 * @return string
 	 */
 	function img_url($nom) {
-		return theme() . '/images/' . $nom;
+		return theme_url() . '/images/' . $nom;
 	}
 }
 
 if (!function_exists('asset_url')) {
 	function asset_url($nom) {
-		return theme() . '/assets/' . $nom;
+		return theme_url() . '/assets/' . $nom;
 	}
 }
 

@@ -10,12 +10,18 @@
 
 class Dev_test extends TestCase
 {
-	public function test_index()
+	public function test_phpinfo()
 	{
 		$output = $this->request('GET', ['Dev', 'phpinfo']);
 		$this->assertContains('PHP Version', $output);
 	}
 
+	public function test_info()
+	{
+		$output = $this->request('GET', ['Dev', 'info']);
+		$this->assertContains('base_url', $output);
+	}
+	
 	public function test_method_404()
 	{
 		$this->request('GET', ['Dev', 'index']);

@@ -48,6 +48,43 @@
       <useModuleRoot>true</useModuleRoot>
     </hudson.plugins.phing.PhingBuilder>
   </builders>
-  <publishers/>
+  <publishers>
+    <hudson.plugins.plot.PlotPublisher plugin="plot@1.9">
+      <plots>
+        <hudson.plugins.plot.Plot>
+          <title></title>
+          <yaxis></yaxis>
+          <series>
+            <hudson.plugins.plot.CSVSeries>
+              <file></file>
+              <label></label>
+              <fileType>csv</fileType>
+              <inclusionFlag>OFF</inclusionFlag>
+              <exclusionValues></exclusionValues>
+              <url>build/logs/phploc.csv</url>
+              <displayTableFlag>false</displayTableFlag>
+            </hudson.plugins.plot.CSVSeries>
+            <hudson.plugins.plot.PropertiesSeries>
+              <file></file>
+              <label></label>
+              <fileType>properties</fileType>
+            </hudson.plugins.plot.PropertiesSeries>
+          </series>
+          <group>LOC</group>
+          <numBuilds></numBuilds>
+          <csvFileName>1890711624.csv</csvFileName>
+          <csvLastModification>0</csvLastModification>
+          <style>line</style>
+          <useDescr>false</useDescr>
+          <keepRecords>false</keepRecords>
+          <exclZero>false</exclZero>
+          <logarithmic>false</logarithmic>
+        </hudson.plugins.plot.Plot>
+      </plots>
+    </hudson.plugins.plot.PlotPublisher>
+    <hudson.plugins.jdepend.JDependRecorder plugin="jdepend@1.2.4">
+      <configuredJDependFile>build/jdepend-log.xml</configuredJDependFile>
+    </hudson.plugins.jdepend.JDependRecorder>
+  </publishers>
   <buildWrappers/>
 </project>

@@ -61,7 +61,8 @@
 		echo "base_url=" . base_url() . br();
 		echo "site_url=" . site_url() . br();
 		echo "current_url=" . current_url() . br();
-	  ?>
+		echo "js_url=" . js_url("bootstrap") . br();
+		?>
     </div><!-- /.container -->
 
 
