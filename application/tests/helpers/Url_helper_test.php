@@ -7,7 +7,6 @@
  * @copyright  2015 Kenji Suzuki
  * @link       https://github.com/kenjis/ci-phpunit-test
  * 
- * 
  */
 
 class Url_helper_test extends TestCase
@@ -25,19 +24,27 @@ class Url_helper_test extends TestCase
 	{
 		$current_url = current_url();
 		
+		$project_css = project_css('layout');
+	    $bootstrap_css = bootstrap_css('bootstrap.min');
+	    $theme_css = theme_css('flower');
+	    
+	    $project_js = project_js();
+	    $bootstrap_js = bootstrap_js();
+	    $theme_js = theme_js();
+	    
 		$theme_url = theme_url();
- 		$css_url = css_url('bootstrap');
- 		$js_url = js_url('bootstrap');
- 		$bootstrap_url = bootstrap_url();
- 		$bootstrap_css = bootstrap_css();
- 		$bootstrap_js = bootstrap_js();
  		
  		$image_dir = image_dir();
  		$img_url = img_url();
  		$assert_url = asset_url();
  		$controller_url = controller_url();
  		$jqueryui_theme = jqueryui_theme();
-		
-		$this->assertEquals(1, 1, 'URL helper is loaded');
+
+ 		echo $bootstrap_css;
+ 		$ref = 'http://localhost/citemplate/css/layout.css';
+ 		$this->assertEquals($ref, $project_css, $ref);
+ 		
+ 		$ref = 'http://localhost/citemplate/bootstrap/css/bootstrap.min.css';
+ 		$this->assertEquals($ref, $bootstrap_css, $ref);
 	}
 }

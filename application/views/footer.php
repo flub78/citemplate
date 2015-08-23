@@ -21,6 +21,21 @@
  */
 ?>
 
-<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+    <footer class="footer">
+      <div class="container">
+      <p class="text-muted">
+        &copy Company 2014, Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?>
+        </p>
+      </div>
+    </footer>
 
 
+
+    <!-- Latest compiled and minified JavaScript -->
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<?= script(bootstrap_js('jquery.min'))?>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<?= script(bootstrap_js('bootstrap.min'))?>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+ 	<?= script(bootstrap_js('ie10-viewport-bug-workaround'))?>

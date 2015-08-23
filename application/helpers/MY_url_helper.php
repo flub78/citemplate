@@ -19,9 +19,38 @@
  *
  *	  Resources path and URL management
  *
+ *    We need the url for
+ *   - css used by the project
+ *   - bootstrap css
+ *   - overlaping css for cutomisation (theme)
+ * they could be named project_css, bootstap_css and theme_css,
+ * project_js, bootstrap_js and theme_js
+ *
  */
 if (!defined('BASEPATH'))
 	exit ('No direct script access allowed');
+
+if (!function_exists('project_css')) {
+	/**
+	 * base URL for CSS
+	 * @param unknown_type $nom
+	 * @return string
+	 */
+	function project_css($nom) {
+		return base_url() . "css/" . $nom . '.css';
+	}
+}
+
+if (!function_exists('project_js')) {
+	/**
+	 * base URL for Javascript
+	 * @param unknown_type $nom
+	 * @return string
+	 */
+	function project_js($nom) {
+		return base_url() . "js/" . $nom . '.js';
+	}
+}
 
 if (!function_exists('theme_url')) {
 	/**
@@ -31,31 +60,35 @@ if (!function_exists('theme_url')) {
 	function theme_url() {
 		$CI = & get_instance();
 		$theme = $CI->config->item('theme');
+		if (!$theme) {
+			$theme = 'default';
+		}
 		return base_url() . "themes/" . $theme;
 	}
 }
 
-if (!function_exists('css_url')) {
+if (!function_exists('theme_css')) {
 	/**
 	 * base URL for CSS
 	 * @param unknown_type $nom
 	 * @return string
 	 */
-	function css_url($nom) {
+	function theme_css($nom) {
 		return theme_url() . "/css/" . $nom . '.css';
 	}
 }
 
-if (!function_exists('js_url')) {
+if (!function_exists('theme_js')) {
 	/**
-	 * Base URL for Javascript
+	 * base URL for Javascript
 	 * @param unknown_type $nom
 	 * @return string
 	 */
-	function js_url($nom) {
-		return base_url() . 'assets/javascript/' . $nom . '.js';
+	function theme_js($nom) {
+		return theme_url() . "/js/" . $nom . '.js';
 	}
 }
+
 
 if (!function_exists('bootstrap_url')) {
 	/**

@@ -14,8 +14,19 @@ class Bootstrap_test extends TestCase
 	{
 		$output = $this->request('GET', ['Bootstrap', 'starter']);
 		$this->assertContains('Bootstrap starter', $output);
+		$this->assertNotContains('A PHP Error was encountered', $output);
 	}
 
+	public function test_all() {
+		$views = array('basic', 'blog', 'carousel', 'cover', 'dashboard', 'fixed_navbar', 'grids', 'jumbotron',
+				'narrow_jumbotron', 'navbar', 'sign_in', 'starter', 'static_top_navbar', 'sticky_footer_with_navbar',
+				'sticky_footer', 'theme');
+		foreach ($views as $view) {
+			$output = $this->request('GET', ['Bootstrap', $view]);
+			$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in $view");
+		}	
+	}
+	
 	public function test_method_404()
 	{
 		$this->request('GET', ['Bootstrap', 'unknow_method']);

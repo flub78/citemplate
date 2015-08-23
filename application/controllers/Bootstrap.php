@@ -38,12 +38,113 @@ class Bootstrap extends CI_Controller {
 	/**
 	 * Index Page for this controller.
 	 */
-	public function index()
+	public function basic()
 	{
 		$data = array();
 		$this->load->view('bootstrap/basic', $data);
 		
 	}
+
+	public function index() {
+		$this->basic();	
+	}
+	
+	/**
+	 * Index Page for this controller.
+	 */
+	public function blog()
+	{
+		$data = array();
+		$this->load->view('bootstrap/blog', $data);
+	
+	}
+
+	/**
+	 *
+	 */
+	public function carousel() {
+		$data = array();
+		$this->load->view('bootstrap/carousel', $data);
+	}
+
+	/**
+	 * Index Page for this controller.
+	 */
+	public function cover()
+	{
+		$data = array();
+		$this->load->view('bootstrap/cover', $data);
+	
+	}
+
+	/**
+	 *
+	 */
+	public function dashboard() {
+		$data = array();
+		$this->load->view('bootstrap/dashboard', $data);
+	}
+
+	/**
+	 * Index Page for this controller.
+	 */
+	public function fixed_navbar()
+	{
+		$data = array();
+		$this->load->view('bootstrap/fixed_navbar', $data);
+	
+	}
+	
+	/**
+	 * Index Page for this controller.
+	 */
+	public function grids()
+	{
+		$data = array();
+		$this->load->view('bootstrap/grids', $data);
+	
+	}
+	
+	/**
+	 * Index Page for this controller.
+	 */
+	public function jumbotron()
+	{
+		$data = array();
+		$this->load->view('bootstrap/jumbotron', $data);
+	
+	}
+		
+	/**
+	 * Index Page for this controller.
+	 */
+	public function narrow_jumbotron()
+	{
+		$data = array();
+		$this->load->view('bootstrap/narrow_jumbotron', $data);
+	
+	}
+	
+	/**
+	 * Index Page for this controller.
+	 */
+	public function navbar()
+	{
+		$data = array();
+		$this->load->view('bootstrap/navbar', $data);
+	
+	}
+	
+	/**
+	 * Index Page for this controller.
+	 */
+	public function sign_in()
+	{
+		$data = array();
+		$this->load->view('bootstrap/sign_in', $data);
+	
+	}
+	
 	
 	/**
 	 * 
@@ -54,21 +155,45 @@ class Bootstrap extends CI_Controller {
 	}
 	
 	/**
-	 *
+	 * Index Page for this controller.
 	 */
-	public function carousel() {
+	public function static_top_navbar()
+	{
 		$data = array();
-		$this->load->view('bootstrap/carousel', $data);
+		$this->load->view('bootstrap/static_top_navbar', $data);
+	
 	}
 	
 	/**
-	 *
+	 * Index Page for this controller.
 	 */
-	public function dashboard() {
+	public function sticky_footer_with_navbar()
+	{
 		$data = array();
-		$this->load->view('bootstrap/dashboard', $data);
+		$this->load->view('bootstrap/sticky_footer_with_navbar', $data);
+	
 	}
-
+	
+	/**
+	 * Index Page for this controller.
+	 */
+	public function sticky_footer()
+	{
+		$data = array();
+		$this->load->view('bootstrap/sticky_footer', $data);
+	
+	}
+	
+	/**
+	 * Index Page for this controller.
+	 */
+	public function theme()
+	{
+		$data = array();
+		$this->load->view('bootstrap/theme', $data);
+	
+	}
+	
 	/**
 	 *
 	 */

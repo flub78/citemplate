@@ -19,13 +19,20 @@
  * Formulaire de ...
  * @package vues
  */
+defined('BASEPATH') OR exit('No direct script access allowed');
 $this->lang->load('application');
-
-$this->load->view('header', array('title' => translation('app_title')));
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <?php $this->load->view('header', array('title' => translation('app_title'))); ?>
+    <?= link_tag(project_css('welcome'));?>
+</head>
+<body>
+<?php 
 $this->load->view('banner');
 $this->load->view('sidebar');
 $this->load->view('menu');
-
 ?>
 <div id="container">
 	<h1><?php title('app_title'); ?></h1>
