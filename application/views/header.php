@@ -21,7 +21,7 @@
  */
 
 ?>
-	<title><?php echo $title; ?> </title>
+	<title><?php echo $this->config->item("program_title");?> </title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,7 +36,6 @@
     <!-- Latest compiled and minified CSS -->
 
     <!-- Custom styles for this template -->
-    <?= link_tag(bootstrap_css('starter-template'));?>
     <?= link_tag(bootstrap_css('sticky-footer-navbar'));?>
     
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->

@@ -104,7 +104,7 @@ $autoload['helper'] = array('html', 'url');
 |
 */
 
-$autoload['config'] = array('ciauth');
+$autoload['config'] = array('ciauth', 'program');
 
 
 /*

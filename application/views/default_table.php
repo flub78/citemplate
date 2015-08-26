@@ -16,15 +16,16 @@
  *    You should have received a copy of the GNU General Public License
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Formulaire de ...
+ * This view is a standard form for CRUD create and edit using bootstrap.
  * @package vues
  */
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php $this->load->view('header', array('title' => 'Starter Template for Bootstrap')); ?>
+<?php $this->load->view('header'); ?>
 <?= link_tag(bootstrap_css('dashboard'));?>
+<?= link_tag(bootstrap_css('menu'));?>
 </head>
 
 <body>

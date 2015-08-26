@@ -34,7 +34,7 @@ class Bootstrap extends CI_Controller {
 		parent :: __construct();
 		$this->load->helper('metadata');
 	}
-	
+
 	/**
 	 * Index Page for this controller.
 	 */
@@ -42,13 +42,13 @@ class Bootstrap extends CI_Controller {
 	{
 		$data = array();
 		$this->load->view('bootstrap/basic', $data);
-		
+
 	}
 
 	public function index() {
-		$this->basic();	
+		$this->basic();
 	}
-	
+
 	/**
 	 * Index Page for this controller.
 	 */
@@ -56,7 +56,7 @@ class Bootstrap extends CI_Controller {
 	{
 		$data = array();
 		$this->load->view('bootstrap/blog', $data);
-	
+
 	}
 
 	/**
@@ -74,7 +74,7 @@ class Bootstrap extends CI_Controller {
 	{
 		$data = array();
 		$this->load->view('bootstrap/cover', $data);
-	
+
 	}
 
 	/**
@@ -92,9 +92,9 @@ class Bootstrap extends CI_Controller {
 	{
 		$data = array();
 		$this->load->view('bootstrap/fixed_navbar', $data);
-	
+
 	}
-	
+
 	/**
 	 * Index Page for this controller.
 	 */
@@ -102,9 +102,9 @@ class Bootstrap extends CI_Controller {
 	{
 		$data = array();
 		$this->load->view('bootstrap/grids', $data);
-	
+
 	}
-	
+
 	/**
 	 * Index Page for this controller.
 	 */
@@ -112,9 +112,9 @@ class Bootstrap extends CI_Controller {
 	{
 		$data = array();
 		$this->load->view('bootstrap/jumbotron', $data);
-	
+
 	}
-		
+
 	/**
 	 * Index Page for this controller.
 	 */
@@ -122,9 +122,9 @@ class Bootstrap extends CI_Controller {
 	{
 		$data = array();
 		$this->load->view('bootstrap/narrow_jumbotron', $data);
-	
+
 	}
-	
+
 	/**
 	 * Index Page for this controller.
 	 */
@@ -132,9 +132,9 @@ class Bootstrap extends CI_Controller {
 	{
 		$data = array();
 		$this->load->view('bootstrap/navbar', $data);
-	
+
 	}
-	
+
 	/**
 	 * Index Page for this controller.
 	 */
@@ -142,18 +142,18 @@ class Bootstrap extends CI_Controller {
 	{
 		$data = array();
 		$this->load->view('bootstrap/sign_in', $data);
-	
+
 	}
-	
-	
+
+
 	/**
-	 * 
+	 *
 	 */
 	public function starter() {
 		$data = array();
 		$this->load->view('bootstrap/starter', $data);
 	}
-	
+
 	/**
 	 * Index Page for this controller.
 	 */
@@ -161,9 +161,9 @@ class Bootstrap extends CI_Controller {
 	{
 		$data = array();
 		$this->load->view('bootstrap/static_top_navbar', $data);
-	
+
 	}
-	
+
 	/**
 	 * Index Page for this controller.
 	 */
@@ -171,9 +171,9 @@ class Bootstrap extends CI_Controller {
 	{
 		$data = array();
 		$this->load->view('bootstrap/sticky_footer_with_navbar', $data);
-	
+
 	}
-	
+
 	/**
 	 * Index Page for this controller.
 	 */
@@ -181,9 +181,9 @@ class Bootstrap extends CI_Controller {
 	{
 		$data = array();
 		$this->load->view('bootstrap/sticky_footer', $data);
-	
+
 	}
-	
+
 	/**
 	 * Index Page for this controller.
 	 */
@@ -191,15 +191,38 @@ class Bootstrap extends CI_Controller {
 	{
 		$data = array();
 		$this->load->view('bootstrap/theme', $data);
-	
+
 	}
-	
+
 	/**
 	 *
 	 */
 	public function example($name) {
 		$data = array();
 		$this->load->view('bootstrap/' . $name, $data);
+	}
+
+	/**
+	 * Openclassroom Bootstrap tutorial
+	 */
+	public function tuto1() {
+		$data = array();
+		$this->load->view('bootstrap/tuto1', $data);
+	}
+
+	/**
+	 * Openclassroom Bootstrap tutorial
+	 */
+	public function tuto2() {
+		$data = array();
+		$this->load->view('bootstrap/tuto2', $data);
+	}
+	/**
+	 * Openclassroom Bootstrap tutorial
+	 */
+	public function tuto3() {
+		$data = array();
+		$this->load->view('bootstrap/tuto3', $data);
 	}
 	
 }
