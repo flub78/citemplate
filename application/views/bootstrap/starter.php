@@ -24,6 +24,7 @@
 <html lang="en">
 <head>
 <?php $this->load->view('header', array('title' => 'Starter Template for Bootstrap')); ?>
+<?= link_tag(bootstrap_css('starter-template'));?>
 </head>
 
 <body>

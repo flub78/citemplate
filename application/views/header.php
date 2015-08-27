@@ -36,7 +36,6 @@
     <!-- Latest compiled and minified CSS -->
 
     <!-- Custom styles for this template -->
-    <?= link_tag(bootstrap_css('starter-template'));?>
     <?= link_tag(bootstrap_css('sticky-footer-navbar'));?>
     
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
