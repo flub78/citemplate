@@ -110,10 +110,8 @@ $menu_help = array (
 		) 
 );
 
-$menu = array (
-		$menu_file,
-		$menu_crud,
-		$menu_help 
+$menubar = array ('class' => 'menubar',
+		'submenu' => array($menu_file, $menu_crud, $menu_help) 
 );
 
 // <!-- Fixed navbar -->

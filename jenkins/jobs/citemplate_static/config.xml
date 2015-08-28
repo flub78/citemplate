@@ -16,7 +16,7 @@
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <url>https://github.com/flub78/citemplate.git</url>
+        <url>file:///home/frederic/git/citemplate</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -52,27 +52,80 @@
     <hudson.plugins.plot.PlotPublisher plugin="plot@1.9">
       <plots>
         <hudson.plugins.plot.Plot>
-          <title></title>
+          <title>Number of files</title>
           <yaxis></yaxis>
           <series>
             <hudson.plugins.plot.CSVSeries>
-              <file></file>
+              <file>build/logs/phploc.csv</file>
+              <label></label>
+              <fileType>csv</fileType>
+              <colExclusionSet>
+                <int>1</int>
+                <int>2</int>
+              </colExclusionSet>
+              <inclusionFlag>INCLUDE_BY_COLUMN</inclusionFlag>
+              <exclusionValues>1,2</exclusionValues>
+              <url>build/logs/phploc.csv</url>
+              <displayTableFlag>false</displayTableFlag>
+            </hudson.plugins.plot.CSVSeries>
+          </series>
+          <group>PHP code measures</group>
+          <numBuilds></numBuilds>
+          <csvFileName>1890711624.csv</csvFileName>
+          <csvLastModification>0</csvLastModification>
+          <style>line</style>
+          <useDescr>false</useDescr>
+          <keepRecords>false</keepRecords>
+          <exclZero>false</exclZero>
+          <logarithmic>false</logarithmic>
+        </hudson.plugins.plot.Plot>
+        <hudson.plugins.plot.Plot>
+          <title>Number of lines</title>
+          <yaxis></yaxis>
+          <series>
+            <hudson.plugins.plot.CSVSeries>
+              <file>build/logs/phploc.csv</file>
+              <label></label>
+              <fileType>csv</fileType>
+              <colExclusionSet>
+                <int>3</int>
+                <int>4</int>
+                <int>5</int>
+                <int>6</int>
+              </colExclusionSet>
+              <inclusionFlag>INCLUDE_BY_COLUMN</inclusionFlag>
+              <exclusionValues>3,4,5,6</exclusionValues>
+              <url></url>
+              <displayTableFlag>false</displayTableFlag>
+            </hudson.plugins.plot.CSVSeries>
+          </series>
+          <group>PHP code measures</group>
+          <numBuilds></numBuilds>
+          <csvFileName>1447538683.csv</csvFileName>
+          <csvLastModification>0</csvLastModification>
+          <style>line</style>
+          <useDescr>false</useDescr>
+          <keepRecords>false</keepRecords>
+          <exclZero>false</exclZero>
+          <logarithmic>false</logarithmic>
+        </hudson.plugins.plot.Plot>
+        <hudson.plugins.plot.Plot>
+          <title>Complexity</title>
+          <yaxis></yaxis>
+          <series>
+            <hudson.plugins.plot.CSVSeries>
+              <file>build/logs/phploc.csv</file>
               <label></label>
               <fileType>csv</fileType>
               <inclusionFlag>OFF</inclusionFlag>
               <exclusionValues></exclusionValues>
-              <url>build/logs/phploc.csv</url>
+              <url></url>
               <displayTableFlag>false</displayTableFlag>
             </hudson.plugins.plot.CSVSeries>
-            <hudson.plugins.plot.PropertiesSeries>
-              <file></file>
-              <label></label>
-              <fileType>properties</fileType>
-            </hudson.plugins.plot.PropertiesSeries>
           </series>
-          <group>LOC</group>
+          <group>PHP code measures</group>
           <numBuilds></numBuilds>
-          <csvFileName>1890711624.csv</csvFileName>
+          <csvFileName>276280437.csv</csvFileName>
           <csvLastModification>0</csvLastModification>
           <style>line</style>
           <useDescr>false</useDescr>
