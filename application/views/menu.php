@@ -104,6 +104,10 @@ $menu_dev = array (
 				array (
 						'label' => "CodeIgniter",
 						'url' => "http://localhost/citemplate/user_guide/"
+				),
+				array (
+						'label' => "Login",
+						'url' => controller_url ( "welcome/login" )
 				)
 		)
 );

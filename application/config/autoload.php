@@ -120,7 +120,7 @@ $autoload['config'] = array('ciauth', 'program');
 |
 */
 
-$autoload['language'] = array();
+$autoload['language'] = array('application');
 
 
 /*

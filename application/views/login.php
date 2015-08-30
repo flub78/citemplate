@@ -35,11 +35,11 @@
 		</header>
 
 		<form class="form-signin">
-			<h2 class="form-signin-heading">Please sign in</h2>
+			<h2 class="form-signin-heading"><?= translation('login_title'); ?></h2>
 
-			<label for="inputEmail" class="sr-only">Email address</label> <input
+			<label for="inputEmail" class="sr-only"><?= translation("login_user_label");?></label> <input
 				type="email" id="inputEmail" class="form-control"
-				placeholder="Email address" required autofocus /> <label
+				placeholder="<?= translation('login_user_label'); ?>" required autofocus /> <label
 				for="inputPassword" class="sr-only">Password</label> <input
 				type="password" id="inputPassword" class="form-control"
 				placeholder="Password" required />
