@@ -1,6 +1,6 @@
 <?php
 
-class Ciauth_nav_admin {
+class Ciauth_nav_admins2 {
 
     public $db_fields;
     public $max_pages = 1;

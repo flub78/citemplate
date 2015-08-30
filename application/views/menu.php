@@ -32,48 +32,78 @@
  *   a class fo the element
  */
 
+
+
 // #################################################################################################
-$menu_file = array (
-		'label' => translation ( "File" ),
-		'class' => 'menuheader',
+$menu_bootstrap = array (
+		'label' => "Bootstrap",
+//		'class' => 'menuheader',
+		'url' => controller_url ( "bootstrap" ),
 		'submenu' => array (
 				array (
-						'label' => translation ( "New" ),
-						'url' => controller_url ( "file/new" ) 
+						'label' => "Basic",
+						'url' => controller_url ( "bootstrap/basic" )
 				),
 				array (
-						'label' => translation ( "Open" ),
-						'url' => controller_url ( "file/open" ),
-						'role' => 'ca' 
+						'label' => "Blog",
+						'url' => controller_url ( "bootstrap/blog" )
 				),
 				array (
-						'label' => translation ( "Close" ),
-						'url' => controller_url ( "file/close" ) 
+						'label' => "Carousel",
+						'url' => controller_url ( "bootstrap/carousel" )
 				),
 				array (
-						'label' => translation ( "Save" ),
-						'url' => controller_url ( "file/save" ) 
+						'label' => "Cover",
+						'url' => controller_url ( "bootstrap/cover" )
 				),
 				array (
-						'label' => translation ( "Save as ..." ),
-						'url' => controller_url ( "file/save_as" ),
-						'role' => 'ca' 
-				) 
-		) 
+						'label' => "Dashboard",
+						'url' => controller_url ( "bootstrap/dashboard" )
+				),
+				array (
+						'label' => "Grids",
+						'url' => controller_url ( "bootstrap/grids" )
+				),
+				array (
+						'label' => "jumbotron",
+						'url' => controller_url ( "bootstrap/jumbotron" )
+				),
+				array (
+						'label' => "narrow_jumbotron",
+						'url' => controller_url ( "bootstrap/narrow_jumbotron" )
+				),
+				array (
+						'label' => "sign_in",
+						'url' => controller_url ( "bootstrap/sign_in" )
+				),
+				array (
+						'label' => "sticky_footer_with_navbar",
+						'url' => controller_url ( "bootstrap/sticky_footer_with_navbar" )
+				),
+				array (
+						'label' => "Theme",
+						'url' => controller_url ( "bootstrap/theme" )
+				)
+		)
 );
 
 // #################################################################################################
 $menu_dev = array (
-		'label' => translation ( "Dev" ),
-		'class' => 'menuheader',
+		'label' => "Dev",
+		// 'class' => 'menuheader',
 		'submenu' => array (
 				array (
-						'label' => translation ( "info" ),
+						'label' => "info",
 						'url' => controller_url ( "dev/info" )
 				),
 				array (
-						'label' => translation ( "PhpInfo" ),
+						'label' => "PhpInfo",
 						'url' => controller_url ( "dev/phpinfo" )
+				),
+				$menu_bootstrap,
+				array (
+						'label' => "CodeIgniter",
+						'url' => "http://localhost/citemplate/user_guide/"
 				)
 		)
 );
@@ -81,76 +111,85 @@ $menu_dev = array (
 // #################################################################################################
 
 $menu_database = array (
-		'label' => translation ( "Database" ),
-		'class' => 'dropdown-menu multi-level',
+		'label' => "Database",
+//		'class' => 'dropdown-menu multi-level',
 		'submenu' => array (
 				array (
-						'label' => translation ( "Backup" ),
+						'label' => "Backup",
 						'url' => controller_url ( "database/backup" )
 				),
 				array (
-						'label' => translation ( "Restore" ),
+						'label' => "Restore",
 						'url' => controller_url ( "database/restore" )
 				),
 				array (
-						'label' => translation ( "Migration" ),
+						'label' => "Migration",
 						'url' => controller_url ( "database/migration" )
 				)
 		)				
 );
 
 $menu_admin = array (
-		'label' => translation ( "Admin" ),
-		'class' => 'dropdown-menu multi-level',
+		'label' => "Admin",
+//		'class' => 'dropdown-menu multi-level',
 		'role' => 'admin',
 		'submenu' => array (
 				array (
-						'label' => translation ( "Config" ),
+						'label' => "Config",
 						'url' => controller_url ( "admin/config" )
 				),
 				$menu_database,
 				array (
-						'label' => translation ( "Lock" ),
+						'label' => "Lock",
 						'url' => controller_url ( "admin/lock" )
+				),
+				array (
+						'label' => "Users",
+						'url' => controller_url ( "admin/users" )
 				)
 		)
 );
 
 // #################################################################################################
 $menu_crud = array (
-		'label' => translation ( "CRUD" ),
-		'class' => 'menuheader',
+		'label' => "CRUD",
+//		'class' => 'menuheader',
 		'submenu' => array (
 				array (
-						'label' => translation ( "List" ),
+						'label' => "List",
 						'url' => controller_url ( "crud/all" ) 
 				),
 				array (
-						'label' => translation ( "Create" ),
+						'label' => "Create",
 						'url' => controller_url ( "crud/create" ) 
 				),
 				array (
-						'label' => translation ( "Stats" ),
+						'label' => "Stats",
 						'url' => controller_url ( "crud/stats" ) 
 				)
 		) 
 );
 
 $menu_help = array (
-		'label' => translation ( "Help" ),
-		'class' => 'menuheader',
+		'label' => "Help",
+//		'class' => 'menuheader',
 		'submenu' => array (
 				array (
-						'label' => translation ( "About" ),
+						'label' => "About",
 						'url' => controller_url ( "welcome/about" ) 
 				)
 		) 
 );
 
-$menubar = array ('class' => 'menubar',
-		'submenu' => array($menu_file, $menu_admin, $menu_dev, $menu_crud, $menu_help) 
-);
-
+if (ENVIRONMENT == 'development') {
+	$menubar = array ('class' => 'menubar',
+		'submenu' => array($menu_admin, $menu_dev, $menu_crud, $menu_help) 
+	);
+} else {
+	$menubar = array ('class' => 'menubar',
+			'submenu' => array($menu_admin, $menu_crud, $menu_help)
+	);
+}
 
 ?>
 
@@ -167,7 +206,7 @@ $menubar = array ('class' => 'menubar',
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">CIAUTH</a>
+			<a class="navbar-brand" href="#">CITemp</a>
 		</div>
 
 		<div id="navbar" class="collapse navbar-collapse">

@@ -88,16 +88,6 @@ class Bootstrap extends CI_Controller {
 	/**
 	 * Index Page for this controller.
 	 */
-	public function fixed_navbar()
-	{
-		$data = array();
-		$this->load->view('bootstrap/fixed_navbar', $data);
-
-	}
-
-	/**
-	 * Index Page for this controller.
-	 */
 	public function grids()
 	{
 		$data = array();
@@ -128,16 +118,6 @@ class Bootstrap extends CI_Controller {
 	/**
 	 * Index Page for this controller.
 	 */
-	public function navbar()
-	{
-		$data = array();
-		$this->load->view('bootstrap/navbar', $data);
-
-	}
-
-	/**
-	 * Index Page for this controller.
-	 */
 	public function sign_in()
 	{
 		$data = array();
@@ -145,24 +125,6 @@ class Bootstrap extends CI_Controller {
 
 	}
 
-
-	/**
-	 *
-	 */
-	public function starter() {
-		$data = array();
-		$this->load->view('bootstrap/starter', $data);
-	}
-
-	/**
-	 * Index Page for this controller.
-	 */
-	public function static_top_navbar()
-	{
-		$data = array();
-		$this->load->view('bootstrap/static_top_navbar', $data);
-
-	}
 
 	/**
 	 * Index Page for this controller.
@@ -177,29 +139,11 @@ class Bootstrap extends CI_Controller {
 	/**
 	 * Index Page for this controller.
 	 */
-	public function sticky_footer()
-	{
-		$data = array();
-		$this->load->view('bootstrap/sticky_footer', $data);
-
-	}
-
-	/**
-	 * Index Page for this controller.
-	 */
 	public function theme()
 	{
 		$data = array();
 		$this->load->view('bootstrap/theme', $data);
 
-	}
-
-	/**
-	 *
-	 */
-	public function example($name) {
-		$data = array();
-		$this->load->view('bootstrap/' . $name, $data);
 	}
 
 	/**

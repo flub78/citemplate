@@ -53,6 +53,7 @@ class Menu {
 	 */
 	public function __construct($attrs = array ()) {
 		$this->CI = & get_instance ();
+		$this->CI->load->language("application");
 	}
 	
 	/**
@@ -210,13 +211,16 @@ class Menu {
 		
 		$res = "";
 		
+		if (!$this->CI->ciauth->is_logged_in ()) {
+			//return $res;
+		}
 		if (isset ( $menu ['role'] ) && ! $this->has_privilege ( $menu ['role'] )) {
 			return $res;
 		}
 		
 		$class = (isset ( $menu ['class'] )) ? 'class="' . $menu ['class'] . '"' : "";
 		$href = (isset ( $menu ['url'] )) ?  $menu ['url'] : '';
-		$label = (isset ( $menu ['label'] )) ? $menu ['label'] : '';
+		$label = (isset ( $menu ['label'] )) ? translation($menu ['label']) : '';
 		
 		# Open element
 		if ($level == 0) {

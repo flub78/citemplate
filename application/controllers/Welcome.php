@@ -44,8 +44,7 @@ class Welcome extends CI_Controller {
 	 * User login
 	 */
 	public function login() {
-		echo "Welcome login";
-		$this->load->view('about');
+		$this->load->view('login');
 	}
 	
 	/**
