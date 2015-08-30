@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+
+.nav-welcome h5
+{
+  padding-top: 5px;
+  line-height: 20px;
+  color: #9d9d9d;
+}

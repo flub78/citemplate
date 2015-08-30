@@ -34,28 +34,28 @@
 
 // #################################################################################################
 $menu_file = array (
-		'label' => translation ( "menu_file" ),
+		'label' => translation ( "File" ),
 		'class' => 'menuheader',
 		'submenu' => array (
 				array (
-						'label' => translation ( "menu_new" ),
+						'label' => translation ( "New" ),
 						'url' => controller_url ( "file/new" ) 
 				),
 				array (
-						'label' => translation ( "menu_open" ),
+						'label' => translation ( "Open" ),
 						'url' => controller_url ( "file/open" ),
 						'role' => 'ca' 
 				),
 				array (
-						'label' => translation ( "menu_close" ),
+						'label' => translation ( "Close" ),
 						'url' => controller_url ( "file/close" ) 
 				),
 				array (
-						'label' => translation ( "menu_save" ),
+						'label' => translation ( "Save" ),
 						'url' => controller_url ( "file/save" ) 
 				),
 				array (
-						'label' => translation ( "menu_save_as" ),
+						'label' => translation ( "Save as ..." ),
 						'url' => controller_url ( "file/save_as" ),
 						'role' => 'ca' 
 				) 
@@ -63,91 +63,94 @@ $menu_file = array (
 );
 
 // #################################################################################################
-$menu_crud = array (
-		'label' => translation ( "menu_crud" ),
+$menu_dev = array (
+		'label' => translation ( "Dev" ),
 		'class' => 'menuheader',
 		'submenu' => array (
 				array (
-						'label' => translation ( "menu_list" ),
-						'url' => controller_url ( "event/stats" ) 
+						'label' => translation ( "info" ),
+						'url' => controller_url ( "dev/info" )
 				),
 				array (
-						'label' => translation ( "menu_create" ),
-						'url' => controller_url ( "event/formation" ) 
+						'label' => translation ( "PhpInfo" ),
+						'url' => controller_url ( "dev/phpinfo" )
+				)
+		)
+);
+
+// #################################################################################################
+
+$menu_database = array (
+		'label' => translation ( "Database" ),
+		'class' => 'dropdown-menu multi-level',
+		'submenu' => array (
+				array (
+						'label' => translation ( "Backup" ),
+						'url' => controller_url ( "database/backup" )
 				),
 				array (
-						'label' => translation ( "menu_stats" ),
-						'url' => controller_url ( "event/fai" ) 
+						'label' => translation ( "Restore" ),
+						'url' => controller_url ( "database/restore" )
 				),
 				array (
-						'label' => translation ( "gvv_menu_formation_pilote" ),
-						'url' => controller_url ( "vols_planeur/par_pilote_machine" ),
-						'role' => 'ca' 
-				) 
+						'label' => translation ( "Migration" ),
+						'url' => controller_url ( "database/migration" )
+				)
+		)				
+);
+
+$menu_admin = array (
+		'label' => translation ( "Admin" ),
+		'class' => 'dropdown-menu multi-level',
+		'role' => 'admin',
+		'submenu' => array (
+				array (
+						'label' => translation ( "Config" ),
+						'url' => controller_url ( "admin/config" )
+				),
+				$menu_database,
+				array (
+						'label' => translation ( "Lock" ),
+						'url' => controller_url ( "admin/lock" )
+				)
+		)
+);
+
+// #################################################################################################
+$menu_crud = array (
+		'label' => translation ( "CRUD" ),
+		'class' => 'menuheader',
+		'submenu' => array (
+				array (
+						'label' => translation ( "List" ),
+						'url' => controller_url ( "crud/all" ) 
+				),
+				array (
+						'label' => translation ( "Create" ),
+						'url' => controller_url ( "crud/create" ) 
+				),
+				array (
+						'label' => translation ( "Stats" ),
+						'url' => controller_url ( "crud/stats" ) 
+				)
 		) 
 );
 
 $menu_help = array (
-		'label' => translation ( "menu_help" ),
+		'label' => translation ( "Help" ),
 		'class' => 'menuheader',
 		'submenu' => array (
 				array (
-						'label' => translation ( "menu_about" ),
-						'url' => controller_url ( "vols_planeur/statistic" ) 
-				),
-				array (
-						'label' => translation ( "gvv_menu_statistic_yearly" ),
-						'url' => controller_url ( "vols_planeur/cumuls" ) 
-				),
-				array (
-						'label' => translation ( "gvv_menu_statistic_history" ),
-						'url' => controller_url ( "vols_planeur/histo" ) 
-				),
-				array (
-						'label' => translation ( "gvv_menu_statistic_age" ),
-						'url' => controller_url ( "vols_planeur/age" ) 
-				) 
+						'label' => translation ( "About" ),
+						'url' => controller_url ( "welcome/about" ) 
+				)
 		) 
 );
 
 $menubar = array ('class' => 'menubar',
-		'submenu' => array($menu_file, $menu_crud, $menu_help) 
+		'submenu' => array($menu_file, $menu_admin, $menu_dev, $menu_crud, $menu_help) 
 );
 
-// <!-- Fixed navbar -->
-// <nav class="navbar navbar-inverse navbar-fixed-top">
-// <div class="container">
-// <div class="navbar-header">
-// <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-// <span class="sr-only">Toggle navigation</span>
-// <span class="icon-bar"></span>
-// </button>
-// <a class="navbar-brand" href="#">CITemplate</a>
-// </div>
-
-// <div id="navbar" class="collapse navbar-collapse">
-// <ul class="nav navbar-nav">
-// <li class="active"><a href="#">Home</a></li>
-// <li><a href="#about">About</a></li>
-// <li><a href="#contact">Contact</a></li>
-
-// <li class="dropdown">
-// <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-// <ul class="dropdown-menu">
-// <li><a href="#">Action</a></li>
-// <li><a href="#">Another action</a></li>
-// <li><a href="#">Something else here</a></li>
-// <li role="separator" class="divider"></li>
-// <li class="dropdown-header">Nav header</li>
-// <li><a href="#">Separated link</a></li>
-// <li><a href="#">One more separated link</a></li>
-// </ul>
-// </li>
-
-// </ul>
-// </div><!--/.nav-collapse -->
-// </div>
-// </nav>
 
 ?>
 
@@ -169,48 +172,8 @@ $menubar = array ('class' => 'menubar',
 
 		<div id="navbar" class="collapse navbar-collapse">
 
-			<ul id="main-menu" class="nav navbar-nav sm">
-
-				<li><a href="" class="dropdown-toggle" data-toggle="dropdown">Dev <b
-						class="caret"></b></a>
-					<ul class="dropdown-menu multi-level">
-						<li><a href="/dev/phpinfo">Phpinfo</a></li>
-						<li><a href="/dev/info">Info</a></li>
-					</ul></li>
-
-				<li><a href="" class="dropdown-toggle" data-toggle="dropdown">Admin<b
-						class="caret"></b></a>
-
-					<ul class="dropdown-menu multi-level">
-						<li><a href="/admin/config">Configuration</a></li>
-						<li class="dropdown-submenu"><a href="" class="dropdown-toggle"
-							data-toggle="dropdown">Database</a>
-							<ul class="dropdown-menu">
-								<li><a href="/database/backup">Backup</a></li>
-								<li><a href="/database/restore">Restore</a></li>
-								<li><a href="/database/migration">Migration</a></li>
-								<li><a href="/database/schema">Schema</a></li>
-								<li><a href="/database/default">Default tables</a></li>
-							</ul></li>
-						<li><a href="/admin/lock">Lock site</a></li>
-						<li><a href="/users">Users Management</a></li>
-						<li><a href="/C_ciauth_admin/nav_admin">Menus</a></li>
-					</ul></li>
-
-				<li><a href="" class="dropdown-toggle" data-toggle="dropdown">CRUD <b
-						class="caret"></b></a>
-					<ul class="dropdown-menu multi-level">
-						<li><a href="/crud/list">List</a></li>
-						<li><a href="/crud/create">Create</a></li>
-					</ul></li>
-
-				<li><a href="" class="dropdown-toggle" data-toggle="dropdown">Help <b
-						class="caret"></b></a>
-					<ul class="dropdown-menu multi-level">
-						<li><a href="/about">About</a></li>
-					</ul></li>
-			</ul>
-
+			<?php echo bootstrap_menu($menubar); ?>
+			
 			<ul id="main-menu" class="nav navbar-nav navbar-right">
             <?php
 			  if ($this->ciauth->is_logged_in ()) {

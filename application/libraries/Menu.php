@@ -177,6 +177,7 @@ class Menu {
 	 * 
 	 * Structure
 	 *   main menu: <ul id="main-menu" class="nav navbar-nav sm">
+	 *   
 	 *   dropdown header:
 	 *     <li>
 	 *       <a href="" class="dropdown-toggle" data-toggle="dropdown">
@@ -192,10 +193,15 @@ class Menu {
 	 *      <li> <a href="..."> Label </a></li>
 	 *      
 	 *   Submenu header
-	 *     
+	 *      <li class="dropdown-submenu">
+	 *        <a href="" class="dropdown-toggle" data-toggle="dropdown">Database</a>
+	 *        <ul class="dropdown-menu">
+	 *           <li> ... </li>
+	 *           ...
+	 *        </ul>
 	 */
 	public function bootstrap_html($menu, $level = 0, $li = false, $button_class = "") {
-
+		
 		$ul_attr = ($level == 0) 
 			? 'id="main-menu" class="nav navbar-nav sm"' 
 			: 'class="dropdown-menu multi-level"';
@@ -212,27 +218,55 @@ class Menu {
 		$href = (isset ( $menu ['url'] )) ?  $menu ['url'] : '';
 		$label = (isset ( $menu ['label'] )) ? $menu ['label'] : '';
 		
-		if ($li) {
-			$res .= "<li $class $li_attr>";
-		}
-		
-		if ($href || $label) {
-			$res .= anchor($href, $label, "$button_class $anchor_attr");
-		}
-		
+		# Open element
+		if ($level == 0) {
+			$res .= "\n";
+			
+		} elseif ($level == 1) {
+			$res .= tab($level) . '<li>';
+			if (isset($menu ['submenu'])) {
+				$res .= "<a href=\"$href\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">";
+				$res .= $label . '<b class="caret"></b>' . '</a>';
+			} else {
+				$res .= anchor($href, $label);	
+			}
+			
+		} else {  # ($level >= 1)
+			if (isset($menu ['submenu'])) {
+			    $res .= tab($level) . '<li class="dropdown-submenu">';
+			    $res .= "<a href=\"$href\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">";
+				$res .= $label . '</a>';
+			} else {
+			    $res .= tab($level) . '<li>';
+				$res .= anchor($href, $label);	
+			}
+		}		
+
+		# Sub menu
 		if (isset ( $menu ['submenu'] )) {
 			// $res .= tab($level) . "<ul $class>\n";
-			$res .= tab ( $level ) . "<ul $ul_attr>\n";
+			if (!$level) {
+				$res .= "\n" . tab ( $level) . "<ul $ul_attr>\n";				
+			} else {
+				$res .= "\n" . tab ( $level + 1) . "<ul $ul_attr>\n";
+			}
 			foreach ( $menu ['submenu'] as $elt ) {
 				$res .= tab ( $level );
 				$res .= $this->bootstrap_html ( $elt, $level + 1, true, $button_class );
 				$res .= "\n";
 			}
-			$res .= tab ( $level ) . "</ul>\n";
+			if (!$level) {
+				$res .= tab($level) . "</ul>\n";
+			} else {
+				$res .= tab($level + 1) . "</ul>\n";
+			}
+				
 		}
 		
-		if ($li)
-			$res .= '</li>';
+		# Close element
+		if ($level != 0) {
+			$res .= tab($level) . '</li>';
+		}
 		
 		return $res;
 		

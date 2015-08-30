@@ -21,6 +21,9 @@
  */
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 	<title><?php echo $this->config->item("program_title");?> </title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,6 +40,7 @@
 
     <!-- Custom styles for this template -->
     <?= link_tag(bootstrap_css('sticky-footer-navbar'));?>
+    <?= link_tag(project_css('project'));?>
     
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -49,3 +53,6 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <?= link_tag(bootstrap_css('dashboard'));?>
+	<?= link_tag(bootstrap_css('menu'));?>
+    

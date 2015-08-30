@@ -35,7 +35,7 @@ $this->load->view('sidebar');
 $this->load->view('menu');
 ?>
 <div id="container">
-	<h1><?php title('app_title'); ?></h1>
+	<h1><?= title('app_title'); ?></h1>
 
 	<div id="body">
 		<p>Constante: <?php echo "constant";?></p>

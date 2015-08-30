@@ -20,11 +20,8 @@
  * @package vues
  */
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
 <?php $this->load->view('header'); ?>
-<?= link_tag(bootstrap_css('dashboard'));?>
+<!-- Additional view specific header elements below -->
 </head>
 
 <body>

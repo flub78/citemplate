@@ -20,12 +20,8 @@
  * @package vues
  */
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
 <?php $this->load->view('header'); ?>
-<?= link_tag(bootstrap_css('dashboard'));?>
-<?= link_tag(bootstrap_css('menu'));?>
+<!-- Additional view specific header elements below -->
 </head>
 
 <body>
@@ -67,8 +63,7 @@
 	</div>
 	<footer class="row">
 	<?php $this->load->view('footer'); ?>
-	</footer>
-	<!-- /.container -->
+	</footer><!-- /.container -->
 
 </body>
 </html>

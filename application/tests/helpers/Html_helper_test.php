@@ -15,6 +15,7 @@ class Html_helper_test extends TestCase
 	{
 		$this->resetInstance();
 		$this->CI->load->helper('html');
+		$this->CI->lang->load('application');
 	}
 	
 	/**
@@ -27,5 +28,18 @@ class Html_helper_test extends TestCase
  		$ref = '<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>';
  		$this->assertEquals($ref, $actual, $ref);
  		
+	}
+	
+	public function test_translation() {
+		$this->assertEquals("Fred",
+				translation('Fred'),
+				'Identity when not found'
+		);
+		
+		$expected = "english";
+		$actual = translation('language');
+		$this->assertEquals($expected, $actual,
+				"Translated when found, $expected == $actual"
+		);
 	}
 }

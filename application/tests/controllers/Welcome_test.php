@@ -14,6 +14,17 @@ class Welcome_test extends TestCase
 	{
 		$output = $this->request('GET', ['Welcome', 'index']);
 		$this->assertContains('<title>Welcome to CodeIgniter</title>', $output);
+		$this->assertNotContains('A PHP Error was encountered', $output);
+		
+		$output = $this->request('GET', ['Welcome', 'home']);
+		$this->assertNotContains('A PHP Error was encountered', $output);
+		
+		$output = $this->request('GET', ['Welcome', 'login']);
+		$this->assertNotContains('A PHP Error was encountered', $output);
+		
+		$output = $this->request('GET', ['Welcome', 'about']);
+		$this->assertNotContains('A PHP Error was encountered', $output);
+		
 	}
 
 	public function test_method_404()

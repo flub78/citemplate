@@ -19,14 +19,32 @@ class Metadata_helper_test extends TestCase
 	
 	public function test_loaded()
 	{
-		$this->assertEquals("Fred",
-			translation('Fred'),
-			'Identity when not found'
+		
+		$data_table = datatable("crud");
+		$expected = "";
+		$this->assertEquals($expected,
+			$datatable,
+			'datatable helper'
 		);
-		$expected = "english";
-		$actual = translation('language');
+		
+		$expected = "";
+		$actual = field_label('language');
 		$this->assertEquals($expected, $actual, 
-			"Translated when found, $expected == $actual"
+			"field_label"
 		);
+
+		$expected = "";
+		$actual = field_input('language');
+		$this->assertEquals($expected, $actual,
+				"field_input"
+		);
+
+		$expected = "";
+		$actual = form('language');
+		$this->assertEquals($expected, $actual,
+				"basic form"
+		);
+		
+		
 	}
 }

@@ -3,6 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
 
+	function __construct() {
+		parent :: __construct();
+		$this->load->helper('metadata');
+		$this->load->library('logger');
+	
+		$this->logger = new Logger("class=" . get_class($this));
+		$this->logger->debug('New instance of ' . get_class($this));
+	}
+	
 	/**
 	 * Index Page for this controller.
 	 *
@@ -21,5 +30,28 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('welcome_message');
+	}
+	
+	/**
+	 * Project home page
+	 */
+	public function home() {
+		echo "Welcome home";
+		$this->load->view('about');
+	}
+	
+	/**
+	 * User login
+	 */
+	public function login() {
+		echo "Welcome login";
+		$this->load->view('about');
+	}
+	
+	/**
+	 * Project about
+	 */
+	public function about() {
+		$this->load->view('about');
 	}
 }

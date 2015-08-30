@@ -21,27 +21,55 @@
 if (!defined('BASEPATH'))
 	exit ('No direct script access allowed');
 
-if (!function_exists('translation')) {
 
+if (!function_exists('datatable')) {
 	/**
-	 * 
-	 * @param unknown_type $title_id
+	 * Generate datatable HTML table
+	 * @param unknown_type $table
+	 * @param unknown_type $data
+	 * @param unknown_type $filter
 	 */
-	function translation($title_id = '') {
-		$CI = & get_instance();
-		$translated = $CI->lang->line($title_id);
-		return ($translated) ? $translated : $title_id;
+	function datatable ($table, $data=array(), $filter=array()) {
+		return "";
 	}
 }
 
-if (!function_exists('title')) {
-
+if (!function_exists('field_label')) {
 	/**
-	 * 
-	 * @param unknown_type $title_id
+	 * Generate a form field label
+	 * @param unknown_type $table
+	 * @param unknown_type $field
+	 * @param unknown_type $attrs
 	 */
-	function title ($title_id = '') {
-		echo translation($title_id);
+	function field_label ($table, $field, $attrs=array()) {
+		return "";
 	}
 }
+
+if (!function_exists('field_input')) {
+	/**
+	 * Generate a form field input
+	 * @param unknown_type $table
+	 * @param unknown_type $field
+	 * @param unknown_type $data
+	 * @param unknown_type $attrs
+	 */
+	function field_input ($table, $field, $data = '', $attrs=array()) {
+		return "";
+	}
+}
+
+if (!function_exists('form')) {
+	/**
+	 * Generate a basic form
+	 * @param unknown_type $table
+	 * @param unknown_type $data
+	 * @param unknown_type $attrs
+	 * @return string
+	 */
+	function form ($table, $data=array(), $attrs=array()) {
+		return "";
+	}
+}
+
 

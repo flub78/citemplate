@@ -33,3 +33,27 @@ if (!function_exists('script')) {
 		return '<script src="' . $nom . '"></script>';
 	}
 }
+
+if (!function_exists('translation')) {
+
+	/**
+	 *
+	 * @param unknown_type $title_id
+	 */
+	function translation($title_id = '') {
+		$CI = & get_instance();
+		$translated = $CI->lang->line($title_id);
+		return ($translated) ? $translated : $title_id;
+	}
+}
+
+if (!function_exists('title')) {
+
+	/**
+	 *
+	 * @param unknown_type $title_id
+	 */
+	function title ($title_id = '') {
+		return translation($title_id);
+	}
+}
