@@ -1,0 +1,32 @@
+#
+# RTF rake file
+#
+# require 'rdoc/task'
+require 'fileutils.rb'
+require 'ci/reporter/rake/minitest'
+
+desc "Start CITemplate WATIR tests"
+task test: [] do
+  
+#  if (!ENV['RTF'])
+#    puts "Environment variable $RTF is not defined"
+#    exit
+#  else
+#    puts "RTF=#{ENV['RTF']}"
+#  end
+    
+  require "./all_tests.rb"
+  
+end
+
+desc "Cleanup generated files"
+task clean: [] do
+  puts "cleaning"
+  FileUtils.rm_rf(Dir.glob("screenshots/*.png"))
+  FileUtils.rm_rf(Dir.glob("test/reports/*.xml"))
+end
+
+#task task_name: [:prerequisite_task, :another_task_we_depend_on] do
+#  # All your magic here
+#  # Any valid Ruby code is allowed
+#end

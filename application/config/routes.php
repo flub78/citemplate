@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'C_ciauth';
+$route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
@@ -57,10 +57,10 @@ $route['translate_uri_dashes'] = FALSE;
  * Ciauth routes
  */
 
-$route['login'] = 'C_ciauth/login';
-$route['logout'] = 'C_ciauth/logout';
-$route['register'] = 'C_ciauth/register';
-$route['about'] = 'C_ciauth/about';
+$route['login'] = 'welcome/login';
+$route['logout'] = 'welcome/logout';
+$route['register'] = 'welcome/register';
+$route['about'] = 'welcome/about';
 
 /*
  * Ciauth Admin Routes

@@ -197,7 +197,7 @@ class Menu {
 		$res = "";
 		
 		if (!$this->CI->ciauth->is_logged_in ()) {
-			//return $res;
+			return $res;
 		}
 		if (isset ( $menu ['role'] ) && ! $this->has_privilege ( $menu ['role'] )) {
 			return $res;
