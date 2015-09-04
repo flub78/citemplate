@@ -6,3 +6,8 @@
   line-height: 20px;
   color: #9d9d9d;
 }
+
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+}

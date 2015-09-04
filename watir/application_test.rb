@@ -5,6 +5,7 @@
 gem "minitest"
 require 'minitest/autorun'
 require "minitest/ci"
+require "minitest/pride"
 require 'watir-webdriver'
 require './os.rb'
 require 'headless' if !OS.windows?
@@ -40,9 +41,10 @@ class ApplicationTest < MiniTest::Test
   def login (user, password, expected_success=true)
     @b.goto @base_url
     screenshot('scr_before_login.png')
-    @b.text_field(:id => 'username').set user
+    @b.text_field(:id => 'login_value').set user
     @b.text_field(:id => 'password').set password
-    @b.button(:name => 'login').click
+    @b.button(:type => 'submit').click
+    screenshot('scr_after_login_click.png')
     if (expected_success)
       check(@b.text.include?(user), "utilisateur #{user} connecté")
     end

@@ -221,12 +221,12 @@ if (ENVIRONMENT == 'development') {
             <?php
 			  if ($this->ciauth->is_logged_in ()) {
 				$userdata = $this->ciauth->get_user_data ();
-				echo "<li class=\"nav-welcome\"><h5>Welcome " . $userdata->username . "</h5></li>";
+				echo "<li class=\"nav-welcome\"><h5>" . translation('login_welcome') . " " . $userdata->username . "</h5></li>";
 				echo "<li>&nbsp;</li>";
-				echo "<li><a href=\"logout\">Logout</a></li>";
+				echo "<li><a id=\"logout\" href=\"logout\">" . translation('button_logout') . "</a></li>";
  			  } else {
-				echo "<li><a href=\"login\">Login</a></li>";
-				echo "<li><a href=\"register\">Register</a></li>";
+				echo "<li><a href=\"login\">" . translation('button_login') . "</a></li>";
+				echo "<li><a href=\"register\">" . translation('button_register') . "</a></li>";
 			  }
 			?>
                         
