@@ -57,3 +57,21 @@ if (!function_exists('title')) {
 		return translation($title_id);
 	}
 }
+
+if (!function_exists('tabs')) {
+/**
+ * Returns a variable width string of spaces.
+ * Generated HTML indentation. It is more convenient to
+ * generate clean indented HTML when you need to read it for analysis.
+ *
+ * @param unknown_type $nb        	
+ */
+function tabs($nb) {
+	$pattern = '    ';
+	$res = "";
+	for($i = 0; $i < $nb; $i ++) {
+		$res .= $pattern;
+	}
+	return $res;
+}
+}

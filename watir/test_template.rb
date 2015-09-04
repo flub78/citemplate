@@ -4,6 +4,7 @@
 # Vérifie ....
 #
 require 'dbi'
+require 'colorize'
 require './application_test.rb'
 
 class TestTemplate < ApplicationTest

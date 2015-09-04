@@ -156,20 +156,19 @@ $menu_admin = array (
 
 // #################################################################################################
 $menu_crud = array (
-		'label' => "CRUD",
-//		'class' => 'menuheader',
+		'label' => "Users",
 		'submenu' => array (
 				array (
 						'label' => "List",
-						'url' => controller_url ( "crud/all" ) 
+						'url' => controller_url ( "users/all" ) 
 				),
 				array (
 						'label' => "Create",
-						'url' => controller_url ( "crud/create" ) 
+						'url' => controller_url ( "users/create" ) 
 				),
 				array (
 						'label' => "Stats",
-						'url' => controller_url ( "crud/stats" ) 
+						'url' => controller_url ( "users/stats" ) 
 				)
 		) 
 );

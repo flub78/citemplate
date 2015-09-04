@@ -20,21 +20,6 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-/**
- * Returns a variable width string of spaces.
- * Generated HTML indentation. It is more convenient to
- * generate clean indented HTML when you need to read it for analysis.
- *
- * @param unknown_type $nb        	
- */
-function tab($nb) {
-	$pattern = '    ';
-	$res = "";
-	for($i = 0; $i < $nb; $i ++) {
-		$res .= $pattern;
-	}
-	return $res;
-}
 
 /**
  * Generates a menu.
@@ -110,14 +95,14 @@ class Menu {
 		}
 		
 		if (isset ( $menu ['submenu'] )) {
-			// $res .= tab($level) . "<ul $class>\n";
-			$res .= tab ( $level ) . "<ul $ul_attr>\n";
+			// $res .= tabs($level) . "<ul $class>\n";
+			$res .= tabs ( $level ) . "<ul $ul_attr>\n";
 			foreach ( $menu ['submenu'] as $elt ) {
-				$res .= tab ( $level );
+				$res .= tabs ( $level );
 				$res .= $this->html ( $elt, $level + 1, true, $button_class );
 				$res .= "\n";
 			}
-			$res .= tab ( $level ) . "</ul>\n";
+			$res .= tabs ( $level ) . "</ul>\n";
 		}
 		
 		if ($li)
@@ -227,7 +212,7 @@ class Menu {
 			$res .= "\n";
 			
 		} elseif ($level == 1) {
-			$res .= tab($level) . '<li>';
+			$res .= tabs($level) . '<li>';
 			if (isset($menu ['submenu'])) {
 				$res .= "<a href=\"$href\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">";
 				$res .= $label . '<b class="caret"></b>' . '</a>';
@@ -237,39 +222,39 @@ class Menu {
 			
 		} else {  # ($level >= 1)
 			if (isset($menu ['submenu'])) {
-			    $res .= tab($level) . '<li class="dropdown-submenu">';
+			    $res .= tabs($level) . '<li class="dropdown-submenu">';
 			    $res .= "<a href=\"$href\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">";
 				$res .= $label . '</a>';
 			} else {
-			    $res .= tab($level) . '<li>';
+			    $res .= tabs($level) . '<li>';
 				$res .= anchor($href, $label);	
 			}
 		}		
 
 		# Sub menu
 		if (isset ( $menu ['submenu'] )) {
-			// $res .= tab($level) . "<ul $class>\n";
+			// $res .= tabs($level) . "<ul $class>\n";
 			if (!$level) {
-				$res .= "\n" . tab ( $level) . "<ul $ul_attr>\n";				
+				$res .= "\n" . tabs ( $level) . "<ul $ul_attr>\n";				
 			} else {
-				$res .= "\n" . tab ( $level + 1) . "<ul $ul_attr>\n";
+				$res .= "\n" . tabs ( $level + 1) . "<ul $ul_attr>\n";
 			}
 			foreach ( $menu ['submenu'] as $elt ) {
-				$res .= tab ( $level );
+				$res .= tabs ( $level );
 				$res .= $this->bootstrap_html ( $elt, $level + 1, true, $button_class );
 				$res .= "\n";
 			}
 			if (!$level) {
-				$res .= tab($level) . "</ul>\n";
+				$res .= tabs($level) . "</ul>\n";
 			} else {
-				$res .= tab($level + 1) . "</ul>\n";
+				$res .= tabs($level + 1) . "</ul>\n";
 			}
 				
 		}
 		
 		# Close element
 		if ($level != 0) {
-			$res .= tab($level) . '</li>';
+			$res .= tabs($level) . '</li>';
 		}
 		
 		return $res;

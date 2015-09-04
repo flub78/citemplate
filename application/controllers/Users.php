@@ -23,11 +23,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Metadata controller
+ * Users controller
  * @author frederic
  *
  */
-class Crud extends CI_Controller {
+class Users extends CI_Controller {
 
 	var $logger;
 	
@@ -38,6 +38,10 @@ class Crud extends CI_Controller {
 
 		$this->logger = new Logger("class=" . get_class($this));
 		$this->logger->debug('New instance of ' . get_class($this));
+		
+		// TODO: use auto loading
+		$this->load->helper('form');
+		
 	}
 	
 	/**
@@ -80,6 +84,7 @@ class Crud extends CI_Controller {
 	 */
 	public function create() {
 		$data = array();
+		$data['title'] = translation('Please Register');
 		$this->load->view('default_form', $data);
 	}
 

@@ -8,14 +8,14 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-class Crud_test extends TestCase
+class Users_test extends TestCase
 {
 
 	public function test_all() {
 		$methods = array('index', 'create');
 		foreach ($methods as $method) {
 			$id = 42;
-			$output = $this->request('GET', ['Crud', $method]);
+			$output = $this->request('GET', ['Users', $method]);
 			$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in $view");
 		}	
 	}
