@@ -3,6 +3,9 @@
   <actions/>
   <description>&lt;h2&gt; Static analysis&lt;/h2&gt;&#xd;
 &#xd;
+&lt;img src=&quot;http://localhost:8080/job/citemplate_static/ws/build/pyramid.svg&quot;/&gt;&#xd;
+&lt;/br&gt;&#xd;
+&lt;img src=&quot;http://localhost:8080/job/citemplate_static/ws/build/jdepend-chart.svg&quot;/&gt;&#xd;
 </description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
@@ -60,11 +63,11 @@
               <label></label>
               <fileType>csv</fileType>
               <colExclusionSet>
+                <int>0</int>
                 <int>1</int>
-                <int>2</int>
               </colExclusionSet>
               <inclusionFlag>INCLUDE_BY_COLUMN</inclusionFlag>
-              <exclusionValues>1,2</exclusionValues>
+              <exclusionValues>0,1</exclusionValues>
               <url>build/logs/phploc.csv</url>
               <displayTableFlag>false</displayTableFlag>
             </hudson.plugins.plot.CSVSeries>
@@ -88,13 +91,14 @@
               <label></label>
               <fileType>csv</fileType>
               <colExclusionSet>
-                <int>3</int>
+                <int>2</int>
                 <int>4</int>
                 <int>5</int>
                 <int>6</int>
+                <int>7</int>
               </colExclusionSet>
               <inclusionFlag>INCLUDE_BY_COLUMN</inclusionFlag>
-              <exclusionValues>3,4,5,6</exclusionValues>
+              <exclusionValues>2,4,5,6,7</exclusionValues>
               <url></url>
               <displayTableFlag>false</displayTableFlag>
             </hudson.plugins.plot.CSVSeries>
@@ -112,17 +116,7 @@
         <hudson.plugins.plot.Plot>
           <title>Complexity</title>
           <yaxis></yaxis>
-          <series>
-            <hudson.plugins.plot.CSVSeries>
-              <file>build/logs/phploc.csv</file>
-              <label></label>
-              <fileType>csv</fileType>
-              <inclusionFlag>OFF</inclusionFlag>
-              <exclusionValues></exclusionValues>
-              <url></url>
-              <displayTableFlag>false</displayTableFlag>
-            </hudson.plugins.plot.CSVSeries>
-          </series>
+          <series/>
           <group>PHP code measures</group>
           <numBuilds></numBuilds>
           <csvFileName>276280437.csv</csvFileName>

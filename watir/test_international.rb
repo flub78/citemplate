@@ -72,13 +72,30 @@ class TestInternational < ApplicationTest
     
     screenshot('lang_english.png')
     # puts @b.text
+    check(@b.html.include?('Logout'), 'Logout button in english')
     
-    # Puisque qu'on a changé de language, le boutton à changé    
-    @b.link(:id => 'logout').click
+    self.logout
+    self.set_language('english')
 
-    # self.set_language('french')
- 
   end
 
+  # --------------------------------------------------------------------------------
+  # Test of French version
+  # --------------------------------------------------------------------------------
+  def test_french
+    
+    self.set_language('french')
+    self.login('testadmin', 'testadmin')
+    
+    @b.goto @root_url
+    check(@b.html.include?('Sortie'), 'Logout button in french')
+
+    screenshot('lang_french.png')
+    
+    self.logout
+    
+    self.set_language('english')
+
+  end
           
 end

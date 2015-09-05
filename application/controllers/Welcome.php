@@ -39,7 +39,7 @@ class Welcome extends CI_Controller {
 		if (!$this->ciauth->is_logged_in ()) {
 			redirect(base_url() . 'login');
 		}
-		$this->load->view('home');
+		$this->load->view(translation('language') . '/home');
 	}
 	
 	/**

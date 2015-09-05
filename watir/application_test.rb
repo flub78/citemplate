@@ -56,7 +56,7 @@ class ApplicationTest < MiniTest::Test
   # input assertion: logged in
   # --------------------------------------------------------------------------------
   def logout ()
-    @b.button(:value => 'Sortie').click
+    @b.link(:id => 'logout').click
     screenshot('scr_logged_out.png')
   end
 
@@ -72,8 +72,8 @@ class ApplicationTest < MiniTest::Test
   # Connect to the database
   # --------------------------------------------------------------------------------
   def db_connect
-    @db = DBI.connect('DBI:Mysql:gvv2', 'gvv_user', 'lfoyfgbj')
-    check(@db, "connexion base OK")
+    @db = DBI.connect('DBI:Mysql:ci3', 'ci3', 'ci3')
+    check(@db, "database connected")
   end
 
   # --------------------------------------------------------------------------------

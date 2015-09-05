@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+
+  <title>File: php_config.rb [RDoc Documentation]</title>
+
+  <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+
+  <script src="./js/jquery.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/thickbox-compressed.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/quicksearch.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/darkfish.js" type="text/javascript"
+    charset="utf-8"></script>
+</head>
+
+<body class="file file-popup">
+  <div id="metadata">
+    <dl>
+      <dt class="modified-date">Last Modified</dt>
+      <dd class="modified-date">2015-09-04 20:05:55 +0200</dd>
+
+      
+      <dt class="requires">Requires</dt>
+      <dd class="requires">
+        <ul>
+        
+        </ul>
+      </dd>
+      
+
+      
+    </dl>
+  </div>
+
+  <div id="documentation">
+    
+    <div class="description">
+      <h2>Description</h2>
+      
+<p>Class to read and edit a PHP file considered as a configuration file</p>
+
+<p>The goal of this class is to edit these configuration files while
+preserving comments and formating. Formatting preservation is a best
+effort. The goal is to prevent the configuration editor to remove all
+comments and formatting, not to guarantee that all indentation is stricly
+preserve whatever it is.</p>
+
+<p>These files contain:</p>
+
+<pre>* &lt;?php open directive
+* multiline comments started by /** and ended by */
+* blank lines
+* scalar string values:  $config['key'] = &quot;string value&quot;;
+* scalar string values:  $config['key'] = 'string value';
+* scalar boolean values: $config['key'] = TRUE;
+* scalar boolean values: $config['key'] = FALSE;
+* scalar integer values: $config['key'] = 10;
+* scalar decimal values: $config['key'] = 10.314;
+* PHP statements: if ( ! defined('BASEPATH')) exit('No direct script access allowed');</pre>
+
+<p>Use cases</p>
+
+<pre>    * load a configuration file
+* get the list of keys
+* get the value for a key, scalar or array
+* change the value for a key, scalar or array
+* save the configuration</pre>
+
+<p>Design</p>
+
+<pre>Exact PHP grammar parser (no, too complex and too expensive)
+or
+search for configuration element definition outside of comments.
+
+The second approach is not full proof. Eventually the parser could detect
+the start of a configuration element where there is none, or miss some because
+of a weird formating.</pre>
+
+    </div>
+    
+  </div>
+</body>
+</html>
+
