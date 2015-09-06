@@ -41,8 +41,8 @@ class Metadata_helper_test extends TestCase
 
 		$expected = "";
 		$actual = form('language');
-		$this->assertEquals($expected, $actual,
-				"basic form"
+		$this->assertNotEquals($expected, $actual,
+				"basic form: $actual not empty"
 		);
 		
 		

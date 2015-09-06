@@ -26,10 +26,10 @@ if (!function_exists('html_menu')) {
 	/**
 	 * Translate a menu description into an HTML list
 	 */
-	function html_menu($menu, $level = 0, $li = false, $button_class = "") {
-		$CI = & get_instance();
-		return $CI->menu->html($menu, $level, $li, $button_class);
-	}
+// 	function html_menu($menu, $level = 0, $li = false, $button_class = "") {
+// 		$CI = & get_instance();
+// 		return $CI->menu->html($menu, $level, $li, $button_class);
+// 	}
 }
 
 if (!function_exists('bootstrap_menu')) {
