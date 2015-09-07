@@ -221,7 +221,9 @@ if (ENVIRONMENT == 'development') {
 				echo "<li><a id=\"logout\" href=\"logout\">" . translation('button_logout') . "</a></li>";
  			  } else {
 				echo "<li><a href=\"login\">" . translation('button_login') . "</a></li>";
-				echo "<li><a href=\"register\">" . translation('button_register') . "</a></li>";
+				if ($this->config->item('autoregister')) {
+					echo "<li><a href=\"register\">" . translation('button_register') . "</a></li>";
+				}
 			  }
 			?>
                         

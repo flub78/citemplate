@@ -35,6 +35,13 @@ $config['program_title'] = "CI template";
 */
 $config['locked'] = FALSE;
 
+/*
+ |--------------------------------------------------------------------------
+ | Unknown users are allowed to register themselves
+ |--------------------------------------------------------------------------
+ */
+$config['autoregister'] = FALSE;
+
 
 /* End of file program.php */
 /* Location: .application/config/program.php */
