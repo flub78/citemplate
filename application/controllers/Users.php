@@ -83,6 +83,8 @@ class Users extends CI_Controller {
 	 * Display a form to create a new element
 	 */
 	public function create() {
+		$this->load->library('form_validation');
+		
 		$data = array();
 		$data['title'] = translation('Please Register');
 		$this->load->view('default_form', $data);
