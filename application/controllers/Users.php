@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author frederic
  *
  */
-class Users extends CI_Controller {
+class Users extends MY_Controller {
 
 	var $logger;
 	

@@ -52,17 +52,16 @@ class Livre {
  * @author frederic
  *
  */
-class Metadata extends CI_Controller {
+class Metadata extends MY_Controller {
 
 	var $logger;
 	
 	function __construct() {
 		parent :: __construct();
-		$this->load->helper('metadata');
-		$this->load->helper('log');		
-		$this->load->library('logger');	
+// 		$this->load->helper('log');		
+// 		$this->load->library('logger');	
 
-		$this->logger = new Logger("class=" . get_class($this));
+// 		$this->logger = new Logger("class=" . get_class($this));
 	}
 	
 	/**

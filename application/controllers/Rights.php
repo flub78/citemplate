@@ -26,23 +26,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author frederic
  *
  */
-class Rights extends CI_Controller {
+class Rights extends MY_Controller {
 
 	var $logger;
 	
+	/**
+	 * Constructor
+	 */
 	function __construct() {
 		parent :: __construct();
-		$this->load->model('crud_model', 'rights');
-		
-		$this->load->helper('metadata');
-		$this->load->library('logger');	
-
-		$this->logger = new Logger("class=" . get_class($this));
-		$this->logger->debug('New instance of ' . get_class($this));
-		
-		// TODO: use auto loading
-		$this->load->helper('form');
-		
+		$this->load->model('crud_model', 'rights');		
 	}
 	
 	/**
@@ -72,8 +65,9 @@ class Rights extends CI_Controller {
 		$data = array();
 		$data['table_title'] = "Rights definition";
 		$data['table_attrs'] = array(
-								'align' => array('left', 'left', 'right', 'right', 'right', 'right')
-						);
+				'fields' => array('privilege_name', 'privilege_description'),
+				'align' => array('left', 'left', 'right', 'right', 'right', 'right')
+		);
 		$data['data_table'] = $this->rights->select_all('ciauth_user_privileges');
 		
 		// var_dump($data_table);

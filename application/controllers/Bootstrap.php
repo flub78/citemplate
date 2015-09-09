@@ -28,11 +28,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author frederic
  *
  */
-class Bootstrap extends CI_Controller {
+class Bootstrap extends MY_Controller {
 
 	function __construct() {
 		parent :: __construct();
-		$this->load->helper('metadata');
 	}
 
 	/**

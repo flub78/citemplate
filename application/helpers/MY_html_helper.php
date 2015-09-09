@@ -84,6 +84,7 @@ if (!function_exists('table_from_array')) {
 	 * TODO check for incorrect parameter type
 	 */
 	function table_from_array($table, $attrs = array()) {
+		var_dump($table);
 		$class = isset($attrs['class']) ? $attrs['class'] : '';
 		$res = "";
 		$res .= "<table class=\"$class\">\n";

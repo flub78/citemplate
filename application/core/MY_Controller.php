@@ -16,40 +16,30 @@
  *    You should have received a copy of the GNU General Public License
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @filesource Metadata.php
+ * @filesource Rights.php
  * @package controllers
- * Development tools controler
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Development controller
+ * Rights controller
  * @author frederic
  *
  */
-class Dev extends MY_Controller {
+class MY_Controller extends CI_Controller {
 
+	var $logger;
+	
 	function __construct() {
 		parent :: __construct();
+		
+		$this->logger = new Logger("class=" . get_class($this));
+		$this->logger->debug('New instance of ' . get_class($this));
+		
+		if (!$this->ciauth->is_logged_in()) {
+			redirect(controller_url('welcome/login'));
+		}
 	}
 	
-	/**
-	 * Display phpinfo
-	 */
-	public function phpinfo()
-	{
-		phpinfo();
-	}
-
-	/**
-	 * Display info
-	 */
-	public function info()
-	{
-		echo "base_url=" . base_url() . br();
-		echo "site_url=" . site_url() . br();
-		echo "current_url=" . current_url() . br();
-	}
-	
-	
+		
 }

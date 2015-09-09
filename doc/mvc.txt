@@ -1,0 +1,17 @@
+Model, Vue, Controller
+
+    Some conventions on MVC. 
+    
+    Table managements:
+    
+    1) the model->select_all method returns a list of hash.
+    
+    2) The metadata datatable:
+        - add the header line
+        - select the colomns
+        - add the actions, checkbox selector, edit, delete
+        - return a 2 dimentional array (array of array)
+        
+    3) the HTML helper should turn this array into an HTML table
+    
+    
