@@ -71,45 +71,45 @@ class Menu {
 	 *
 	 * @param unknown_type $menu        	
 	 */
-	public function html($menu, $level = 0, $li = false, $button_class = "") {
-		$ul_attr = 'data-role="listview" data-divider-theme="b" data-inset="true"';
-		$li_attr = 'data-theme="c"';
-		$anchor_attr = 'data-transition="slide"';
+// 	public function html($menu, $level = 0, $li = false, $button_class = "") {
+// 		$ul_attr = 'data-role="listview" data-divider-theme="b" data-inset="true"';
+// 		$li_attr = 'data-theme="c"';
+// 		$anchor_attr = 'data-transition="slide"';
 		
-		$res = "";
+// 		$res = "";
 		
-		if (isset ( $menu ['role'] ) && ! $this->has_privilege ( $menu ['role'] )) {
-			return $res;
-		}
+// 		if (isset ( $menu ['role'] ) && ! $this->has_privilege ( $menu ['role'] )) {
+// 			return $res;
+// 		}
 		
-		$class = (isset ( $menu ['class'] )) ? 'class="' . $menu ['class'] . '"' : "";
-		$href = (isset ( $menu ['url'] )) ?  $menu ['url'] : '';
-		$label = (isset ( $menu ['label'] )) ? $menu ['label'] : '';
+// 		$class = (isset ( $menu ['class'] )) ? 'class="' . $menu ['class'] . '"' : "";
+// 		$href = (isset ( $menu ['url'] )) ?  $menu ['url'] : '';
+// 		$label = (isset ( $menu ['label'] )) ? $menu ['label'] : '';
 		
-		if ($li) {
-			$res .= "<li $class $li_attr>";
-		}
+// 		if ($li) {
+// 			$res .= "<li $class $li_attr>";
+// 		}
 		
-		if ($href || $label) {
-		    $res .= anchor($href, $label, "$button_class $anchor_attr");
-		}
+// 		if ($href || $label) {
+// 		    $res .= anchor($href, $label, "$button_class $anchor_attr");
+// 		}
 		
-		if (isset ( $menu ['submenu'] )) {
-			// $res .= tabs($level) . "<ul $class>\n";
-			$res .= tabs ( $level ) . "<ul $ul_attr>\n";
-			foreach ( $menu ['submenu'] as $elt ) {
-				$res .= tabs ( $level );
-				$res .= $this->html ( $elt, $level + 1, true, $button_class );
-				$res .= "\n";
-			}
-			$res .= tabs ( $level ) . "</ul>\n";
-		}
+// 		if (isset ( $menu ['submenu'] )) {
+// 			// $res .= tabs($level) . "<ul $class>\n";
+// 			$res .= tabs ( $level ) . "<ul $ul_attr>\n";
+// 			foreach ( $menu ['submenu'] as $elt ) {
+// 				$res .= tabs ( $level );
+// 				$res .= $this->html ( $elt, $level + 1, true, $button_class );
+// 				$res .= "\n";
+// 			}
+// 			$res .= tabs ( $level ) . "</ul>\n";
+// 		}
 		
-		if ($li)
-			$res .= '</li>';
+// 		if ($li)
+// 			$res .= '</li>';
 		
-		return $res;
-	}
+// 		return $res;
+// 	}
 	
 	/**
 	 * Generate bootstrap navbar subset at the following format:
