@@ -8,21 +8,21 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-class Users_test extends TestCase
+class Rights_test extends TestCase
 {
 
 	public function test_all() {
 		$methods = array('index', 'create');
 		foreach ($methods as $method) {
 			$id = 42;
-			$output = $this->request('GET', ['Users', $method]);
+			$output = $this->request('GET', ['Rights', $method]);
 			$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in $view");
 		}	
 	}
 	
 	public function test_method_404()
 	{
-		$this->request('GET', ['Users', 'unknow_method']);
+		$this->request('GET', ['Rights', 'unknow_method']);
 		$this->assertResponseCode(404);
 	}
 

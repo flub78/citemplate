@@ -75,3 +75,65 @@ function tabs($nb) {
 	return $res;
 }
 }
+
+if (!function_exists('table_from_array')) {
+	/**
+	 * Generates a html table from an array of rows
+	 * Each rows must be an array of cells
+	 * @return string
+	 * TODO check for incorrect parameter type
+	 */
+	function table_from_array($table, $attrs = array()) {
+		$class = isset($attrs['class']) ? $attrs['class'] : '';
+		$res = "";
+		$res .= "<table class=\"$class\">\n";
+
+		if (array_key_exists('title', $attrs)) {
+			$title = $attrs['title'];
+			$res .= "\t<caption>$title</caption>\n";
+		}
+		$alignments = (array_key_exists('align', $attrs))
+		? $attrs['align']
+		: array();
+
+		if (array_key_exists('fields', $attrs)) {
+			$res .= "\t<thead>";
+			$res .= "<tr>";
+			$cnt = 0;
+			foreach ($attrs['fields'] as $field) {
+				$align = (array_key_exists($cnt, $alignments))
+				? 'align="' . $alignments[$cnt] . '"'
+						: "";
+				$res .= "\t\t<th $align class=\"ui-state-default\" >";
+				$res .= $field;
+				$res .= "</th>\n";
+				$cnt++;
+			}
+			$res .= "</tr>";
+			$res .= "</thead>\n";
+		}
+
+		$line_cnt = 0;
+		foreach ($table as $row) {
+			$line_cnt++;
+			if ($line_cnt % 2)  {
+				$res .= "\t<tr class=\"odd\"  >";
+			} else {
+				$res .= "\t<tr class=\"even\"  >";
+			}
+			$cnt = 0;
+			foreach ($row as $cell) {
+				$align = (array_key_exists($cnt, $alignments))
+				? 'align="' . $alignments[$cnt] . '"'
+						: "";
+				$res .= "\t\t<td $align>";
+				$res .= $cell;
+				$res .= "</td>\n";
+				$cnt++;
+			}
+			$res .= "\t</tr>\n";
+		}
+		$res .= "</table>\n";
+		return $res;
+	}
+}

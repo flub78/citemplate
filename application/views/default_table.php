@@ -36,24 +36,11 @@
 		<div class="row">
 			<nav class="col-sm-1"></nav>
 			<section class="col-sm-11">
-				<h1>Bootstrap starter template</h1>
+				<h1><?= $table_title ?></h1>
 
 				<div class="row">
 					<article class="col-sm-12 row">
-						<p class="lead">
-							Use this document as a way to quickly start any new project.<br>
-							All you get is this text and a mostly barebones HTML document.
-						</p>
-						<p class="lead">
-							Use this document as a way to quickly start any new project.<br>
-							All you get is this text and a mostly barebones HTML document.
-						</p>
-						<?php 
-						echo "base_url=" . base_url() . br();
-						echo "site_url=" . site_url() . br();
-						echo "current_url=" . current_url() . br();
-						echo "bootstrap_js=" . bootstrap_js("bootstrap") . br();
-						?>
+						<?=	table_from_array($data_table, $table_attrs); ?>
 
 					</article>
 				</div>

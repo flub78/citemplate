@@ -38,4 +38,22 @@ Todo:
     * Bootstrap tutorial
     * Fill the authentication database
     * Database save and restore
+    
+CRUD scaffolding
+
+    export CRUD_NAME="Rights"
+    export CRUD_PURPOSE="Authorization management"
+    
+    # Create a controller
+    cp application/controllers/Users.php application/controllers/$CRUD_NAME.php
+    sed 
         
+    # Create a controller test
+    cp application/tests/controllers/Users_test.php application/tests/controllers/$CRUD_NAME_test.php
+    
+    # Create a form view (if required)
+    # Create a table view (if required)
+    
+    # Create a model
+    # Create a model test
+    

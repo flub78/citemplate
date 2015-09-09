@@ -104,7 +104,12 @@ $menu_dev = array (
 				array (
 						'label' => "CodeIgniter",
 						'url' => "http://localhost/citemplate/user_guide/"
+				),
+				array (
+						'label' => "Metadata",
+						'url' => controller_url ( "metadata/tables" )
 				)
+				
 		)
 );
 
@@ -146,6 +151,10 @@ $menu_admin = array (
 				array (
 						'label' => "Users",
 						'url' => controller_url ( "admin/users" )
+				),
+				array (
+						'label' => "Rights",
+						'url' => controller_url ( "rights/all" )
 				)
 		)
 );

@@ -16,53 +16,33 @@
  *    You should have received a copy of the GNU General Public License
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @filesource Metadata.php
+ * @filesource Rights.php
  * @package controllers
- * Metadata controller
- * 
- * @see http://localhost/citemplate/user_guide/database/metadata.html
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Livre {
-	var $titre;
-	var $auteur;
-	var $prix;
-
-	function __construct($attrs = array()) {
-		// print "In BaseClass constructor\n";
-		 if (array_key_exists('titre', $attrs)) {$this->titre = $attrs['titre'];};
-		 if (array_key_exists('auteur', $attrs)) {$this->auteur = $attrs['auteur'];};
-		 if (array_key_exists('prix', $attrs)) {$this->prix = $attrs['prix'];};
-	}
-	
-	function image() {
-		return "Livre: titre=" . $this->titre 
-		. ", auteur=" . $this->auteur
-		. ", prix=" . $this->prix;
-	}
-	
-	function display() {
-		echo $this->image();
-	}
-}
-
 /**
- * Metadata controller
+ * Rights controller
  * @author frederic
  *
  */
-class Metadata extends CI_Controller {
+class Rights extends CI_Controller {
 
 	var $logger;
 	
 	function __construct() {
 		parent :: __construct();
+		$this->load->model('crud_model', 'rights');
+		
 		$this->load->helper('metadata');
-		$this->load->helper('log');		
 		$this->load->library('logger');	
 
 		$this->logger = new Logger("class=" . get_class($this));
+		$this->logger->debug('New instance of ' . get_class($this));
+		
+		// TODO: use auto loading
+		$this->load->helper('form');
+		
 	}
 	
 	/**
@@ -82,33 +62,55 @@ class Metadata extends CI_Controller {
 	 */
 	public function index()
 	{
-		$livre1 = new Livre(array('titre' => 'Le Petit Prince',
-				'auteur' => 'Antoine de Saint Exupery', 'prix' => 100));
-		$livre2 = new Livre(array('titre' => 'La bible'));
-			
-		$data = array();
-		$data['titi'] = 12;
-		$data['html'] = '<input type="text" name="username" value="" id="username" size="30"  /> ';
-		$data['hello'] = translation("monde");
-		
-		$data['livre1'] = $livre1;
-		$data['livre2'] = $livre2;
-		
-		$data['hash'] = array (
-				'kiwi' => 12,
-				'orange' => 9,
-				'pomme' => 7);
-		
-		$this->load->view('metadata', $data);
+		$this->all();
 	}
 	
 	/**
-	 * Liste les tables en base
+	 * List of elements
 	 */
-	public function tables() {
-		$res = $this->db->list_tables();
-		echo "tables de la base, res=" .var_export($res, true);
-		$this->logger->debug('Log debugging message');
+	public function all() {
+		$data = array();
+		$data['table_title'] = "Rights definition";
+		$data['table_attrs'] = array(
+								'align' => array('left', 'left', 'right', 'right', 'right', 'right')
+						);
+		$data['data_table'] = $this->rights->select_all('ciauth_user_privileges');
+		
+		// var_dump($data_table);
+		$this->load->view('default_table', $data);
 	}
 	
+	/**
+	 * Add a new element 
+	 */
+	public function add($data = array()) {
+		
+	}
+	
+	/**
+	 * Display a form to create a new element
+	 */
+	public function create() {
+		$data = array();
+		$data['title'] = translation('Please Register');
+		$this->load->view('default_form', $data);
+	}
+
+	/**
+	 * Display a form to edit an existing element
+	 * @param unknown $id
+	 */
+	public function edit($id) {
+		$data = array();
+		$this->load->view('default_form', $data);
+	}
+
+	/**
+	 * Display a form to edit an existing element
+	 * @param unknown $id
+	 */
+	public function delete($id) {
+	
+	}
+		
 }

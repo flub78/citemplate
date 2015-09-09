@@ -22,7 +22,7 @@ class Users_test extends TestCase
 	
 	public function test_method_404()
 	{
-		$this->request('GET', ['Users', 'unknow_method']);
+		$this->request('GET', ['Crud', 'unknow_method']);
 		$this->assertResponseCode(404);
 	}
 
