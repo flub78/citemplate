@@ -24,7 +24,6 @@ class Bootstrap_test extends TestCase
 				'theme');
 		
 		foreach ($views as $view) {
-			$view = 'basic';
 			echo "testing $view";
 			$output = $this->request('GET', ['Bootstrap', $view]);
 			echo "output=$ouput";
