@@ -39,3 +39,6 @@
 	<?= script(bootstrap_js('bootstrap.min'))?>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
  	<?= script(bootstrap_js('ie10-viewport-bug-workaround'))?>
+
+ 	<?= script(base_url() . '/components/DataTables/datatables.js')?>
+ 	

@@ -96,7 +96,7 @@ if (!function_exists('bootstrap_url')) {
 	 * @return string
 	 */
 	function bootstrap_url() {
-		return base_url() . 'bootstrap/';
+		return base_url() . 'components/bootstrap/';
 	}
 }
 

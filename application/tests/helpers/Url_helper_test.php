@@ -44,7 +44,7 @@ class Url_helper_test extends TestCase
  		$ref = 'http://localhost/citemplate/css/layout.css';
  		$this->assertEquals($ref, $project_css, $ref);
  		
- 		$ref = 'http://localhost/citemplate/bootstrap/css/bootstrap.min.css';
+ 		$ref = 'http://localhost/citemplate/components/bootstrap/css/bootstrap.min.css';
  		$this->assertEquals($ref, $bootstrap_css, $ref);
 	}
 }

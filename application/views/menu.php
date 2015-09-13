@@ -108,7 +108,12 @@ $menu_dev = array (
 				array (
 						'label' => "Metadata",
 						'url' => controller_url ( "metadata/tables" )
+				),
+				array (
+						'label' => "CIAuth demo",
+						'url' => 'http://localhost/citemplate/C_ciauth'
 				)
+				
 				
 		)
 );

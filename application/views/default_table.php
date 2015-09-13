@@ -37,11 +37,16 @@ $this->load->library('table');
 		<div class="row">
 			<nav class="col-sm-1"></nav>
 			<section class="col-sm-11">
-				<?= heading($table_title, 2); ?>
+				<?= heading($table_title, 3); ?>
 
 				<div class="row">
 					<article class="col-sm-12 row">
-						<?=	$this->table->generate($data_table); ?>
+						<?php
+						$template = array(
+							'table_open' => '<table class="display" cellspacing="0" width="100%">' 
+						);
+						$this->table->set_template($template);
+						echo $this->table->generate($data_table); ?>
 					</article>
 				</div>
 			</section>
@@ -55,55 +60,9 @@ $this->load->library('table');
 <script type="text/javascript">
 <!--
 $(document).ready(function(){
-    // notre code ici
-    $(".jbutton").button();
-    $( "#tabs" ).tabs();
-
-    var execute = function() { 
-        //$("#dialog").parent().hide();
-    	$("#dialog").dialog("close");
-    };
-    var cancel = function() { alert("Cancel")};
-    var dialogOpts = {
-    		modal: true,
-    		buttons: {
-    			"Ok": execute
-    			}
-    		};
-    $( "#dialog" ).dialog(dialogOpts);
-    
-    $( ".datepicker" ).datepicker({changeYear: true, yearRange: "1930:2030"});
-    $('.startClosed').coolfieldset({collapsed:true});
-    if ($("input[name=filter_active]").val()) {
-        $('.filtre').coolfieldset();
-    } else { 
-        $('.filtre').coolfieldset({collapsed:true});
-    }
-
-    $('.datatable').dataTable({
-        "bFilter": true,
-        "bPaginate": true,
-        "iDisplayLength": 25,
-        "bStateSave": false,
-        "bSort": false,
-        "bInfo": true,
-        "bJQueryUI": true,
-        "bRetrieve" : false,
-        "bAutoWidth": true,
-        "sPaginationType": "full_numbers",
-        "oLanguage": olanguage
-    });
+	
+    $('.display').dataTable();
        
-    $('.fixed_datatable').dataTable({
-        "bFilter": false,
-        "bPaginate": false,
-        "bStateSave": false,
-        "bSort": false,
-        "bInfo": false,
-        "bAutoWidth": true,
-        "bJQueryUI": true,
-    });
-
 });
 //-->
 </script>
