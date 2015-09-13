@@ -26,13 +26,22 @@ if (!defined('BASEPATH'))
 
 if (!function_exists('datatable')) {
 	/**
-	 * Generate datatable HTML table
+	 * Generate a two dimentional array for HTML display or export 
 	 * @param unknown_type $table
 	 * @param unknown_type $data
 	 * @param unknown_type $filter
 	 */
-	function datatable ($table, $data=array(), $filter=array()) {
-		return "";
+	function datatable ($table, $data=array(), $attrs=array()) {
+		
+		# Select useful columns
+		
+		# Add actions and special field
+		
+		# insert heading row
+		$res = array(array("Id", "Privilege", "Description"));
+		$res = array_merge($res, $data);
+		
+		return $res;
 	}
 }
 

@@ -12,6 +12,6 @@ Model, Vue, Controller
         - add the actions, checkbox selector, edit, delete
         - return a 2 dimentional array (array of array)
         
-    3) the HTML helper should turn this array into an HTML table
+    3) the CodeIgniter table library should turn this array into an HTML table
     
     

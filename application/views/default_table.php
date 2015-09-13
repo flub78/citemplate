@@ -19,6 +19,7 @@
  * This view is a standard form for CRUD create and edit using bootstrap.
  * @package vues
  */
+$this->load->library('table');
 ?>
 <?php $this->load->view('header'); ?>
 <!-- Additional view specific header elements below -->
@@ -36,12 +37,11 @@
 		<div class="row">
 			<nav class="col-sm-1"></nav>
 			<section class="col-sm-11">
-				<h1><?= $table_title ?></h1>
+				<?= heading($table_title, 2); ?>
 
 				<div class="row">
 					<article class="col-sm-12 row">
-						<?=	table_from_array($data_table, $table_attrs); ?>
-
+						<?=	$this->table->generate($data_table); ?>
 					</article>
 				</div>
 			</section>
@@ -52,5 +52,61 @@
 	<?php $this->load->view('footer'); ?>
 	</footer><!-- /.container -->
 
+<script type="text/javascript">
+<!--
+$(document).ready(function(){
+    // notre code ici
+    $(".jbutton").button();
+    $( "#tabs" ).tabs();
+
+    var execute = function() { 
+        //$("#dialog").parent().hide();
+    	$("#dialog").dialog("close");
+    };
+    var cancel = function() { alert("Cancel")};
+    var dialogOpts = {
+    		modal: true,
+    		buttons: {
+    			"Ok": execute
+    			}
+    		};
+    $( "#dialog" ).dialog(dialogOpts);
+    
+    $( ".datepicker" ).datepicker({changeYear: true, yearRange: "1930:2030"});
+    $('.startClosed').coolfieldset({collapsed:true});
+    if ($("input[name=filter_active]").val()) {
+        $('.filtre').coolfieldset();
+    } else { 
+        $('.filtre').coolfieldset({collapsed:true});
+    }
+
+    $('.datatable').dataTable({
+        "bFilter": true,
+        "bPaginate": true,
+        "iDisplayLength": 25,
+        "bStateSave": false,
+        "bSort": false,
+        "bInfo": true,
+        "bJQueryUI": true,
+        "bRetrieve" : false,
+        "bAutoWidth": true,
+        "sPaginationType": "full_numbers",
+        "oLanguage": olanguage
+    });
+       
+    $('.fixed_datatable').dataTable({
+        "bFilter": false,
+        "bPaginate": false,
+        "bStateSave": false,
+        "bSort": false,
+        "bInfo": false,
+        "bAutoWidth": true,
+        "bJQueryUI": true,
+    });
+
+});
+//-->
+</script>
+	
 </body>
 </html>

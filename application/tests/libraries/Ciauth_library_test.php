@@ -11,7 +11,8 @@ class Ciauth_library_test extends TestCase
 
     public function test_lib()
     {
-        $this->assertEquals(false, $this->CI->ciauth->is_logged_in(), "Not logged in");       
+        $this->CI->ciauth->logout();        
+    	$this->assertEquals(false, $this->CI->ciauth->is_logged_in(), "Not logged in");       
         
         $this->CI->ciauth->login("testuser", "testuser", false);        
         $this->assertEquals(true, $this->CI->ciauth->is_logged_in(), "Logged in");
@@ -25,6 +26,7 @@ class Ciauth_library_test extends TestCase
 
     public function test_admin()
     {
+        $this->CI->ciauth->logout();        
     	$this->assertEquals(false, $this->CI->ciauth->is_logged_in(), "Not logged in");
     
     	$this->CI->ciauth->login("testadmin", "testadmin", true);   

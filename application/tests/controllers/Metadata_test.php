@@ -10,20 +10,19 @@
 
 class Metadata_test extends TestCase
 {
+	function __construct() {
+		parent :: __construct();
+		$this->resetInstance();
+		$this->CI->load->library('ciauth');
+		$this->CI->ciauth->login('testuser', 'testuser', true);
+	}
+	
 	public function test_index()
 	{
 		$output = $this->request('GET', ['Metadata', 'index']);
 		$this->assertContains('Welcome to This template application', $output);
 		$this->assertNotContains('A PHP Error was encountered', $output);
 	}
-
-	public function test_test()
-	{
-		$output = $this->request('GET', ['Metadata', 'test']);
-		$this->assertCount(1, array('Passed'), "Good number of passed");
-		$this->assertNotContains('A PHP Error was encountered', $output);
-	}
-	
 	
 	public function test_method_404()
 	{

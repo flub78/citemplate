@@ -11,8 +11,15 @@
 class Users_test extends TestCase
 {
 
+	function __construct() {
+		parent :: __construct();
+		$this->resetInstance();
+		$this->CI->load->library('ciauth');
+		$this->CI->ciauth->login('testuser', 'testuser', true);
+	}
+	
 	public function test_all() {
-		$methods = array('index', 'create');
+		$methods = array('create');
 		foreach ($methods as $method) {
 			$id = 42;
 			$output = $this->request('GET', ['Users', $method]);
