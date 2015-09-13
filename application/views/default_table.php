@@ -61,7 +61,9 @@ $this->load->library('table');
 <!--
 $(document).ready(function(){
 	
-    $('.display').dataTable();
+    $('.display').dataTable( {
+        stateSave: true
+    });
        
 });
 //-->

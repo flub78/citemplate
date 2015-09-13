@@ -56,6 +56,6 @@
     <?= link_tag(bootstrap_css('dashboard'));?>
 	<?= link_tag(bootstrap_css('menu'));?>
 	<?= link_tag(base_url() . '/components/DataTables/datatables.css');?>
-	<?= link_tag( 'https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css');?>
+	<?= link_tag(base_url() . '/components/DataTables/DataTables-1.10.9/css/dataTables.bootstrap.css');?>
 	
     

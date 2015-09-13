@@ -41,4 +41,5 @@
  	<?= script(bootstrap_js('ie10-viewport-bug-workaround'))?>
 
  	<?= script(base_url() . '/components/DataTables/datatables.js')?>
+ 	<?= script(base_url() . '/components/DataTables/DataTables-1.10.9/js/dataTables.bootstrap.js')?>
  	
