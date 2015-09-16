@@ -23,7 +23,7 @@ class Bootstrap_helper_test extends TestCase
 	 */
 	public function test_button()
 	{
-		$actual = button('xxx');
+		$actual = anchor_button('xxx');
  		$expected = '';
  		$this->assertNotEquals($expected, $actual, 'test button');
  		
