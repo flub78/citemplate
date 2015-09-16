@@ -41,17 +41,6 @@ class Rights extends MY_Controller {
 	/**
 	 * Index Page for this controller.
 	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index()
 	{
@@ -64,9 +53,11 @@ class Rights extends MY_Controller {
 	public function all() {
 		$data = array();
 		$data['table_title'] = translation('title_rights');
-
+		
 		$select = $this->rights->select_all('ciauth_user_privileges');
+
 		$attrs['fields'] = array('privilege_name', 'privilege_description', '__edit', '__delete');
+		$attrs['controller'] = 'rights';
 		$data['data_table'] = datatable('ciauth_user_privileges', $select, $attrs);
 		
 		$this->load->view('default_table', $data);

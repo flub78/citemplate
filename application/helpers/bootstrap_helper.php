@@ -36,11 +36,11 @@ if (! function_exists ( 'anchor_button' )) {
 	function anchor_button($attrs = array()) {
 		
 		$icon = $attrs['icon'];
-		$button = "<a type=\"button\" class=\"btn btn-default btn-lg\"
-					aria-label=\"Left Align\">
-					<span class=\"glyphicon glyphicon-$icon\" aria-hidden=\"true\"></span>
-					</a>";
-		return $button;
+		$url = $attrs['url'];
+		$attributes = (array_key_exists ( 'attributes', $attrs )) ? $attrs ['attributes'] : array ();
+		
+		$content = "<span class=\"glyphicon glyphicon-$icon\" aria-hidden=\"true\"></span>";
+        return anchor($url, $content, $attributes);
 	}
 }
 
@@ -68,10 +68,19 @@ if (! function_exists ( 'delete_button' )) {
 	 * @param
 	 *        	$id
 	 */
-	function delete_button($controller, $id) {
-		return anchor_button(array(
+	function delete_button($controller, $id, $confirm = true) {
+		$attrs = array(
 			'icon' => 'remove',
 			'url' => controller_url($controller) . '/delete/' . $id
-		));
+		);
+		
+		if ($confirm) {
+			// $txt = $this->CI->lang->line("gvv_button_delete_confirm") . " $elt_image?";
+			$txt = "Are you sure that you want to delete $id";
+			$attributes = "onclick=\"return confirm('$txt')\" ";
+			$attrs['attributes'] = $attributes;
+		}
+		
+		return anchor_button($attrs);
 	}
 }

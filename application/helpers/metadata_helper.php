@@ -68,6 +68,7 @@ if (! function_exists ( 'datatable' )) {
 		$fields = (array_key_exists ( 'fields', $attrs )) ? $attrs ['fields'] : array ();
 		$controller = (array_key_exists ( 'controller', $attrs )) ? $attrs ['controller'] : $table;
 		
+		echo $controller;
 		// insert heading row
 		$res = array (
 				heading_row ( $table, $fields ) 
