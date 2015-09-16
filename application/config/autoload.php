@@ -62,7 +62,7 @@ $autoload['packages'] = array();
 
 $autoload['libraries'] = array('Ciauth','Ciauth_datatables','Ciauth_nav','Ciauth_template', 
 		
-'Menu', 'logger');
+'Menu', 'logger', 'Metadata');
 
 
 /*
@@ -90,7 +90,7 @@ $autoload['drivers'] = array();
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('html', 'url', 'menu', 'form', 'metadata');
+$autoload['helper'] = array('html', 'url', 'menu', 'form', 'metadata', 'bootstrap');
 
 
 /*

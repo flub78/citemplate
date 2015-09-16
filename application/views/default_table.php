@@ -37,7 +37,7 @@ $this->load->library('table');
 		<div class="row">
 			<nav class="col-sm-1"></nav>
 			<section class="col-sm-11">
-				<?= heading($table_title, 3); ?>
+			    <?= heading($table_title, 3); ?>	
 
 				<div class="row">
 					<article class="col-sm-12 row">

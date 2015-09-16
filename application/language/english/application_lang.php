@@ -26,3 +26,8 @@ $lang['button_login'] = "Login";
 $lang['button_logout'] = "Logout";
 $lang['button_register'] = "Register";
 
+$lang['title_rights'] = "Rights definition";
+
+$lang['heading_privilege_id'] = "Id";
+$lang['heading_privilege_name'] = "Name";
+$lang['heading_privilege_description'] = "Description";

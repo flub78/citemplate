@@ -25,3 +25,9 @@ $lang['error_user_not_found'] = "Mot de passe ou identifiant inconnu.";
 $lang['button_login'] = "Connexion";
 $lang['button_logout'] = "Sortie";
 $lang['button_register'] = "Enregistrement";
+
+$lang['title_rights'] = "Privilèges utilisateur";
+
+$lang['heading_privilege_id'] = "N°";
+$lang['heading_privilege_name'] = "Nom";
+$lang['heading_privilege_description'] = "Description";

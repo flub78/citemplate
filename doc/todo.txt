@@ -30,15 +30,27 @@ Features:
         
     * Testing and validation
         - PHPunit with high coverage
-        - Watir funcitonnal tests with high coverage
+        - Watir functional tests with high coverage
         - Jenkins
         - Javascripts unit tests
+============================================================================================================================    
+
+Done:
+    * Fill the authentication database.
         
 Todo:
+    * Internationalization of the list view
+        - Titles and heading
+        - datatables
+    * Metadata
+        - create first form based on metadata
+        - create first table based on metadata
+        - Add actions on table view
     * Bootstrap tutorial
-    * Fill the authentication database
+    * Datatables tutorial    
     * Database save and restore
-    
+
+============================================================================================================================    
 CRUD scaffolding
 
     export CRUD_NAME="Rights"

@@ -63,14 +63,11 @@ class Rights extends MY_Controller {
 	 */
 	public function all() {
 		$data = array();
-		$data['table_title'] = "Rights definition";
-// 		$data['table_attrs'] = array(
-// 				'fields' => array('privilege_name', 'privilege_description'),
-// 				'align' => array('left', 'left', 'right', 'right', 'right', 'right')
-// 		);
+		$data['table_title'] = translation('title_rights');
 
 		$select = $this->rights->select_all('ciauth_user_privileges');
-		$data['data_table'] = datatable('ciauth_user_privileges', $select);
+		$attrs['fields'] = array('privilege_name', 'privilege_description', '__edit', '__delete');
+		$data['data_table'] = datatable('ciauth_user_privileges', $select, $attrs);
 		
 		$this->load->view('default_table', $data);
 	}
