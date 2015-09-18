@@ -85,6 +85,7 @@ class Rights extends MY_Controller {
 	 */
 	public function edit($id) {
 		$data = array();
+		$data['title'] = translation('Please Register');
 		$this->load->view('default_form', $data);
 	}
 
@@ -93,7 +94,7 @@ class Rights extends MY_Controller {
 	 * @param unknown $id
 	 */
 	public function delete($id) {
-	
+		echo "delete $id";
 	}
 		
 }

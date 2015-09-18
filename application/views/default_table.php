@@ -23,6 +23,8 @@ $this->load->library('table');
 ?>
 <?php $this->load->view('header'); ?>
 <!-- Additional view specific header elements below -->
+	<?= link_tag('https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css');?>
+
 </head>
 
 <body>
@@ -57,15 +59,57 @@ $this->load->library('table');
 	<?php $this->load->view('footer'); ?>
 	</footer><!-- /.container -->
 
+	<?= script(base_url() . '/components/DataTables/datatables.js')?>
+
+    <?= script('https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js')?>
+    <?= script('https://cdn.datatables.net/buttons/1.0.3/js/buttons.bootstrap.min.js')?>
+    <?= script('https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js')?>
+    <?= script('https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js')?>
+    <?= script('https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js')?>
+    <?= script('https://cdn.datatables.net/buttons/1.0.3/js/buttons.html5.min.js')?>
+    <?= script('https://cdn.datatables.net/buttons/1.0.3/js/buttons.print.min.js')?>
+
 <script type="text/javascript">
 <!--
 $(document).ready(function(){
 	
-    $('.display').dataTable( {
-        stateSave: true
+    var table = $('.display').dataTable( {
+        stateSave: true,
+        dom: 'Bfrtip',
+        buttons: [
+                  'excel', 'pdf', 'print',
+                  {
+                      text: 'Create',
+                      action: function ( e, dt, node, config ) {
+                          alert( 'Button activated' );
+                      }
+                  }
+              ]
     });
+
+    new $.fn.dataTable.Buttons( table, {
+        buttons: [
+            {
+                text: 'Button 2',
+                action: function ( e, dt, node, conf ) {
+                    alert( 'Button 2 clicked on' );
+                }
+            },
+            {
+                text: 'Button 3',
+                action: function ( e, dt, node, conf ) {
+                    alert( 'Button 3 clicked on' );
+                }
+            }
+        ]
+    } );
+
+    table.buttons( 1, null ).container().appendTo(
+            table.table().container()
+        );
        
 });
+
 //-->
 </script>
 	

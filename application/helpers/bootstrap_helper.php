@@ -54,7 +54,8 @@ if (! function_exists ( 'edit_button' )) {
 		
 		return anchor_button(array(
 			'icon' => 'pencil',
-			'url' => controller_url($controller) . '/edit/' . $id
+			'url' => controller_url($controller) . '/edit/' . $id,
+			'attributes' => 'title = "' . translation('button_edit') . '"'
 		));
 	}
 }
@@ -71,15 +72,16 @@ if (! function_exists ( 'delete_button' )) {
 	function delete_button($controller, $id, $confirm = true) {
 		$attrs = array(
 			'icon' => 'remove',
-			'url' => controller_url($controller) . '/delete/' . $id
+			'url' => controller_url($controller) . '/delete/' . $id,
+			'attributes' => 'title = "' . translation('button_delete') . '"'
 		);
-		
+
 		if ($confirm) {
-			// $txt = $this->CI->lang->line("gvv_button_delete_confirm") . " $elt_image?";
-			$txt = "Are you sure that you want to delete $id";
-			$attributes = "onclick=\"return confirm('$txt')\" ";
-			$attrs['attributes'] = $attributes;
+			$txt = translation('delete_confirm') . " $id";
+			$attributes = " onclick=\"return confirm('$txt')\" ";
+			$attrs['attributes'] .= $attributes;
 		}
+		
 		
 		return anchor_button($attrs);
 	}

@@ -25,6 +25,13 @@ $lang['error_user_not_found'] = "The username/email or password was not found";
 $lang['button_login'] = "Login";
 $lang['button_logout'] = "Logout";
 $lang['button_register'] = "Register";
+$lang['button_delete'] = "Delete";
+$lang['button_cancel'] = "Cancel";
+$lang['button_clone'] = "Clone";
+$lang['button_new'] = "New";
+$lang['button_edit'] = "Edit";
+$lang['delete_confirm'] = "Delete ";
+
 
 $lang['title_rights'] = "Rights definition";
 

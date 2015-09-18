@@ -37,10 +37,12 @@ Features:
 
 Done:
     * Fill the authentication database.
+    * Internationalization of the list view
+        - Titles and heading
+    * basic Excel and PDF export
         
 Todo:
     * Internationalization of the list view
-        - Titles and heading
         - datatables
     * Metadata
         - create first form based on metadata

@@ -25,6 +25,12 @@ $lang['error_user_not_found'] = "Mot de passe ou identifiant inconnu.";
 $lang['button_login'] = "Connexion";
 $lang['button_logout'] = "Sortie";
 $lang['button_register'] = "Enregistrement";
+$lang['button_delete'] = "Supprime";
+$lang['button_cancel'] = "Abandon";
+$lang['button_clone'] = "Clone";
+$lang['button_new'] = "Nouveau";
+$lang['button_edit'] = "Edite";
+$lang['delete_confirm'] = "Suppression de";
 
 $lang['title_rights'] = "Privilèges utilisateur";
 
