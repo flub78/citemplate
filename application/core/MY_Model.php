@@ -34,9 +34,9 @@ class MY_Model extends CI_Model {
      * Retourne le nom de la clé primaire sur la table
      * @return string
      */
-    public function primary_key() {
-        return $this->primary_key;
-    }
+//     public function primary_key() {
+//         return $this->primary_key;
+//     }
 
     /**
      *    Ajoute un élément
@@ -62,21 +62,22 @@ class MY_Model extends CI_Model {
      * delete
      * @param unknown_type $where selection des éléments à détruire
      */
-    function delete($where = array ()) {
-        $this->db->delete($this->table, $where);
+    function delete($table, $where = array ()) {
+        $this->db->delete($table, $where);
     }
 
     /**
-     *    Retourne une ligne de base
+     *    Returns a table row as hash
      *
-     * @param mlogin
-     * @return hash des valeurs
+     * @param table
+     * @param $keyid
+     * @param $keyvalue 
+     * @return hash
      */
-    public function get_by_id($keyid, $keyvalue) {
-        $table = $this->table;
+    public function get_by_id($table, $keyid, $keyvalue) {
 
         $this->db->where($keyid, $keyvalue);
-        $res = $this->db->get($this->table)->row_array();
+        $res = $this->db->get($table)->row_array();
         return $res;
     }
 
@@ -111,11 +112,8 @@ class MY_Model extends CI_Model {
      *    @return integer        Le nombre de news satisfaisant la condition
      */
     public function count($table, $where = array ()
-    		# , $where2 = array ()
     		) {
         $this->db->where($where);
-//         if (isset ($where2))
-//             $this->db->where($where2);
         return $this->db->count_all_results($table);
     }
 
@@ -149,13 +147,13 @@ class MY_Model extends CI_Model {
      *  @param $where selection
      *    @return objet          La liste
      */
-    public function select_columns($columns, $nb = 0, $debut = 0, $where = array ()) {
-        if ($nb) { 
-            return $this->db->select($columns)->from($this->table)->where($where)->limit($nb, $debut)->get()->result_array();
-        } else {
-            return $this->db->select($columns)->from($this->table)->where($where)->get()->result_array();            
-        }
-    }
+//     public function select_columns($columns, $nb = 0, $debut = 0, $where = array ()) {
+//         if ($nb) { 
+//             return $this->db->select($columns)->from($this->table)->where($where)->limit($nb, $debut)->get()->result_array();
+//         } else {
+//             return $this->db->select($columns)->from($this->table)->where($where)->get()->result_array();            
+//         }
+//     }
 
     /**
      *    Retourne un tableau
@@ -198,23 +196,23 @@ class MY_Model extends CI_Model {
      * @param $where selection
      * @param $order ordre de tri
      */
-    public function selector($where = array (), $order = "asc") {
-        $key = $this->primary_key;
+//     public function selector($where = array (), $order = "asc") {
+//         $key = $this->primary_key;
 
-        $allkeys = $this->db->select($key)->from($this->table)->where($where)->get()->result_array();
+//         $allkeys = $this->db->select($key)->from($this->table)->where($where)->get()->result_array();
 
-        $result = array ();
-        foreach ($allkeys as $row) {
-            $value = $row[$key];
-            $result[$value] = $this->image($value);
-        }
-        if ($order == "asc") {
-             natcasesort($result);
-        } else {
-            arsort($result);
-        }
-        return $result;
-    }
+//         $result = array ();
+//         foreach ($allkeys as $row) {
+//             $value = $row[$key];
+//             $result[$value] = $this->image($value);
+//         }
+//         if ($order == "asc") {
+//              natcasesort($result);
+//         } else {
+//             arsort($result);
+//         }
+//         return $result;
+//     }
 
     /**
      * Retourne un hash qui peut-être utilisé dans un menu drow-down
@@ -246,33 +244,33 @@ class MY_Model extends CI_Model {
      * 
      * @param $where selection
      */
-    public function selector_with_null($where = array ()) {
-        $allkeys = $this->selector($where);
-        $result = array ();
-        $result[''] = '';
-        foreach ($allkeys as $key => $value) {
-            $result[$key] = $value;
-        }
-        return $result;
-    }
+//     public function selector_with_null($where = array ()) {
+//         $allkeys = $this->selector($where);
+//         $result = array ();
+//         $result[''] = '';
+//         foreach ($allkeys as $key => $value) {
+//             $result[$key] = $value;
+//         }
+//         return $result;
+//     }
 
     /**
      * Génère un selecteur d'année contenant toutes les années possibles pour une table
      * @param $date_field champ contenant la date dont extraire l'année
      */
-    public function getYearSelector($date_field) {
-        $query = $this->db->select("YEAR($date_field) as year")
-        ->from($this->table)
-        ->order_by("$date_field ASC")
-        ->group_by('year')->get()->result_array();
+//     public function getYearSelector($date_field) {
+//         $query = $this->db->select("YEAR($date_field) as year")
+//         ->from($this->table)
+//         ->order_by("$date_field ASC")
+//         ->group_by('year')->get()->result_array();
 
-        $year_selector = array ();
+//         $year_selector = array ();
 
-        foreach ($query as $key => $row) {
-            $year_selector[$row['year']] = $row['year'];
-        }
-        return $year_selector;
-    }
+//         foreach ($query as $key => $row) {
+//             $year_selector[$row['year']] = $row['year'];
+//         }
+//         return $year_selector;
+//     }
 
 }
 

@@ -35,7 +35,7 @@ class Rights extends MY_Controller {
 	 */
 	function __construct() {
 		parent :: __construct();
-		$this->load->model('crud_model', 'rights');		
+		$this->load->model('crud_model', 'model');		
 	}
 	
 	/**
@@ -54,7 +54,7 @@ class Rights extends MY_Controller {
 		$data = array();
 		$data['table_title'] = translation('title_rights');
 		
-		$select = $this->rights->select_all('ciauth_user_privileges');
+		$select = $this->model->select_all('ciauth_user_privileges');
 
 		$attrs['fields'] = array('privilege_name', 'privilege_description', '__edit', '__delete');
 		$attrs['controller'] = 'rights';
@@ -84,6 +84,10 @@ class Rights extends MY_Controller {
 	 * @param unknown $id
 	 */
 	public function edit($id) {
+		// charge les données
+		$this->data = $this->model->get_by_id('ciauth_user_privileges', 'privilege_id', $id);
+		var_dump($this->data);
+		
 		$data = array();
 		$data['title'] = translation('Please Register');
 		$this->load->view('default_form', $data);

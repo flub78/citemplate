@@ -15,3 +15,27 @@ Model, Vue, Controller
     3) the CodeIgniter table library should turn this array into an HTML table
     
     
+    Questions & Answers
+    
+    * In metadata programming where should I put the fields validation rules?
+    
+    In basic CI application, they are usually in the controllers. With metadata programming, somes of the rules
+    are implied by the metadata type. So it is logical to have a rules($table, $field) in the metadata helper.
+    However is is more flexible to keep the rues setting in the controllers (to add business rules).
+    
+    * Should I try to keep all data validation inside the model like on RoR?
+    
+    Advantage of this approach is that is that there is no way to insert incoherent data in the database.
+    
+    * Is it judicious to consider two data validation levels ?
+        1) one form validation, just to check the syntax
+        2) business rules validation
+        
+    The first one could be enforced on the client by javascript. In all cases, all data validation must be
+    also done at the server levle for security reasons.
+    
+    
+    
+     
+    
+    
