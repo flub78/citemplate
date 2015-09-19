@@ -60,11 +60,16 @@ class Metadata {
 			$this->table_exist[$table] = $this->CI->db->table_exists($table);
 			
 			if ($this->table_exist[$table]) {
+				
+				# fetch database metadata
 				$this->list_fields[$table] = $this->CI->db->list_fields($table);
 				$fields = $this->CI->db->field_data($table);
 				foreach ($fields as $field) {
 					$this->field_data[$table][$field->name] = $field;
 				}
+				
+				# fetch additional metadata
+				
 			}
 		}
 		return $this->table_exist[$table];
