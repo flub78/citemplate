@@ -34,10 +34,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Metadata {
 	protected $CI;
-	protected $table_exist;
-	protected $list_fields;
-	protected $field_data;
-		
+	protected $table_exist; 	# database metadata
+	protected $list_fields;     # database metadata
+	protected $field_data;      # database metadata
+	protected $fields;	        # additional metadata 
+	
 	/**
 	 * Constructor
 	 */
@@ -48,6 +49,24 @@ class Metadata {
 		$this->table_exist = array();
 		$this->list_fields = array();
 		$this->field_data = array();
+		$this->init();
+	}
+	
+	/**
+	 * Initialize the fields metadata 
+	 */
+	protected function init() {
+		
+		$this->fields = array();
+		
+		$this->fields['ciauth_user_accounts']['email'] = array('subtype' => 'email');
+		$this->fields['ciauth_user_accounts']['username'] = array('subtype' => 'text');
+		$this->fields['ciauth_user_accounts']['password'] = array('subtype' => 'password');
+		$this->fields['ciauth_user_accounts']['admin'] = array('subtype' => 'boolean');
+
+		$this->fields['ciauth_user_privileges']['privilege_id'] = array('subtype' => 'int');
+		$this->fields['ciauth_user_privileges']['privilege_name'] = array('subtype' => 'text');
+		$this->fields['ciauth_user_privileges']['privilege_description'] = array('subtype' => 'text');
 	}
  	
 	/**
@@ -64,6 +83,7 @@ class Metadata {
 				# fetch database metadata
 				$this->list_fields[$table] = $this->CI->db->list_fields($table);
 				$fields = $this->CI->db->field_data($table);
+				# var_dump($fields);
 				foreach ($fields as $field) {
 					$this->field_data[$table][$field->name] = $field;
 				}
@@ -86,11 +106,11 @@ class Metadata {
 	}
 	
 	/**
-	 * Check if a filed exists in database
+	 * Check if a field exists in database
 	 * @param unknown_type $table
 	 * @param unknown_type $field
 	 */
-	function field_exist($table, $field) {
+	function field_exists($table, $field) {
 		if (!$this->table_exists($table)) {
 			return false;
 		}
@@ -103,7 +123,7 @@ class Metadata {
 	 * @param unknown_type $field
 	 * @return string
 	 */
-	function type($table, $field) {
+	function field_type($table, $field) {
 		if (!$this->table_exists($table)) {throw new Exception("Table $table does not exist");}
 		$type = $this->field_data[$table][$field]->type;
 		return $type;
@@ -115,21 +135,13 @@ class Metadata {
 	 * @param unknown_type $field
 	 * @return string
 	 */
-	function subtype($table, $field) {
-		if (!$this->table_exists($table)) {
-			throw new Exception("Table $table does not exist");
-		}
+	function field_subtype($table, $field) {
+		if (!$this->field_exists($table, $field)) {throw new Exception("Field $field does not exist in table $table");}
 		
-		$subtype = array (
-				'email' => "email",
-				'username' => "text",
-				'privilege_name' => "text",
-				'privilege_description' => "text",
-				
-				'password' => "password",
-				'confirm-password' => "password" 
-		);
-		return $subtype[$field];
+		if (! isset($this->fields[$table][$field]['subtype'])) {
+			throw new Exception("Undefined subtype for table$$table, field=$field");
+		}
+		return $this->fields[$table][$field]['subtype'];
 	}
 
 	/**
@@ -138,10 +150,26 @@ class Metadata {
 	 * @param unknown_type $field
 	 * @return string
 	 */
-	function size($table, $field) {
-			if (!$this->table_exists($table)) {throw new Exception("Table $table does not exist");}
-		return 25;
+	function field_size($table, $field) {
+		if (!$this->field_exists($table, $field)) {throw new Exception("Field $field does not exist in table $table");}
+		$size = $this->field_data[$table][$field]->max_length;
+		return $size;
 	}
+	
+	/**
+	 * Returns the field default
+	 * @param unknown_type $table
+	 * @param unknown_type $field
+	 * @return string
+	 */
+	function field_default($table, $field) {
+		if (!$this->field_exists($table, $field)) {
+			throw new Exception("Field $field does not exist in table $table");
+		}
+		$default = $this->field_data[$table][$field]->default;
+		return $default;
+	}
+	
 
 	/**
 	 * Returns the field placeholder
@@ -149,9 +177,13 @@ class Metadata {
 	 * @param unknown_type $field
 	 * @return string
 	 */
-	function placeholder($table, $field) {
-		if (!$this->table_exists($table)) {throw new Exception("Table $table does not exist");}
-		return "";
+	function field_placeholder($table, $field) {
+		if (!$this->field_exists($table, $field)) {throw new Exception("Field $field does not exist in able $table");}
+
+		if (! isset($this->fields[$table][$field]['placeholder'])) {
+			return "";
+		}
+		return $this->fields[$table][$field]['placeholder'];		
 	}
 
 	/**

@@ -149,10 +149,12 @@ if (! function_exists ( 'field_input' )) {
 	function field_input($table, $field, $data = '', $attrs = array()) {
 		$CI = & get_instance ();
 		
-		$type = $CI->metadata->type ($table, $field);
-		$subtype = $CI->metadata->subtype ($table, $field);
-		$size = $CI->metadata->size ($table, $field);
-		$placeholder = $CI->metadata->placeholder ($table, $field);
+		echo "field_input($table, $field)";
+		
+		$type = $CI->metadata->field_type ($table, $field);
+		$subtype = $CI->metadata->field_subtype ($table, $field);
+		$size = $CI->metadata->field_size ($table, $field);
+		$placeholder = $CI->metadata->field_placeholder ($table, $field);
 		
 		$info = "field_input($table, $field) ";
 		$info .= "type=$type, subtype=$subtype, size=$size, placeholder=$placeholder";		

@@ -20,9 +20,9 @@ class Metadata_helper_test extends TestCase
 	public function test_loaded()
 	{
 		$table = 'ciauth_user_privileges';
-		$fied = 'privilege_name';
+		$field = 'privilege_name';
 		
-		$data_table = datatable('crud');
+		$datatable = datatable('crud');
 		$expected = "";
 		$this->assertEquals($expected,
 			$datatable,
@@ -37,7 +37,7 @@ class Metadata_helper_test extends TestCase
 
 		$expected = "";
 		$actual = field_input($table, $field);
-		$this->assertEquals($expected, $actual,
+		$this->assertNotEquals($expected, $actual,
 				"field_input"
 		);
 
