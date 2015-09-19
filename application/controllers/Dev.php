@@ -51,5 +51,13 @@ class Dev extends MY_Controller {
 		echo "current_url=" . current_url() . br();
 	}
 	
+	/**
+	 * Display information on ..
+	 */
+	public function test()
+	{
+		$fields = $this->db->field_data('ciauth_user_privileges');
+		var_dump($fields);
+	}
 	
 }

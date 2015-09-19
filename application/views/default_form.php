@@ -38,10 +38,10 @@
 			<section class="col-sm-11">
 			
 			<div class="container">
-				<?= form_open('welcome/create', array("class" => "form-register")); ?>
+				<?= form_open($controller . '/create', array("class" => "form-register")); ?>
 				
 					<h2 class="form-heading"><?= $title ?></h2>
-					<?= form("ciauth_user_accounts"); ?>
+					<?= form("ciauth_user_privileges"); ?>
 					<div id='message'></div>
 					<p>&nbsp;</p>
 					<?= submit('Register'); ?>

@@ -23,7 +23,7 @@ class Users_test extends TestCase
 		foreach ($methods as $method) {
 			$id = 42;
 			$output = $this->request('GET', ['Users', $method]);
-			$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in $view");
+			$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in $method");
 		}	
 	}
 	

@@ -19,28 +19,30 @@ class Metadata_helper_test extends TestCase
 	
 	public function test_loaded()
 	{
+		$table = 'ciauth_user_privileges';
+		$fied = 'privilege_name';
 		
-		$data_table = datatable("crud");
+		$data_table = datatable('crud');
 		$expected = "";
 		$this->assertEquals($expected,
 			$datatable,
-			'datatable helper'
+			'check that datable return nothing on non existing tables'
 		);
 		
 		$expected = "";
-		$actual = field_label('language');
+		$actual = field_label($table, $field);
 		$this->assertEquals($expected, $actual, 
 			"field_label"
 		);
 
 		$expected = "";
-		$actual = field_input('language');
+		$actual = field_input($table, $field);
 		$this->assertEquals($expected, $actual,
 				"field_input"
 		);
 
 		$expected = "";
-		$actual = form('language');
+		$actual = form($table);
 		$this->assertNotEquals($expected, $actual,
 				"basic form: $actual not empty"
 		);

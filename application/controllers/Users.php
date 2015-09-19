@@ -83,10 +83,10 @@ class Users extends MY_Controller {
 	 * Display a form to create a new element
 	 */
 	public function create() {
-		$this->load->library('form_validation');
 		
 		$data = array();
 		$data['title'] = translation('Please Register');
+		$data['controller'] = 'users';
 		$this->load->view('default_form', $data);
 	}
 

@@ -75,7 +75,8 @@ class Rights extends MY_Controller {
 	 */
 	public function create() {
 		$data = array();
-		$data['title'] = translation('Please Register');
+		$data['title'] = translation('New privilege');
+		$data['controller'] = 'rights';
 		$this->load->view('default_form', $data);
 	}
 
@@ -86,10 +87,11 @@ class Rights extends MY_Controller {
 	public function edit($id) {
 		// charge les données
 		$this->data = $this->model->get_by_id('ciauth_user_privileges', 'privilege_id', $id);
-		var_dump($this->data);
+		// var_dump($this->data);
 		
 		$data = array();
-		$data['title'] = translation('Please Register');
+		$data['title'] = translation('Privileges');
+		$data['controller'] = 'rights';
 		$this->load->view('default_form', $data);
 	}
 

@@ -19,6 +19,26 @@
  *    The metadata helper is in charge of generating views element using 
  *    the metada description. The metadata librarie is in charge of fetching
  *    table and fields descriptions. 
+ *    
+ *    Metadata supports several subtypes of data
+ *    * varchar
+ *       * emails dot seperated strings with one @
+ *       * password
+ *       * url
+ *       * key to others table
+ *       
+ *    * tinyint
+ *       * booleans
+ *       
+ *    * int
+ *       * enumerates
+ *       * keys to others tables 
+ *       
+ *    * decimal
+ *       * currency
+ *       
+ *    * date
+ *    * timestamp
  */
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
@@ -33,6 +53,8 @@ if (! function_exists ( 'heading_row' )) {
 	 */
 	function heading_row($table, $fields = array()) {
 		$CI = & get_instance ();
+		
+		if (!$CI->metadata->table_exists($table)) {return array();};
 		
 		if (count ( $fields ) == 0) {
 			// default, all fields
@@ -67,6 +89,11 @@ if (! function_exists ( 'datatable' )) {
 	function datatable($table, $data = array(), $attrs = array()) {
 		$fields = (array_key_exists ( 'fields', $attrs )) ? $attrs ['fields'] : array ();
 		$controller = (array_key_exists ( 'controller', $attrs )) ? $attrs ['controller'] : $table;
+		
+		$CI = & get_instance ();
+		if (!$CI->metadata->table_exists($table)) {
+			return "";
+		};
 		
 		// insert heading row
 		$res = array (
@@ -120,11 +147,24 @@ if (! function_exists ( 'field_input' )) {
 	 * @param unknown_type $attrs        	
 	 */
 	function field_input($table, $field, $data = '', $attrs = array()) {
+		$CI = & get_instance ();
+		
+		$type = $CI->metadata->type ($table, $field);
+		$subtype = $CI->metadata->subtype ($table, $field);
+		$size = $CI->metadata->size ($table, $field);
+		$placeholder = $CI->metadata->placeholder ($table, $field);
+		
+		$info = "field_input($table, $field) ";
+		$info .= "type=$type, subtype=$subtype, size=$size, placeholder=$placeholder";		
+		$CI->metadata->log($info);
+		
 		$fields = array (
-				'email' => '<input type="email" name="email_value" value="" id="email_value" class="form-control" placeholder="Email Address" size="25"  />',
-				'username' => '<input type="text" name="username_value" value="" id="username_value" class="form-control" placeholder="User Name" size="25"  />',
-				'password' => '<input type="password" name="password" value="" id="password" class="form-control" placeholder="Password" size="25"  />',
-				'confirm-password' => '<input type="password" name="confirm-password" value="" id="confirm-password" class="form-control" placeholder="Confirm Password" size="25"  />' 
+				'email' => '<input type="' . $subtype . '" name="email_value" value="" id="email_value" class="form-control" placeholder="Email Address" size="25"  />',
+				'username' => '<input type="' . $subtype . '" name="username_value" value="" id="username_value" class="form-control" placeholder="User Name" size="25"  />',
+				'privilege_name' => '<input type="' . $subtype . '" name="username_value" value="" id="username_value" class="form-control" placeholder="User Name" size="25"  />',
+				'privilege_description' => '<input type="' . $subtype . '" name="username_value" value="" id="username_value" class="form-control" placeholder="User Name" size="25"  />',
+				'password' => '<input type="' . $subtype . '" name="password" value="" id="password" class="form-control" placeholder="Password" size="25"  />',
+				'confirm-password' => '<input type="' . $subtype . '" name="confirm-password" value="" id="confirm-password" class="form-control" placeholder="Confirm Password" size="25"  />' 
 		);
 		return $fields [$field];
 	}
@@ -138,12 +178,8 @@ if (! function_exists ( 'form_field_list' )) {
 	 */
 	function form_field_list($table) {
 		$list = array (
-				'ciauth_user_accounts' => array (
-						'email',
-						'username',
-						'password',
-						'confirm-password' 
-				) 
+				'ciauth_user_accounts' => array ('email', 'username', 'password', 'confirm-password'),
+				'ciauth_user_privileges' => array('privilege_name', 'privilege_description') 
 		);
 		return $list [$table];
 	}
