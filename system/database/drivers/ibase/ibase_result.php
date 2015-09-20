@@ -67,7 +67,7 @@ class CI_DB_ibase_result extends CI_DB_result {
 	 *
 	 * @return	array
 	 */
-	public function list_fields()
+	public function fields_list()
 	{
 		$field_names = array();
 		for ($i = 0, $num_fields = $this->num_fields(); $i < $num_fields; $i++)

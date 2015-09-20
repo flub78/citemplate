@@ -10,6 +10,16 @@
 
 class Dev_test extends TestCase
 {
+	public function setUp()
+	{
+		$this->resetInstance();
+		$this->CI->ciauth->login('testuser', 'testuser', true);
+	}
+	
+	public function tearDown() {
+		$this->CI->ciauth->logout();
+	}
+	
 	public function test_phpinfo()
 	{
 		$output = $this->request('GET', ['Dev', 'phpinfo']);

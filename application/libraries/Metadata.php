@@ -1,4 +1,4 @@
-<?php
+é<?php
 /**
  *    Project {$PROJECT}
  *    Copyright (C) 2015 {$AUTHOR}
@@ -29,13 +29,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * For performance, metadata are only fetched once and on demand from database
  * even if the same information is used several times to build a view.
  * 
+ * Design
+ * 
+ * Initially I thought about to put all metadata in database, as some of the metadata
+ * information are fetch from database if seems logical to have only one source
+ * of information. But then I need a model just to fetch it and have it available
+ * from a PHP class. So it is more efficient to just put the additional metadata
+ * as a set of constant into the PHP class, it save all database related accesses
+ * and this information is static, it is never change following a user action.
+ * 
+ * 
+ * 
  * @author frederic
  *
  */
 class Metadata {
 	protected $CI;
 	protected $table_exist; 	# database metadata
-	protected $list_fields;     # database metadata
+	protected $fields_list;     # database metadata
 	protected $field_data;      # database metadata
 	protected $fields;	        # additional metadata 
 	
@@ -47,10 +58,17 @@ class Metadata {
 		
 		# initialize the caches
 		$this->table_exist = array();
-		$this->list_fields = array();
+		$this->fields_list = array();
 		$this->field_data = array();
 		$this->init();
 	}
+	
+	/*
+	 * Here starts the metadata description itself
+	 * 
+	 * For the moment I'll put all metadata here. But later when the application
+	 * will grow up, it could make sense to derive this class.
+	 */
 	
 	/**
 	 * Initialize the fields metadata 
@@ -59,9 +77,38 @@ class Metadata {
 		
 		$this->fields = array();
 		
-		$this->fields['ciauth_user_accounts']['email'] = array('subtype' => 'email');
-		$this->fields['ciauth_user_accounts']['username'] = array('subtype' => 'text');
-		$this->fields['ciauth_user_accounts']['password'] = array('subtype' => 'password');
+		$this->fields['ciauth_user_accounts']['email'] = array(
+            'name' => 'email_value',
+            'type' => 'email',
+			'subtype' => 'email',
+            'id' => 'email_value',
+            'class' => 'form-control',
+            'placeholder' => 'Email Address',
+            'size' => '25'
+        );
+		$this->fields['ciauth_user_accounts']['username'] = array(
+            'name' => 'username_value',
+            'type' => 'text',
+            'id' => 'username_value',
+            'class' => 'form-control',
+            'placeholder' => 'User Name',
+            'size' => '25'
+        );
+		$this->fields['ciauth_user_accounts']['password'] = array(
+            'name' => 'password',
+            'id' => 'password',
+            'class' => 'form-control',
+            'placeholder' => 'Password',
+            'size' => '25'
+        );
+		// confirm-password is not a real database field
+		$this->fields['ciauth_user_accounts']['confirm-password'] = array(
+				'name' => 'confirm-password',
+				'id' => 'confirm-password',
+				'class' => 'form-control',
+				'placeholder' => 'Confirm Password',
+				'size' => '25'
+		);
 		$this->fields['ciauth_user_accounts']['admin'] = array('subtype' => 'boolean');
 
 		$this->fields['ciauth_user_privileges']['privilege_id'] = array('subtype' => 'int');
@@ -69,6 +116,26 @@ class Metadata {
 		$this->fields['ciauth_user_privileges']['privilege_description'] = array('subtype' => 'text');
 	}
  	
+	/**
+	 * Returns the list of fields to be displayed in a form
+	 *
+	 * @param unknown_type $table
+	 */
+	function form_field_list($table) {
+		$CI = & get_instance ();
+		
+		$list = array (
+			'ciauth_user_accounts' => array ('email', 'username', 'password', 'confirm-password'),
+			'ciauth_user_privileges' => array('privilege_name', 'privilege_description')
+		);
+		return $list[$table];
+	}
+	
+	/*
+	 * End of metadata description
+	 * 
+	 */
+	
 	/**
 	 * Check if a table or view exist in the database
 	 * The routine also fetch table information
@@ -81,15 +148,21 @@ class Metadata {
 			if ($this->table_exist[$table]) {
 				
 				# fetch database metadata
-				$this->list_fields[$table] = $this->CI->db->list_fields($table);
+				$this->fields_list[$table] = $this->CI->db->fields_list($table);
 				$fields = $this->CI->db->field_data($table);
+				
 				# var_dump($fields);
+				/*
+				 * object(stdClass)[31]
+  					public 'name' => string 'privilege_id' (length=12)
+  					public 'type' => string 'int' (length=3)
+  					public 'max_length' => int 11
+  					public 'default' => null
+  					public 'primary_key' => int 1
+				 */
 				foreach ($fields as $field) {
 					$this->field_data[$table][$field->name] = $field;
-				}
-				
-				# fetch additional metadata
-				
+				}				
 			}
 		}
 		return $this->table_exist[$table];
@@ -99,11 +172,12 @@ class Metadata {
 	 * Return the list of fields of a table
 	 * @param unknown $table
 	 */
-	function list_fields ($table) {
+	function fields_list ($table) {
 		if (!$this->table_exists($table)) {throw new Exception("Table $table does not exist");}
 		
-		return $this->list_fields[$table];
+		return $this->fields_list[$table];
 	}
+	
 	
 	/**
 	 * Check if a field exists in database
@@ -118,16 +192,17 @@ class Metadata {
 	}
 	
 	/**
-	 * Returns the field type
+	 * Returns the field database type
 	 * @param unknown_type $table
 	 * @param unknown_type $field
 	 * @return string
 	 */
-	function field_type($table, $field) {
+	function field_db_type($table, $field) {
 		if (!$this->table_exists($table)) {throw new Exception("Table $table does not exist");}
 		$type = $this->field_data[$table][$field]->type;
 		return $type;
 	}
+	
 	
 	/**
 	 * Returns the field subtype
@@ -135,11 +210,11 @@ class Metadata {
 	 * @param unknown_type $field
 	 * @return string
 	 */
-	function field_subtype($table, $field) {
+	function field_type($table, $field) {
 		if (!$this->field_exists($table, $field)) {throw new Exception("Field $field does not exist in table $table");}
 		
 		if (! isset($this->fields[$table][$field]['subtype'])) {
-			throw new Exception("Undefined subtype for table$$table, field=$field");
+			return "";
 		}
 		return $this->fields[$table][$field]['subtype'];
 	}
@@ -151,6 +226,9 @@ class Metadata {
 	 * @return string
 	 */
 	function field_size($table, $field) {
+		if (isset($this->fields[$table][$field]['size'])) {
+			return $this->fields[$table][$field]['size'];
+		}
 		if (!$this->field_exists($table, $field)) {throw new Exception("Field $field does not exist in table $table");}
 		$size = $this->field_data[$table][$field]->max_length;
 		return $size;
@@ -183,7 +261,7 @@ class Metadata {
 		if (! isset($this->fields[$table][$field]['placeholder'])) {
 			return "";
 		}
-		return $this->fields[$table][$field]['placeholder'];		
+		return translation($this->fields[$table][$field]['placeholder']);		
 	}
 
 	/**

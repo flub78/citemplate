@@ -81,7 +81,7 @@ class CI_DB_cubrid_result extends CI_DB_result {
 	 *
 	 * @return	array
 	 */
-	public function list_fields()
+	public function fields_list()
 	{
 		return cubrid_column_names($this->result_id);
 	}

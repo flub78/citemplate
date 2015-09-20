@@ -1,0 +1,1797 @@
+é
+A PHP Error was encountered
+
+Severity: NoticeMessage:  Undefined variable: _SESSIONFilename: /home/frederic/git/citemplate/system/libraries/Session/Session.phpLine Number: 729
+
+Backtrace:
+			
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 94	Function: unset_userdata
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.php	Line: 18	Function: login
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 473	Function: __construct
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 834	Function: createTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 212	Function: addTestMethod
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 315	Function: __construct
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 389	Function: addTestSuite
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 416	Function: addTestFile
+		
+			
+	File: /usr/share/php/PHPUnit/Util/Configuration.php	Line: 873	Function: addTestFiles
+		
+			
+	File: /usr/share/php/PHPUnit/Util/Configuration.php	Line: 789	Function: getTestSuite
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 657	Function: getTestSuiteConfiguration
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 138	Function: handleArguments
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	
+A PHP Error was encountered
+
+Severity: WarningMessage:  Cannot modify header information - headers already sent by (output started at /home/frederic/git/citemplate/application/libraries/Metadata.php:1)Filename: /home/frederic/git/citemplate/application/libraries/Ciauth.phpLine Number: 229
+
+Backtrace:
+			
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 229	Function: setcookie
+		
+			
+	File: /home/frederic/git/citemplate/application/models/M_ciauth.php	Line: 102	Function: set_ciauth_session
+		
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 101	Function: login
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.php	Line: 18	Function: login
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 473	Function: __construct
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 834	Function: createTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 212	Function: addTestMethod
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 315	Function: __construct
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 389	Function: addTestSuite
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 416	Function: addTestFile
+		
+			
+	File: /usr/share/php/PHPUnit/Util/Configuration.php	Line: 873	Function: addTestFiles
+		
+			
+	File: /usr/share/php/PHPUnit/Util/Configuration.php	Line: 789	Function: getTestSuite
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 657	Function: getTestSuiteConfiguration
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 138	Function: handleArguments
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	
+A PHP Error was encountered
+
+Severity: WarningMessage:  Cannot modify header information - headers already sent by (output started at /home/frederic/git/citemplate/application/libraries/Metadata.php:1)Filename: /home/frederic/git/citemplate/application/libraries/Ciauth.phpLine Number: 229
+
+Backtrace:
+			
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 229	Function: setcookie
+		
+			
+	File: /home/frederic/git/citemplate/application/models/M_ciauth.php	Line: 102	Function: set_ciauth_session
+		
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 101	Function: login
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.php	Line: 18	Function: login
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 473	Function: __construct
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 834	Function: createTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 212	Function: addTestMethod
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 315	Function: __construct
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 389	Function: addTestSuite
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 416	Function: addTestFile
+		
+			
+	File: /usr/share/php/PHPUnit/Util/Configuration.php	Line: 873	Function: addTestFiles
+		
+			
+	File: /usr/share/php/PHPUnit/Util/Configuration.php	Line: 789	Function: getTestSuite
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 657	Function: getTestSuiteConfiguration
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 138	Function: handleArguments
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	
+A PHP Error was encountered
+
+Severity: WarningMessage:  Cannot modify header information - headers already sent by (output started at /home/frederic/git/citemplate/application/libraries/Metadata.php:1)Filename: /home/frederic/git/citemplate/application/libraries/Ciauth.phpLine Number: 229
+
+Backtrace:
+			
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 229	Function: setcookie
+		
+			
+	File: /home/frederic/git/citemplate/application/models/M_ciauth.php	Line: 102	Function: set_ciauth_session
+		
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 101	Function: login
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/controllers/Users_test.php	Line: 18	Function: login
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 473	Function: __construct
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 834	Function: createTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 212	Function: addTestMethod
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 315	Function: __construct
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 389	Function: addTestSuite
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 416	Function: addTestFile
+		
+			
+	File: /usr/share/php/PHPUnit/Util/Configuration.php	Line: 873	Function: addTestFiles
+		
+			
+	File: /usr/share/php/PHPUnit/Util/Configuration.php	Line: 789	Function: getTestSuite
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 657	Function: getTestSuiteConfiguration
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 138	Function: handleArguments
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	
+A PHP Error was encountered
+
+Severity: WarningMessage:  Cannot modify header information - headers already sent by (output started at /home/frederic/git/citemplate/application/libraries/Metadata.php:1)Filename: /home/frederic/git/citemplate/application/libraries/Ciauth.phpLine Number: 229
+
+Backtrace:
+			
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 229	Function: setcookie
+		
+			
+	File: /home/frederic/git/citemplate/application/models/M_ciauth.php	Line: 102	Function: set_ciauth_session
+		
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 101	Function: login
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/controllers/Users_test.php	Line: 18	Function: login
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 473	Function: __construct
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 834	Function: createTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 212	Function: addTestMethod
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 315	Function: __construct
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 389	Function: addTestSuite
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 416	Function: addTestFile
+		
+			
+	File: /usr/share/php/PHPUnit/Util/Configuration.php	Line: 873	Function: addTestFiles
+		
+			
+	File: /usr/share/php/PHPUnit/Util/Configuration.php	Line: 789	Function: getTestSuite
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 657	Function: getTestSuiteConfiguration
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 138	Function: handleArguments
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	PHPUnit 3.7.28 by Sebastian Bergmann.
+
+Configuration read from /home/frederic/git/citemplate/application/tests/phpunit.xml
+
+.testing basic
+A PHP Error was encountered
+
+Severity: NoticeMessage:  Undefined variable: ouputFilename: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.phpLine Number: 29
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.php	Line: 29	Function: _error_handler
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	output=testing blog
+A PHP Error was encountered
+
+Severity: NoticeMessage:  Undefined variable: ouputFilename: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.phpLine Number: 29
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.php	Line: 29	Function: _error_handler
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	output=testing carousel
+A PHP Error was encountered
+
+Severity: NoticeMessage:  Undefined variable: ouputFilename: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.phpLine Number: 29
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.php	Line: 29	Function: _error_handler
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	output=testing cover
+A PHP Error was encountered
+
+Severity: NoticeMessage:  Undefined variable: ouputFilename: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.phpLine Number: 29
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.php	Line: 29	Function: _error_handler
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	output=testing dashboard
+A PHP Error was encountered
+
+Severity: NoticeMessage:  Undefined variable: ouputFilename: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.phpLine Number: 29
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.php	Line: 29	Function: _error_handler
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	output=testing grids
+A PHP Error was encountered
+
+Severity: NoticeMessage:  Undefined variable: ouputFilename: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.phpLine Number: 29
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.php	Line: 29	Function: _error_handler
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	output=testing jumbotron
+A PHP Error was encountered
+
+Severity: NoticeMessage:  Undefined variable: ouputFilename: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.phpLine Number: 29
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.php	Line: 29	Function: _error_handler
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	output=testing narrow_jumbotron
+A PHP Error was encountered
+
+Severity: NoticeMessage:  Undefined variable: ouputFilename: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.phpLine Number: 29
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.php	Line: 29	Function: _error_handler
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	output=testing sign_in
+A PHP Error was encountered
+
+Severity: NoticeMessage:  Undefined variable: ouputFilename: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.phpLine Number: 29
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.php	Line: 29	Function: _error_handler
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	output=testing sticky_footer_with_navbar
+A PHP Error was encountered
+
+Severity: NoticeMessage:  Undefined variable: ouputFilename: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.phpLine Number: 29
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.php	Line: 29	Function: _error_handler
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	output=testing theme
+A PHP Error was encountered
+
+Severity: NoticeMessage:  Undefined variable: ouputFilename: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.phpLine Number: 29
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/tests/controllers/Bootstrap_test.php	Line: 29	Function: _error_handler
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	output=..........
+A PHP Error was encountered
+
+Severity: WarningMessage:  Cannot modify header information - headers already sent by (output started at /home/frederic/git/citemplate/application/libraries/Metadata.php:1)Filename: /home/frederic/git/citemplate/application/libraries/Ciauth.phpLine Number: 229
+
+Backtrace:
+			
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 229	Function: setcookie
+		
+			
+	File: /home/frederic/git/citemplate/application/models/M_ciauth.php	Line: 102	Function: set_ciauth_session
+		
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 101	Function: login
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/controllers/Ciauth_test.php	Line: 74	Function: login
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	.........
+A PHP Error was encountered
+
+Severity: WarningMessage:  Cannot modify header information - headers already sent by (output started at /home/frederic/git/citemplate/application/libraries/Metadata.php:1)Filename: /home/frederic/git/citemplate/application/libraries/Ciauth.phpLine Number: 229
+
+Backtrace:
+			
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 229	Function: setcookie
+		
+			
+	File: /home/frederic/git/citemplate/application/models/M_ciauth.php	Line: 102	Function: set_ciauth_session
+		
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 101	Function: login
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/controllers/Welcome_test.php	Line: 17	Function: login
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	...
+A PHP Error was encountered
+
+Severity: WarningMessage:  Illegal string offset 'icon'Filename: /home/frederic/git/citemplate/application/helpers/bootstrap_helper.phpLine Number: 38
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/helpers/bootstrap_helper.php	Line: 38	Function: _error_handler
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/helpers/Bootstrap_helper_test.php	Line: 26	Function: anchor_button
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	
+A PHP Error was encountered
+
+Severity: WarningMessage:  Illegal string offset 'url'Filename: /home/frederic/git/citemplate/application/helpers/bootstrap_helper.phpLine Number: 39
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/helpers/bootstrap_helper.php	Line: 39	Function: _error_handler
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/helpers/Bootstrap_helper_test.php	Line: 26	Function: anchor_button
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	
+A PHP Error was encountered
+
+Severity: WarningMessage:  array_key_exists() expects parameter 2 to be array, string givenFilename: /home/frederic/git/citemplate/application/helpers/bootstrap_helper.phpLine Number: 40
+
+Backtrace:
+			
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/helpers/bootstrap_helper.php	Line: 40	Function: array_key_exists
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/helpers/Bootstrap_helper_test.php	Line: 26	Function: anchor_button
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	.<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>...
+A PHP Error was encountered
+
+Severity: WarningMessage:  Cannot modify header information - headers already sent by (output started at /home/frederic/git/citemplate/application/libraries/Metadata.php:1)Filename: /home/frederic/git/citemplate/application/libraries/Ciauth.phpLine Number: 229
+
+Backtrace:
+			
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 229	Function: setcookie
+		
+			
+	File: /home/frederic/git/citemplate/application/models/M_ciauth.php	Line: 102	Function: set_ciauth_session
+		
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 101	Function: login
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/helpers/Menu_helper_test.php	Line: 270	Function: login
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	.field_input(ciauth_user_privileges, privilege_name)<br />field_input(ciauth_user_privileges, privilege_name) db_type=varchar, type=, size=40, placeholder=field_input(ciauth_user_privileges, privilege_name)<br />field_input(ciauth_user_privileges, privilege_name) db_type=varchar, type=, size=40, placeholder=field_input(ciauth_user_privileges, privilege_description)<br />field_input(ciauth_user_privileges, privilege_description) db_type=varchar, type=, size=200, placeholder=.
+A PHP Error was encountered
+
+Severity: WarningMessage:  Missing argument 1 for project_js(), called in /home/frederic/git/citemplate/application/tests/helpers/Url_helper_test.php on line 31 and definedFilename: /home/frederic/git/citemplate/application/helpers/MY_url_helper.phpLine Number: 50
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/helpers/MY_url_helper.php	Line: 50	Function: _error_handler
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/helpers/Url_helper_test.php	Line: 31	Function: project_js
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	
+A PHP Error was encountered
+
+Severity: NoticeMessage:  Undefined variable: nomFilename: /home/frederic/git/citemplate/application/helpers/MY_url_helper.phpLine Number: 51
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/helpers/MY_url_helper.php	Line: 51	Function: _error_handler
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/helpers/Url_helper_test.php	Line: 31	Function: project_js
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	
+A PHP Error was encountered
+
+Severity: WarningMessage:  Missing argument 1 for bootstrap_js(), called in /home/frederic/git/citemplate/application/tests/helpers/Url_helper_test.php on line 32 and definedFilename: /home/frederic/git/citemplate/application/helpers/MY_url_helper.phpLine Number: 120
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/helpers/MY_url_helper.php	Line: 120	Function: _error_handler
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/helpers/Url_helper_test.php	Line: 32	Function: bootstrap_js
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	
+A PHP Error was encountered
+
+Severity: NoticeMessage:  Undefined variable: nameFilename: /home/frederic/git/citemplate/application/helpers/MY_url_helper.phpLine Number: 121
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/helpers/MY_url_helper.php	Line: 121	Function: _error_handler
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/helpers/Url_helper_test.php	Line: 32	Function: bootstrap_js
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	
+A PHP Error was encountered
+
+Severity: WarningMessage:  Missing argument 1 for theme_js(), called in /home/frederic/git/citemplate/application/tests/helpers/Url_helper_test.php on line 33 and definedFilename: /home/frederic/git/citemplate/application/helpers/MY_url_helper.phpLine Number: 87
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/helpers/MY_url_helper.php	Line: 87	Function: _error_handler
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/helpers/Url_helper_test.php	Line: 33	Function: theme_js
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	
+A PHP Error was encountered
+
+Severity: NoticeMessage:  Undefined variable: nomFilename: /home/frederic/git/citemplate/application/helpers/MY_url_helper.phpLine Number: 88
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/helpers/MY_url_helper.php	Line: 88	Function: _error_handler
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/helpers/Url_helper_test.php	Line: 33	Function: theme_js
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	
+A PHP Error was encountered
+
+Severity: WarningMessage:  Missing argument 1 for img_url(), called in /home/frederic/git/citemplate/application/tests/helpers/Url_helper_test.php on line 38 and definedFilename: /home/frederic/git/citemplate/application/helpers/MY_url_helper.phpLine Number: 142
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/helpers/MY_url_helper.php	Line: 142	Function: _error_handler
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/helpers/Url_helper_test.php	Line: 38	Function: img_url
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	
+A PHP Error was encountered
+
+Severity: NoticeMessage:  Undefined variable: nomFilename: /home/frederic/git/citemplate/application/helpers/MY_url_helper.phpLine Number: 143
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/helpers/MY_url_helper.php	Line: 143	Function: _error_handler
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/helpers/Url_helper_test.php	Line: 38	Function: img_url
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	
+A PHP Error was encountered
+
+Severity: WarningMessage:  Missing argument 1 for asset_url(), called in /home/frederic/git/citemplate/application/tests/helpers/Url_helper_test.php on line 39 and definedFilename: /home/frederic/git/citemplate/application/helpers/MY_url_helper.phpLine Number: 148
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/helpers/MY_url_helper.php	Line: 148	Function: _error_handler
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/helpers/Url_helper_test.php	Line: 39	Function: asset_url
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	
+A PHP Error was encountered
+
+Severity: NoticeMessage:  Undefined variable: nomFilename: /home/frederic/git/citemplate/application/helpers/MY_url_helper.phpLine Number: 149
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/helpers/MY_url_helper.php	Line: 149	Function: _error_handler
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/helpers/Url_helper_test.php	Line: 39	Function: asset_url
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	
+A PHP Error was encountered
+
+Severity: WarningMessage:  Missing argument 1 for controller_url(), called in /home/frederic/git/citemplate/application/tests/helpers/Url_helper_test.php on line 40 and definedFilename: /home/frederic/git/citemplate/application/helpers/MY_url_helper.phpLine Number: 154
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/helpers/MY_url_helper.php	Line: 154	Function: _error_handler
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/helpers/Url_helper_test.php	Line: 40	Function: controller_url
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	
+A PHP Error was encountered
+
+Severity: NoticeMessage:  Undefined variable: nomFilename: /home/frederic/git/citemplate/application/helpers/MY_url_helper.phpLine Number: 155
+
+Backtrace:
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/helpers/MY_url_helper.php	Line: 155	Function: _error_handler
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/helpers/Url_helper_test.php	Line: 40	Function: controller_url
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	http://localhost/citemplate/components/bootstrap/css/bootstrap.min.css.
+A PHP Error was encountered
+
+Severity: WarningMessage:  Cannot modify header information - headers already sent by (output started at /home/frederic/git/citemplate/application/libraries/Metadata.php:1)Filename: /home/frederic/git/citemplate/application/libraries/Ciauth.phpLine Number: 229
+
+Backtrace:
+			
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 229	Function: setcookie
+		
+			
+	File: /home/frederic/git/citemplate/application/models/M_ciauth.php	Line: 102	Function: set_ciauth_session
+		
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 101	Function: login
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/libraries/Ciauth_library_test.php	Line: 17	Function: login
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	.
+A PHP Error was encountered
+
+Severity: WarningMessage:  Cannot modify header information - headers already sent by (output started at /home/frederic/git/citemplate/application/libraries/Metadata.php:1)Filename: /home/frederic/git/citemplate/application/libraries/Ciauth.phpLine Number: 229
+
+Backtrace:
+			
+			
+			
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 229	Function: setcookie
+		
+			
+	File: /home/frederic/git/citemplate/application/models/M_ciauth.php	Line: 102	Function: set_ciauth_session
+		
+			
+	File: /home/frederic/git/citemplate/application/libraries/Ciauth.php	Line: 101	Function: login
+		
+			
+	File: /home/frederic/git/citemplate/application/tests/libraries/Ciauth_library_test.php	Line: 32	Function: login
+		
+			
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 983	Function: invokeArgs
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 838	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestResult.php	Line: 648	Function: runBare
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestCase.php	Line: 783	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 775	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 745	Function: runTest
+		
+			
+	File: /usr/share/php/PHPUnit/Framework/TestSuite.php	Line: 705	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/TestRunner.php	Line: 349	Function: run
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 176	Function: doRun
+		
+			
+	File: /usr/share/php/PHPUnit/TextUI/Command.php	Line: 129	Function: run
+		
+			
+	File: /usr/bin/phpunit	Line: 46	Function: main
+		
+	..[41;37mF[0m.
+
+Time: 5.5 seconds, Memory: 13.25Mb
+
+There was 1 failure:
+
+1) Metadata_test::test_instance
+subtype
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'text'
++''
+
+/home/frederic/git/citemplate/application/tests/libraries/Metadata_test.php:23
+
+[37;41m[2KFAILURES!
+[0m[37;41m[2KTests: 35, Assertions: 68, Failures: 1.
+[0m[2K
+Generating code coverage report in Clover XML format ... done
+
+Generating code coverage report in HTML format ... done

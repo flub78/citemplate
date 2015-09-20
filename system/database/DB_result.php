@@ -576,7 +576,7 @@ class CI_DB_result {
 	 *
 	 * @return	array
 	 */
-	public function list_fields()
+	public function fields_list()
 	{
 		return array();
 	}

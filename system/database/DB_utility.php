@@ -237,14 +237,14 @@ abstract class CI_DB_utility {
 	 */
 	public function csv_from_result($query, $delim = ',', $newline = "\n", $enclosure = '"')
 	{
-		if ( ! is_object($query) OR ! method_exists($query, 'list_fields'))
+		if ( ! is_object($query) OR ! method_exists($query, 'fields_list'))
 		{
 			show_error('You must submit a valid result object');
 		}
 
 		$out = '';
 		// First generate the headings from the table column names
-		foreach ($query->list_fields() as $name)
+		foreach ($query->fields_list() as $name)
 		{
 			$out .= $enclosure.str_replace($enclosure, $enclosure.$enclosure, $name).$enclosure.$delim;
 		}
@@ -275,7 +275,7 @@ abstract class CI_DB_utility {
 	 */
 	public function xml_from_result($query, $params = array())
 	{
-		if ( ! is_object($query) OR ! method_exists($query, 'list_fields'))
+		if ( ! is_object($query) OR ! method_exists($query, 'fields_list'))
 		{
 			show_error('You must submit a valid result object');
 		}

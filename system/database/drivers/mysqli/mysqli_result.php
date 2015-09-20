@@ -83,7 +83,7 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	 *
 	 * @return	array
 	 */
-	public function list_fields()
+	public function fields_list()
 	{
 		$field_names = array();
 		$this->result_id->field_seek(0);

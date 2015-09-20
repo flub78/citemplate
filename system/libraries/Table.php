@@ -442,7 +442,7 @@ class CI_Table {
 		// First generate the headings from the table column names
 		if ($this->auto_heading === TRUE && empty($this->heading))
 		{
-			$this->heading = $this->_prep_args($object->list_fields());
+			$this->heading = $this->_prep_args($object->fields_list());
 		}
 
 		foreach ($object->result_array() as $row)

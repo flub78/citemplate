@@ -1112,7 +1112,7 @@ abstract class CI_DB_driver {
 	 */
 	public function primary($table)
 	{
-		$fields = $this->list_fields($table);
+		$fields = $this->fields_list($table);
 		return is_array($fields) ? current($fields) : FALSE;
 	}
 
@@ -1221,7 +1221,7 @@ abstract class CI_DB_driver {
 	 * @param	string	the table name
 	 * @return	array
 	 */
-	public function list_fields($table)
+	public function fields_list($table)
 	{
 		// Is there a cached result?
 		if (isset($this->data_cache['field_names'][$table]))
@@ -1274,7 +1274,7 @@ abstract class CI_DB_driver {
 	 */
 	public function field_exists($field_name, $table_name)
 	{
-		return in_array($field_name, $this->list_fields($table_name));
+		return in_array($field_name, $this->fields_list($table_name));
 	}
 
 	// --------------------------------------------------------------------

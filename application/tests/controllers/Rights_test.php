@@ -11,6 +11,16 @@
 class Rights_test extends TestCase
 {
 
+	public function setUp()
+	{
+		$this->resetInstance();
+		$this->CI->ciauth->login('testuser', 'testuser', true);
+	}
+
+	public function tearDown() {
+		$this->CI->ciauth->logout();
+	}
+	
 	public function test_all() {
 		$methods = array('index', 'create');
 		foreach ($methods as $method) {

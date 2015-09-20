@@ -17,8 +17,11 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  *    The metadata helper is in charge of generating views element using 
- *    the metada description. The metadata librarie is in charge of fetching
- *    table and fields descriptions. 
+ *    the metada description. It is a helper because object oriented syntax
+ *    brings an overhead to views.
+ *    The metadata librarie is in charge of fetching table and fields 
+ *    descriptions. It is a class because it provides both persistend data
+ *    and access method. 
  *    
  *    Metadata supports several subtypes of data
  *    * varchar
@@ -39,6 +42,7 @@
  *       
  *    * date
  *    * timestamp
+ *    
  */
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
@@ -59,7 +63,7 @@ if (! function_exists ( 'heading_row' )) {
 		if (count ( $fields ) == 0) {
 			// default, all fields
 			if ($CI->metadata->table_exists ( $table )) {
-				$fields = $CI->metadata->list_fields ( $table );
+				$fields = $CI->metadata->fields_list ( $table );
 			}
 		}
 		
@@ -133,7 +137,10 @@ if (! function_exists ( 'field_label' )) {
 	 * @param unknown_type $attrs        	
 	 */
 	function field_label($table, $field, $attrs = array()) {
-		return "";
+		$CI = & get_instance();
+		$label = $CI->lang->line('label_' . $table . '_' . $field);
+		
+		return ($label) ? $label : "";
 	}
 }
 
@@ -149,24 +156,24 @@ if (! function_exists ( 'field_input' )) {
 	function field_input($table, $field, $data = '', $attrs = array()) {
 		$CI = & get_instance ();
 		
-		echo "field_input($table, $field)";
+		echo "field_input($table, $field)" . br();
 		
 		$type = $CI->metadata->field_type ($table, $field);
-		$subtype = $CI->metadata->field_subtype ($table, $field);
+		$db_type = $CI->metadata->field_db_type ($table, $field);
 		$size = $CI->metadata->field_size ($table, $field);
 		$placeholder = $CI->metadata->field_placeholder ($table, $field);
 		
 		$info = "field_input($table, $field) ";
-		$info .= "type=$type, subtype=$subtype, size=$size, placeholder=$placeholder";		
+		$info .= "db_type=$db_type, type=$type, size=$size, placeholder=$placeholder";		
 		$CI->metadata->log($info);
 		
 		$fields = array (
-				'email' => '<input type="' . $subtype . '" name="email_value" value="" id="email_value" class="form-control" placeholder="Email Address" size="25"  />',
-				'username' => '<input type="' . $subtype . '" name="username_value" value="" id="username_value" class="form-control" placeholder="User Name" size="25"  />',
-				'privilege_name' => '<input type="' . $subtype . '" name="username_value" value="" id="username_value" class="form-control" placeholder="User Name" size="25"  />',
-				'privilege_description' => '<input type="' . $subtype . '" name="username_value" value="" id="username_value" class="form-control" placeholder="User Name" size="25"  />',
-				'password' => '<input type="' . $subtype . '" name="password" value="" id="password" class="form-control" placeholder="Password" size="25"  />',
-				'confirm-password' => '<input type="' . $subtype . '" name="confirm-password" value="" id="confirm-password" class="form-control" placeholder="Confirm Password" size="25"  />' 
+				'email' => '<input type="' . $type . '" name="email_value" value="" id="email_value" class="form-control" placeholder="Email Address" size="25"  />',
+				'username' => '<input type="' . $type . '" name="username_value" value="" id="username_value" class="form-control" placeholder="User Name" size="25"  />',
+				'privilege_name' => '<input type="' . $type . '" name="username_value" value="" id="username_value" class="form-control" placeholder="User Name" size="25"  />',
+				'privilege_description' => '<input type="' . $type . '" name="username_value" value="" id="username_value" class="form-control" placeholder="User Name" size="25"  />',
+				'password' => '<input type="' . $type . '" name="password" value="" id="password" class="form-control" placeholder="Password" size="25"  />',
+				'confirm-password' => '<input type="' . $type . '" name="confirm-password" value="" id="confirm-password" class="form-control" placeholder="Confirm Password" size="25"  />' 
 		);
 		return $fields [$field];
 	}
@@ -179,11 +186,9 @@ if (! function_exists ( 'form_field_list' )) {
 	 * @param unknown_type $table        	
 	 */
 	function form_field_list($table) {
-		$list = array (
-				'ciauth_user_accounts' => array ('email', 'username', 'password', 'confirm-password'),
-				'ciauth_user_privileges' => array('privilege_name', 'privilege_description') 
-		);
-		return $list [$table];
+		$CI = & get_instance ();
+		
+		return $CI->metadata->form_field_list ($table);		
 	}
 }
 
