@@ -49,7 +49,7 @@ class Welcome extends CI_Controller {
 	 * User login
 	 */
 	public function login() {
-		$this->load->library('form_validation');
+		// $this->load->library('form_validation');
 		
 		$this->form_validation->set_rules('login_value', translation("login_user_label"), 'required|min_length[3]');
 		$this->form_validation->set_rules('password', translation('login_password_label'), 'required');

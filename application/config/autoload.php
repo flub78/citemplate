@@ -62,7 +62,7 @@ $autoload['packages'] = array();
 
 $autoload['libraries'] = array('Ciauth','Ciauth_nav','Ciauth_template', 
 		
-'Menu', 'logger', 'Metadata');
+'Menu', 'logger', 'Metadata', 'form_validation');
 
 
 /*

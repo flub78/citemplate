@@ -48,13 +48,16 @@ class Metadata {
 	protected $table_exist; 	# database metadata
 	protected $fields_list;     # database metadata
 	protected $field_data;      # database metadata
-	protected $fields;	        # additional metadata 
+	protected $fields;	        # additional metadata
+	protected $logger;
 	
 	/**
 	 * Constructor
 	 */
 	public function __construct($attrs = array ()) {
 		$this->CI = & get_instance ();
+		
+		$this->logger = new Logger("Metadata" );
 		
 		# initialize the caches
 		$this->table_exist = array();
@@ -79,11 +82,9 @@ class Metadata {
 		
 		$this->fields['ciauth_user_accounts']['email'] = array(
             'name' => 'email_value',
-            'type' => 'email',
-			'subtype' => 'email',
+			'metadata_type' => 'email',
             'id' => 'email_value',
             'class' => 'form-control',
-            'placeholder' => 'Email Address',
             'size' => '25'
         );
 		$this->fields['ciauth_user_accounts']['username'] = array(
@@ -91,14 +92,12 @@ class Metadata {
             'type' => 'text',
             'id' => 'username_value',
             'class' => 'form-control',
-            'placeholder' => 'User Name',
             'size' => '25'
         );
 		$this->fields['ciauth_user_accounts']['password'] = array(
             'name' => 'password',
             'id' => 'password',
             'class' => 'form-control',
-            'placeholder' => 'Password',
             'size' => '25'
         );
 		// confirm-password is not a real database field
@@ -106,14 +105,19 @@ class Metadata {
 				'name' => 'confirm-password',
 				'id' => 'confirm-password',
 				'class' => 'form-control',
-				'placeholder' => 'Confirm Password',
 				'size' => '25'
 		);
-		$this->fields['ciauth_user_accounts']['admin'] = array('subtype' => 'boolean');
+		$this->fields['ciauth_user_accounts']['admin'] = array('metadata_type' => 'boolean');
 
-		$this->fields['ciauth_user_privileges']['privilege_id'] = array('subtype' => 'int');
-		$this->fields['ciauth_user_privileges']['privilege_name'] = array('subtype' => 'text');
-		$this->fields['ciauth_user_privileges']['privilege_description'] = array('subtype' => 'text');
+		$this->fields['ciauth_user_privileges']['privilege_id'] = array('metadata_type' => 'int');
+		$this->fields['ciauth_user_privileges']['privilege_name'] = array(
+				'metadata_type' => 'text',
+				'placeholder' => "Privilege name",
+            	'size' => '25'
+		);
+		$this->fields['ciauth_user_privileges']['privilege_description'] = array(
+            	'size' => '25'
+		);
 	}
  	
 	/**
@@ -200,12 +204,13 @@ class Metadata {
 	function field_db_type($table, $field) {
 		if (!$this->table_exists($table)) {throw new Exception("Table $table does not exist");}
 		$type = $this->field_data[$table][$field]->type;
+		// var_dump($type);
 		return $type;
 	}
 	
 	
 	/**
-	 * Returns the field subtype
+	 * Returns the field type as it will be used for HTML forms. This is also the metadata type.
 	 * @param unknown_type $table
 	 * @param unknown_type $field
 	 * @return string
@@ -213,10 +218,18 @@ class Metadata {
 	function field_type($table, $field) {
 		if (!$this->field_exists($table, $field)) {throw new Exception("Field $field does not exist in table $table");}
 		
-		if (! isset($this->fields[$table][$field]['subtype'])) {
+		if (! isset($this->fields[$table][$field]['metadata_type'])) {
+			// try to deduce it from the database type
+			if ($this->field_exists($table, $field)) {
+				$db_type = $this->field_db_type($table, $field);
+				$equivalence = array(
+					'varchar'	=> 'text'
+				);
+				return (isset($equivalence[$db_type])) ? $equivalence[$db_type] : "";
+			}
 			return "";
 		}
-		return $this->fields[$table][$field]['subtype'];
+		return $this->fields[$table][$field]['metadata_type'];
 	}
 
 	/**
@@ -256,21 +269,70 @@ class Metadata {
 	 * @return string
 	 */
 	function field_placeholder($table, $field) {
-		if (!$this->field_exists($table, $field)) {throw new Exception("Field $field does not exist in able $table");}
-
-		if (! isset($this->fields[$table][$field]['placeholder'])) {
-			return "";
-		}
-		return translation($this->fields[$table][$field]['placeholder']);		
+		// if defined in $field
+		if (isset($this->fields[$table][$field]['placeholder'])) {
+			$placeholder = $this->fields[$table][$field]['placeholder'];
+			$translated = $this->CI->lang->line('placeholder_' . $placeholder);
+			// returns direct or translated value
+			return ($translated) ? $translated : $placeholder;
+		} 
+		$translated = $this->CI->lang->line('placeholder_' . $table . '_' . $field);
+		
+		return ($translated) ? $translated : "";		
 	}
 
+	/**
+	 * Returns the field name
+	 * @param unknown_type $table
+	 * @param unknown_type $field
+	 * @return string
+	 */
+	function field_name($table, $field) {
+	
+		if (isset($this->fields[$table][$field]['name'])) {
+			return $this->fields[$table][$field]['name'];
+		} else {
+			return $table . '_' . $field;			
+		}
+	}
+
+	/**
+	 * Returns the field id
+	 * @param unknown_type $table
+	 * @param unknown_type $field
+	 * @return string
+	 */
+	function field_id($table, $field) {
+	
+		if (isset($this->fields[$table][$field]['id'])) {
+			return $this->fields[$table][$field]['id'];
+		} else {
+			return $this->field_name($table, $field);
+		}
+	}
+	
+	/*
+	 * Returns a table primary key
+	 * 
+	 * TODO: define what to do in case of multiple keys, return an array ?
+	 * TODO: get the information from database
+	 */
+	function table_key($table) {
+		$key = array(
+			'ciauth_user_accounts' => 'username',
+			'ciauth_user_privileges' => 'privilege_id'
+		);
+	
+		return $key[$table];
+	}
+	
 	/**
 	 * Log information on the metadata logger
 	 * @param unknown_type $msg
 	 * @param unknown_type $level
 	 */
 	function log($msg, $level = "info") {
-		echo $msg;
+		$this->logger->log($level, $msg);
 	}
 }
 

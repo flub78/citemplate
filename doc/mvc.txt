@@ -15,6 +15,37 @@ Model, Vue, Controller
     3) the CodeIgniter table library should turn this array into an HTML table
     
     
+    Form validation:
+    ----------------
+    
+    Usual style for CodeIgniter is to have the same method to display the initial
+    form and to validate it.
+    
+    the form_validation->run returns false when
+        - nothing has been validated so the form should be displayed
+        - an error has been detected so the form needs to be displayed again
+        
+    Difference between creation and edit:
+        - creation is initialized with defaults
+        - edit is initialized with existing data and an error should be handled on
+        request to edit non existing data
+        - when repopulating the form the set_value function is used
+    
+    Note that data preparation can be done by the validation rules.
+    
+    any function that takes one parameter and return a result can be used as a rule.
+    
+    In GVV, two methods: create and edit($id), with edit in mode write and read-only.
+    There was a specific formValidation/$action ...
+    
+    what we could do:
+        controller/create
+        controller/edit/x
+        controller/read/x   edit read only
+    
+    What to do on attempt of editing, reading non existing elements:
+        goto list + popup error dialog.    
+    
     Questions & Answers
     
     * In metadata programming where should I put the fields validation rules?

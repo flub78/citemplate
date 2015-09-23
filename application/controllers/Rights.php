@@ -28,40 +28,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Rights extends MY_Controller {
 
-	var $logger;
+	var $default_table = 'ciauth_user_privileges';
+	var $table_fields = array('privilege_name', 'privilege_description', '__edit', '__delete');
+	var $controller = 'rights';
 	
 	/**
 	 * Constructor
 	 */
-	function __construct() {
-		parent :: __construct();
-		$this->load->model('crud_model', 'model');		
-	}
+// 	function __construct() {
+// 		parent :: __construct();
+// 		// specific initialization	
+// 	}
 	
-	/**
-	 * Index Page for this controller.
-	 *
-	 */
-	public function index()
-	{
-		$this->all();
-	}
-	
-	/**
-	 * List of elements
-	 */
-	public function all() {
-		$data = array();
-		$data['table_title'] = translation('title_rights');
-		
-		$select = $this->model->select_all('ciauth_user_privileges');
-
-		$attrs['fields'] = array('privilege_name', 'privilege_description', '__edit', '__delete');
-		$attrs['controller'] = 'rights';
-		$data['data_table'] = datatable('ciauth_user_privileges', $select, $attrs);
-		
-		$this->load->view('default_table', $data);
-	}
 	
 	/**
 	 * Add a new element 
@@ -76,7 +54,7 @@ class Rights extends MY_Controller {
 	public function create() {
 		$data = array();
 		$data['title'] = translation('New privilege');
-		$data['controller'] = 'rights';
+		$data['controller'] = $this->controller;
 		$this->load->view('default_form', $data);
 	}
 
@@ -86,8 +64,18 @@ class Rights extends MY_Controller {
 	 */
 	public function edit($id) {
 		// charge les données
-		$this->data = $this->model->get_by_id('ciauth_user_privileges', 'privilege_id', $id);
+		$id_field = table_key($this->default_table);
+		$this->data = $this->model->get_by_id($this->default_table, $id_field, $id);
 		// var_dump($this->data);
+		
+		/*
+		 * GVV
+		 * get_by_id
+		 * form_static_element: in place modifications
+		 * all values passed to the view
+		 * call or metadata form passing keys/values
+		 */
+		
 		
 		$data = array();
 		$data['title'] = translation('Privileges');
@@ -95,12 +83,5 @@ class Rights extends MY_Controller {
 		$this->load->view('default_form', $data);
 	}
 
-	/**
-	 * Display a form to edit an existing element
-	 * @param unknown $id
-	 */
-	public function delete($id) {
-		echo "delete $id";
-	}
 		
 }

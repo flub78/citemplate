@@ -32,9 +32,17 @@ $lang['button_new'] = "New";
 $lang['button_edit'] = "Edit";
 $lang['delete_confirm'] = "Delete ";
 
+$lang['title_ciauth_user_accounts'] = "Users";
 
-$lang['title_rights'] = "Rights definition";
+$lang['title_ciauth_user_privileges'] = "Rights definition";
 
 $lang['heading_privilege_id'] = "Id";
 $lang['heading_privilege_name'] = "Name";
 $lang['heading_privilege_description'] = "Description";
+$lang['placeholder_ciauth_user_privileges_privilege_description'] = "Privilege description";
+$lang['label_ciauth_user_privileges_privilege_description'] = "Privilege description";
+
+$lang['placeholder_ciauth_user_accounts_email'] = "Email address";
+$lang['placeholder_ciauth_user_accounts_username'] = "User name";
+$lang['placeholder_ciauth_user_accounts_password'] = "Password";
+$lang['placeholder_ciauth_user_accounts_confirm-password'] = "Confirm Password";

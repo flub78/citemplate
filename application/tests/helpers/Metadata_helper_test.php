@@ -30,7 +30,7 @@ class Metadata_helper_test extends TestCase
 		);
 		
 		$expected = "";
-		$actual = field_label($table, $field);
+		$actual = field_label_text($table, $field);
 		$this->assertEquals($expected, $actual, 
 			"field_label"
 		);

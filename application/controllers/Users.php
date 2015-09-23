@@ -28,49 +28,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  */
 class Users extends MY_Controller {
-
-	var $logger;
 	
-	function __construct() {
-		parent :: __construct();
-		$this->load->helper('metadata');
-		$this->load->library('logger');	
-
-		$this->logger = new Logger("class=" . get_class($this));
-		$this->logger->debug('New instance of ' . get_class($this));
-		
-		// TODO: use auto loading
-		$this->load->helper('form');
-		
-	}
+	var $default_table = 'ciauth_user_accounts';
+	var $table_fields = array('username', 'email', '__edit', '__delete');
+	var $controller = 'users';
 	
 	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
+	 * Constructor
 	 */
-	public function index()
-	{
-		$this->all();
-	}
-	
-	/**
-	 * List of elements
-	 */
-	public function all() {
-		$data = array();
-		$this->load->view('default_table', $data);
-	}
+// 	function __construct() {
+// 		parent :: __construct();
+// 		// specific initialization	
+// 	}
 	
 	/**
 	 * Add a new element 
@@ -86,7 +55,7 @@ class Users extends MY_Controller {
 		
 		$data = array();
 		$data['title'] = translation('Please Register');
-		$data['controller'] = 'users';
+		$data['controller'] = $this->controller;
 		$this->load->view('default_form', $data);
 	}
 
@@ -97,14 +66,6 @@ class Users extends MY_Controller {
 	public function edit($id) {
 		$data = array();
 		$this->load->view('default_form', $data);
-	}
-
-	/**
-	 * Display a form to edit an existing element
-	 * @param unknown $id
-	 */
-	public function delete($id) {
-	
 	}
 		
 }

@@ -30,6 +30,9 @@ class MY_Controller extends CI_Controller {
 
 	var $logger;
 	
+	/**
+	 * Constructor
+	 */
 	function __construct() {
 		parent :: __construct();
 		
@@ -39,6 +42,41 @@ class MY_Controller extends CI_Controller {
 		if (!$this->ciauth->is_logged_in()) {
 			redirect(controller_url('welcome/login'));
 		}
+		
+		// load common model
+		$this->load->model('crud_model', 'model');
+	}
+	
+	/**
+	 * Default is to list all elements
+	 */
+	public function index()
+	{
+		$this->all();
+	}
+	
+	/**
+	 * List of elements
+	 */
+	public function all() {
+	
+		$data = array();
+		$data['table_title'] = table_title($this->default_table);
+		$select = $this->model->select_all($this->default_table);
+	
+		$attrs['fields'] = $this->table_fields;
+		$attrs['controller'] = $this->controller;
+		$data['data_table'] = datatable($this->default_table, $select, $attrs);
+	
+		$this->load->view('default_table', $data);
+	}
+	
+	/**
+	 * Delete an element
+	 * @param unknown $id
+	 */
+	public function delete($id) {
+		echo "delete $id";
 	}
 	
 		

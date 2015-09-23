@@ -25,7 +25,7 @@
  *    
  *    Metadata supports several subtypes of data
  *    * varchar
- *       * emails dot seperated strings with one @
+ *       * emails dot separated strings with one @
  *       * password
  *       * url
  *       * key to others table
@@ -128,7 +128,21 @@ if (! function_exists ( 'datatable' )) {
 	}
 }
 
-if (! function_exists ( 'field_label' )) {
+if (! function_exists ( 'table_title' )) {
+	/**
+	 * Return the title for a table
+	 *
+	 * @param unknown_type $table
+	 */
+	function table_title($table) {
+		$CI = & get_instance();
+		$title = $CI->lang->line('title_' . $table);
+
+		return ($title) ? $title : $table;
+	}
+}
+
+if (! function_exists ( 'field_label_text' )) {
 	/**
 	 * Generate a form field label
 	 * 
@@ -136,11 +150,35 @@ if (! function_exists ( 'field_label' )) {
 	 * @param unknown_type $field        	
 	 * @param unknown_type $attrs        	
 	 */
-	function field_label($table, $field, $attrs = array()) {
+	function field_label_text($table, $field) {
 		$CI = & get_instance();
 		$label = $CI->lang->line('label_' . $table . '_' . $field);
 		
 		return ($label) ? $label : "";
+	}
+}
+
+if (! function_exists ( 'field_label' )) {
+	/**
+	 * Generate a form field label
+	 *
+	 * @param unknown_type $table
+	 * @param unknown_type $field
+	 * @param unknown_type $attrs
+	 */
+	function field_label($table, $field, $attrs = array()) {
+
+		$CI = & get_instance ();
+		
+		$text = field_label_text($table, $field);
+		
+		if ($text) {
+			$id = $CI->metadata->field_id ($table, $field);
+		
+			return '<label for="' . $id . '">' . $text . '</label>';
+		} else {
+			return "";
+		}
 	}
 }
 
@@ -155,10 +193,10 @@ if (! function_exists ( 'field_input' )) {
 	 */
 	function field_input($table, $field, $data = '', $attrs = array()) {
 		$CI = & get_instance ();
-		
-		echo "field_input($table, $field)" . br();
-		
+				
 		$type = $CI->metadata->field_type ($table, $field);
+		$name = $CI->metadata->field_name ($table, $field);
+		$id = $CI->metadata->field_id ($table, $field);
 		$db_type = $CI->metadata->field_db_type ($table, $field);
 		$size = $CI->metadata->field_size ($table, $field);
 		$placeholder = $CI->metadata->field_placeholder ($table, $field);
@@ -167,15 +205,27 @@ if (! function_exists ( 'field_input' )) {
 		$info .= "db_type=$db_type, type=$type, size=$size, placeholder=$placeholder";		
 		$CI->metadata->log($info);
 		
-		$fields = array (
-				'email' => '<input type="' . $type . '" name="email_value" value="" id="email_value" class="form-control" placeholder="Email Address" size="25"  />',
-				'username' => '<input type="' . $type . '" name="username_value" value="" id="username_value" class="form-control" placeholder="User Name" size="25"  />',
-				'privilege_name' => '<input type="' . $type . '" name="username_value" value="" id="username_value" class="form-control" placeholder="User Name" size="25"  />',
-				'privilege_description' => '<input type="' . $type . '" name="username_value" value="" id="username_value" class="form-control" placeholder="User Name" size="25"  />',
-				'password' => '<input type="' . $type . '" name="password" value="" id="password" class="form-control" placeholder="Password" size="25"  />',
-				'confirm-password' => '<input type="' . $type . '" name="confirm-password" value="" id="confirm-password" class="form-control" placeholder="Confirm Password" size="25"  />' 
-		);
-		return $fields [$field];
+		$input = '<input';
+		if ($type) {
+			$input .= " type=\"$type\"";
+		}
+		if ($name) {
+			$input .= " name=\"$name\"";
+		}
+		if ($id) {
+			$input .= " id=\"$id\"";
+		}
+		$input .= " class=\"form-control\"";
+		$input .= " value=\"\"";
+		if ($placeholder) {
+			$input .= " placeholder=\"$placeholder\"";
+		}
+		if ($size) {
+			$input .= " size=\"$size\"";
+		}
+		
+		$input .= ' />';
+		return $input;
 	}
 }
 
@@ -236,7 +286,8 @@ if (! function_exists ( 'table_key' )) {
 	 * @param unknown_type $table        	
 	 */
 	function table_key($table) {
-		return "privilege_id";
+		$CI = & get_instance ();		
+		return $CI->metadata->table_key($table);
 	}
 }
 
