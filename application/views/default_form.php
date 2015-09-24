@@ -40,13 +40,13 @@
 				<div class="row">
 					<div class="col-lg-6 col-lg-offset-4 text-error">
 						<p class="text-warning"><?php echo validation_errors(); ?></p>
-						<p class="text-warning"><?php echo $error_msg; ?></p>
+						<p class="text-warning"><?php echo isset($error_msg) ? $error_msg : ""; ?></p>
 					</div>
 				</div>
 				<div class="container">
-				<?= form_open($controller . "/$action", array("class" => "form-register")); ?>
+				<?= form_open($controller . (isset($action) ? "/$action" : ""), array("class" => "form-register")); ?>
 				
-					<h2 class="form-heading"><?= $title ?></h2>
+					<h2 class="form-heading"><?= isset($title) ? $title : "" ?></h2>
 					<?= form($table, $values); ?>
 					<div id='message'></div>
 					<p>&nbsp;</p>

@@ -216,7 +216,6 @@ class Metadata {
 	 * @return string
 	 */
 	function field_type($table, $field) {
-		if (!$this->field_exists($table, $field)) {throw new Exception("Field $field does not exist in table $table");}
 		
 		if (! isset($this->fields[$table][$field]['metadata_type'])) {
 			// try to deduce it from the database type
@@ -226,10 +225,13 @@ class Metadata {
 					'varchar'	=> 'text'
 				);
 				return (isset($equivalence[$db_type])) ? $equivalence[$db_type] : "";
+			} else {
+				# throw new Exception("Field $field does not exist in table $table");
+				return "";
 			}
-			return "";
+		} else {
+			return $this->fields[$table][$field]['metadata_type'];
 		}
-		return $this->fields[$table][$field]['metadata_type'];
 	}
 
 	/**
