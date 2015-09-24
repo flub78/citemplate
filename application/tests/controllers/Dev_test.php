@@ -34,7 +34,7 @@ class Dev_test extends TestCase
 	
 	public function test_method_404()
 	{
-		$this->request('GET', ['Dev', 'index']);
+		$this->request('GET', ['Dev', 'undefined_method']);
 		$this->assertResponseCode(404);
 	}
 

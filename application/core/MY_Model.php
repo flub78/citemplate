@@ -167,6 +167,11 @@ class MY_Model extends CI_Model {
      *    @return objet          La liste
      */
     public function select_all($table, $where = array (), $order_by = "") {
+    	
+    	if (! $table) {
+    		throw new Exception ("select_all called with no table");
+    	}
+
     	if ($order_by) {
     		return $this->db->from($table)
         	->where($where)

@@ -182,6 +182,21 @@ if (! function_exists ( 'field_label' )) {
 	}
 }
 
+if (! function_exists ( 'field_name' )) {
+	/**
+	 * Return the field name
+	 *
+	 * @param unknown_type $table
+	 * @param unknown_type $field
+	 */
+	function field_name($table, $field) {
+
+		$CI = & get_instance ();
+		return $CI->metadata->field_name ($table, $field);		
+	}
+}
+
+
 if (! function_exists ( 'field_input' )) {
 	/**
 	 * Generate a form field input
@@ -191,7 +206,7 @@ if (! function_exists ( 'field_input' )) {
 	 * @param unknown_type $data        	
 	 * @param unknown_type $attrs        	
 	 */
-	function field_input($table, $field, $data = '', $attrs = array()) {
+	function field_input($table, $field, $value = '', $attrs = array()) {
 		$CI = & get_instance ();
 				
 		$type = $CI->metadata->field_type ($table, $field);
@@ -205,6 +220,7 @@ if (! function_exists ( 'field_input' )) {
 		$info .= "db_type=$db_type, type=$type, size=$size, placeholder=$placeholder";		
 		$CI->metadata->log($info);
 		
+		// TODO: use form_input
 		$input = '<input';
 		if ($type) {
 			$input .= " type=\"$type\"";
@@ -216,7 +232,7 @@ if (! function_exists ( 'field_input' )) {
 			$input .= " id=\"$id\"";
 		}
 		$input .= " class=\"form-control\"";
-		$input .= " value=\"\"";
+		$input .= " value=\"$value\"";
 		if ($placeholder) {
 			$input .= " placeholder=\"$placeholder\"";
 		}
@@ -254,7 +270,8 @@ if (! function_exists ( 'form' )) {
 	function form($table, $data = array(), $attrs = array()) {
 		$res = "";
 		foreach ( form_field_list ( $table ) as $field ) {
-			$res .= tabs ( 4 ) . field_label ( $table, $field ) . field_input ( $table, $field ) . "\n";
+			$value = (isset($data[$table][$field])) ? $data[$table][$field] : "";
+			$res .= tabs ( 4 ) . field_label ( $table, $field ) . field_input ( $table, $field, $value) . "\n";
 		}
 		$res .= '<div class="g-recaptcha" data-sitekey="6LdlegoTAAAAAD4wEuXR1IIeru34DhdPN1DYKTNH"></div>' . "\n";
 		$res .= '' . "\n";
@@ -303,6 +320,19 @@ if (! function_exists ( 'autogen_key' )) {
 		// return $key;
 		// }
 		return FALSE;
+	}
+}
+
+if (! function_exists ( 'rules' )) {
+	/**
+	 * Return the validation rules deduced from metadata
+	 *
+	 * @param unknown_type $table
+	 * @param unknown_type $field
+	 */
+	function rules($table, $field) {
+		$CI = & get_instance();
+		return $CI->metadata->rules($table, $field);		
 	}
 }
 

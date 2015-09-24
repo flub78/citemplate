@@ -29,15 +29,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Rights extends MY_Controller {
 
 	var $default_table = 'ciauth_user_privileges';
+	var $form_fields = array('privilege_name', 'privilege_description');
 	var $table_fields = array('privilege_name', 'privilege_description', '__edit', '__delete');
 	var $controller = 'rights';
 	
-	/**
-	 * Constructor
-	 */
+// 	/**
+// 	 * Constructor
+// 	 */
 // 	function __construct() {
 // 		parent :: __construct();
 // 		// specific initialization	
+// 		$this->table_fields = array_merge($this->form_fields,  array('__edit', '__delete'));
 // 	}
 	
 	
@@ -55,18 +57,42 @@ class Rights extends MY_Controller {
 		$data = array();
 		$data['title'] = translation('New privilege');
 		$data['controller'] = $this->controller;
-		$this->load->view('default_form', $data);
+		$data['action'] = "create";
+		$data['table'] = $this->default_table;
+		$data['values'] = array();
+		$data['error_msg'] = "";
+			$this->load->view('default_form', $data);
 	}
 
+	/**
+	 * Edit an existing item
+	 * @param unknown $id
+	 */
+	public function edit2($id) {
+		$data = array();
+		$this->display_form("");
+	}
+	
 	/**
 	 * Display a form to edit an existing element
 	 * @param unknown $id
 	 */
 	public function edit($id) {
-		// charge les données
+		// load data
 		$id_field = table_key($this->default_table);
-		$this->data = $this->model->get_by_id($this->default_table, $id_field, $id);
-		// var_dump($this->data);
+		
+		$values = array($this->default_table => 
+				$this->model->get_by_id($this->default_table, $id_field, $id));
+		// var_dump($values);
+
+		// set rules
+		foreach ($this->form_fields as $field) {
+			$name = field_name($this->default_table, $field);
+			$label = field_label_text($this->default_table, $field);
+			$rules = rules($this->default_table, $field);
+			// echo "name=$name, label=$label, rules=$rules";
+			$this->form_validation->set_rules($name, $label, $rules);
+		}
 		
 		/*
 		 * GVV
@@ -74,14 +100,28 @@ class Rights extends MY_Controller {
 		 * form_static_element: in place modifications
 		 * all values passed to the view
 		 * call or metadata form passing keys/values
+		 * 
+		 * use cases
+		 *    - create with eventually some default values (converted from database to display (localisation))
+		 *    - edit with values from the database (converted from database to display (localisation))
+		 *    - repopulation from the form
+		 *    - readonly
 		 */
-		
 		
 		$data = array();
 		$data['title'] = translation('Privileges');
-		$data['controller'] = 'rights';
-		$this->load->view('default_form', $data);
+		$data['controller'] = $this->controller;
+		$data['table'] = $this->default_table;
+		$data['action'] = "edit/$id";
+		$data['values'] = $values;
+		$data['error_msg'] = "";
+		
+		if ($this->form_validation->run() == FALSE) {
+			# invalid input, reload the form
+			$this->load->view('default_form', $data);
+		} else {
+			# successful validation
+		}
 	}
-
 		
 }

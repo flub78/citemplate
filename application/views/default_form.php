@@ -36,21 +36,27 @@
 		<div class="row">
 			<nav class="col-sm-1"></nav>
 			<section class="col-sm-11">
-			
-			<div class="container">
-				<?= form_open($controller . '/create', array("class" => "form-register")); ?>
+
+				<div class="row">
+					<div class="col-lg-6 col-lg-offset-4 text-error">
+						<p class="text-warning"><?php echo validation_errors(); ?></p>
+						<p class="text-warning"><?php echo $error_msg; ?></p>
+					</div>
+				</div>
+				<div class="container">
+				<?= form_open($controller . "/$action", array("class" => "form-register")); ?>
 				
 					<h2 class="form-heading"><?= $title ?></h2>
-					<?= form("ciauth_user_privileges"); ?>
+					<?= form($table, $values); ?>
 					<div id='message'></div>
 					<p>&nbsp;</p>
 					<?= submit('Register'); ?>
 				<?= form_close();?>
 			</div>
-			
+
 			</section>
 		</div>
-		
+
 	</div>
 	<footer class="row">
 	<?php $this->load->view('footer'); ?>

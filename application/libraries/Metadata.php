@@ -1,4 +1,4 @@
-é<?php
+<?php
 /**
  *    Project {$PROJECT}
  *    Copyright (C) 2015 {$AUTHOR}
@@ -324,6 +324,16 @@ class Metadata {
 		);
 	
 		return $key[$table];
+	}
+	
+	/**
+	 * Return the validation rules deduced from metadata
+	 *
+	 * @param unknown_type $table
+	 * @param unknown_type $field
+	 */
+	function rules($table, $field) {
+		return 'required';
 	}
 	
 	/**
