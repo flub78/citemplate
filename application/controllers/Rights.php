@@ -29,9 +29,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Rights extends MY_Controller {
 
 	var $default_table = 'ciauth_user_privileges';
+	var $controller = 'rights';
 	var $form_fields = array('privilege_name', 'privilege_description');
 	var $table_fields = array('privilege_name', 'privilege_description', '__edit', '__delete');
-	var $controller = 'rights';
+	
+	var $title = array (
+		'create' => 'New privilege',
+		'edit' => 'Privilege'
+	);
 	
 // 	/**
 // 	 * Constructor
@@ -51,28 +56,30 @@ class Rights extends MY_Controller {
 	}
 	
 	/**
+	 * Initialize the data to send to the form
+	 * @param unknown $action
+	 * @return multitype:
+	 */
+	protected function init_form($action) {
+		$data = array();
+		$data['title'] = translation($this->title[$action]);
+		$data['controller'] = $this->controller;
+		$data['action'] = $action;
+		$data['table'] = $this->default_table;
+		$data['error_msg'] = "";
+		return $data;
+	}
+	
+	/**
 	 * Display a form to create a new element
 	 */
 	public function create() {
-		$data = array();
-		$data['title'] = translation('New privilege');
-		$data['controller'] = $this->controller;
-		$data['action'] = "create";
-		$data['table'] = $this->default_table;
-		$data['values'] = array();
-		$data['error_msg'] = "";
-			$this->load->view('default_form', $data);
-	}
-
-	/**
-	 * Edit an existing item
-	 * @param unknown $id
-	 */
-	public function edit2($id) {
-		$data = array();
-		$this->display_form("");
+		$data = init_form("create");
+		$data['values'] = array();		# TODO should be default values
+		$this->load->view('default_form', $data);
 	}
 	
+
 	/**
 	 * Display a form to edit an existing element
 	 * @param unknown $id
@@ -81,9 +88,20 @@ class Rights extends MY_Controller {
 		// load data
 		$id_field = table_key($this->default_table);
 		
-		$values = array($this->default_table => 
+		$values = array($this->default_table =>
 				$this->model->get_by_id($this->default_table, $id_field, $id));
-		// var_dump($values);
+		
+		$data = init_form("edit");
+		$data['values'] = $values;
+		
+		$this->load->view('default_form', $data);
+	}
+	
+	/**
+	 * Display a form to edit an existing element
+	 * @param unknown $id
+	 */
+	public function validate($action, $id = "") {
 
 		// set rules
 		foreach ($this->form_fields as $field) {
@@ -108,19 +126,31 @@ class Rights extends MY_Controller {
 		 *    - readonly
 		 */
 		
-		$data = array();
-		$data['title'] = translation('Privileges');
-		$data['controller'] = $this->controller;
-		$data['table'] = $this->default_table;
-		$data['action'] = "edit/$id";
-		$data['values'] = $values;
-		$data['error_msg'] = "";
 		
 		if ($this->form_validation->run() == FALSE) {
-			# invalid input, reload the form
+			// invalid input, reload the form
+
+			$data = init_form($action);				
+			$data['values'] = array();
 			$this->load->view('default_form', $data);
+			
 		} else {
 			# successful validation
+			echo "validation success";
+			$values = array();
+			foreach ($this->form_fields as $field) {
+				$field_name = field_name($this->default_table, $field);
+				$values[$field] = $this->input->post($field_name);
+			}
+			var_dump($values);
+			
+			if ($action == "edit") {
+				# update
+				
+			} else {
+				# create
+				
+			}
 		}
 	}
 		

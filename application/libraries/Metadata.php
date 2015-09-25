@@ -289,12 +289,12 @@ class Metadata {
 	 * @param unknown_type $field
 	 * @return string
 	 */
-	function field_name($table, $field) {
+	function field_name($table, $field, $full = false) {
 	
 		if (isset($this->fields[$table][$field]['name'])) {
 			return $this->fields[$table][$field]['name'];
 		} else {
-			return $table . '_' . $field;			
+			return ($full) ? $table . '_' . $field : $field;			
 		}
 	}
 
@@ -335,7 +335,7 @@ class Metadata {
 	 * @param unknown_type $field
 	 */
 	function rules($table, $field) {
-		return 'required';
+		return 'required|md5';
 	}
 	
 	/**

@@ -56,8 +56,10 @@ class Users extends MY_Controller {
 		$data = array();
 		$data['title'] = translation('Please Register');
 		$data['controller'] = $this->controller;
+		$data['action'] = "create";
 		$data['table'] = $this->default_table;
 		$data['values'] = array();
+		$data['error_msg'] = "";
 		$this->load->view('default_form', $data);
 	}
 

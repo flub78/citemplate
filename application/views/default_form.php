@@ -44,7 +44,7 @@
 					</div>
 				</div>
 				<div class="container">
-				<?= form_open($controller . (isset($action) ? "/$action" : ""), array("class" => "form-register")); ?>
+				<?= form_open($controller . "/validate/$action", array("class" => "form-register")); ?>
 				
 					<h2 class="form-heading"><?= isset($title) ? $title : "" ?></h2>
 					<?= form($table, $values); ?>

@@ -188,11 +188,12 @@ if (! function_exists ( 'field_name' )) {
 	 *
 	 * @param unknown_type $table
 	 * @param unknown_type $field
+	 * @param $full use full name to avoid name collision
 	 */
-	function field_name($table, $field) {
+	function field_name($table, $field, $full = false) {
 
 		$CI = & get_instance ();
-		return $CI->metadata->field_name ($table, $field);		
+		return $CI->metadata->field_name ($table, $field, $full);		
 	}
 }
 
@@ -212,13 +213,16 @@ if (! function_exists ( 'field_input' )) {
 		$type = $CI->metadata->field_type ($table, $field);
 		$name = $CI->metadata->field_name ($table, $field);
 		$id = $CI->metadata->field_id ($table, $field);
-		$db_type = $CI->metadata->field_db_type ($table, $field);
+		# $db_type = $CI->metadata->field_db_type ($table, $field);
 		$size = $CI->metadata->field_size ($table, $field);
 		$placeholder = $CI->metadata->field_placeholder ($table, $field);
 		
 		$info = "field_input($table, $field) ";
-		$info .= "db_type=$db_type, type=$type, size=$size, placeholder=$placeholder";		
+		$info .= "type=$type, size=$size, placeholder=$placeholder";		
 		$CI->metadata->log($info);
+		
+		// The first time used $value, then re-populate from the form
+		$value = set_value($name, $value);
 		
 		// TODO: use form_input
 		$input = '<input';

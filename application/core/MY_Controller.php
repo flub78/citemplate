@@ -66,6 +66,7 @@ class MY_Controller extends CI_Controller {
 	
 		$attrs['fields'] = $this->table_fields;
 		$attrs['controller'] = $this->controller;
+		$data['controller'] = $this->controller;
 		$data['data_table'] = datatable($this->default_table, $select, $attrs);
 	
 		$this->load->view('default_table', $data);

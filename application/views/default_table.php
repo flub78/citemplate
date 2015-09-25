@@ -19,16 +19,19 @@
  * This view is a standard form for CRUD create and edit using bootstrap.
  * @package vues
  */
-$this->load->library('table');
+$this->load->library ( 'table' );
 ?>
 <?php $this->load->view('header'); ?>
 <!-- Additional view specific header elements below -->
-	<?= link_tag(base_url() . '/components/DataTables/Buttons-1.0.3/css/buttons.dataTables.min.css');?>
-	
+<?= link_tag(base_url() . '/components/DataTables/Buttons-1.0.3/css/buttons.dataTables.min.css');?>
+
 </head>
 
 <body>
-
+    <?php // hidden contrller url for java script access
+		echo form_hidden ( 'controller_url', controller_url ( $controller ), '"id"="controller_url"' );
+	?>
+    
 	<div class="container-fluid starter-template">
 		<header class="row">
 			<div class="col-lg-12">
@@ -44,20 +47,22 @@ $this->load->library('table');
 				<div class="row">
 					<article class="col-sm-12 row">
 						<?php
-						$template = array(
-							'table_open' => '<table class="display" cellspacing="0" width="100%">' 
+						$template = array (
+								'table_open' => '<table class="display" cellspacing="0" width="100%">' 
 						);
-						$this->table->set_template($template);
-						echo $this->table->generate($data_table); ?>
+						$this->table->set_template ( $template );
+						echo $this->table->generate ( $data_table );
+						?>
 					</article>
 				</div>
 			</section>
 		</div>
-		
+
 	</div>
 	<footer class="row">
 	<?php $this->load->view('footer'); ?>
-	</footer><!-- /.container -->
+	</footer>
+	<!-- /.container -->
 
 	<?= script(base_url() . '/components/DataTables/datatables.js')?>
 	<?= script(base_url() . '/components/DataTables/Buttons-1.0.3/js/dataTables.buttons.min.js')?>
@@ -73,7 +78,7 @@ $this->load->library('table');
 <script type="text/javascript">
 <!--
 $(document).ready(function(){
-	
+		
     var table = $('.display').dataTable( {
         stateSave: true,
         dom: 'Bfrtip',
@@ -82,7 +87,8 @@ $(document).ready(function(){
                   {
                       text: 'Create',
                       action: function ( e, dt, node, config ) {
-                          alert( 'Button activated' );
+                          var url = $('input[name="controller_url"]').val() + '/create';
+                          window.location.href = url;
                       }
                   }
               ]
@@ -113,6 +119,6 @@ $(document).ready(function(){
 
 //-->
 </script>
-	
+
 </body>
 </html>
