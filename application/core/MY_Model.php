@@ -14,17 +14,23 @@ class MY_Model extends CI_Model {
     public $table;
     protected $primary_key;
 
+    var $logger;
+    
     /**
      * Constructor
      *
      */
-//     function __construct() {
-//         parent :: __construct();
-//     }
+    function __construct() {
+        parent :: __construct();
+        $this->load->library("Logger");
+        $this->logger = new Logger("MY_Model");
+		$this->logger->debug('New instance of ' . get_class($this));
+    }
 
     /**
      * Accès en lecture au nom de la table
      * @return string
+     * @deprecated
      */
     public function table() {
         return $this->table;
@@ -43,17 +49,17 @@ class MY_Model extends CI_Model {
      *
      * @param $data hash des valeurs
      */
-    public function create($data) {
-        if ($this->db->insert($this->table, $data)) {
+    public function create($table, $data) {
+        if ($this->db->insert($table, $data)) {
             $last_id = $this->db->insert_id();
-            gvv_debug("create succesful, table=" . $this->table  . ", \$last_id=$last_id, data=" . var_export($data, true));
+            $this->logger->debug("create succesful, table=" . $table  . ", \$last_id=$last_id, data=" . var_export($data, true));
             if (!$last_id) {
                 $last_id = $data[$this->primary_key];
-                gvv_debug("\$last_id=$last_id (\$data[primary_key])");
+                $this->logger->debug("\$last_id=$last_id (\$data[primary_key])");
             }
             return $last_id;
         } else {
-        	gvv_error("create error: " . var_export($data, false));
+        	$this->logger->error("create error: " . var_export($data, false));
             return FALSE;
         }
     }
@@ -63,7 +69,8 @@ class MY_Model extends CI_Model {
      * @param unknown_type $where selection des éléments à détruire
      */
     function delete($table, $where = array ()) {
-        $this->db->delete($table, $where);
+        $this->logger->debug("delete from table=" . $table  . ", where=" . var_export($where, true));
+    	$this->db->delete($table, $where);
     }
 
     /**
@@ -98,11 +105,14 @@ class MY_Model extends CI_Model {
      *    @param hash  $data donnée à remplacer
      *    @return bool        Le résultat de la requête
      */
-    public function update($keyid, $data, $keyvalue = '') {
+    public function update($table, $keyid, $data, $keyvalue = '') {
+    	$msg = "update table=" . $table  . ", id=$keyvalue, data=" . var_export($data, true);
+    	$this->logger->debug($msg);
+    	 
         if ($keyvalue == '') $keyvalue = $data[$keyid];
         $this->db->where($keyid, $keyvalue);
         unset($data[$keyid]);
-        $this->db->update($this->table, $data);
+        $this->db->update($table, $data);
     }
 
     /**

@@ -335,7 +335,7 @@ class Metadata {
 	 * @param unknown_type $field
 	 */
 	function rules($table, $field) {
-		return 'required|md5';
+		return 'required';
 	}
 	
 	/**

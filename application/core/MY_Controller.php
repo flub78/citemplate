@@ -77,8 +77,124 @@ class MY_Controller extends CI_Controller {
 	 * @param unknown $id
 	 */
 	public function delete($id) {
-		echo "delete $id";
+		$id_field = table_key($this->default_table);
+		$this->model->delete($this->default_table, array($id_field  => $id));
+		redirect(controller_url($this->controller));
 	}
 	
-		
+	/**
+	 * Add a new element
+	 */
+	public function add($data = array()) {
+		$this->model->create($this->default_table, $data);
+		redirect(controller_url($this->controller));
+	}
+
+	/**
+	 * Update an element
+	 */
+	public function update($id, $data = array()) {
+		$id_field = table_key($this->default_table);
+		$this->model->update($this->default_table, $id_field, $data, $id);
+		redirect(controller_url($this->controller));
+	}
+	
+	/**
+	 * Initialize the data to send to the form
+	 * @param unknown $action
+	 * @return multitype:
+	 */
+	protected function init_form($action, $id = "") {
+		$data = array();
+		$data['title'] = translation($this->title[$action]);
+		$data['controller'] = $this->controller;
+		$data['action'] = ($id) ? "$action/$id" : $action;
+		$data['table'] = $this->default_table;
+		$data['error_msg'] = "";
+		return $data;
+	}
+
+	/**
+	 * Display a form to create a new element
+	 */
+	public function create() {
+		$data = $this->init_form("create");
+		$data['values'] = array();		# TODO should be default values
+		$this->load->view('default_form', $data);
+	}
+	
+	/**
+	 * Display a form to edit an existing element
+	 * @param unknown $id
+	 */
+	public function edit($id) {
+		// load data
+		$id_field = table_key($this->default_table);
+	
+		$values = array($this->default_table =>
+				$this->model->get_by_id($this->default_table, $id_field, $id));
+	
+		$data = $this->init_form("edit", $id);
+		$data['values'] = $values;
+	
+		$this->load->view('default_form', $data);
+	}
+
+	/**
+	 * Display a form to edit an existing element
+	 * @param unknown $id
+	 */
+	public function validate($action, $id = "") {
+	
+		// set rules
+		foreach ($this->form_fields as $field) {
+			$name = field_name($this->default_table, $field);
+			$label = field_label_text($this->default_table, $field);
+			$rules = rules($this->default_table, $field);
+			// echo "name=$name, label=$label, rules=$rules";
+			$this->form_validation->set_rules($name, $label, $rules);
+		}
+	
+		/*
+		 * GVV
+		 * get_by_id
+		 * form_static_element: in place modifications
+		 * all values passed to the view
+		 * call or metadata form passing keys/values
+		 *
+		 * use cases
+		 *    - create with eventually some default values (converted from database to display (localisation))
+		 *    - edit with values from the database (converted from database to display (localisation))
+		 *    - repopulation from the form
+		 *    - readonly
+		 */
+	
+	
+		if ($this->form_validation->run() == FALSE) {
+			// invalid input, reload the form
+	
+			$data = $this->init_form($action);
+			$data['values'] = array();
+			$this->load->view('default_form', $data);
+				
+		} else {
+			# successful validation
+			$values = array();
+			foreach ($this->form_fields as $field) {
+				$field_name = field_name($this->default_table, $field);
+				$values[$field] = $this->input->post($field_name);
+			}
+			# var_dump($values);
+				
+			if ($action == "edit") {
+				# update
+				$this->update($id, $values);
+	
+			} else {
+				# create
+				$this->add($values);
+			}
+		}
+	}
+	
 }
