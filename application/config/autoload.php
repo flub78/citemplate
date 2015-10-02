@@ -139,4 +139,4 @@ $autoload['language'] = array('application');
 |	$autoload['model'] = array('first_model' => 'first');
 */
 
-$autoload['model'] = array('M_ciauth','M_ciauth_datatables','M_ciauth_nav');
+$autoload['model'] = array('M_ciauth','M_ciauth_nav');

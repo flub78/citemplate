@@ -31,6 +31,12 @@ class Dev_test extends TestCase
 		$output = $this->request('GET', ['Dev', 'info']);
 		$this->assertContains('base_url', $output);
 	}
+
+	public function test_check_lang()
+	{
+		$output = $this->request('GET', ['Dev', 'check_lang', 'french', 1]);
+		$this->assertContains('Reference language', $output);
+	}
 	
 	public function test_method_404()
 	{

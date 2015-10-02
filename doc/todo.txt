@@ -39,18 +39,25 @@ Done:
     * Fill the authentication database.
     * Internationalization of the list view
         - Titles and heading
+        - language comparison
     * basic Excel and PDF export
-        
-Todo:
-    * Internationalization of the list view
-        - datatables
     * Metadata
         - create first form based on metadata
         - create first table based on metadata
         - Add actions on table view
+        
+Todo:
+    * Internationalization
+        - datatables
+    * Metadata
+        * jointure
+        * date
+        * currency
+        * attachement, pictures
     * Bootstrap tutorial
     * Datatables tutorial    
     * Database save and restore
+    * 
 
 ============================================================================================================================    
 CRUD scaffolding
