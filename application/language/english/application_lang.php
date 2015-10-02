@@ -46,3 +46,6 @@ $lang['placeholder_ciauth_user_accounts_email'] = "Email address";
 $lang['placeholder_ciauth_user_accounts_username'] = "User name";
 $lang['placeholder_ciauth_user_accounts_password'] = "Password";
 $lang['placeholder_ciauth_user_accounts_confirm-password'] = "Confirm Password";
+$lang['title_ciauth_user_privileges_form'] = "Rights definition";
+$lang['title_ciauth_user_privileges_create'] = "New right definition";
+

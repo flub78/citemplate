@@ -32,19 +32,15 @@ class Rights extends MY_Controller {
 	var $controller = 'rights';
 	var $form_fields = array('privilege_name', 'privilege_description');
 	var $table_fields = array('privilege_name', 'privilege_description', '__edit', '__delete');
-	
-	var $title = array (
-		'create' => 'New privilege',
-		'edit' => 'Privilege'
-	);
-	
-// 	/**
-// 	 * Constructor
-// 	 */
-// 	function __construct() {
-// 		parent :: __construct();
-// 		// specific initialization	
-// 		$this->table_fields = array_merge($this->form_fields,  array('__edit', '__delete'));
-// 	}	
+		
+	/**
+	 * Constructor
+	 */
+	function __construct() {
+		parent :: __construct();
+		// specific initialization
+		$this->load->model('rights_model', 'model');
+		
+	}	
 		
 }

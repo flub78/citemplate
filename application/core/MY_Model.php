@@ -195,13 +195,11 @@ class MY_Model extends CI_Model {
     }
 
     /**
-     * Retourne une chaine de caractère qui identifie une ligne de façon unique.
-     * Cette chaine est utilisé dans les affichages.
-     * Par défaut elle retourne la valeur de la clé, mais elle est conçue pour être
-     * surchargée.
+     * This string identifies an element in human readable maned.
+     * Likely overloaded.
      * @param $key identifiant de la ligne à représenter
      */
-    public function image($key) {
+    public function image($table, $key) {
         return $key;
     }
 

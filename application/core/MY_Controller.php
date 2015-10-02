@@ -16,13 +16,15 @@
  *    You should have received a copy of the GNU General Public License
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @filesource Rights.php
+ * This controller implement a basic CRUD
+ * 
+ * @filesource MY_Controller.php
  * @package controllers
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Rights controller
+ * MY_Controller controller
  * @author frederic
  *
  */
@@ -44,7 +46,7 @@ class MY_Controller extends CI_Controller {
 		}
 		
 		// load common model
-		$this->load->model('crud_model', 'model');
+		// $this->load->model('crud_model', 'model');
 	}
 	
 	/**
@@ -106,7 +108,7 @@ class MY_Controller extends CI_Controller {
 	 */
 	protected function init_form($action, $id = "") {
 		$data = array();
-		$data['title'] = translation($this->title[$action]);
+		$data['title'] = form_title($this->default_table, $action); 
 		$data['controller'] = $this->controller;
 		$data['action'] = ($id) ? "$action/$id" : $action;
 		$data['table'] = $this->default_table;
@@ -153,22 +155,7 @@ class MY_Controller extends CI_Controller {
 			$rules = rules($this->default_table, $field);
 			// echo "name=$name, label=$label, rules=$rules";
 			$this->form_validation->set_rules($name, $label, $rules);
-		}
-	
-		/*
-		 * GVV
-		 * get_by_id
-		 * form_static_element: in place modifications
-		 * all values passed to the view
-		 * call or metadata form passing keys/values
-		 *
-		 * use cases
-		 *    - create with eventually some default values (converted from database to display (localisation))
-		 *    - edit with values from the database (converted from database to display (localisation))
-		 *    - repopulation from the form
-		 *    - readonly
-		 */
-	
+		}	
 	
 		if ($this->form_validation->run() == FALSE) {
 			// invalid input, reload the form

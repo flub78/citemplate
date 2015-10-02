@@ -69,7 +69,11 @@ if (! function_exists ( 'delete_button' )) {
 	 * @param
 	 *        	$id
 	 */
-	function delete_button($controller, $id, $confirm = true) {
+	function delete_button($controller, $id, $image = "", $confirm = true) {
+		if ($image == "") {
+			$image = $id;
+		}
+		// echo "image=$image"; exit;
 		$attrs = array(
 			'icon' => 'remove',
 			'url' => controller_url($controller) . '/delete/' . $id,
@@ -77,7 +81,7 @@ if (! function_exists ( 'delete_button' )) {
 		);
 
 		if ($confirm) {
-			$txt = translation('delete_confirm') . " $id";
+			$txt = translation('delete_confirm') . " " . $image;
 			$attributes = " onclick=\"return confirm('$txt')\" ";
 			$attrs['attributes'] .= $attributes;
 		}

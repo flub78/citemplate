@@ -107,14 +107,15 @@ if (! function_exists ( 'datatable' )) {
 		foreach ( $data as $elt ) {
 			
 			$id = $elt [table_key ( $table )];
-			
+			$image = $CI->model->image($table, $id);
+			// echo "image=$image"; exit;
 			// Select useful columns
 			$row = array ();
 			foreach ( $fields as $field ) {
 				if ($field == "__edit") {
 					$row [] = edit_button ( $controller, $id );
 				} elseif ($field == "__delete") {
-					$row [] = delete_button ( $controller, $id );
+					$row [] = delete_button ( $controller, $id, $image);
 				} else {
 					// regular data field
 					$row [] = $elt [$field];
@@ -138,6 +139,26 @@ if (! function_exists ( 'table_title' )) {
 		$CI = & get_instance();
 		$title = $CI->lang->line('title_' . $table);
 
+		return ($title) ? $title : $table;
+	}
+}
+
+if (! function_exists ( 'form_title' )) {
+	/**
+	 * Return the title for a form
+	 *
+	 * @param unknown_type $table
+	 */
+	function form_title($table, $action) {
+		$CI = & get_instance();
+		$title = $CI->lang->line('title_' . $table . "_$action");
+		
+		if ($title) {
+			return $title;
+		}
+
+		$title = $CI->lang->line('title_' . $table . "_form");
+		
 		return ($title) ? $title : $table;
 	}
 }
