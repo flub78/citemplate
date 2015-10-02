@@ -116,6 +116,13 @@ class MY_Model extends CI_Model {
     }
 
     /**
+     * Return the ID of last inserted element
+     */
+    function get_last_inserted() {
+    	return $this->db->insert_id();
+    }
+    
+    /**
      *    Retourne le nombre de membres
      *
      *    @param array $where    Tableau associatif permettant de définir des conditions

@@ -32,8 +32,9 @@ class Rights_model extends MY_Model {
 	 * @param $key identifiant de la ligne à représenter
 	 */
 	public function image($table, $key) {
-		///$vals = $this->get_by_id('vaid', $key);
-		$img = "<<<" . $key . ">>>";
+		$vals = $this->get_by_id($table, '	privilege_id', $key);
+		// var_dump($vals);
+		$img = (isset($vals['privilege_name'])) ? $vals['privilege_name'] : $key;
 		return $img;
 	}
 	
