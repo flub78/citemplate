@@ -112,7 +112,12 @@ $menu_dev = array (
 				array (
 						'label' => "CIAuth demo",
 						'url' => 'http://localhost/citemplate/C_ciauth'
+				),
+				array (
+						'label' => "Check French",
+						'url' => controller_url("dev/check_lang/french/1")
 				)
+				
 				
 				
 		)

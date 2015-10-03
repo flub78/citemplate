@@ -31,6 +31,7 @@ class Dev extends MY_Controller {
 
 	function __construct() {
 		parent :: __construct();
+		$this->load->language("dev");
 	}
 
 	/**
@@ -100,10 +101,13 @@ class Dev extends MY_Controller {
 	*/
 	public function check_lang ($lang = "french", $identical = 0, $type = "application") {
 		$lang_ref = "english";
-			
-		echo "Reference language=$lang_ref" . br();
-		echo "Checked language=$lang" .br();
-			
+
+		$data= array();
+		echo translation("ref_lang") . "=" . $lang_ref . br();
+		echo translation("checked_lang") . "=" .$lang .br();
+		$data['lang_ref'] = $lang_ref;
+		$data['checked_lang'] = $checked_lang;
+		
 		$missing_files = 0;
 		$missing_keys = 0;
 		$not_translated = 0;
@@ -164,6 +168,7 @@ class Dev extends MY_Controller {
 
 		echo br();
 		echo "Missing files = $missing_files, missing entries = $missing_keys" .br();
+
 	}
 
 }
