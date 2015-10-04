@@ -31,7 +31,6 @@ class Dev extends MY_Controller {
 
 	function __construct() {
 		parent :: __construct();
-		$this->load->language("dev");
 	}
 
 	/**
@@ -103,8 +102,8 @@ class Dev extends MY_Controller {
 		$lang_ref = "english";
 
 		$data= array();
-		echo translation("ref_lang") . "=" . $lang_ref . br();
-		echo translation("checked_lang") . "=" .$lang .br();
+		echo "Reference language=" . $lang_ref . br();
+		echo "Checked language=" .$lang .br();
 		$data['lang_ref'] = $lang_ref;
 		$data['checked_lang'] = $lang;
 		

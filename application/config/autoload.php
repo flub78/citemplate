@@ -60,7 +60,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
 
-$autoload['libraries'] = array('Ciauth','Ciauth_nav','Ciauth_template', 
+$autoload['libraries'] = array('Ciauth','Ciauth_template', 'Ciauth_nav',
 		
 'Menu', 'Logger', 'Metadata', 'form_validation');
 
@@ -139,4 +139,4 @@ $autoload['language'] = array('application');
 |	$autoload['model'] = array('first_model' => 'first');
 */
 
-$autoload['model'] = array('M_ciauth','M_ciauth_nav');
+$autoload['model'] = array('M_ciauth', 'M_ciauth_nav');

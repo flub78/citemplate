@@ -44,12 +44,12 @@ class Ciauth_test extends TestCase
 		# $this->assertNotContains('A PHP Error was encountered', $output);
 	}
 	
-	public function test_about()
-	{
-		$output = $this->request('GET', ['C_ciauth', 'about']);
-		$this->assertContains('About', $output);
-		$this->assertNotContains('A PHP Error was encountered', $output);
-	}
+// 	public function test_about()
+// 	{
+// 		$output = $this->request('GET', ['C_ciauth', 'about']);
+// 		$this->assertContains('About', $output);
+// 		$this->assertNotContains('A PHP Error was encountered', $output);
+// 	}
 
 	public function test_recaptcha()
 	{
@@ -64,20 +64,6 @@ class Ciauth_test extends TestCase
 	public function test_process_login_form_ajax()
 	{
 		$output = $this->request('GET', ['C_ciauth', 'process_login_form_ajax']);
-	}
-	
-	public function test_connection()
-	{
-		$this->resetInstance();
-		$this->CI->load->library('ciauth');
-		
-		$this->CI->ciauth->login("testuser", "testuser", false);
-		
-		$output = $this->request('GET', ['C_ciauth', 'about']);
-		$this->assertContains('Welcome', $output);
-		$this->assertNotContains('A PHP Error was encountered', $output);
-
-		$this->CI->ciauth->logout();
 	}
 	
 	public function test_method_404()

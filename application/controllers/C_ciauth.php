@@ -63,18 +63,19 @@ class C_ciauth extends CI_Controller {
          * be changed in our admin interface under navigation.
          */
 
-        $nav = new ciauth_nav();
-        $nav->db_fields = array('id' => 'id', 'parent' => 'parent');
+//         $nav = new ciauth_nav();
+//         $nav->db_fields = array('id' => 'id', 'parent' => 'parent');
 
-        $nav_elements = $this->M_ciauth_nav->get_menus();
-        $nav_menu = $nav->walk($nav_elements, 10);
+//         $nav_elements = $this->M_ciauth_nav->get_menus();
+//         $nav_menu = $nav->walk($nav_elements, 10);
   
-        if ($this->ciauth->is_logged_in()) {
-        	$data['nav_menu'] = $nav_menu;
-        } else {
-        	$data['nav_menu'] = "";
-        }
-
+//         if ($this->ciauth->is_logged_in()) {
+//         	$data['nav_menu'] = $nav_menu;
+//         } else {
+//         	$data['nav_menu'] = "";
+//         }
+        $data['nav_menu'] = "";
+        
         /*
          * load our V_template and the ciauth basic 
          */
@@ -82,43 +83,43 @@ class C_ciauth extends CI_Controller {
         $this->ciauth_template->load('V_template', 'V_ciauth_basic', $data);
     }
 
-    public function about() {
-        /*
-         * We can set the meta description, meta author, and title of each
-         * page using the varibles. This is to give SEO value to our pages.
-         */
+//     public function about() {
+//         /*
+//          * We can set the meta description, meta author, and title of each
+//          * page using the varibles. This is to give SEO value to our pages.
+//          */
 
-        $meta_description = 'Ciauth - Authorization, Navigation, and Template libraries for CodeIgniter.';
-        $meta_author = 'Glen Barnhardt, CEO Barnhardt Enterprises, Inc.';
-        $data = array();
-        $data['title'] = "CIAUTH About";
-        $data['meta_description'] = $meta_description;
-        $data['meta_author'] = $meta_author;
+//         $meta_description = 'Ciauth - Authorization, Navigation, and Template libraries for CodeIgniter.';
+//         $meta_author = 'Glen Barnhardt, CEO Barnhardt Enterprises, Inc.';
+//         $data = array();
+//         $data['title'] = "CIAUTH About";
+//         $data['meta_description'] = $meta_description;
+//         $data['meta_author'] = $meta_author;
 
-        /*
-         * Build the navigation
-         * We grab values from the database for our navigation. These can
-         * be changed in our admin interface under navigation.
-         */
+//         /*
+//          * Build the navigation
+//          * We grab values from the database for our navigation. These can
+//          * be changed in our admin interface under navigation.
+//          */
 
-        $nav = new ciauth_nav();
-        $nav->db_fields = array('id' => 'id', 'parent' => 'parent');
+//         $nav = new ciauth_nav();
+//         $nav->db_fields = array('id' => 'id', 'parent' => 'parent');
 
-        $nav_elements = $this->M_ciauth_nav->get_menus();
-        $nav_menu = $nav->walk($nav_elements, 10);
+//         $nav_elements = $this->M_ciauth_nav->get_menus();
+//         $nav_menu = $nav->walk($nav_elements, 10);
 
-        if ($this->ciauth->is_logged_in()) {
-        	$data['nav_menu'] = $nav_menu;
-        } else {
-        	$data['nav_menu'] = "";
-        }
+//         if ($this->ciauth->is_logged_in()) {
+//         	$data['nav_menu'] = $nav_menu;
+//         } else {
+//         	$data['nav_menu'] = "";
+//         }
         
-        /*
-         * load our V_template and the ciauth basic 
-         */
+//         /*
+//          * load our V_template and the ciauth basic 
+//          */
 
-        $this->ciauth_template->load('V_template', 'V_ciauth_about', $data);
-    }
+//         $this->ciauth_template->load('V_template', 'V_ciauth_about', $data);
+//     }
 
     /*
      * Function: login
@@ -147,13 +148,13 @@ class C_ciauth extends CI_Controller {
          * be changed in our admin interface under navigation.
          */
 
-        $nav = new ciauth_nav();
-        $nav->db_fields = array('id' => 'id', 'parent' => 'parent');
+//         $nav = new ciauth_nav();
+//         $nav->db_fields = array('id' => 'id', 'parent' => 'parent');
 
-        $nav_elements = $this->M_ciauth_nav->get_menus();
-        $nav_menu = $nav->walk($nav_elements, 10);
+//         $nav_elements = $this->M_ciauth_nav->get_menus();
+//         $nav_menu = $nav->walk($nav_elements, 10);
 
-        $data['nav_menu'] = $nav_menu;
+//         $data['nav_menu'] = $nav_menu;
         $data['nav_menu'] = ""; # menu not enabled on login page
         
         $this->form_validation->set_rules('login_value', 'Username or Email', 'required');
