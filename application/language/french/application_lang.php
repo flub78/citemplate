@@ -32,8 +32,27 @@ $lang['button_new'] = "Nouveau";
 $lang['button_edit'] = "Edite";
 $lang['delete_confirm'] = "Suppression de";
 
-$lang['title_rights'] = "Privilèges utilisateur";
+// ciauth_user_privileges
+$lang['title_ciauth_user_privileges'] = "Privilèges";
+$lang['title_ciauth_user_privileges_form'] = "Privilège";
+$lang['title_ciauth_user_privileges_create'] = "Nouveau privilège";
 
 $lang['heading_privilege_id'] = "N°";
 $lang['heading_privilege_name'] = "Nom";
 $lang['heading_privilege_description'] = "Description";
+$lang['placeholder_ciauth_user_privileges_privilege_description'] = "Description";
+$lang['label_ciauth_user_privileges_privilege_description'] = "Description";
+
+$lang['placeholder_ciauth_user_accounts_email'] = "Courriel";
+$lang['placeholder_ciauth_user_accounts_username'] = "Nom";
+$lang['placeholder_ciauth_user_accounts_password'] = "Mot de passe";
+$lang['placeholder_ciauth_user_accounts_confirm-password'] = "Confirmez le mot de passe";
+
+// ciauth_user_accounts
+$lang['title_ciauth_user_accounts'] = "Utilisateurs";
+$lang['title_ciauth_user_accounts_form'] = "Utilisateur";
+$lang['title_ciauth_user_accounts_create'] = "Nouvel utilisateur";
+
+$lang['heading_email'] = "Courriel";
+$lang['heading_username'] = "Nom";
+

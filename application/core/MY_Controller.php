@@ -110,6 +110,11 @@ class MY_Controller extends CI_Controller {
 		$data['action'] = ($id) ? "$action/$id" : $action;
 		$data['table'] = $this->default_table;
 		$data['error_msg'] = "";
+		if ($action == 'create') {
+			$data['submit_label'] = 'button_submit_create';
+		} else {
+			$data['submit_label'] = 'button_submit_edit';				
+		}
 		return $data;
 	}
 
@@ -135,7 +140,7 @@ class MY_Controller extends CI_Controller {
 	
 		$data = $this->init_form("edit", $id);
 		$data['values'] = $values;
-	
+		
 		$this->load->view('default_form', $data);
 	}
 

@@ -30,11 +30,15 @@ $lang['button_cancel'] = "Cancel";
 $lang['button_clone'] = "Clone";
 $lang['button_new'] = "New";
 $lang['button_edit'] = "Edit";
+$lang['button_submit_edit'] = "Validate";
+$lang['button_submit_create'] = "Create";
+$lang['button_submit_register'] = "Register";
 $lang['delete_confirm'] = "Delete ";
 
-$lang['title_ciauth_user_accounts'] = "Users";
-
+// ciauth_user_privileges
 $lang['title_ciauth_user_privileges'] = "Rights definition";
+$lang['title_ciauth_user_privileges_form'] = "Rights definition";
+$lang['title_ciauth_user_privileges_create'] = "New right definition";
 
 $lang['heading_privilege_id'] = "Id";
 $lang['heading_privilege_name'] = "Name";
@@ -46,6 +50,12 @@ $lang['placeholder_ciauth_user_accounts_email'] = "Email address";
 $lang['placeholder_ciauth_user_accounts_username'] = "User name";
 $lang['placeholder_ciauth_user_accounts_password'] = "Password";
 $lang['placeholder_ciauth_user_accounts_confirm-password'] = "Confirm Password";
-$lang['title_ciauth_user_privileges_form'] = "Rights definition";
-$lang['title_ciauth_user_privileges_create'] = "New right definition";
+
+// ciauth_user_accounts
+$lang['title_ciauth_user_accounts'] = "Users";
+$lang['title_ciauth_user_accounts_form'] = "User";
+$lang['title_ciauth_user_accounts_create'] = "Create user";
+
+$lang['heading_email'] = "Email address";
+$lang['heading_username'] = "User name";
 

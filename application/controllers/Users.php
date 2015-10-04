@@ -54,6 +54,7 @@ class Users extends MY_Controller {
 		$data['table'] = $this->default_table;
 		$data['values'] = array();
 		$data['error_msg'] = "";
+		$data['submit_label'] = 'button_submit_register';
 		$this->load->view('default_form', $data);
 	}
 		

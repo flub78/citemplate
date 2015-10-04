@@ -35,13 +35,31 @@ class Database extends MY_Controller {
 	 */
 	function __construct() {
 		parent :: __construct();
+		$this->load->library('Database');
 	}
 	
 	/**
 	 * Save the database
+	 * @param $action = backup|structure|default
 	 */
-	function backup () {
-		
+	function backup ($action = 'backup') {
+		echo "database backup";
 	}	
-		
+
+	/**
+	 * Restore the database
+	 */
+	function restore () {
+	
+	}
+
+	/**
+	 * Migration of the database
+	 */
+	function migration() {
+	
+	}
+	
+	
+	
 }

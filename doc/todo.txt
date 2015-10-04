@@ -45,6 +45,9 @@ Done:
         - create first form based on metadata
         - create first table based on metadata
         - Add actions on table view
+    * Submit button labels 
+        (Valider, Créer, Créer et continuer)
+        Validate, Create, Create and continue, Register
         
 Todo:
     * Internationalization
@@ -62,7 +65,6 @@ Todo:
     * Bootstrap tutorial
     * Datatables tutorial    
     * Database save and restore
-    * Submit button labels
     * Rights management
         - url access
         - changement de mot de passe

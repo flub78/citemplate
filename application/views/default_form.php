@@ -50,7 +50,7 @@
 					<?= form($table, $values); ?>
 					<div id='message'></div>
 					<p>&nbsp;</p>
-					<?= submit('Register'); ?>
+					<?= submit(translation($submit_label)); ?>
 				<?= form_close();?>
 			</div>
 
