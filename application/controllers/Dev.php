@@ -106,7 +106,7 @@ class Dev extends MY_Controller {
 		echo translation("ref_lang") . "=" . $lang_ref . br();
 		echo translation("checked_lang") . "=" .$lang .br();
 		$data['lang_ref'] = $lang_ref;
-		$data['checked_lang'] = $checked_lang;
+		$data['checked_lang'] = $lang;
 		
 		$missing_files = 0;
 		$missing_keys = 0;
@@ -169,6 +169,8 @@ class Dev extends MY_Controller {
 		echo br();
 		echo "Missing files = $missing_files, missing entries = $missing_keys" .br();
 
+		$this->load->view(translation('language') . '/dev/check_lang');
+		
 	}
 
 }

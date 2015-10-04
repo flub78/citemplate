@@ -30,24 +30,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Users extends MY_Controller {
 	
 	var $default_table = 'ciauth_user_accounts';
-	var $table_fields = array('username', 'email', '__edit', '__delete');
 	var $controller = 'users';
+	var $table_fields = array('username', 'email', '__edit', '__delete');
 	
 	/**
 	 * Constructor
 	 */
-// 	function __construct() {
-// 		parent :: __construct();
-// 		// specific initialization	
-// 	}
-	
-	/**
-	 * Add a new element 
-	 */
-	public function add($data = array()) {
+	function __construct() {
+		parent :: __construct();
+		// specific initialization
+		$this->load->model('crud_model', 'model');
+	}	
 		
-	}
-	
 	/**
 	 * Display a form to create a new element
 	 */
@@ -60,15 +54,6 @@ class Users extends MY_Controller {
 		$data['table'] = $this->default_table;
 		$data['values'] = array();
 		$data['error_msg'] = "";
-		$this->load->view('default_form', $data);
-	}
-
-	/**
-	 * Display a form to edit an existing element
-	 * @param unknown $id
-	 */
-	public function edit($id) {
-		$data = array();
 		$this->load->view('default_form', $data);
 	}
 		

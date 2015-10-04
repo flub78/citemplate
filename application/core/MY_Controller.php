@@ -43,10 +43,7 @@ class MY_Controller extends CI_Controller {
 		
 		if (!$this->ciauth->is_logged_in()) {
 			redirect(controller_url('welcome/login'));
-		}
-		
-		// load common model
-		// $this->load->model('crud_model', 'model');
+		}		
 	}
 	
 	/**

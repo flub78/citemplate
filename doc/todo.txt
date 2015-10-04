@@ -50,14 +50,34 @@ Todo:
     * Internationalization
         - datatables
     * Metadata
+        * second CRUD (users)
+            * forgotten password
         * jointure
+        * password, confirm-password
         * date
         * currency
         * attachement, pictures
+        * Automated filtering
+        
     * Bootstrap tutorial
     * Datatables tutorial    
     * Database save and restore
-    * 
+    * Submit button labels
+    * Rights management
+        - url access
+        - changement de mot de passe
+    * Google calendar
+        - display
+        - event CRUD
+    * graphisme and diagrams
+    * emails with attachements
+    * Template PDF generation or whole page export
+    * Shopping cart and paiement
+    * QR code, ticket impression
+    * REST interface
+    * REST service access
+    
+        
 
 ============================================================================================================================    
 CRUD scaffolding
