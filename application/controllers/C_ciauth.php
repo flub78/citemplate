@@ -27,10 +27,12 @@ if (!defined('BASEPATH'))
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-
 class C_ciauth extends CI_Controller {
 
+	// @codeCoverageIgnoreStart
+	
     public function __construct() {
         parent::__construct();
         if (! defined ('SITE_PATH')) {
@@ -487,5 +489,5 @@ class C_ciauth extends CI_Controller {
             }
         }
     }
-
+    // @codeCoverageIgnoreEnd
 }

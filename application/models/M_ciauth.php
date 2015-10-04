@@ -30,7 +30,8 @@ if (!defined('BASEPATH'))
  */
 
 class M_ciauth extends CI_model {
-
+	// @codeCoverageIgnoreStart
+	
     public function __construct() {
         parent::__construct();
         $this->load->database();
@@ -252,5 +253,6 @@ class M_ciauth extends CI_model {
             return $result;
         }
     }
-
+    // @codeCoverageIgnoreEnd
+    
 }

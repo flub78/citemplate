@@ -21,6 +21,11 @@
 			<directory suffix=".php">../libraries</directory>
 			<directory suffix=".php">../helpers</directory>
 			<directory suffix=".php">../hooks</directory>
+            <exclude>
+              <directory suffix=".php">../views/bootstrap</directory>
+              <directory suffix=".php">../views/ciauth</directory>
+              <directory suffix=".php">../views/errors</directory>
+            </exclude>
 		</whitelist>
 	</filter>
 	<logging>
