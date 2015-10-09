@@ -170,8 +170,10 @@ class MY_Controller extends CI_Controller {
 			# successful validation
 			$values = array();
 			foreach ($this->form_fields as $field) {
-				$field_name = field_name($this->default_table, $field);
-				$values[$field] = $this->input->post($field_name);
+				if ($this->metadata->field_exists($this->default_table, $field)) {
+					$field_name = field_name($this->default_table, $field);
+					$values[$field] = $this->input->post($field_name);
+				}
 			}
 			# var_dump($values);
 				

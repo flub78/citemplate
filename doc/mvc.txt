@@ -66,6 +66,15 @@ Model, Vue, Controller
     also done at the server levle for security reasons.
     
     
+Form validation
+
+    * Type & metadata types.
+        - type is used by html 5, for exemple password. 
+        - if we need to distinguish for metadata treatments another attribute will be used.
+        
+    * Rules: there are some that are defined by the database null, not null,
+    Sometime it is useful to define additional business rules.
+    
     
      
     

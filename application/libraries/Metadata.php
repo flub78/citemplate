@@ -97,13 +97,15 @@ class Metadata {
 		$this->fields['ciauth_user_accounts']['password'] = array(
             'name' => 'password',
             'id' => 'password',
-            'class' => 'form-control',
+            'metadata_type' => 'password',
+			'class' => 'form-control',
             'size' => '25'
         );
 		// confirm-password is not a real database field
 		$this->fields['ciauth_user_accounts']['confirm-password'] = array(
 				'name' => 'confirm-password',
 				'id' => 'confirm-password',
+            	'metadata_type' => 'password',
 				'class' => 'form-control',
 				'size' => '25'
 		);
