@@ -37,6 +37,48 @@ class MY_Model extends CI_Model {
     }
 
     /**
+     * Replaced the default CI field_data so that we could determine if the field is a auto_increment
+     * 
+     * @param unknown $table
+     */
+	public function getTableMetaData($table) {
+		
+		/*
+		 * Example object in the MetaData
+		 *
+		 * stdClass::__set_state(array(
+		 * 'Field' => 'coupon_no',
+		 * 'Type' => 'bigint(20)',
+		 * 'Null' => 'NO',
+		 * 'Key' => 'PRI',
+		 * 'Default' => NULL,
+		 * 'Extra' => 'auto_increment',
+		 * ))
+		 */
+		$fields = $this->db->query ( 'DESCRIBE ' . $table )->result ();
+		$md = array ();
+		foreach ( $fields as $field ) {
+			preg_match ( '/([a-zA-Z]+)((d+))?/', $field->Type, $matches );
+			
+			$type = (array_key_exists ( 1, $matches )) ? $matches [1] : NULL;
+			$length = (array_key_exists ( 2, $matches )) ? preg_replace ( '/[^d]/', '', $matches [2] ) : NULL;
+			
+			$F = new stdClass ();
+			$F->name = $field->Field;
+			$F->type = $type;
+			$F->default = $field->Default;
+			$F->max_length = $length;
+			$F->primary_key = ($field->Key == 'PRI' ? 1 : 0);
+			$F->auto_increment = strripos ( $field->Extra, 'auto_increment' ) !== FALSE ? 1 : 0;
+			$F->allow_null = $field->Null === 'YES' ? TRUE : FALSE;
+			
+			$md [] = $F;
+		}
+		
+		return $md;
+	}
+    
+    /**
      * Retourne le nom de la clé primaire sur la table
      * @return string
      */

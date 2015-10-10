@@ -35,11 +35,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * information are fetch from database if seems logical to have only one source
  * of information. But then I need a model just to fetch it and have it available
  * from a PHP class. So it is more efficient to just put the additional metadata
- * as a set of constant into the PHP class, it save all database related accesses
+ * as a set of arrays into the PHP class, it save all database related accesses
  * and this information is static, it is never change following a user action.
  * 
- * 
- * 
+ * Data fetched from the databaser are:
+ *    * The list or table
+ *    * The list of fields for each table
+ *    * a list of attributes for each fields
+ *      
+          public 'name' => string 'user_id' (length=7)
+          public 'type' => string 'int' (length=3)
+          public 'max_length' => int 11
+          public 'default' => null
+          public 'primary_key' => int 1
+
+          public 'auto_increment' => int 1
+          public 'allow_null' => boolean false
+ *
  * @author frederic
  *
  */
@@ -144,7 +156,9 @@ class Metadata {
 	
 	/**
 	 * Check if a table or view exist in the database
+	 * 
 	 * The routine also fetch table information
+	 * 
 	 * @param unknown $table
 	 */
 	function table_exists ($table) {
@@ -155,9 +169,10 @@ class Metadata {
 				
 				# fetch database metadata
 				$this->fields_list[$table] = $this->CI->db->fields_list($table);
-				$fields = $this->CI->db->field_data($table);
+				// Do not use the CI>db->field_data, it does not report enough information 
+				$fields = $this->CI->model->getTableMetaData($table);
 				
-				# var_dump($fields);
+				// var_dump($fields);
 				/*
 				 * object(stdClass)[31]
   					public 'name' => string 'privilege_id' (length=12)
@@ -330,14 +345,107 @@ class Metadata {
 		return $key[$table];
 	}
 	
+	protected function add_rule(&$rule, $new_rule) {
+		if ($rule) {
+			$rule .= '|';
+		}
+		$rule .= $new_rule;
+	}
+	
 	/**
 	 * Return the validation rules deduced from metadata
 	 *
+	 * rules is invoked in form validation method, metadata must be loaded on demand
+	 * 
 	 * @param unknown_type $table
 	 * @param unknown_type $field
+	 *   'user_id' => 
+    object(stdClass)[34]
+      public 'name' => string 'user_id' (length=7)
+      public 'type' => string 'int' (length=3)
+      public 'default' => null
+      public 'max_length' => null
+      public 'primary_key' => int 1
+      public 'auto_increment' => int 1
+      public 'allow_null' => boolean false
+  'email' => 
+    object(stdClass)[43]
+      public 'name' => string 'email' (length=5)
+      public 'type' => string 'varchar' (length=7)
+      public 'default' => null
+      public 'max_length' => null
+      public 'primary_key' => int 0
+      public 'auto_increment' => int 0
+      public 'allow_null' => boolean false
+  'username' => 
+    object(stdClass)[44]
+      public 'name' => string 'username' (length=8)
+      public 'type' => string 'varchar' (length=7)
+      public 'default' => null
+      public 'max_length' => null
+      public 'primary_key' => int 0
+      public 'auto_increment' => int 0
+      public 'allow_null' => boolean false
+  'password' => 
+    object(stdClass)[45]
+      public 'name' => string 'password' (length=8)
+      public 'type' => string 'varchar' (length=7)
+      public 'default' => null
+      public 'max_length' => null
+      public 'primary_key' => int 0
+      public 'auto_increment' => int 0
+      public 'allow_null' => boolean false
+  'creation_date' => 
+    object(stdClass)[46]
+      public 'name' => string 'creation_date' (length=13)
+      public 'type' => string 'timestamp' (length=9)
+      public 'default' => string 'CURRENT_TIMESTAMP' (length=17)
+      public 'max_length' => null
+      public 'primary_key' => int 0
+      public 'auto_increment' => int 0
+      public 'allow_null' => boolean false
+  'last_login' => 
+    object(stdClass)[47]
+      public 'name' => string 'last_login' (length=10)
+      public 'type' => string 'timestamp' (length=9)
+      public 'default' => null
+      public 'max_length' => null
+      public 'primary_key' => int 0
+      public 'auto_increment' => int 0
+      public 'allow_null' => boolean true
+  'admin' => 
+    object(stdClass)[48]
+      public 'name' => string 'admin' (length=5)
+      public 'type' => string 'varchar' (length=7)
+      public 'default' => null
+      public 'max_length' => null
+      public 'primary_key' => int 0
+      public 'auto_increment' => int 0
+      public 'allow_null' => boolean false
+  'remember_me' => 
+    object(stdClass)[49]
+      public 'name' => string 'remember_me' (length=11)
+      public 'type' => string 'int' (length=3)
+      public 'default' => null
+      public 'max_length' => null
+      public 'primary_key' => int 0
+      public 'auto_increment' => int 0
+      public 'allow_null' => boolean false
 	 */
 	function rules($table, $field) {
+		
+		$rule = "";
+		if ($this->table_exists($table)) {
+			if (isset($this->field_data[$table][$field])) {
+				// if this field exist in database
+				$meta = $this->field_data[$table][$field];
+				// var_dump($this->field_data[$table]); exit;
+				$this->add_rule($rule, 'required');
+			}
+		}
+		$this->log("rules($table,$field) = " . $rule);
 		return 'required';
+		return $rule;
 	}
 	
 	/**
