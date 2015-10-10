@@ -15,6 +15,7 @@ class Metadata_helper_test extends TestCase
 		$this->resetInstance();
 		$this->CI->load->helper('metadata');
 		$this->CI->lang->load('application');
+        $this->CI->load->model('crud_model', 'model');
 	}
 	
 	public function test_loaded()

@@ -6,6 +6,7 @@ class Metadata_test extends TestCase
     {
         $this->resetInstance();
         $this->CI->load->library('metadata');
+        $this->CI->load->model('crud_model', 'model');
     }
 
     public function test_instance()
