@@ -156,7 +156,9 @@ class MY_Controller extends CI_Controller {
 			$label = field_label_text($this->default_table, $field);
 			$rules = rules($this->default_table, $field);
 			// echo "name=$name, label=$label, rules=$rules";
-			$this->form_validation->set_rules($name, $label, $rules);
+			if ($rules) {
+				$this->form_validation->set_rules($name, $label, $rules);
+			}
 		}	
 	
 		if ($this->form_validation->run() == FALSE) {

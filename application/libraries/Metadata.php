@@ -104,14 +104,16 @@ class Metadata {
             'type' => 'text',
             'id' => 'username_value',
             'class' => 'form-control',
-            'size' => '25'
+            'size' => '25',
+			'rules' => 'is_unique[ciauth_user_accounts.username]|alpha_dash'
         );
 		$this->fields['ciauth_user_accounts']['password'] = array(
             'name' => 'password',
             'id' => 'password',
             'metadata_type' => 'password',
 			'class' => 'form-control',
-            'size' => '25'
+            'size' => '25',
+			'rules' => 'min_length[5]'
         );
 		// confirm-password is not a real database field
 		$this->fields['ciauth_user_accounts']['confirm-password'] = array(
@@ -119,7 +121,8 @@ class Metadata {
 				'id' => 'confirm-password',
             	'metadata_type' => 'password',
 				'class' => 'form-control',
-				'size' => '25'
+				'size' => '25',
+				'rules' => 'required|matches[password]'
 		);
 		$this->fields['ciauth_user_accounts']['admin'] = array('metadata_type' => 'boolean');
 
@@ -171,6 +174,7 @@ class Metadata {
 				$this->fields_list[$table] = $this->CI->db->fields_list($table);
 				// Do not use the CI>db->field_data, it does not report enough information 
 				$fields = $this->CI->model->getTableMetaData($table);
+				// $fields = $this->CI->db->field_data($table);
 				
 				// var_dump($fields);
 				/*
@@ -359,6 +363,7 @@ class Metadata {
 	 * 
 	 * @param unknown_type $table
 	 * @param unknown_type $field
+	 * 
 	 *   'user_id' => 
     object(stdClass)[34]
       public 'name' => string 'user_id' (length=7)
@@ -435,16 +440,40 @@ class Metadata {
 	function rules($table, $field) {
 		
 		$rule = "";
+		
+		// Rules deduced from the database info
 		if ($this->table_exists($table)) {
 			if (isset($this->field_data[$table][$field])) {
+				
 				// if this field exist in database
 				$meta = $this->field_data[$table][$field];
-				// var_dump($this->field_data[$table]); exit;
-				$this->add_rule($rule, 'required');
+				// var_dump($meta);
+				
+				if (!$meta->allow_null) {
+					$this->add_rule($rule, 'required');
+				}
+				if (array_key_exists('max_length', $meta) && $meta->max_length) {
+					$rl = 'max_length[' .  $meta->max_length . ']';
+					$this->add_rule($rule, $rl);
+				}
 			}
 		}
+		
+		// additional rules deduced from metadata types
+		if (isset($this->fields[$table][$field]['metadata_type'])) {
+			
+			if ($this->fields[$table][$field]['metadata_type'] == 'email') {
+				$this->add_rule($rule, 'valid_email');
+			}
+		}
+
+		// additional metadata explicit rules
+		if (isset($this->fields[$table][$field]['rules'])) {
+			$this->add_rule($rule, $this->fields[$table][$field]['rules']);			
+		}
+		
 		$this->log("rules($table,$field) = " . $rule);
-		return 'required';
+		// return '';
 		return $rule;
 	}
 	

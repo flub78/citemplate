@@ -58,11 +58,12 @@ class MY_Model extends CI_Model {
 		$fields = $this->db->query ( 'DESCRIBE ' . $table )->result ();
 		$md = array ();
 		foreach ( $fields as $field ) {
-			preg_match ( '/([a-zA-Z]+)((d+))?/', $field->Type, $matches );
+			$reg = '/([a-zA-Z]+)\((\d+)\)?/';
+			preg_match ( $reg, $field->Type, $matches );
 			
 			$type = (array_key_exists ( 1, $matches )) ? $matches [1] : NULL;
-			$length = (array_key_exists ( 2, $matches )) ? preg_replace ( '/[^d]/', '', $matches [2] ) : NULL;
-			
+			// $length = (array_key_exists ( 2, $matches )) ? preg_replace ( '/[^d]/', '', $matches [2] ) : NULL;
+			$length = (array_key_exists ( 2, $matches )) ? $matches [2]: NULL;
 			$F = new stdClass ();
 			$F->name = $field->Field;
 			$F->type = $type;
