@@ -76,6 +76,104 @@ Form validation
     Sometime it is useful to define additional business rules.
     
     
-     
+User documentation
+==================
+
+    The organization of this project around metadata has been done to provide
+    a very efficient framework to develop WEB applications. As usual, there is no free meals,
+    so if it is fast to develop applications using this approach it is because a significant part 
+    of the work that you have usually to do has been incorporated in the framework
+    and the libraries.
     
+    The idea is to used metadata extracted from the database to define how to handle information.
+    When the database types are not sufficient, for example, you can store an email as well than a url into
+    a varchar, we intent to extend the data description and says: this varchar is an email, this varchar is an url or this varchar
+    is a hashed password.
+    
+    The program using these data descriptions will know how to display fields and label in forms and tables.
+    
+    It guarantees both an homogeneous treatment (all currency fields are always treated the same, all date fields
+    are always displayed the same) and productivity gains as soon as you have to handle several occurrences of the same type.
+    
+    Like Ruby on Rails for Ruby WEB application development, I also intend to base a lot of things on conventions. It implies that
+    if you are happy with the default behavior, you have nothing to do to implement a new controller or model. Of course the object oriented
+    approach allows developers to overload treatments that do no suite their needs.
+    
+    The third idea behind the framework is to store all jointures and complex requests inside the database. You can find hundreds of
+    CRUD managers, CRUD scafeholding or CRUD code generator on the internet. Most of the time, they are limited to manage a single
+    table, which is a rather unfrequent use case in WEB application. Most of the real interactions with the data is done through
+    complex request and jointures. By storing these requests as views in the database, not only there is eventually some performance
+    improvements but it becomes possible to apply the same CRUD approach on complex tables.
+    
+    The framework provides a generic controllers, a generic model and generic views to handle elements creation and modification
+    and table display.
+
+The generic model
+=================
+
+    Usually loaded and named "model", this model provides basic CRUD actions
+    on one table. Simple controllers do not need to use or derive their own model.
+
+The generic controller
+======================
+
+    The generic controller just derive from the initial CI controller core/MY_Controller.php.
+    It provides the basic access control verification: that the current user
+    as the authorizations to access the controller.
+    It also provides basic CRUD methods to create, read, update and delete elements
+    of the controller's main table.
+    
+The generic views
+=================
+
+    Default form view
+    -----------------
+    
+    Default table view
+    ------------------
+    
+user authentication and Rights Management
+=========================================
+
+Installation and Migration
+==========================
+
+Logging
+=======
+
+
+Tests and continuous integration
+================================
+
+    The framework already comes with basic tests that covers the framework features themselves.
+    To keep the good test practices for your application, you just have to add your own tests
+    along your developments.
+    
+    PHPUNIT tests
+    -------------
+    
+        They are fully integrated to the framework. Located in the application/test folder you will find
+        unit tests for helpers and libraries as long as more high level tests for views and controllers.
+        
+        These tests use the assertion mechanism of PHPUNIT and include coverage measure so you can know what
+        percentage of lines, modules and classes are covered by the tests.
+        
+    WATIR functional tests
+    ----------------------
+    
+        WATIR tests are higher level tests that control a WEB navigator and simulate a human user that interacts
+        with the application. The tests can click on buttons and links, select items in menus, fill input fields
+        and check the result of these actions on the displayed page. The tests can also query the database to check
+        that database, GUI interactions and displayed information are coherent.
+        
+        The framework already comes with a set of WATIR tests. WATIR tests are written in Ruby, language that should not
+        be an issue for a PHP developer (If one day I find an equivalent test framework written in PHP, I may switch). 
+    
+    Continuous Integration
+    ---------------------
+    
+        The project also comes with a set of Jenkins jobs to continuously run the tests when a change in the code is detected and
+        also to perform static analysis on the code in order to detect poor programming practices and potential issues. 
+    
+        
     

@@ -354,10 +354,11 @@ if (! function_exists ( 'rules' )) {
 	 *
 	 * @param unknown_type $table
 	 * @param unknown_type $field
+	 * @param $action = "create" | "edit"
 	 */
-	function rules($table, $field) {
+	function rules($table, $field, $action) {
 		$CI = & get_instance();
-		return $CI->metadata->rules($table, $field);		
+		return $CI->metadata->rules($table, $field, $action);		
 	}
 }
 

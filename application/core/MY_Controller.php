@@ -154,8 +154,11 @@ class MY_Controller extends CI_Controller {
 		foreach ($this->form_fields as $field) {
 			$name = field_name($this->default_table, $field);
 			$label = field_label_text($this->default_table, $field);
-			$rules = rules($this->default_table, $field);
+			$rules = rules($this->default_table, $field, $action);
 			// echo "name=$name, label=$label, rules=$rules";
+			
+			// On some fields like password on edit, some rules must be applied only
+			// if the field is set.
 			if ($rules) {
 				$this->form_validation->set_rules($name, $label, $rules);
 			}

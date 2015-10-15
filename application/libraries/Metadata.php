@@ -108,12 +108,12 @@ class Metadata {
 			'rules' => 'is_unique[ciauth_user_accounts.username]|alpha_dash'
         );
 		$this->fields['ciauth_user_accounts']['password'] = array(
-            'name' => 'password',
             'id' => 'password',
             'metadata_type' => 'password',
 			'class' => 'form-control',
             'size' => '25',
-			'rules' => 'min_length[5]'
+			'rules' => 'trim|min_length[5]|md5',
+			'edit_rules' => 'trim|callback_null_or_min_length[5]|md5'
         );
 		// confirm-password is not a real database field
 		$this->fields['ciauth_user_accounts']['confirm-password'] = array(
@@ -122,7 +122,7 @@ class Metadata {
             	'metadata_type' => 'password',
 				'class' => 'form-control',
 				'size' => '25',
-				'rules' => 'required|matches[password]'
+				'rules' => 'trim|md5|matches[password]'
 		);
 		$this->fields['ciauth_user_accounts']['admin'] = array('metadata_type' => 'boolean');
 
@@ -363,6 +363,7 @@ class Metadata {
 	 * 
 	 * @param unknown_type $table
 	 * @param unknown_type $field
+	 * @param unknown_type $action
 	 * 
 	 *   'user_id' => 
     object(stdClass)[34]
@@ -437,7 +438,7 @@ class Metadata {
       public 'auto_increment' => int 0
       public 'allow_null' => boolean false
 	 */
-	function rules($table, $field) {
+	function rules($table, $field, $action) {
 		
 		$rule = "";
 		
@@ -470,6 +471,11 @@ class Metadata {
 		// additional metadata explicit rules
 		if (isset($this->fields[$table][$field]['rules'])) {
 			$this->add_rule($rule, $this->fields[$table][$field]['rules']);			
+		}
+
+		// Replace default rules
+		if (isset($this->fields[$table][$field][$action . '_rules'])) {
+			$rule = $this->fields[$table][$field][$action . 'rules'];
 		}
 		
 		$this->log("rules($table,$field) = " . $rule);

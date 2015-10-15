@@ -58,5 +58,24 @@ class Users extends MY_Controller {
 		$data['submit_label'] = 'button_submit_register';
 		$this->load->view('default_form', $data);
 	}
-		
+	
+	/**
+	 * Form validation callback
+	 * 
+	 * @param unknown $str
+	 * @return boolean
+	 */
+	public function null_or_min_length($str, $size)
+	{
+		if ($str == '' or lenght($str) >= $size)
+		{
+			return TRUE;
+		}
+		else
+		{
+			$this->form_validation->set_message('username_check', 'The {field} field can not be the word "test"');
+			return FALSE;
+		}
+	}
+	
 }
