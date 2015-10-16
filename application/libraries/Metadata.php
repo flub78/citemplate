@@ -112,8 +112,8 @@ class Metadata {
             'metadata_type' => 'password',
 			'class' => 'form-control',
             'size' => '25',
-			'rules' => 'trim|min_length[5]|md5',
-			'edit_rules' => 'trim|callback_null_or_min_length[5]|md5'
+			'edit_rules' => 'trim|callback_null_or_min_length[5]',
+			'create_rules' => 'trim|min_length[5]'
         );
 		// confirm-password is not a real database field
 		$this->fields['ciauth_user_accounts']['confirm-password'] = array(
@@ -122,7 +122,7 @@ class Metadata {
             	'metadata_type' => 'password',
 				'class' => 'form-control',
 				'size' => '25',
-				'rules' => 'trim|md5|matches[password]'
+				'rules' => 'trim|matches[password]'
 		);
 		$this->fields['ciauth_user_accounts']['admin'] = array('metadata_type' => 'boolean');
 
@@ -475,12 +475,48 @@ class Metadata {
 
 		// Replace default rules
 		if (isset($this->fields[$table][$field][$action . '_rules'])) {
-			$rule = $this->fields[$table][$field][$action . 'rules'];
+			$rule = $this->fields[$table][$field][$action . '_rules'];
 		}
 		
 		$this->log("rules($table,$field) = " . $rule);
 		// return '';
 		return $rule;
+	}
+	
+	/**
+	 * Transform a field from the database into something suitable for display
+	 * @param unknown $table
+	 * @param unknown $field
+	 * @param unknown $value
+	 * @param $format
+	 */
+	function display_field($table, $field, $value, $format = "html") {
+		// echo "$table, $field, $value" . br();
+		if (isset($this->fields[$table][$field]['metadata_type'])) {
+			$metadata_type = $this->fields[$table][$field]['metadata_type'];
+			
+			if ($metadata_type == 'password') {
+				return '';
+			}
+		}
+		return $value;
+	}
+	
+	/**
+	 * The prep function transforms data extracted from the database into data that
+	 * can be displayed into a form or table. It takes localisation into account.
+	 * 
+	 * Input format: array (
+	 *    'table_name' => array('field_name' => 'field_value', ...))
+	 * 
+	 */
+	function prep($values, $format = "html") {
+		foreach ($values as $table => $table_values) {
+			foreach ($table_values as $field => $value) {
+				$values[$table][$field] = $this->display_field($table, $field, $value, $format);
+			}
+		}
+		return $values;
 	}
 	
 	/**

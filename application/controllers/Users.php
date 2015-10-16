@@ -31,7 +31,7 @@ class Users extends MY_Controller {
 	
 	var $default_table = 'ciauth_user_accounts';
 	var $controller = 'users';
-	var $table_fields = array('username', 'email', '__edit', '__delete');
+	var $table_fields = array('username', 'email', 'password', '__edit', '__delete');
 	var $form_fields = array('email', 'username', 'password', 'confirm-password');
 	
 	/**
@@ -41,8 +41,20 @@ class Users extends MY_Controller {
 		parent :: __construct();
 		// specific initialization
 		$this->load->model('crud_model', 'model');
+		$this->load->model("m_ciauth");
 	}	
 		
+	/**
+	 * Add a new element
+	 */
+	public function add($data = array()) {
+		
+		$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+		$this->m_ciauth->add_user_account($data);
+		
+		redirect(controller_url($this->controller));
+	}
+	
 	/**
 	 * Display a form to create a new element
 	 */
@@ -73,7 +85,7 @@ class Users extends MY_Controller {
 		}
 		else
 		{
-			$this->form_validation->set_message('username_check', 'The {field} field can not be the word "test"');
+			$this->form_validation->set_message('password', 'The {field} length must be at least 5');
 			return FALSE;
 		}
 	}

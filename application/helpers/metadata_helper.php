@@ -118,7 +118,7 @@ if (! function_exists ( 'datatable' )) {
 					$row [] = delete_button ( $controller, $id, $image);
 				} else {
 					// regular data field
-					$row [] = $elt [$field];
+					$row [] = $CI->metadata->display_field($table, $field, $elt [$field]);
 				}
 			}
 			// Add actions and special field

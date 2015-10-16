@@ -135,8 +135,8 @@ class MY_Controller extends CI_Controller {
 		// load data
 		$id_field = table_key($this->default_table);
 	
-		$values = array($this->default_table =>
-				$this->model->get_by_id($this->default_table, $id_field, $id));
+		$values = $this->metadata->prep(array($this->default_table =>
+				$this->model->get_by_id($this->default_table, $id_field, $id)));
 	
 		$data = $this->init_form("edit", $id);
 		$data['values'] = $values;
@@ -144,6 +144,17 @@ class MY_Controller extends CI_Controller {
 		$this->load->view('default_form', $data);
 	}
 
+	/**
+	 * Reload the form after validation errors
+	 * 
+	 * @param unknown $action
+	 */
+	protected function reload_form($action) {
+		$data = $this->init_form($action);
+		$data['values'] = array();
+		$this->load->view('default_form', $data);
+	}
+	
 	/**
 	 * Display a form to edit an existing element
 	 * @param unknown $id
@@ -157,20 +168,16 @@ class MY_Controller extends CI_Controller {
 			$rules = rules($this->default_table, $field, $action);
 			// echo "name=$name, label=$label, rules=$rules";
 			
-			// On some fields like password on edit, some rules must be applied only
-			// if the field is set.
 			if ($rules) {
 				$this->form_validation->set_rules($name, $label, $rules);
 			}
 		}	
 	
+		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 		if ($this->form_validation->run() == FALSE) {
 			// invalid input, reload the form
-	
-			$data = $this->init_form($action);
-			$data['values'] = array();
-			$this->load->view('default_form', $data);
-				
+			$this->reload_form($action);
+					
 		} else {
 			# successful validation
 			$values = array();
