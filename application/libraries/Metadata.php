@@ -58,6 +58,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Metadata {
 	protected $CI;
 	protected $table_exist; 	# database metadata
+	protected $table_keys;   	# database metadata
 	protected $fields_list;     # database metadata
 	protected $field_data;      # database metadata
 	protected $fields;	        # additional metadata
@@ -73,6 +74,7 @@ class Metadata {
 		
 		# initialize the caches
 		$this->table_exist = array();
+		$this->table_keys = array();
 		$this->fields_list = array();
 		$this->field_data = array();
 		$this->init();
@@ -187,6 +189,9 @@ class Metadata {
 				 */
 				foreach ($fields as $field) {
 					$this->field_data[$table][$field->name] = $field;
+					if ($field->primary_key) {
+						$this->table_keys[$table] = $field->name;
+					}
 				}				
 			}
 		}
@@ -341,12 +346,16 @@ class Metadata {
 	 * TODO: get the information from database
 	 */
 	function table_key($table) {
-		$key = array(
-			'ciauth_user_accounts' => 'username',
-			'ciauth_user_privileges' => 'privilege_id'
-		);
+		if (!$this->table_exists($table)) {
+			return '';
+		}
+		return $this->table_keys[$table];
+// 		$key = array(
+// 			'ciauth_user_accounts' => 'username',
+// 			'ciauth_user_privileges' => 'privilege_id'
+// 		);
 	
-		return $key[$table];
+// 		return $key[$table];
 	}
 	
 	protected function add_rule(&$rule, $new_rule) {
@@ -476,6 +485,18 @@ class Metadata {
 		// Replace default rules
 		if (isset($this->fields[$table][$field][$action . '_rules'])) {
 			$rule = $this->fields[$table][$field][$action . '_rules'];
+		}
+		
+		// remove is_unique in edit mode
+		if ($action != 'create') {
+			$splitted = preg_split('/\|/', $rule);
+			$rls = "";
+			foreach ($splitted as $rl) {
+				if (!preg_match('/is_unique/', $rl) ) {
+					$this->add_rule($rls, $rl);
+				}
+			}
+			$rule = $rls;
 		}
 		
 		$this->log("rules($table,$field) = " . $rule);

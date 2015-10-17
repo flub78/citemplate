@@ -156,8 +156,19 @@ class MY_Controller extends CI_Controller {
 	}
 	
 	/**
-	 * Display a form to edit an existing element
+	 * Validate inputs for creation or modification.
+	 * 
 	 * @param unknown $id
+	 * 
+	 * Question what do we do with the form when the key fields are 
+	 * modified ? several options are possible:
+	 * 		1) to forbid it
+	 * 		2) to reload the other elements when the key is modified (GVV for pilots and accounts)
+	 * 		3) to consider that is is a renaming and propagate the renaming
+	 * 
+	 * Option 2 is both relatively simple and convenient. So lets not do anything when a form
+	 * is validated with a key different from the inital value but rather setup an Ajax call
+	 * to reload the form when the key is changed.
 	 */
 	public function validate($action, $id = "") {
 	

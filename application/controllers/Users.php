@@ -46,12 +46,32 @@ class Users extends MY_Controller {
 		
 	/**
 	 * Add a new element
+	 * 
+	 * Special version because the password must be encoded
 	 */
 	public function add($data = array()) {
 		
 		$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 		$this->m_ciauth->add_user_account($data);
 		
+		redirect(controller_url($this->controller));
+	}
+
+	/**
+	 * Update an element
+	 * 
+	 * Special version because the password may be empty when 
+	 * it is not modified.
+	 */
+	public function update($id, $data = array()) {
+		
+		if (isset($data['password']) && ($data['password'] != "")) {
+			$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);				
+		} else {
+			unset($data['password']);
+		}
+		$id_field = table_key($this->default_table);
+		$this->model->update($this->default_table, $id_field, $data, $id);
 		redirect(controller_url($this->controller));
 	}
 	
@@ -79,7 +99,7 @@ class Users extends MY_Controller {
 	 */
 	public function null_or_min_length($str, $size)
 	{
-		if ($str == '' or lenght($str) >= $size)
+		if ($str == '' or strlen($str) >= $size)
 		{
 			return TRUE;
 		}
