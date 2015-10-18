@@ -143,6 +143,18 @@ if (! function_exists ( 'table_title' )) {
 	}
 }
 
+if (! function_exists ( 'element_default_values' )) {
+	/**
+	 * Return the default values for a table row
+	 *
+	 * @param unknown_type $table
+	 */
+	function element_default_values($table) {
+		$CI = & get_instance();
+		return $CI->metadata->element_default_values($table);
+	}
+}
+
 if (! function_exists ( 'form_title' )) {
 	/**
 	 * Return the title for a form

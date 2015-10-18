@@ -13,6 +13,7 @@ class Rights_test extends TestCase
 
 	public function setUp()
 	{
+		parent :: __construct();
 		$this->resetInstance();
 		$this->CI->ciauth->login('testuser', 'testuser', true);
 

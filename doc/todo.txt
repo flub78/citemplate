@@ -45,6 +45,7 @@ Done:
         - create first form based on metadata
         - create first table based on metadata
         - Add actions on table view
+        - password, confirm-password
     * Submit button labels 
         (Valider, Créer, Créer et continuer)
         Validate, Create, Create and continue, Register
@@ -52,11 +53,15 @@ Done:
 Todo:
     * Internationalization
         - datatables
+        - form validation
     * Metadata
         * second CRUD (users)
+            * default values on create
+            * unit tests
+            * French translation
             * forgotten password
+            
         * jointure
-        * password, confirm-password
         * date
         * currency
         * attachement, pictures

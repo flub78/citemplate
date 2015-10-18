@@ -50,7 +50,7 @@ class Users extends MY_Controller {
 	 * Special version because the password must be encoded
 	 */
 	public function add($data = array()) {
-		
+		echo "creating user :" . var_export($data, true);
 		$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 		$this->m_ciauth->add_user_account($data);
 		
@@ -85,7 +85,7 @@ class Users extends MY_Controller {
 		$data['controller'] = $this->controller;
 		$data['action'] = "create";
 		$data['table'] = $this->default_table;
-		$data['values'] = array();
+		$data['values'] = element_default_values($this->default_table);
 		$data['error_msg'] = "";
 		$data['submit_label'] = 'button_submit_register';
 		$this->load->view('default_form', $data);

@@ -115,7 +115,7 @@ class Metadata {
 			'class' => 'form-control',
             'size' => '25',
 			'edit_rules' => 'trim|callback_null_or_min_length[5]',
-			'create_rules' => 'trim|min_length[5]'
+			'create_rules' => 'required|trim|min_length[5]'
         );
 		// confirm-password is not a real database field
 		$this->fields['ciauth_user_accounts']['confirm-password'] = array(
@@ -283,10 +283,12 @@ class Metadata {
 	 */
 	function field_default($table, $field) {
 		if (!$this->field_exists($table, $field)) {
-			throw new Exception("Field $field does not exist in table $table");
+			return '';
 		}
-		$default = $this->field_data[$table][$field]->default;
-		return $default;
+		if (isset($this->field_data[$table][$field]->default)) {
+			return $this->field_data[$table][$field]->default;
+		}
+		return '';
 	}
 	
 
@@ -356,6 +358,21 @@ class Metadata {
 // 		);
 	
 // 		return $key[$table];
+	}
+	
+	/**
+	 * Return the default values for an element
+	 * @param unknown $table
+	 */
+	function element_default_values($table) {
+		if (!$this->table_exists($table)) {
+			return array();
+		}
+		$values = array();
+		foreach ($this->fields_list($table) as $field) {
+			$values[$field] = $this->field_default($table, $field);
+		}
+		return array($table => $values);
 	}
 	
 	protected function add_rule(&$rule, $new_rule) {
