@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 <?php
 /**
  *    Project {$PROJECT}
@@ -23,7 +16,7 @@
  *    You should have received a copy of the GNU General Public License
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @filesource Crud_model.php
+ * @filesource Users_model.php
  * @package model
  * 
  * The CRUD model is a standard model for CRUD access. All its implementation
@@ -31,7 +24,7 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Rights_model extends MY_Model {
+class Users_model extends MY_Model {
 
 	/**
 	 * This string identifies an element in human readable maned.
@@ -39,9 +32,9 @@ class Rights_model extends MY_Model {
 	 * @param $key identifiant de la ligne à représenter
 	 */
 	public function image($table, $key) {
-		$vals = $this->get_by_id($table, 'privilege_id', $key);
+		$vals = $this->get_by_id($table, 'user_id', $key);
 		// var_dump($vals);
-		$img = (isset($vals['privilege_name'])) ? $vals['privilege_name'] : $key;
+		$img = (isset($vals['username'])) ? $vals['username'] : $key;
 		return $img;
 	}
 	

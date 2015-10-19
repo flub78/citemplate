@@ -1,6 +1,6 @@
 <?php
 /*
- * CITemplate Frenche translation
+ * CITemplate French translation
 */
 
 $lang['language'] = "french";	// must match value in config.php
@@ -11,6 +11,39 @@ $lang['app_title'] = "Bienvenue des cette application WEB!!!";
 
 # Menus
 $lang['Dev'] = "Développement";
+$lang["Admin"] = "Administration";
+$lang["Config"] = "Configuration";
+$lang["Database"] = "Base de Données";
+$lang["Backup"] = "Sauvegarde";
+$lang["Restore"] = "Restauration";
+// $lang["Migration"] = "";
+$lang["Lock"] = "Vérouiller";
+$lang["Users"] = "Utilisateurs";
+$lang["Rights"] = "Droits";
+// $lang["info"] = "";
+// $lang["PhpInfo"] = "";
+// $lang["Bootstrap"] = "";
+// $lang["Basic"] = "";
+// $lang["Blog"] = "";
+// $lang["Carousel"] = "";
+// $lang["Cover"] = "";
+// $lang["Dashboard"] = "";
+// $lang["Grids"] = "";
+// $lang["jumbotron"] = "";
+// $lang["narrow_jumbotron"] = "";
+// $lang["sign_in"] = "";
+// $lang["sticky_footer_with_navbar"] = "";
+// $lang["Theme"] = "";
+// $lang["CodeIgniter"] = "";
+// $lang["Metadata"] = "";
+// $lang["CIAuth demo"] = "";
+$lang["Check French"] = "Vérification du Français";
+$lang["Users"] = "Utilisateurs";
+$lang["List"] = "Liste";
+$lang["Create"] = "Nouveau";
+$lang["Stats"] = "Statistiques";
+$lang["Help"] = "";
+$lang["About"] = "";
 
 # Login
 $lang['login_title'] = "Connectez vous.";
@@ -19,6 +52,7 @@ $lang['login_password_label'] = "Mot de passe";
 $lang['login_remember_me_label'] = "Ce souvenir de moi";
 $lang['login_sign_in_button'] = "Connexion";
 $lang['login_welcome'] = "Bienvenue";
+$lang['Please Register'] = "Enregistrez vous";
 
 $lang['error_user_not_found'] = "Mot de passe ou identifiant inconnu.";
 
@@ -30,9 +64,14 @@ $lang['button_cancel'] = "Abandon";
 $lang['button_clone'] = "Clone";
 $lang['button_new'] = "Nouveau";
 $lang['button_edit'] = "Edite";
+$lang['button_submit_edit'] = "Valider";
+$lang['button_submit_create'] = "Valider";
+$lang['button_submit_register'] = "Enregistrer";
 $lang['delete_confirm'] = "Suppression de";
 
-// ciauth_user_privileges
+/**
+ * ciauth_user_privileges
+ */
 $lang['title_ciauth_user_privileges'] = "Privilèges";
 $lang['title_ciauth_user_privileges_form'] = "Privilège";
 $lang['title_ciauth_user_privileges_create'] = "Nouveau privilège";
@@ -43,16 +82,23 @@ $lang['heading_privilege_description'] = "Description";
 $lang['placeholder_ciauth_user_privileges_privilege_description'] = "Description";
 $lang['label_ciauth_user_privileges_privilege_description'] = "Description";
 
+/**
+ * ciauth_user_accounts
+ */
 $lang['placeholder_ciauth_user_accounts_email'] = "Courriel";
 $lang['placeholder_ciauth_user_accounts_username'] = "Nom";
 $lang['placeholder_ciauth_user_accounts_password'] = "Mot de passe";
 $lang['placeholder_ciauth_user_accounts_confirm-password'] = "Confirmez le mot de passe";
 
-// ciauth_user_accounts
 $lang['title_ciauth_user_accounts'] = "Utilisateurs";
 $lang['title_ciauth_user_accounts_form'] = "Utilisateur";
 $lang['title_ciauth_user_accounts_create'] = "Nouvel utilisateur";
 
 $lang['heading_email'] = "Courriel";
 $lang['heading_username'] = "Nom";
+$lang['heading_password'] = "Mot de passe";
+$lang['heading_creation_date'] = "Crée le";
+$lang['heading_last_login'] = "Dernière connexion";
+$lang['heading_admin'] = "Administrateur";
 
+ 

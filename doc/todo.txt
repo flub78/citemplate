@@ -46,6 +46,7 @@ Done:
         - create first table based on metadata
         - Add actions on table view
         - password, confirm-password
+        - French translation
     * Submit button labels 
         (Valider, Créer, Créer et continuer)
         Validate, Create, Create and continue, Register
@@ -56,9 +57,8 @@ Todo:
         - form validation
     * Metadata
         * second CRUD (users)
-            * default values on create
+            * default values on create (understand why last login is used)
             * unit tests
-            * French translation
             * forgotten password
             
         * jointure

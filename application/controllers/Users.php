@@ -31,7 +31,7 @@ class Users extends MY_Controller {
 	
 	var $default_table = 'ciauth_user_accounts';
 	var $controller = 'users';
-	var $table_fields = array('username', 'email', 'password', '__edit', '__delete');
+	var $table_fields = array('username', 'email', 'creation_date', 'last_login', 'admin', '__edit', '__delete');
 	var $form_fields = array('email', 'username', 'password', 'confirm-password');
 	
 	/**
@@ -40,7 +40,7 @@ class Users extends MY_Controller {
 	function __construct() {
 		parent :: __construct();
 		// specific initialization
-		$this->load->model('crud_model', 'model');
+		$this->load->model('users_model', 'model');
 		$this->load->model("m_ciauth");
 	}	
 		
