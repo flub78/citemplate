@@ -484,15 +484,12 @@ class Meta {
 	 * @param $format
 	 */
 	function display_field($table, $field, $value, $format = "html") {
-// 		echo "$table, $field, $value" . br();
+
+		$db_type = $this->field_db_type($table, $field);
 		
-// 		if ($this->table_exists($table)) {
-// 			echo "db_type = " . $this->field_db_type($table, $field) . br();
-// 		}
-		
+			
 		if (isset($this->fields[$table][$field]['metadata_type'])) {
 			$metadata_type = $this->fields[$table][$field]['metadata_type'];
-// 			echo "metadata_type = $metadata_type" . br();
 			
 			if ($metadata_type == 'password') {
 				return '';
@@ -512,7 +509,22 @@ class Meta {
 					}
 				}
 			}
+			
 		}
+		
+		/*
+		 * Mysql handels several time related types:
+		 *    DATE: date without time part
+		 *    DATETIME: dates with time part, range '1000-01-01 00:00:00' to '999-12-31 23:59:59'
+		 *    TIMESTAMP: dates with time part, Unix range '1970-01-01 00:00:01' to '2038-01-19 03:14:07' UTC
+		 *    TIME: time of the day or result of DATETIME difference.
+		 *    
+		 *    TIMESTAMPs are stored in UTC but converted to local when retrieved.
+		 */
+		if ($db_type == 'timestamp') {
+			return date("d/m/Y h:i:s", strtotime($value));
+		}
+		
 		return $value;
 	}
 	
