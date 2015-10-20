@@ -103,7 +103,7 @@ class Meta {
 		$CI = & get_instance ();
 		
 		$list = array (
-			'ciauth_user_accounts' => array ('email', 'username', 'password', 'confirm-password'),
+			'ciauth_user_accounts' => array ('email', 'username', 'password', 'confirm-password', 'creation_date', 'last_login', 'admin'),
 			'ciauth_user_privileges' => array('privilege_name', 'privilege_description')
 		);
 		return $list[$table];
@@ -522,10 +522,63 @@ class Meta {
 		 *    TIMESTAMPs are stored in UTC but converted to local when retrieved.
 		 */
 		if ($db_type == 'timestamp') {
-			return date("d/m/Y h:i:s", strtotime($value));
+			$format = "Y-m-s h:i:s";
+			$translated = $this->CI->lang->line('format_timestamp');
+			if ($translated) {
+				$format = $translated;
+			}
+			return date($format, strtotime($value));
 		}
 		
 		return $value;
+	}
+
+	/**
+	 * Generate a form field input
+	 * 
+	 * @param unknown $table
+	 * @param unknown $field
+	 * @param unknown $value
+	 * @param $format
+	 */
+	function field_input($table, $field, $value = '', $attrs = array()) {
+				
+		$type = $this->field_type ($table, $field);
+		$name = $this->field_name ($table, $field);
+		$id = $this->field_id ($table, $field);
+		# $db_type = $this->field_db_type ($table, $field);
+		$size = $this->field_size ($table, $field);
+		$placeholder = $this->field_placeholder ($table, $field);
+		
+		$info = "field_input($table, $field) ";
+		$info .= "type=$type, size=$size, placeholder=$placeholder";		
+		$this->log($info);
+		
+		// The first time used $value, then re-populate from the form
+		$value = set_value($name, $value);
+		
+		// TODO: use form_input
+		$input = '<input';
+		if ($type) {
+			$input .= " type=\"$type\"";
+		}
+		if ($name) {
+			$input .= " name=\"$name\"";
+		}
+		if ($id) {
+			$input .= " id=\"$id\"";
+		}
+		$input .= " class=\"form-control\"";
+		$input .= " value=\"$value\"";
+		if ($placeholder) {
+			$input .= " placeholder=\"$placeholder\"";
+		}
+		if ($size) {
+			$input .= " size=\"$size\"";
+		}
+		
+		$input .= ' />';
+		return $input;
 	}
 	
 	/**

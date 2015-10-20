@@ -101,4 +101,4 @@ $lang['heading_creation_date'] = "Crée le";
 $lang['heading_last_login'] = "Dernière connexion";
 $lang['heading_admin'] = "Administrateur";
 
- 
+$lang['format_timestamp'] = "d/m/Y h:i:s";

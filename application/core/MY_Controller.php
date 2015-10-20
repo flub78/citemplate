@@ -124,6 +124,7 @@ class MY_Controller extends CI_Controller {
 	public function create() {
 		$data = $this->init_form("create");
 		$data['values'] = array();		# TODO should be default values
+		$data['field_list'] = $this->metadata->form_field_list($this->default_table);
 		$this->load->view('default_form', $data);
 	}
 	
@@ -140,6 +141,7 @@ class MY_Controller extends CI_Controller {
 	
 		$data = $this->init_form("edit", $id);
 		$data['values'] = $values;
+		$data['field_list'] = $this->metadata->form_field_list($this->default_table);
 		
 		$this->load->view('default_form', $data);
 	}

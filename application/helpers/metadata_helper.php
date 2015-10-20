@@ -242,43 +242,8 @@ if (! function_exists ( 'field_input' )) {
 	 */
 	function field_input($table, $field, $value = '', $attrs = array()) {
 		$CI = & get_instance ();
-				
-		$type = $CI->metadata->field_type ($table, $field);
-		$name = $CI->metadata->field_name ($table, $field);
-		$id = $CI->metadata->field_id ($table, $field);
-		# $db_type = $CI->metadata->field_db_type ($table, $field);
-		$size = $CI->metadata->field_size ($table, $field);
-		$placeholder = $CI->metadata->field_placeholder ($table, $field);
 		
-		$info = "field_input($table, $field) ";
-		$info .= "type=$type, size=$size, placeholder=$placeholder";		
-		$CI->metadata->log($info);
-		
-		// The first time used $value, then re-populate from the form
-		$value = set_value($name, $value);
-		
-		// TODO: use form_input
-		$input = '<input';
-		if ($type) {
-			$input .= " type=\"$type\"";
-		}
-		if ($name) {
-			$input .= " name=\"$name\"";
-		}
-		if ($id) {
-			$input .= " id=\"$id\"";
-		}
-		$input .= " class=\"form-control\"";
-		$input .= " value=\"$value\"";
-		if ($placeholder) {
-			$input .= " placeholder=\"$placeholder\"";
-		}
-		if ($size) {
-			$input .= " size=\"$size\"";
-		}
-		
-		$input .= ' />';
-		return $input;
+		return $CI->metadata->field_input($table, $field, $value, $attrs);
 	}
 }
 
@@ -304,9 +269,9 @@ if (! function_exists ( 'form' )) {
 	 * @param unknown_type $attrs        	
 	 * @return string
 	 */
-	function form($table, $data = array(), $attrs = array()) {
+	function form($table, $field_list, $data = array(), $attrs = array()) {
 		$res = "";
-		foreach ( form_field_list ( $table ) as $field ) {
+		foreach ($field_list  as $field ) {
 			$value = (isset($data[$table][$field])) ? $data[$table][$field] : "";
 			$res .= tabs ( 4 ) . field_label ( $table, $field ) . field_input ( $table, $field, $value) . "\n";
 		}

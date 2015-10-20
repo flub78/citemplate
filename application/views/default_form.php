@@ -47,7 +47,7 @@
 				<?= form_open($controller . "/validate/$action", array("class" => "form-register")); ?>
 				
 					<h2 class="form-heading"><?= isset($title) ? $title : "" ?></h2>
-					<?= form($table, $values);?>
+					<?= form($table, $field_list, $values);?>
 					<div id='message'></div>
 					<p>&nbsp;</p>
 					<?= submit(translation($submit_label)); ?>
