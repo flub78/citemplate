@@ -183,10 +183,15 @@ class Meta {
 	 * @return string
 	 */
 	function field_db_type($table, $field) {
-		if (!$this->table_exists($table)) {throw new Exception("Table $table does not exist");}
-		$type = $this->field_data[$table][$field]->type;
-		// var_dump($type);
-		return $type;
+		if (!$this->table_exists($table)) {
+			return '';
+		}
+		
+		if (isset($this->field_data[$table][$field]->type)) {
+			return $this->field_data[$table][$field]->type;
+		} else {
+			return '';
+		}
 	}
 	
 	
@@ -546,7 +551,7 @@ class Meta {
 		$type = $this->field_type ($table, $field);
 		$name = $this->field_name ($table, $field);
 		$id = $this->field_id ($table, $field);
-		# $db_type = $this->field_db_type ($table, $field);
+		$db_type = $this->field_db_type ($table, $field);
 		$size = $this->field_size ($table, $field);
 		$placeholder = $this->field_placeholder ($table, $field);
 		
