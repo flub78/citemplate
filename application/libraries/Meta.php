@@ -52,6 +52,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           public 'auto_increment' => int 1
           public 'allow_null' => boolean false
  *
+ * Supported metadata types:
+ *    
+ *    boolean:
+ *       - display with a tick in tables
+ *       - checkbox for inputs
+ *       
+ *    date:
+ *    time:
+ *    timestamp:
+ *       - http://trentrichardson.com/examples/timepicker/
+ *    datetime:
+ *    
+ *    email:
+ *    password:
+ *    password-confirm:
+ *    keys:
+ *    
  * @author frederic
  *
  */
@@ -594,7 +611,24 @@ class Meta {
 		if ($id) {
 			$input .= " id=\"$id\"";
 		}
-		$input .= " class=\"form-control\"";
+		$class = 'form-control';
+		if ($db_type == 'date') {
+			$class .= ' date';			
+		}
+		if ($db_type == 'time') {
+			$class .= ' time';
+		}
+		if ($db_type == 'datetime') {
+			$class .= ' datetime';
+		}
+		if ($db_type == 'timestamp') {
+			$class .= ' timestamp';
+		}
+		if ($type) {
+			$class .= ' ' . $type;
+		}
+		
+		$input .= " class=\"$class\"";
 		$input .= " value=\"$value\"";
 		if ($placeholder) {
 			$input .= " placeholder=\"$placeholder\"";

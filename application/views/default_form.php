@@ -63,5 +63,7 @@
 	</footer>
 	<!-- /.container -->
 
+    <?= script(base_url() . '/js/project.js')?>
+    
 </body>
 </html>

@@ -42,4 +42,8 @@
 
  	<?= script(base_url() . '/components/DataTables/datatables.js')?>
  	<?= script(base_url() . '/components/DataTables/DataTables-1.10.9/js/dataTables.bootstrap.js')?>
+ 	<?= script(base_url() . '/components/jquery-ui/jquery-ui.min.js')?>
+ 	
+ 	<?= script(base_url() . '/js/jquery-ui-timepicker-addon.js')?>
+ 	
  	

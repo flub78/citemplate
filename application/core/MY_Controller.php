@@ -187,7 +187,7 @@ class MY_Controller extends CI_Controller {
 		}	
 	
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-		var_dump($_POST);
+		// var_dump($_POST);
 		if ($this->form_validation->run() == FALSE) {
 			// invalid input, reload the form
 			$this->reload_form($action);

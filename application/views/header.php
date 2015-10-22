@@ -41,6 +41,7 @@
     <!-- Custom styles for this template -->
     <?= link_tag(bootstrap_css('sticky-footer-navbar'));?>
     <?= link_tag(project_css('project'));?>
+    <?= link_tag(project_css('jquery-ui-timepicker-addon'));?>
     
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -57,5 +58,11 @@
 	<?= link_tag(bootstrap_css('menu'));?>
 	<?= link_tag(base_url() . '/components/DataTables/datatables.css');?>
 	<?= link_tag(base_url() . '/components/DataTables/DataTables-1.10.9/css/dataTables.bootstrap.css');?>
+
+	<?= link_tag(base_url() . '/components/jquery-ui/jquery-ui.min.css');?>
+	<?= link_tag(base_url() . '/components/jquery-ui/jquery-ui.structure.min.css');?>
+	<?= link_tag(base_url() . '/components/jquery-ui/jquery-ui.theme.min.css');?>
+	
+	
 	
     
