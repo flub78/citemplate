@@ -436,8 +436,14 @@ class Meta {
 				$meta = $this->field_data[$table][$field];
 				// var_dump($meta);
 				
+				$metadata_type = (isset($this->fields[$table][$field]['metadata_type'])) ?
+						$this->fields[$table][$field]['metadata_type'] :
+						'';
+				
 				if (!$meta->allow_null) {
-					$this->add_rule($rule, 'required');
+					if ($metadata_type != 'boolean') {
+						$this->add_rule($rule, 'required');
+					}
 				}
 				if (array_key_exists('max_length', $meta) && $meta->max_length) {
 					$rl = 'max_length[' .  $meta->max_length . ']';
@@ -445,6 +451,8 @@ class Meta {
 				}
 			}
 		}
+		
+		
 		
 		// additional rules deduced from metadata types
 		if (isset($this->fields[$table][$field]['metadata_type'])) {
@@ -483,6 +491,9 @@ class Meta {
 	
 	/**
 	 * Transform a field from the database into something suitable for display
+	 * 
+	 * So it mainly takes formating and languages into account.
+	 * 
 	 * @param unknown $table
 	 * @param unknown $field
 	 * @param unknown $value
@@ -508,9 +519,9 @@ class Meta {
 					}
 				} else {
 					if ($value) {
-						return 'true';
+						return 1;
 					} else {
-						return 'false';
+						return 0;
 					}
 				}
 			}
@@ -561,6 +572,16 @@ class Meta {
 		
 		// The first time used $value, then re-populate from the form
 		$value = set_value($name, $value);
+		
+		if ($type == 'boolean') {
+			return nbs() . form_checkbox(array (
+					'name' => $field,
+					'id' => $field,
+					'value' => 1,
+					'checked' => (0 != $value)
+			));
+		
+		}
 		
 		// TODO: use form_input
 		$input = '<input';

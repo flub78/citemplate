@@ -46,6 +46,17 @@ $lang['heading_privilege_description'] = "Description";
 $lang['placeholder_ciauth_user_privileges_privilege_description'] = "Privilege description";
 $lang['label_ciauth_user_privileges_privilege_description'] = "Privilege description";
 
+
+/*
+ * ciauth_user_accounts
+ */
+$lang['title_ciauth_user_accounts'] = "Users";
+$lang['title_ciauth_user_accounts_form'] = "User";
+$lang['title_ciauth_user_accounts_create'] = "Create user";
+
+$lang['heading_email'] = "Email address";
+$lang['heading_username'] = "User name";
+
 $lang['placeholder_ciauth_user_accounts_email'] = "Email address";
 $lang['placeholder_ciauth_user_accounts_username'] = "User name";
 $lang['placeholder_ciauth_user_accounts_password'] = "Password";
@@ -55,12 +66,6 @@ $lang['label_ciauth_user_accounts_email'] = "Email address";
 $lang['label_ciauth_user_accounts_username'] = "User name";
 $lang['label_ciauth_user_accounts_password'] = "Password";
 $lang['label_ciauth_user_accounts_confirm-password'] = "Confirm Password";
-
-// ciauth_user_accounts
-$lang['title_ciauth_user_accounts'] = "Users";
-$lang['title_ciauth_user_accounts_form'] = "User";
-$lang['title_ciauth_user_accounts_create'] = "Create user";
-
-$lang['heading_email'] = "Email address";
-$lang['heading_username'] = "User name";
-
+$lang['label_ciauth_user_accounts_creation_date'] = "Creation date";
+$lang['label_ciauth_user_accounts_last_login'] = "Last login";
+$lang['label_ciauth_user_accounts_admin'] = "Administrator";

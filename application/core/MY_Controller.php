@@ -137,7 +137,7 @@ class MY_Controller extends CI_Controller {
 		$id_field = table_key($this->default_table);
 	
 		$values = $this->metadata->prep(array($this->default_table =>
-				$this->model->get_by_id($this->default_table, $id_field, $id)));
+				$this->model->get_by_id($this->default_table, $id_field, $id)), 'input');
 	
 		$data = $this->init_form("edit", $id);
 		$data['values'] = $values;
@@ -187,7 +187,7 @@ class MY_Controller extends CI_Controller {
 		}	
 	
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-		// var_dump($_POST);
+		var_dump($_POST);
 		if ($this->form_validation->run() == FALSE) {
 			// invalid input, reload the form
 			$this->reload_form($action);
