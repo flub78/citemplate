@@ -5,5 +5,6 @@ $(document).ready(function(){
  
     $( ".date" ).datepicker({changeYear: true, yearRange: "1930:2030"});
     $('.timestamp').datetimepicker();
+    $('.timestamp3').datepicker();
 
 });

@@ -32,7 +32,8 @@ class Users extends MY_Controller {
 	var $default_table = 'ciauth_user_accounts';
 	var $controller = 'users';
 	var $table_fields = array('username', 'email', 'creation_date', 'last_login', 'admin', '__edit', '__delete');
-	var $form_fields = array('email', 'username', 'password', 'confirm-password', 'creation_date', 'last_login', 'admin');
+	// var $form_fields = array('email', 'username', 'password', 'confirm-password', 'creation_date', 'last_login', 'admin');
+	var $form_fields = array('email', 'username', 'password', 'confirm-password');
 	
 	/**
 	 * Constructor

@@ -109,6 +109,7 @@ class MY_Controller extends CI_Controller {
 		$data['controller'] = $this->controller;
 		$data['action'] = ($id) ? "$action/$id" : $action;
 		$data['table'] = $this->default_table;
+		$data['field_list'] = $this->form_fields; // Different field list depending on the context ?
 		$data['error_msg'] = "";
 		if ($action == 'create') {
 			$data['submit_label'] = 'button_submit_create';
