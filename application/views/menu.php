@@ -131,15 +131,15 @@ $menu_database = array (
 		'submenu' => array (
 				array (
 						'label' => "Backup",
-						'url' => controller_url ( "database/backup" )
+						'url' => controller_url ( "databaseMgt/backup" )
 				),
 				array (
 						'label' => "Restore",
-						'url' => controller_url ( "database/restore" )
+						'url' => controller_url ( "databaseMgt/restore" )
 				),
 				array (
 						'label' => "Migration",
-						'url' => controller_url ( "database/migration" )
+						'url' => controller_url ( "databaseMgt/migration" )
 				)
 		)				
 );

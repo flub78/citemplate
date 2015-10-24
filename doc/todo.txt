@@ -54,13 +54,12 @@ Done:
 Todo:
     * Internationalization
         - datatables
-        - form validation
+        - form validation error messages
+    * Database save, restore and migrations
     * Metadata
         * second CRUD (users)
             * default values on create (understand why last login is used)
-            * unit tests
-            * forgotten password
-            
+            * unit tests            
         * jointure
         * date
         * currency
@@ -68,9 +67,13 @@ Todo:
         * Automated filtering
         
     * Bootstrap tutorial
-    * Datatables tutorial    
-    * Database save and restore
+
+    * Datatables 
+        - tutorial
+        - ajax pagination
+            
     * Rights management
+        - forgotten password
         - url access
         - changement de mot de passe
     * Google calendar

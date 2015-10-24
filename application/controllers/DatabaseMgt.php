@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author frederic
  *
  */
-class Database extends MY_Controller {
+class DatabaseMgt extends MY_Controller {
 
 	var $logger;
 	
@@ -35,29 +35,29 @@ class Database extends MY_Controller {
 	 */
 	function __construct() {
 		parent :: __construct();
-		$this->load->library('Database');
+		$this->load->library('database');
 	}
 	
 	/**
 	 * Save the database
-	 * @param $action = backup|structure|default
+	 * @param $type = backup|structure|default
 	 */
-	function backup ($action = 'backup') {
-		echo "database backup";
+	function backup ($type = 'backup') {
+		$this->database->backup($type);
 	}	
 
 	/**
 	 * Restore the database
 	 */
 	function restore () {
-	
+		echo "database restore";
 	}
 
 	/**
 	 * Migration of the database
 	 */
 	function migration() {
-	
+		echo "migration";
 	}
 	
 	

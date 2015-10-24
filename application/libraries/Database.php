@@ -32,29 +32,26 @@ class Database  {
 	// on top of the list.
 	// So everything which is referenced by another table must be above the referencing table
 
-	protected $gvv_tables = array(
-			'roles',
-			'permissions',
-			'users',
-			'user_autologin',
-			'user_profile',
-			'user_temp'
-				
+	protected $application_tables = array (
+			'ciauth_navigation',
+			'ciauth_sessions',
+			'ciauth_user_accounts',
+			'ciauth_user_groups',
+			'ciauth_user_privileges',
+			'ciauth_user_privileges_groups',
+			'ciauth_user_privileges_users',
+			'ciauth_user_profiles',
+			'ciauth_user_token' 
 	);
 
 	protected $table_list;
-
+		
 	protected $defaut_list = array (
-			'roles',
-			'permissions',
-			'planc',
-			'events_types',
-			'terrains',
-			'type_ticket',
-			'reports',
-			'migrations'
+			'ciauth_navigation',
+			'ciauth_user_privileges'
 	);
-
+	
+	
 	protected $CI;
 
 	/**
@@ -66,11 +63,8 @@ class Database  {
 		$this->CI = & get_instance();
 		$this->CI->load->dbforge();
 
-		$this->table_list = array_merge (array (
-				'ci_sessions',
-				'login_attempts'),
-
-				$this->gvv_tables
+		$this->table_list = array_merge (array (),
+				$this->application_tables
 		);
 	}
 
@@ -88,7 +82,7 @@ class Database  {
 		 
 		$dt = date("Y_m_d");
 		$format = 'zip';
-		if ($type == "") {
+		if ($type == "" | $type == 'backup') {
 			$filename = "backup_$dt.zip";
 			$add_drop = TRUE;
 			$add_insert = TRUE;
@@ -131,7 +125,7 @@ class Database  {
 	 * Drop all the tables
 	*/
 	public function drop_all () {
-		foreach ($this->gvv_tables as $table) {
+		foreach ($this->application_tables as $table) {
 			$this->CI->dbforge->drop_table($table);
 		}
 	}

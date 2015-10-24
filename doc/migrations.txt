@@ -1,0 +1,41 @@
+Installation and Migrations
+
+
+Use cases:
+
+    * Initial installation:
+    
+    as an administrator I want to start the program for the first time and
+    that it creates the tables and fill them with a minimal set of data.
+    (for example a default user so I can log on).
+    
+    When some data are mandatory for the program to work, they must be filled.
+    (for example if the admin privileges is used in the program).
+    
+    Note that initial installation can be automated (if no tables are
+    detected at startup). In this case it should do nothing if any table
+    is detected. And the reset mechanism should be protected by the
+    admin prvileges and ask for confirmation.
+    
+    
+    * Reset
+    
+    as an administrator, I want to be able to bring back the databse in 
+    the factory configuration (empty)
+    
+    * Migration
+    
+    as an administrator I want to be able to update the database to highest
+    database structure supported by the program. I also want to be able
+    to use any lower value.
+    
+    * Migration from GVV
+    
+    Is it a special case ? The migration to a full application database can
+    be the second migration of the application (if the first one is the one that set the
+    defaults).
+    
+    * No automatic migration
+    
+    If the user want to stick to one migration level on purpose, better to not prompt him each time that
+    he logs on.
