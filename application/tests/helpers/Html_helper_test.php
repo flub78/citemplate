@@ -25,8 +25,8 @@ class Html_helper_test extends TestCase
 	{
 		$actual = script('https://oss.maxcdn.com/respond/1.4.2/respond.min.js');
  		echo $actual;
- 		$ref = '<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>';
- 		$this->assertEquals($ref, $actual, $ref);
+ 		$expected = '<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>';
+ 		$this->assertEquals($expected, $actual, $expected);
  		
 	}
 	
@@ -41,5 +41,19 @@ class Html_helper_test extends TestCase
 		$this->assertEquals($expected, $actual,
 				"Translated when found, $expected == $actual"
 		);
+	}
+	
+	public function test_p() {
+		$expected = '<p></p>';
+		$res = p("");
+ 		$this->assertEquals($expected, $res, 'p("")');
+
+ 		$expected = '<p>Hello world</p>';
+ 		$res = p("Hello world");
+ 		$this->assertEquals($expected, $res, 'p("Hello world")');
+ 		
+ 		$expected = '<p class="error">Hello world</p>';
+ 		$res = p("Hello world", 'class="error"');
+ 		$this->assertEquals($expected, $res, "p(\"Hello world\", 'class=\"error\"')"); 			
 	}
 }

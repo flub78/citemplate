@@ -75,3 +75,18 @@ function tabs($nb) {
 	return $res;
 }
 }
+
+if (!function_exists('p')) {
+	/**
+	 * Generates an HTML paragraph
+	 * @param unknown_type $str
+	 * @return string
+	 */
+	function p($str, $attr = '') {
+		$res = '<p';
+		$res .= ($attr) ? " $attr" : '';
+		$res .= '>' . $str . '</p>';
+		return $res;
+	}
+}
+
