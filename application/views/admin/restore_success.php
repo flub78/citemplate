@@ -19,9 +19,9 @@
  * This view is a standard form for CRUD create and edit using bootstrap.
  * @package vues
  */
- 
+
 $this->load->view('header');
-$this->load->language('admin');
+$this->lang->load('admin');
 ?>
 <!-- Additional view specific header elements below -->
 </head>
@@ -39,31 +39,18 @@ $this->load->language('admin');
 			<nav class="col-sm-1"></nav>
 			<section class="col-sm-11">
 				<h1><?php echo isset($title) ? $title : ''; ?></h1>
-
 				<p class="error"> <?php echo isset($error) ? $error : ''; ?></p>
-				
+
 				<div class="row">
 					<article class="col-sm-12 row">
 						<div class="jumbotron">
 						
-							<?php echo isset($message) ? $message : ''; 
-							echo p(translation("admin_db_warning"), 'class="error"' );
-							echo br();
-							echo p(translation("admin_db_select"));
-							echo form_open_multipart('databaseMgt/do_restore');
-							echo '<input type="file" name="userfile" size="50" /><br><br>';
-							$checked = "";
-							if ($erase_db) {
-								$checked = ' checked="checked" ';
-							}
-							echo translation("admin_db_overwrite") . ': '
-									. "<input type=\"checkbox\" name=\"erase_db\" $checked value=\"$erase_db\" id=\"erase_db\"  />"
-									. br(2);
-							echo form_input(array('type' => 'submit', 'name' => 'button', 'value' => translation("button_validate")));
-							echo form_close('</div>');					
-							
-							?>
-							
+						<?php echo isset($message) ? p($message) : ''; 
+
+echo heading($this->lang->line("admin_title_restore"), 3);
+
+echo $this->lang->line("admin_db_success") . " " . $file_name . "<br>";
+?>							
 						</div>
 
 					</article>

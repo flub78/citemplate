@@ -51,7 +51,7 @@ class DatabaseMgt extends MY_Controller {
 	 */
 	function restore () {
 		$error = array (
-            'error' => 'Ca marche pas',
+            'error' => '',
 			'erase_db' => 1,
 			'title' => 'Restore database'
             );
@@ -112,8 +112,9 @@ class DatabaseMgt extends MY_Controller {
 			// remove the uncompressed file
 			unlink($sqlfile);
 			// remove the zip file
-			$this->unlink_zip($filename);
-	
+			// $this->unlink_zip($filename);
+			unlink($filename);
+			
 			if ($erase_db) {
 				$this->database->drop_all();
 			}

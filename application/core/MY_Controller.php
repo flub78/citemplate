@@ -114,7 +114,7 @@ class MY_Controller extends CI_Controller {
 		if ($action == 'create') {
 			$data['submit_label'] = 'button_submit_create';
 		} else {
-			$data['submit_label'] = 'button_submit_edit';				
+			$data['submit_label'] = 'button_validate';				
 		}
 		return $data;
 	}
