@@ -65,6 +65,7 @@ class TestInternational < ApplicationTest
   # --------------------------------------------------------------------------------
   def test_english
     
+    puts "#\tTest case: English"
     self.set_language('english')
     self.login('testadmin', 'testadmin')
     
@@ -84,6 +85,7 @@ class TestInternational < ApplicationTest
   # --------------------------------------------------------------------------------
   def test_french
     
+    puts "#\tTest case: French"
     self.set_language('french')
     self.login('testadmin', 'testadmin')
     

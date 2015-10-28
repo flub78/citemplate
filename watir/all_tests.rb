@@ -8,4 +8,5 @@ gem "minitest"
 
 require "./test_template.rb"
 require "./test_international.rb"
+require "./test_backup.rb"
 

@@ -31,6 +31,7 @@ class TestTemplate < ApplicationTest
   # Test test
   # --------------------------------------------------------------------------------
   def test_test
+    puts "#\tTest case: test"
     @b.goto @root_url
     screenshot('scr_test.png')
     check(true, "Vérification")

@@ -14,6 +14,11 @@ Minitest::Ci.clean = false
 
 class ApplicationTest < MiniTest::Test
   
+  # Constructor
+  def initialize(arg)
+    super
+    puts "\n# " + self.class.to_s
+  end
   
   # --------------------------------------------------------------------------------
   # Run before every test
@@ -88,7 +93,7 @@ class ApplicationTest < MiniTest::Test
   # Assert with traces
   # --------------------------------------------------------------------------------
   def check(assertion, description = "")
-    puts "\t#assert: #{description}"
+    puts "#\t\tassert: #{description}"
     assert(assertion, description)
     if (!assertion)
       self.screenshot('failed-' + DateTime.now.to_s + '-' + description)
