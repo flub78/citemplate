@@ -85,11 +85,6 @@ $lang['label_ciauth_user_privileges_privilege_description'] = "Description";
 /**
  * ciauth_user_accounts
  */
-$lang['placeholder_ciauth_user_accounts_email'] = "Courriel";
-$lang['placeholder_ciauth_user_accounts_username'] = "Nom";
-$lang['placeholder_ciauth_user_accounts_password'] = "Mot de passe";
-$lang['placeholder_ciauth_user_accounts_confirm-password'] = "Confirmez le mot de passe";
-
 $lang['title_ciauth_user_accounts'] = "Utilisateurs";
 $lang['title_ciauth_user_accounts_form'] = "Utilisateur";
 $lang['title_ciauth_user_accounts_create'] = "Nouvel utilisateur";
@@ -100,5 +95,19 @@ $lang['heading_password'] = "Mot de passe";
 $lang['heading_creation_date'] = "Crée le";
 $lang['heading_last_login'] = "Dernière connexion";
 $lang['heading_admin'] = "Administrateur";
+
+$lang['placeholder_ciauth_user_accounts_email'] = "Courriel";
+$lang['placeholder_ciauth_user_accounts_username'] = "Nom";
+$lang['placeholder_ciauth_user_accounts_password'] = "Mot de passe";
+$lang['placeholder_ciauth_user_accounts_confirm-password'] = "Confirmez le mot de passe";
+
+$lang['label_ciauth_user_accounts_email'] = "Courriel";
+$lang['label_ciauth_user_accounts_username'] = "Nom";
+$lang['label_ciauth_user_accounts_password'] = "Mot de passe";
+$lang['label_ciauth_user_accounts_confirm-password'] = "Confirmez le mot de passe";
+$lang['label_ciauth_user_accounts_creation_date'] = "Date de création";
+$lang['label_ciauth_user_accounts_last_login'] = "Dernière connexion";
+$lang['label_ciauth_user_accounts_admin'] = "Administrateur";
+
 
 $lang['format_timestamp'] = "d/m/Y h:i:s";

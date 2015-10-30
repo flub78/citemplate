@@ -40,6 +40,8 @@ Done:
     * Internationalization of the list view
         - Titles and heading
         - language comparison
+        - datatables
+        - form validation error messages
     * basic Excel and PDF export
     * Metadata
         - create first form based on metadata
@@ -53,8 +55,7 @@ Done:
         
 Todo:
     * Internationalization
-        - datatables
-        - form validation error messages
+        - Datepicker
     * Database save, restore and migrations
     * Metadata
         * second CRUD (users)

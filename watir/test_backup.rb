@@ -15,7 +15,7 @@ class TestBackup < ApplicationTest
   def setup
     super
     self.db_connect
-    # self.login('panoramix', 'password')
+    self.login('testadmin', 'testadmin')
   end
 
   # --------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ class TestBackup < ApplicationTest
   # --------------------------------------------------------------------------------
   def teardown
     self.db_disconnect
-    # self.logout()
+    self.logout()
     super
   end
 
@@ -35,22 +35,21 @@ class TestBackup < ApplicationTest
     puts "#\tTest case: backup"
     @b.goto @root_url
     screenshot('scr_test.png')
-    check(true, "Vérification")
     
     download_dir = ENV['HOME'] + '/Téléchargements'
-#    puts "download=" + download_dir   
+    download_dir = @download_directory
+    # puts "download=" + download_dir   
     
     check(File.directory?(download_dir), "download dir #{download_dir} exists")
     
     d = DateTime.now
     pattern = d.strftime("backup_%Y_%m_%d")
-    puts "pattern=#{pattern}"
     
     pwd = Dir.getwd
     Dir.chdir(download_dir)   #=> 0
     
     files = Dir.glob("#{pattern}*.zip")
-    puts files
+    # puts files
     
     count = files.count
     files.each do |file|
@@ -62,13 +61,13 @@ class TestBackup < ApplicationTest
     check(count == 0, "previous backups have been deleted")
     
     url = @root_url + 'databaseMgt/backup'
-    puts "url=" + url 
+    # puts "url=" + url 
      
     @b.goto url
     
     files = Dir.glob("#{pattern}*.zip")
     count = files.count
-    # check(count == 1, "one backup has been created")
+    check(count == 1, "one backup has been created")
     
     Dir.chdir(pwd) 
 

@@ -14,7 +14,7 @@ class TestTemplate < ApplicationTest
   def setup
     super
     self.db_connect
-    # self.login('panoramix', 'password')
+    self.login('testadmin', 'testadmin')
   end
 
   # --------------------------------------------------------------------------------
@@ -22,7 +22,7 @@ class TestTemplate < ApplicationTest
   # --------------------------------------------------------------------------------
   def teardown
     self.db_disconnect
-    # self.logout()
+    self.logout()
     super
   end
 

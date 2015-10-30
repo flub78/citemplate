@@ -82,6 +82,7 @@ $(document).ready(function(){
     var table = $('.display').dataTable( {
         stateSave: true,
         dom: 'Bfrtip',
+        "oLanguage": olanguage,
         buttons: [
                   'excel', 'pdf', 'print',
                   {

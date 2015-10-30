@@ -34,8 +34,16 @@ class ApplicationTest < MiniTest::Test
       @headless = Headless.new
       @headless.start
     end
-
-    @b = Watir::Browser.new
+    
+    @download_directory = "#{Dir.pwd}/downloads"
+    profile = Selenium::WebDriver::Firefox::Profile.new
+    profile['browser.download.folderList'] = 2 # custom location
+    profile['browser.download.dir'] = @download_directory
+    profile['browser.helperApps.neverAsk.saveToDisk'] = "text/csv,application/pdf,application/octet-stream"
+     
+    @b = Watir::Browser.new :firefox, :profile => profile
+    
+    # @b = Watir::Browser.new
     @b.window.resize_to(1200, 900)
   end
 
@@ -175,7 +183,7 @@ class ApplicationTest < MiniTest::Test
     initial_count = self.table_count(@db, table)
 
     @b.goto  @root_url + url
-    @b.wait_until {@b.text.include? "Peignot"}
+    @b.wait_until {@b.text.include? "Page rendered"}
     
     values.each do |field|
       type = field[:type]
@@ -207,7 +215,7 @@ class ApplicationTest < MiniTest::Test
       self.screenshot(screenshot_name + ".png")
     end
     
-    @b.button(:id => 'validate').click
+    @b.button(:id => 'submit_button').click
 
     if (screenshot_name != "") 
       self.screenshot(screenshot_name + "_ent.png")
@@ -267,11 +275,14 @@ class ApplicationTest < MiniTest::Test
       sql += " WHERE #{where}"
     end
     sql += ";"
+    # puts "sql=#{sql}"
     # read all
     begin
       sth = @db.execute(sql)
       rows = sth.fetch_all
       count = rows.count
+      
+      # puts "count=#{count}"
 
       if (count > 0)
         return rows[count - 1]
@@ -298,31 +309,41 @@ class ApplicationTest < MiniTest::Test
   # --------------------------------------------------------------------------------
   def crud(params)
 
-    create = params['controler'] + '/create'
-
-    # Check that incorrect values are rejected
-    self.fill_form(params['table'], create, params['incorrect_values'], params['error_patterns'], 0)
+    create = params['controller'] + '/create'
+    table = params['table']
 
     # Create
+    puts "#\tTest case: Invalid inputs are rejected during #{table} elements creation"
+    self.fill_form(params['table'], create, params['incorrect_values'], params['error_patterns'], 0)
+
+    puts "#\tTest case: Creation"
     self.fill_form(params['table'], create, params['values'], params['success_patterns'], 1)
 
     last_elt = self.select_last(params['table'])
+    puts "last_elt = " + last_elt.inspect
     id = last_elt[params['key_index']]
-    edit = params['controler'] + '/edit/' + id.to_s
-    delete = params['controler'] + '/delete/' + id.to_s
+    edit = params['controller'] + '/edit/' + id.to_s
+    delete = params['controller'] + '/delete/' + id.to_s
 
     # Read
+    puts "#\tTest case: Read #{table} element"
+    edit_url = @root_url + edit
+    puts "edit_url = #{edit_url}"
     @b.goto  @root_url + edit
-    check(@b.html.include?(params['create_pattern']), '"' + params['create_pattern'] + "\" found in form after creation" + params['table'])
+    
+    check(@b.html.include?(params['create_pattern']), '"' + params['create_pattern'] + "\" found in form after creation in " + params['table'])
 
     # Update
+    puts "#\tTest case: Update #{table} element"
     self.fill_form(params['table'], edit, params['changes'], params['success_patterns'], 0)
 
-    # Read
+    # Modification
+    puts "#\tTest case: Check that #{table} element has been changed"
     @b.goto  @root_url + edit
     check(@b.html.include?(params['change_pattern']), '"' + params['change_pattern'] + "\" found in form after modification" + params['table'])
 
     # Delete
+    puts "#\tTest case: Delete #{table} element"
     self.delete(params['table'], delete, 1)
 
   end

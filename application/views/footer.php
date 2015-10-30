@@ -46,4 +46,13 @@
  	
  	<?= script(base_url() . '/js/jquery-ui-timepicker-addon.js')?>
  	
+ 	<?php 
+ 	$CI =& get_instance();
+ 	$lang = $CI->config->item('language');
+ 	
+ 	echo script(base_url() . "/js/$lang" . "_lang.js")
+ 	?>
+ 	
+ 	
+ 	
  	
