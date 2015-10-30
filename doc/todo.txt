@@ -54,9 +54,11 @@ Done:
         Validate, Create, Create and continue, Register
         
 Todo:
+    * Database save, restore and migrations
+        - migration
     * Internationalization
         - Datepicker
-    * Database save, restore and migrations
+    * Installation
     * Metadata
         * second CRUD (users)
             * default values on create (understand why last login is used)
