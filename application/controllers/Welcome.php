@@ -36,9 +36,25 @@ class Welcome extends CI_Controller {
 	}
 	
 	/**
+	 * Check installation
+	 *  
+	 * Display errors when some are detected.
+	 * 
+	 * Return true when installation is OK
+	 */
+	protected function install_ok() {
+		echo  "Check installation" . date("d/m/Y h:i:s");
+		return true;
+	}
+	
+	/**
 	 * Project home page
 	 */
 	public function home() {
+		if (!$this->install_ok()) {
+			return;
+		}
+		
 		if (!$this->ciauth->is_logged_in ()) {
 			redirect(base_url() . 'login');
 		}
@@ -87,11 +103,7 @@ class Welcome extends CI_Controller {
 	/**
 	 * Project about
 	 */
-	public function about() {
-		if (!$this->ciauth->is_logged_in ()) {
-			redirect(base_url() . 'login');
-		}
-		
+	public function about() {		
 		$this->load->view('about');
 	}
 }
