@@ -54,6 +54,9 @@ Done:
         Validate, Create, Create and continue, Register
         
 Todo:
+    * DatePicker is displayed under the menu
+    * DateTime picker does not work
+    * Set the title for pdf export
     * Database save, restore and migrations
         - migration
     * Internationalization

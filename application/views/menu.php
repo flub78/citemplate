@@ -229,7 +229,7 @@ if (ENVIRONMENT == 'development') {
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">CITemp</a>
+			<a class="navbar-brand" href="<?= base_url();?>"> <?= translation('app_name');?></a>
 		</div>
 
 		<div id="navbar" class="collapse navbar-collapse">

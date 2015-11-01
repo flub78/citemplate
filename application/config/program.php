@@ -47,7 +47,7 @@ $config['autoregister'] = FALSE;
  | Automatic installation
  |--------------------------------------------------------------------------
  */
-$config['check_install'] = FALSE;
+$config['check_install'] = true;
 
 /*
  |--------------------------------------------------------------------------

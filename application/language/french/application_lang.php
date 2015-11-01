@@ -8,6 +8,7 @@ $lang['html_language'] = "fr";
 
 # Titles
 $lang['app_title'] = "Bienvenue des cette application WEB!!!";
+$lang['app_name'] = "Accueil";
 
 # Menus
 $lang['Dev'] = "Développement";

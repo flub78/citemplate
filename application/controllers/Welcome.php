@@ -43,7 +43,38 @@ class Welcome extends CI_Controller {
 	 * Return true when installation is OK
 	 */
 	protected function install_ok() {
-		echo  "Check installation" . date("d/m/Y h:i:s");
+		if (!$this->config->item('check_install')) {
+			return true;
+		}
+		echo  "Check installation " . date("d/m/Y h:i:s") . br();
+		
+		$errors = array();
+		
+		# Check that uploads is writable
+		$uploads = getcwd() . '/uploads';
+		if (!is_really_writable($uploads)) {
+			$errors[] =  "$uploads not writable";
+		}
+		
+		# Check that uploads/restore is writable
+		$uploads .= '/restore';
+		if (!is_really_writable($uploads)) {
+			$errors[] =  "$uploads not writable";
+		}
+		
+		# Check that tables are defined
+		$tables = $this->db->list_tables();
+		if (!$tables) {
+			# Tables are not defined, install the initial database
+		}
+		
+		if ($errors) {
+			$data = array();
+			$data['title'] = "Installation errors";				
+			$data['message'] = '<div class="error">' . ul($errors) . '</div>';
+			$this->load->view('message', $data);
+			return false;
+		}
 		return true;
 	}
 	

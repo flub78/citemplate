@@ -8,6 +8,7 @@ $lang['html_language'] = "en";
 
 # Titles
 $lang['app_title'] = "Welcome to This template application!!!";
+$lang['app_name'] = "Home";
 
 # Menus
 $lang['Dev'] = "Development";
