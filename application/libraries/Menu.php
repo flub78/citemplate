@@ -206,6 +206,7 @@ class Menu {
 		$class = (isset ( $menu ['class'] )) ? 'class="' . $menu ['class'] . '"' : "";
 		$href = (isset ( $menu ['url'] )) ?  $menu ['url'] : '';
 		$label = (isset ( $menu ['label'] )) ? translation($menu ['label']) : '';
+		$onclick = (isset ( $menu ['onclick'] )) ? $menu ['onclick'] : '';
 		
 		# Open element
 		if ($level == 0) {
@@ -227,7 +228,11 @@ class Menu {
 				$res .= $label . '</a>';
 			} else {
 			    $res .= tabs($level) . '<li>';
-				$res .= anchor($href, $label);	
+			    $attrs = "";
+			    if ($onclick) {
+			    	$attrs .= " onclick=\"$onclick\"";
+			    }
+				$res .= anchor($href, $label, $attrs);	
 			}
 		}		
 

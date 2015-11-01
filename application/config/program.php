@@ -42,6 +42,20 @@ $config['locked'] = FALSE;
  */
 $config['autoregister'] = FALSE;
 
+/*
+ |--------------------------------------------------------------------------
+ | Automatic installation
+ |--------------------------------------------------------------------------
+ */
+$config['check_install'] = FALSE;
+
+/*
+ |--------------------------------------------------------------------------
+ | Automatic migration when database version is older than program version
+ | Disable if you want to force a former database schema
+ |--------------------------------------------------------------------------
+ */
+$config['auto_migration'] = FALSE;
 
 /* End of file program.php */
 /* Location: .application/config/program.php */

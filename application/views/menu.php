@@ -140,6 +140,11 @@ $menu_database = array (
 				array (
 						'label' => "Migration",
 						'url' => controller_url ( "databaseMgt/migration" )
+				),
+				array (
+						'label' => "Reset",
+						'url' => controller_url ( "databaseMgt/reset" ),
+						'onclick' => "return confirm('" . translation('reset_database') . "')"
 				)
 		)				
 );

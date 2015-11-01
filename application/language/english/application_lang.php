@@ -69,3 +69,6 @@ $lang['label_ciauth_user_accounts_confirm-password'] = "Confirm Password";
 $lang['label_ciauth_user_accounts_creation_date'] = "Creation date";
 $lang['label_ciauth_user_accounts_last_login'] = "Last login";
 $lang['label_ciauth_user_accounts_admin'] = "Administrator";
+
+$lang['reset_database'] = 'Reset database to factory setting ?' ;
+

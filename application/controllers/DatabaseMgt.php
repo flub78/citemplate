@@ -120,7 +120,10 @@ class DatabaseMgt extends MY_Controller {
 			}
 			$this->database->sql($sql);
 	
-			$this->load->view('admin/restore_success', $data);
+			$this->lang->load('admin');
+			$data['title'] = translation('admin_title_restore');
+			$data['message'] = translation('admin_db_success'). " " . $data['file_name'];
+			$this->load->view('message', $data);
 		}
 	}
 	
@@ -131,6 +134,15 @@ class DatabaseMgt extends MY_Controller {
 		echo "migration";
 	}
 	
-	
-	
+	/**
+	 * Restore to factory configuration
+	 */
+	function reset() {
+		$this->database->drop_all ();
+		
+		$this->lang->load ( 'admin' );
+		$data ['title'] = translation ( 'admin_title_reset' );
+		$data ['message'] = translation ( 'admin_reset_success' );
+		$this->load->view ( 'message', $data );
+	}
 }

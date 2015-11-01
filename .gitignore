@@ -9,6 +9,8 @@ application/tests/build/*
 
 watir/test/*
 watir/screenshots/*
+watir/downloads/*
 
 build/logs/*
 
+/.htaccess

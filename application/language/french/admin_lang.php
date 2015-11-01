@@ -12,6 +12,7 @@ $lang['admin_title_admin'] = "Administration";
 $lang['admin_title_rights'] = "Gestion des droits";
 $lang['admin_title_tests'] = "Tests";
 $lang['admin_title_restore'] = "Restauration de la base de données";
+$lang['admin_title_reset'] = "Réinitialisation de la base de données";
 
 $lang['admin_menu_config'] = "Configuration du club";
 $lang['admin_menu_certificates'] = "Types de dates et certificats";
@@ -34,5 +35,6 @@ $lang['admin_menu_coverage'] = "Mesure de couverture";
 $lang['admin_db_warning'] = "Attention, par défaut la restauration de la base écrase toutes les données.";
 $lang['admin_db_select'] = "Choisissez la sauvegarde que vous voulez recharger.";
 $lang['admin_db_overwrite'] = "Ecraser la base actuelle";
-$lang['admin_db_success'] = "La base a été rechargée depuis la sauvegarde";
+$lang['admin_db_success'] = "La base de données a été rechargée depuis la sauvegarde";
+$lang['admin_reset_success'] = "La base de données a été réinitialisée à la configuration d'usine.";
 

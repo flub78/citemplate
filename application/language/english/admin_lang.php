@@ -12,6 +12,7 @@ $lang['admin_title_admin'] = "Administration";
 $lang['admin_title_rights'] = "Rights management";
 $lang['admin_title_tests'] = "Tests";
 $lang['admin_title_restore'] = "Database restore";
+$lang['admin_title_reset'] = "Database reset";
 
 $lang['admin_menu_config'] = "Club configuration";
 $lang['admin_menu_certificates'] = "Types of dates and certificates";
@@ -35,3 +36,5 @@ $lang['admin_db_warning'] = "By default, database restore overwrite all pre-exis
 $lang['admin_db_select'] = "Select the backup file that you want to restore.";
 $lang['admin_db_overwrite'] = "Overwrite current database";
 $lang['admin_db_success'] = "Database has been succesfully restored from";
+$lang['admin_reset_success'] = "Database has been reset to factory configuration";
+

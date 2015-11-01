@@ -111,3 +111,5 @@ $lang['label_ciauth_user_accounts_admin'] = "Administrateur";
 
 
 $lang['format_timestamp'] = "d/m/Y h:i:s";
+$lang['reset_database'] = 'Réinitialiser la base de données à la configuration usine ?' ;
+
