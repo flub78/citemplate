@@ -109,7 +109,7 @@ class MY_Controller extends CI_Controller {
 		$data['controller'] = $this->controller;
 		$data['action'] = ($id) ? "$action/$id" : $action;
 		$data['table'] = $this->default_table;
-		$data['field_list'] = $this->form_fields; // Different field list depending on the context ?
+		$data['field_list'] = $this->form_fields($action); // Different field list depending on the context ?
 		$data['error_msg'] = "";
 		if ($action == 'create') {
 			$data['submit_label'] = 'button_submit_create';
@@ -117,6 +117,24 @@ class MY_Controller extends CI_Controller {
 			$data['submit_label'] = 'button_validate';				
 		}
 		return $data;
+	}
+	
+	/**
+	 * Return a field list to validate
+	 * 
+	 * @param string $action
+	 */
+	protected function form_fields($action = "") {
+		
+		if (isset($this->form_fields[$action])) {
+			return $this->form_fields[$action];
+		}
+
+		if (isset($this->form_fields)) {
+			return $this->form_fields;
+		}
+		
+		return array();
 	}
 
 	/**
@@ -152,9 +170,10 @@ class MY_Controller extends CI_Controller {
 	 * 
 	 * @param unknown $action
 	 */
-	protected function reload_form($action) {
+	protected function reload_form($action, $post) {
 		$data = $this->init_form($action);
-		$data['values'] = array();
+		$data['values'] = element_default_values($this->default_table, $post);
+		// var_dump($data['values']);
 		$this->load->view('default_form', $data);
 	}
 	
@@ -176,7 +195,7 @@ class MY_Controller extends CI_Controller {
 	public function validate($action, $id = "") {
 	
 		// set rules
-		foreach ($this->form_fields as $field) {
+		foreach ($this->form_fields($action) as $field) {
 			$name = field_name($this->default_table, $field);
 			$label = field_label_text($this->default_table, $field);
 			$rules = rules($this->default_table, $field, $action);
@@ -189,14 +208,19 @@ class MY_Controller extends CI_Controller {
 	
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 		// var_dump($_POST);
+		$post = $_POST;
+		
 		if ($this->form_validation->run() == FALSE) {
 			// invalid input, reload the form
-			$this->reload_form($action);
+			
+			// here the $_POST array has been modified by all the rules modification filters
+			// so it is not these values that we want to reload
+			$this->reload_form($action, $post);
 					
 		} else {
 			# successful validation
 			$values = array();
-			foreach ($this->form_fields as $field) {
+			foreach ($this->form_fields($action) as $field) {
 				if ($this->metadata->field_exists($this->default_table, $field)) {
 					$field_name = field_name($this->default_table, $field);
 					$values[$field] = $this->input->post($field_name);
@@ -213,6 +237,45 @@ class MY_Controller extends CI_Controller {
 				$this->add($values);
 			}
 		}
+	}
+	
+	/**
+	 * Form validation callback
+	 *
+	 * @param unknown $timestamp
+	 * @return boolean date_parse_from_format returns array (size=12)
+	 *         'year' => int 2015
+	 *         'month' => int 11
+	 *         'day' => int 5
+	 *         'hour' => int 13
+	 *         'minute' => int 20
+	 *         'second' => int 0
+	 *         'fraction' => boolean false
+	 *         'warning_count' => int 0
+	 *         'warnings' =>
+	 *         array (size=0)
+	 *         empty
+	 *         'error_count' => int 0
+	 *         'errors' =>
+	 *         array (size=0)
+	 *         empty
+	 *         'is_localtime' => boolean false
+	 */
+	public function valid_timestamp($ts) {
+		$parsed = date_parse_from_format ( translation ( "format_timestamp" ), $ts );
+		
+		if (isset ( $parsed ['error_count'] ) && $parsed ['error_count']) {
+			$this->form_validation->set_message ( 'valid_timestamp', translation ( 'valid_timestamp' ) );
+			return FALSE;
+		}
+		$year = $parsed ['year'];
+		$month = $parsed ['month'];
+		$day = $parsed ['day'];
+		$hour = $parsed ['hour'];
+		$minute = $parsed ['minute'];
+		$second = $parsed ['second'];
+		$timestamp = "$year-$month-$day $hour:$minute:$second";
+		return $timestamp;
 	}
 	
 }

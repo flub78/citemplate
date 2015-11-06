@@ -30,7 +30,6 @@
     </footer>
 
 
-
     <!-- Latest compiled and minified JavaScript -->
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<?= script(bootstrap_js('jquery.min'))?>
@@ -40,17 +39,23 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
  	<?= script(bootstrap_js('ie10-viewport-bug-workaround'))?>
 
- 	<?= script(base_url() . '/components/DataTables/datatables.js')?>
- 	<?= script(base_url() . '/components/DataTables/DataTables-1.10.9/js/dataTables.bootstrap.js')?>
- 	<?= script(base_url() . '/components/jquery-ui/jquery-ui.min.js')?>
+ 	<?= script(base_url() . 'components/DataTables/datatables.js')?>
+ 	<?= script(base_url() . 'components/DataTables/DataTables-1.10.9/js/dataTables.bootstrap.js')?>
+ 	<?= script(base_url() . 'components/jquery-ui/jquery-ui.js')?>
  	
- 	<?= script(base_url() . '/js/jquery-ui-timepicker-addon.js')?>
+ 	<?php echo script(base_url() . 'js/jquery-ui-timepicker-addon.js')?>
  	
  	<?php 
- 	$CI =& get_instance();
- 	$lang = $CI->config->item('language');
+ 	$lang = $this->config->item('language');
  	
- 	echo script(base_url() . "/js/$lang" . "_lang.js")
+ 	echo script(base_url() . "js/$lang" . "_lang.js");
+ 	
+ 	if ($lang == "french") {
+ 		echo script(base_url() . 'js/jquery.ui.datepicker-fr.js'); 
+ 	} elseif ($lang == "dutch") {
+ 		echo script(base_url() . 'js/jquery.ui.datepicker-nl.js'); 
+ 	}
+ 	
  	?>
  	
  	

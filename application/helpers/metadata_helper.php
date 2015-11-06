@@ -149,9 +149,9 @@ if (! function_exists ( 'element_default_values' )) {
 	 *
 	 * @param unknown_type $table
 	 */
-	function element_default_values($table) {
+	function element_default_values($table, $post = array()) {
 		$CI = & get_instance();
-		return $CI->metadata->element_default_values($table);
+		return $CI->metadata->element_default_values($table, $post);
 	}
 }
 

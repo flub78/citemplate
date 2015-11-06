@@ -32,8 +32,10 @@ class Users extends MY_Controller {
 	var $default_table = 'ciauth_user_accounts';
 	var $controller = 'users';
 	var $table_fields = array('username', 'email', 'creation_date', 'last_login', 'admin', '__edit', '__delete');
-	// var $form_fields = array('email', 'username', 'password', 'confirm-password', 'creation_date', 'last_login', 'admin');
-	var $form_fields = array('email', 'username', 'password', 'confirm-password');
+	var $form_fields = array(
+		'create' => array('email', 'username', 'password', 'confirm-password'),
+		'edit' =>  array('email', 'username', 'password', 'confirm-password', 'creation_date', 'last_login', 'admin')
+	);
 	
 	/**
 	 * Constructor
@@ -87,7 +89,7 @@ class Users extends MY_Controller {
 		$data['action'] = "create";
 		$data['table'] = $this->default_table;
 		$data['values'] = element_default_values($this->default_table);
-		$data['field_list'] = array ('email', 'username', 'password', 'confirm-password');
+		$data['field_list'] = $this->form_fields['create'];
 		$data['error_msg'] = "";
 		$data['submit_label'] = 'button_submit_register';
 		$this->load->view('default_form', $data);

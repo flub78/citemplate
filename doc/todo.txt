@@ -42,6 +42,7 @@ Done:
         - language comparison
         - datatables
         - form validation error messages
+        - Datepicker
     * basic Excel and PDF export
     * Metadata
         - create first form based on metadata
@@ -55,12 +56,19 @@ Done:
         
 Todo:
     * DatePicker is displayed under the menu
-    * DateTime picker does not work
+    .ui-datepicker {z-index: 100000; } does not work because z-index is set by the javascript itself.
+    When jquery-ui.js itself is modified and z-index set to 2 10E6 it works
+    2 solutions:
+        - set it in javascript (not so easy)
+        - set the display so that menu and body do not overlap
+        
+    * DateTime picker
+        still a problem of repopulation in case of error.
+        
     * Set the title for pdf export
     * Database save, restore and migrations
         - migration
     * Internationalization
-        - Datepicker
     * Installation
     * Metadata
         * second CRUD (users)

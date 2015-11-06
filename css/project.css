@@ -15,3 +15,7 @@ body {
 .error {
 	color: red;
 }
+
+.ui-datepicker {
+    z-index: 100000; 
+}

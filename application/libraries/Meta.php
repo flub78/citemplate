@@ -341,13 +341,18 @@ class Meta {
 	 * Return the default values for an element
 	 * @param unknown $table
 	 */
-	function element_default_values($table) {
+	function element_default_values($table, $post) {
 		if (!$this->table_exists($table)) {
 			return array();
 		}
 		$values = array();
 		foreach ($this->fields_list($table) as $field) {
-			$values[$field] = $this->field_default($table, $field);
+			$name = $this->field_name($table, $field);
+			if (isset($post[$name])) {
+				$values[$field] = $post[$name];
+			} else {
+				$values[$field] = $this->field_default($table, $field);
+			}
 		}
 		return array($table => $values);
 	}
@@ -457,11 +462,20 @@ class Meta {
 						$this->fields[$table][$field]['metadata_type'] :
 						'';
 				
+				if ($meta->type == 'timestamp') {
+					$this->add_rule($rule, 'callback_valid_timestamp');
+				} elseif ($meta->type == 'date') {
+					$this->add_rule($rule, 'callback_valid_date');
+				} elseif ($meta->type == 'time') {
+					$this->add_rule($rule, 'callback_valid_time');
+				}
+				
 				if (!$meta->allow_null) {
 					if ($metadata_type != 'boolean') {
 						$this->add_rule($rule, 'required');
 					}
 				}
+				
 				if (array_key_exists('max_length', $meta) && $meta->max_length) {
 					$rl = 'max_length[' .  $meta->max_length . ']';
 					$this->add_rule($rule, $rl);
@@ -584,11 +598,11 @@ class Meta {
 		$placeholder = $this->field_placeholder ($table, $field);
 		
 		$info = "field_input($table, $field) ";
-		$info .= "type=$type, size=$size, placeholder=$placeholder";		
+		$info .= "type=$type, size=$size, placeholder=$placeholder, value=$value";		
 		$this->log($info);
-		
-		// The first time used $value, then re-populate from the form
-		$value = set_value($name, $value);
+
+		// set_value is not used as values are fully managed in to be prep
+		// from and to database
 		
 		if ($type == 'boolean') {
 			return nbs() . form_checkbox(array (
@@ -629,7 +643,7 @@ class Meta {
 		}
 		
 		$input .= " class=\"$class\"";
-		$input .= " value=\"$value\"";
+		$input .= " value=\"$value\""; 
 		if ($placeholder) {
 			$input .= " placeholder=\"$placeholder\"";
 		}

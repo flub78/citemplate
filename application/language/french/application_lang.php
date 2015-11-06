@@ -111,6 +111,12 @@ $lang['label_ciauth_user_accounts_last_login'] = "Dernière connexion";
 $lang['label_ciauth_user_accounts_admin'] = "Administrateur";
 
 
-$lang['format_timestamp'] = "d/m/Y h:i:s";
+$lang['format_timestamp'] = "d/m/Y H:i";
+$lang['format_date'] = "d/m/Y";
+$lang['format_time'] = "H:i";
 $lang['reset_database'] = 'Réinitialiser la base de données à la configuration usine ?' ;
+$lang['valid_timestamp'] = '{field} non valide (JJ/MM/YYYY HH:MM)' ;
+$lang['valid_date'] = '{field} non valide (JJ/MM/YYYY)' ;
+$lang['valid_time'] = "{field} non valide (HH:MM)";
+
 

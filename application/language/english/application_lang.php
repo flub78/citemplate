@@ -73,3 +73,12 @@ $lang['label_ciauth_user_accounts_admin'] = "Administrator";
 
 $lang['reset_database'] = 'Reset database to factory setting ?' ;
 
+$lang['format_timestamp'] = "d/m/Y H:i";
+$lang['format_date'] = "m/d/Y";
+$lang['format_time'] = "H:i";
+$lang['reset_database'] = 'Reset database to factory configuration ?' ;
+$lang['valid_timestamp'] = '{field} invalid (MM/DD/YYYY HH:MM)' ;
+$lang['valid_date'] = '{field} invalid (MM/DD/YYYY)' ;
+$lang['valid_time'] = "{field} invalid (HH:MM)";
+
+

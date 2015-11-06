@@ -40,7 +40,6 @@
 
     <!-- Custom styles for this template -->
     <?= link_tag(bootstrap_css('sticky-footer-navbar'));?>
-    <?= link_tag(project_css('project'));?>
     <?= link_tag(project_css('jquery-ui-timepicker-addon'));?>
     
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
@@ -56,13 +55,22 @@
 
     <?= link_tag(bootstrap_css('dashboard'));?>
 	<?= link_tag(bootstrap_css('menu'));?>
-	<?= link_tag(base_url() . '/components/DataTables/datatables.css');?>
-	<?= link_tag(base_url() . '/components/DataTables/DataTables-1.10.9/css/dataTables.bootstrap.css');?>
+	<?= link_tag(base_url() . 'components/DataTables/datatables.css');?>
+	<?= link_tag(base_url() . 'components/DataTables/DataTables-1.10.9/css/dataTables.bootstrap.css');?>
 
-	<?= link_tag(base_url() . '/components/jquery-ui/jquery-ui.min.css');?>
-	<?= link_tag(base_url() . '/components/jquery-ui/jquery-ui.structure.min.css');?>
-	<?= link_tag(base_url() . '/components/jquery-ui/jquery-ui.theme.min.css');?>
+	<?= link_tag(base_url() . 'components/jquery-ui/jquery-ui.min.css');?>
+	<?= link_tag(base_url() . 'components/jquery-ui/jquery-ui.structure.min.css');?>
+	<?= link_tag(base_url() . 'components/jquery-ui/jquery-ui.theme.min.css');?>
 	
+	<?php echo link_tag(project_css('project'));
+// 	$lang = $this->config->item('language');
+// 	if ($lang == "french") {
+// 		# echo link_tag(project_css('jquery.ui.datepicker-fr'));				
+// 	} elseif ($lang == "dutch") {
+// 		# echo link_tag(project_css('jquery.ui.datepicker-nl'));
+// 	}
+	
+	?>
 	
 	
     
