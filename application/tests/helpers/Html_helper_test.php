@@ -24,7 +24,7 @@ class Html_helper_test extends TestCase
 	public function test_values()
 	{
 		$actual = script('https://oss.maxcdn.com/respond/1.4.2/respond.min.js');
- 		echo $actual;
+//  		echo $actual;
  		$expected = '<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>';
  		$this->assertEquals($expected, $actual, $expected);
  		

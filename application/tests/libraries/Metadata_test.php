@@ -1,6 +1,6 @@
 <?php
 
-class Metadata_test extends TestCase
+class Metadata_library_test extends TestCase
 {
     public function setUp()
     {
@@ -9,7 +9,7 @@ class Metadata_test extends TestCase
         $this->CI->load->model('crud_model', 'model');
     }
 
-    public function test_instance()
+    public function test_privileges_metadata()
     {
         $this->assertEquals(true, true, "Metadata library loaded");
         

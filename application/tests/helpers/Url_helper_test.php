@@ -40,7 +40,7 @@ class Url_helper_test extends TestCase
  		$controller_url = controller_url();
  		$jqueryui_theme = jqueryui_theme();
 
- 		echo $bootstrap_css;
+//  		echo $bootstrap_css;
  		$ref = 'http://localhost/citemplate/css/layout.css';
  		$this->assertEquals($ref, $project_css, $ref);
  		

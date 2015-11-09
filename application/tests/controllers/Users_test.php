@@ -13,6 +13,9 @@ class Users_test extends TestCase
 
 	function __construct() {
 		parent :: __construct();
+		if (!isset($_SESSION)) {
+			session_start();
+		}
 		$this->resetInstance();
 		$this->CI->load->library('ciauth');
 		$this->CI->ciauth->login('testuser', 'testuser', true);
@@ -21,16 +24,7 @@ class Users_test extends TestCase
 		$this->CI->load->model('crud_model', 'model');
 		$this->model = $this->CI->model;		
 	}
-	
-// 	public function ttest_all() {
-// 		$methods = array('create');
-// 		foreach ($methods as $method) {
-// 			$id = 42;
-// 			$output = $this->request('GET', ['Users', $method]);
-// 			$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in $method");
-// 		}	
-// 	}
-	
+		
 	public function test_method_404()
 	{
 		$this->request('GET', ['Users', 'unknow_method']);
@@ -41,43 +35,52 @@ class Users_test extends TestCase
 	{
 		# Check create form
 		$output =  $this->request('GET', ['Users', 'create']);
-		$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in $method");
+		$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in User create form");
 	
 		# Actually create something
 		$count =  $this->model->count('ciauth_user_accounts');
 	
-		echo "attempt to create a user with no password";
-		$args = array("email"	=> "test@free.fr",
-				"username" => "test",
+// 		echo "\nattempt to create a user with no password";
+		$args = array("email_value"	=> "test@free.fr",
+				"username_value" => "test",
 				"password" => "pas",
 				"password-confirm" => "password"
 		);
-		$output =  $this->request('POST', ['users', 'validate', 'edit'], $args);
+		$output =  $this->request('POST', ['users', 'validate', 'create'], $args);
 		// echo $output;
-		echo "user with no password validated";
+// 		echo "\nuser with no password validated";
 
-		$this->request('POST', ['users', 'add'], $args);
+	
+		$args = array("email_value"	=> "test@free.fr",
+				"username_value" => "test",
+				"password" => "password",
+				"password-confirm" => "password"
+		);
+		// $this->request('POST', ['users', 'add'], $args);
+		$this->request('POST', ['users', 'validate', 'create'], $args);
 		$id = $this->model->get_last_inserted();
 		
-		echo "check that a user has been created";
+// 		echo "\ncheck that a user has been created id=$id";
 		$new_count =  $this->model->count('ciauth_user_accounts');
-		$this->assertEquals($count +1, $new_count, "One privilege has been created");
+		$this->assertEquals($count +1, $new_count, "One User has been created");
 			
 		// change it
-		$args = array("privilege_description"	=> "For really super hero",
-				"privilege_name" => "Superpower",
-				"privilege_id" => $id,
-				"submit" => "submit");
 		// http://localhost/citemplate/index.php/Users/validate/create
+		$args = array("email_value"	=> "test@free.fr",
+				"username_value" => "modified_test",
+				"password" => "password",
+				"password-confirm" => "password",
+				"last_login" => "12/31/2000 00:00"
+		);
 		$output =  $this->request('POST', ['Users', 'validate', 'edit'], $args);
-			
+// 		$output =  $this->request('SET', ['Users', 'update', $id], $args);
+		
 		// read it
 		$output =  $this->request('GET', ['Users', 'edit', $id]);
 		$this->assertNotEquals("", $output, "Edit");
-		$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in $method");
+		$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in User edit form");
 	
-		// delete if
-// 		return;
+		// delete it
 		$output =  $this->request('GET', ['Users', 'delete', $id]);
 		$new_count =  $this->model->count('ciauth_user_accounts');
 		$this->assertEquals($count, $new_count, "One user has been deleted");

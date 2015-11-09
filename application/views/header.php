@@ -62,6 +62,12 @@
 	<?= link_tag(base_url() . 'components/jquery-ui/jquery-ui.structure.min.css');?>
 	<?= link_tag(base_url() . 'components/jquery-ui/jquery-ui.theme.min.css');?>
 	
+	<?php
+	// todo: manage themes. Currently the Jquery-UI theme is only used for DatePickers
+	$theme = 'south-street';
+	$theme = 'base';
+	echo link_tag('https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/' . $theme .'/jquery-ui.css');?>
+	
 	<?php echo link_tag(project_css('project'));
 // 	$lang = $this->config->item('language');
 // 	if ($lang == "french") {

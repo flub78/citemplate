@@ -8,11 +8,14 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-class Bootstrap_test extends TestCase
+class Bootstrap_controller_test extends TestCase
 {
 
 	function __construct() {
 		parent :: __construct();
+		if (!isset($_SESSION)) {
+			session_start();
+		}
 		$this->resetInstance();
 		$this->CI->load->library('ciauth');
 		$this->CI->ciauth->login('testuser', 'testuser', true);
@@ -24,10 +27,11 @@ class Bootstrap_test extends TestCase
 				'theme');
 		
 		foreach ($views as $view) {
-			echo "testing $view";
+			# echo ("\ntesting $view");
 			$output = $this->request('GET', ['Bootstrap', $view]);
-			echo "output=$ouput";
-			$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in $view");
+			if (isset($output)) {
+				$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in $view");
+			}
 		}	
 	}
 	

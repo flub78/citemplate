@@ -1,6 +1,6 @@
 <?php
 
-class Logger_test extends TestCase
+class Logger_library_test extends TestCase
 {
     public function setUp()
     {
@@ -8,7 +8,7 @@ class Logger_test extends TestCase
         $this->CI->load->library('logger');
     }
 
-    public function test_instance()
+    public function test_log_at_different_levels()
     {
         $this->assertEquals(true, true, "Logger");
         

@@ -68,6 +68,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *    password:
  *    password-confirm:
  *    keys:
+ * 
+ * Addition of new metadata types
+ * ------------------------------
+ * 
+ *    * Modify display_field in this class
+ *    * Modify field_input in this class
+ *    * Modify rules in this class
+ *    * Add validation callback in the core
+ *    
+ *    Note that it would be more elegant to declare a MetadataType class.
  *    
  * @author frederic
  *

@@ -207,7 +207,7 @@ class MY_Controller extends CI_Controller {
 		}	
 	
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-		// var_dump($_POST);
+// 		var_dump($_POST);exit;
 		$post = $_POST;
 		
 		if ($this->form_validation->run() == FALSE) {
@@ -226,8 +226,6 @@ class MY_Controller extends CI_Controller {
 					$values[$field] = $this->input->post($field_name);
 				}
 			}
-			# var_dump($values);
-				
 			if ($action == "edit") {
 				# update
 				$this->update($id, $values);

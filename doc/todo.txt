@@ -62,9 +62,9 @@ Todo:
         - set it in javascript (not so easy)
         - set the display so that menu and body do not overlap
         
-    * DateTime picker
-        still a problem of repopulation in case of error.
-        
+    * Manage null dates
+    * Manage dates with default values
+    
     * Set the title for pdf export
     * Database save, restore and migrations
         - migration

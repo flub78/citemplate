@@ -1,6 +1,6 @@
 <?php
 
-class Unzip_test extends TestCase
+class Unzip_library_test extends TestCase
 {
     public function setUp()
     {
@@ -8,7 +8,7 @@ class Unzip_test extends TestCase
         $this->CI->load->library('Unzip');
     }
 
-    public function test_instance()
+    public function test_basic_unzip()
     {
 
         $this->unzip = new Unzip();

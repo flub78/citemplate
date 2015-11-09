@@ -8,7 +8,7 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-class DatabaseMgt_test extends TestCase
+class DatabaseMgt_controller_test extends TestCase
 {
 	public function test_save()
 	{

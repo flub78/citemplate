@@ -123,7 +123,7 @@ class Crud_model_test extends TestCase
   }
      
      */
-    public function test_getTableMetaData() {
+    public function test_get_table_MetaData() {
     	
     	$meta = $this->model->getTableMetaData('ciauth_user_privileges');
     	

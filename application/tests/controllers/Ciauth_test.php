@@ -8,7 +8,7 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-class Ciauth_test extends TestCase
+class Ciauth_controller_test extends TestCase
 {
 // 	function setUp(){
 // 		@session_start();

@@ -8,7 +8,7 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-class Dev_test extends TestCase
+class Dev_controller_test extends TestCase
 {
 	public function setUp()
 	{

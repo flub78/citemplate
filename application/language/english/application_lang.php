@@ -73,7 +73,7 @@ $lang['label_ciauth_user_accounts_admin'] = "Administrator";
 
 $lang['reset_database'] = 'Reset database to factory setting ?' ;
 
-$lang['format_timestamp'] = "d/m/Y H:i";
+$lang['format_timestamp'] = "m/d/Y H:i";
 $lang['format_date'] = "m/d/Y";
 $lang['format_time'] = "H:i";
 $lang['reset_database'] = 'Reset database to factory configuration ?' ;

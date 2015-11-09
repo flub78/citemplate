@@ -8,12 +8,15 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-class Rights_test extends TestCase
+class Rights_controller_test extends TestCase
 {
 
 	public function setUp()
 	{
 		parent :: __construct();
+		if (!isset($_SESSION)) {
+			session_start();
+		}
 		$this->resetInstance();
 		$this->CI->ciauth->login('testuser', 'testuser', true);
 

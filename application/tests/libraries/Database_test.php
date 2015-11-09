@@ -1,6 +1,6 @@
 <?php
 
-class Database_test extends TestCase
+class Database_library_test extends TestCase
 {
     public function setUp()
     {
@@ -8,7 +8,7 @@ class Database_test extends TestCase
         $this->CI->load->library('Database');
     }
 
-    public function test_instance()
+    public function test_show_tables()
     {
         $this->assertEquals(true, true, "Database");
         
