@@ -57,6 +57,9 @@ $lang['title_ciauth_user_accounts_create'] = "Create user";
 
 $lang['heading_email'] = "Email address";
 $lang['heading_username'] = "User name";
+$lang['heading_creation_date'] = "Creation";
+$lang['heading_last_login'] = "Last login";
+$lang['heading_admin'] = "Admin";
 
 $lang['placeholder_ciauth_user_accounts_email'] = "Email address";
 $lang['placeholder_ciauth_user_accounts_username'] = "User name";

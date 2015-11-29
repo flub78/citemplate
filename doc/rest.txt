@@ -1,0 +1,112 @@
+REST API
+
+Why:
+----
+
+    Convenient API for others programs
+    
+    Server for tablet or phone applications
+    
+    If the application model is a REST API, it becomes easier to switch
+    form one data server to another.
+    
+What:
+-----
+
+    https://your.domain/Api/Resourcename
+    
+    We are going to focus on json API (most widely used and groing)
+    
+    
+    GET /task       retreive a list of tasks
+    
+    GET /task/12    retrieve the task 12
+    
+    POST /task      create a new task
+    
+    PUT/ /task/12   uptadte task 12
+    
+    DELETE /task/12 delete task 12
+    
+    DELETE /task    delete all tasks
+    
+    
+    Maps the relationship
+    ----------------------
+    
+    GET /task/21/comments   retreive all comments for task 21
+    
+    GET /task/21/cmments/5  retreive comment 5 of task 21
+    
+    
+    Search & filters
+    ----------------
+    GET /tasks?sort=-priority
+    
+    Sort by priority descending order
+    
+    GET /tasks?sort=-priority,created_at 
+    Sort by priority descending order and creation date
+    
+    Possibility to create aliases for convenience
+    ---------------------------------------------
+    
+    GET /tasks?status=completed
+    
+    Get /tasks/completed
+    
+    Get /pilots/?age<25
+    
+    GET /pilots/less_25
+    
+    Select fields
+    -------------
+    
+    GET /tasks?fields=id,title,updated_at
+    
+    Pagination
+    ----------
+    
+    GET /notification?page=1&per_page=50
+    
+    Return full resource after action
+    ----------------------------------
+    
+    For efficiency the full resource must be returned after 
+    a PUT, POST, or PATCH in addition of other status, error message, etc.
+    
+    Error messages
+    --------------
+    
+    400: client issue
+    500: server issue
+    
+    {"code": 1234,
+     "message": "task field validation failed",
+     "context" "Date is not set"
+    }
+    
+    
+    Authentication
+    --------------
+    
+        consumer request token
+        
+        service provider grants request token
+        
+    The REST API must be documented online
+    
+    
+    codeigniter-restserver
+    
+    + router
+    
+    /application/controller/api
+    chriskacerguis/codeigniter-restserver to use for CI 3.0
+    
+    
+    https://github.com/linuxjuggler/codeigniter-restserver fork
+    
+    
+    
+    

@@ -541,6 +541,19 @@ class Meta {
 	 * @param $format
 	 */
 	function display_field($table, $field, $value, $format = "html") {
+		
+		/**
+		 * # type is defined by the database
+		 * $meta_type = $this->field_db_type($table, $field);
+		 * 
+		 * # or overloaded
+		 * if (isset($this->fields[$table][$field]['metadata_type'])) {
+		 *    $meta_type = $this->fields[$table][$field]['metadata_type'];
+		 * }
+		 * 
+		 * $type_object = $this->type_manager->instance($meta_type);
+		 * $type_object->display_field($table, $field, $value, $format);
+		 */
 
 		$db_type = $this->field_db_type($table, $field);
 		

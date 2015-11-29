@@ -36,8 +36,6 @@ class TestUsers < ApplicationTest
     controller = 'users'
     
     puts "#\tTest case: CRUD for #{table}"
-    desc = 'Transfers de charges'
-    desc2 = 'Transfers de produits'
    
     params = {
       'controller' => controller,

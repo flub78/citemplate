@@ -313,37 +313,37 @@ class ApplicationTest < MiniTest::Test
     table = params['table']
 
     # Create
-    puts "#\tTest case: Invalid inputs are rejected during #{table} elements creation"
+    puts "#\tTest case: bad inputs rejected #{table} creation"
     self.fill_form(params['table'], create, params['incorrect_values'], params['error_patterns'], 0)
 
     puts "#\tTest case: Creation"
     self.fill_form(params['table'], create, params['values'], params['success_patterns'], 1)
 
     last_elt = self.select_last(params['table'])
-    puts "last_elt = " + last_elt.inspect
+    # puts "last_elt = " + last_elt.inspect
     id = last_elt[params['key_index']]
     edit = params['controller'] + '/edit/' + id.to_s
     delete = params['controller'] + '/delete/' + id.to_s
 
     # Read
-    puts "#\tTest case: Read #{table} element"
+    puts "#\tTest case: Read #{table}"
     edit_url = @root_url + edit
-    puts "edit_url = #{edit_url}"
+    # puts "edit_url = #{edit_url}"
     @b.goto  @root_url + edit
     
     check(@b.html.include?(params['create_pattern']), '"' + params['create_pattern'] + "\" found in form after creation in " + params['table'])
 
     # Update
-    puts "#\tTest case: Update #{table} element"
+    puts "#\tTest case: Update #{table}"
     self.fill_form(params['table'], edit, params['changes'], params['success_patterns'], 0)
 
     # Modification
-    puts "#\tTest case: Check that #{table} element has been changed"
+    puts "#\tTest case: #{table} element changed"
     @b.goto  @root_url + edit
     check(@b.html.include?(params['change_pattern']), '"' + params['change_pattern'] + "\" found in form after modification" + params['table'])
 
     # Delete
-    puts "#\tTest case: Delete #{table} element"
+    puts "#\tTest case: Delete #{table}"
     self.delete(params['table'], delete, 1)
 
   end
