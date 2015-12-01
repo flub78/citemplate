@@ -46,7 +46,7 @@ class Welcome extends CI_Controller {
 		if (!$this->config->item('check_install')) {
 			return true;
 		}
-		echo  "Check installation " . date("d/m/Y h:i:s") . br();
+
 		
 		$errors = array();
 		
@@ -66,6 +66,8 @@ class Welcome extends CI_Controller {
 		$tables = $this->db->list_tables();
 		if (!$tables) {
 			# Tables are not defined, install the initial database
+			echo  "Installation check " . date("d/m/Y h:i:s") . br();
+			echo "database not initialized"; exit;
 		}
 		
 		if ($errors) {

@@ -1,0 +1,45 @@
+Installation
+------------
+
+	* installation should be as simple of possible. I am ready to pay a small overhead on the welcome page to check that the installation has been already been done and do it automatically if it has not.
+
+	* Wordress has a very simple installation procedure, let's steal as many ideas as possible.
+
+	* https://fr.wordpress.org/txt-install/
+
+
+Check to perform on the welcome page
+
+	if it is not possible to connect to the database
+		display error message
+			- mysql may be down
+			- incorrect credential to connect
+		exit
+	endif
+
+	# connected to the database
+
+	# check schema
+	if (schema is not install) then
+		create the tables
+		fill the startup data
+		display information that it was the initial install
+		and explain how to connect
+	else
+		display login page
+	endif
+
+Instructions:
+
+	1) download GVV and put it in your web server directory
+	2) Create a MYSQL database and a user to access it
+	3) Edit the application/config/database.php and change it according to your database user.
+	4) edit application/config/config.php and 
+		adapt the base_url address
+		chose your language $config['language']
+		encryption_key (at some point https://flub78.ddns.net/encryption_key)
+	5) ouvrez l'URL de l'application dans un navigateur WEB
+
+
+
+
