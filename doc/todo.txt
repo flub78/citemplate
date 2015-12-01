@@ -9,12 +9,15 @@ Features:
         - backup
         - restore
         - migration
-    * Authentication (using ciauth)
+    * Authentication (using ciauth) http://ciauth.com/
         - login/logout
         - privileges management
         - register
         - forgotten password
         - control maximal number of attempts
+        - ciauth has not been updated since July 29 2015. I should consider something else.
+        - http://www.tutorials.kode-blog.com/codeigniter-authentication
+        - http://benedmunds.com/ion_auth/
         
     * Navigation
         - privilege controlled menu
@@ -36,6 +39,7 @@ Features:
 ============================================================================================================================    
 
 Done:
+    * replace authentication library
     * Fill the authentication database.
     * Internationalization of the list view
         - Titles and heading

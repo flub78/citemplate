@@ -139,7 +139,7 @@ $menu_database = array (
 				),
 				array (
 						'label' => "Migration",
-						'url' => controller_url ( "databaseMgt/migration" )
+						'url' => controller_url ( "migration" )
 				),
 				array (
 						'label' => "Reset",

@@ -22,9 +22,9 @@
  * @package controllers
  *
  */
-set_include_path(getcwd() . "/..:" . get_include_path());
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Migration extends CI_Controller {
+class Migration extends MY_Controller {
 
 	protected $controller = "migration";
 	protected $unit_test = FALSE;
@@ -34,12 +34,6 @@ class Migration extends CI_Controller {
 	 */
 	function __construct() {
 		parent :: __construct();
-
-		// Check if user is logged in or not
-		if (!$this->dx_auth->is_logged_in()) {
-			redirect("auth/login");
-		}
-		$this->dx_auth->check_uri_permissions();
 
 		$this->load->library('Database');
 		$this->load->helper('file');
@@ -69,18 +63,23 @@ class Migration extends CI_Controller {
 		$this->index();
 	}
 	
-	
+	/**
+	 * Display the migration control page
+	 */
 	public function index () {
 		
 		$program_level = $this->config->item('migration_version');
 		$data['program_level'] = $program_level;
-		$data['base_level'] = $this->migration->get_version();
-
-		$levels = array();
-		for ($i = $program_level; $i >= 1; $i--) {
-			$levels[$i] = $i;
-		}
-		$data['levels'] = $levels;
+		$data['migrations'] = $this->migration->find_migrations();
+		$data['title'] = translation('');
+echo "program= $program_level";
+var_dump($data['migrations']);
+// 		return;
+// 		$levels = array();
+// 		for ($i = $program_level; $i >= 1; $i--) {
+// 			$levels[$i] = $i;
+// 		}
+// 		$data['levels'] = $levels;
 		
 		$this->load->view('migration/avant', $data);
 	}

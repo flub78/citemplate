@@ -74,14 +74,13 @@ $lang['label_ciauth_user_accounts_creation_date'] = "Creation date";
 $lang['label_ciauth_user_accounts_last_login'] = "Last login";
 $lang['label_ciauth_user_accounts_admin'] = "Administrator";
 
-$lang['reset_database'] = 'Reset database to factory setting ?' ;
-
+// Date and time format
 $lang['format_timestamp'] = "m/d/Y H:i";
 $lang['format_date'] = "m/d/Y";
 $lang['format_time'] = "H:i";
-$lang['reset_database'] = 'Reset database to factory configuration ?' ;
 $lang['valid_timestamp'] = '{field} invalid (MM/DD/YYYY HH:MM)' ;
 $lang['valid_date'] = '{field} invalid (MM/DD/YYYY)' ;
 $lang['valid_time'] = "{field} invalid (HH:MM)";
 
+$lang['reset_database'] = 'Reset database to factory configuration ?' ;
 

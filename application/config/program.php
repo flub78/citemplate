@@ -52,7 +52,12 @@ $config['check_install'] = true;
 /*
  |--------------------------------------------------------------------------
  | Automatic migration when database version is older than program version
- | Disable if you want to force a former database schema
+ | Disable if you want to force a former database schema.
+ | Automatic migration happens when
+ |   * An admin logs in
+ |   * this flag is true
+ |   * migrations are enabled in the migration config file
+ [   * the database schema is not up to date
  |--------------------------------------------------------------------------
  */
 $config['auto_migration'] = FALSE;
