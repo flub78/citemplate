@@ -30,6 +30,9 @@
         <phingcall target="pdepend" />
         <phingcall target="phpmd" />
         <phingcall target="phpcb" />
+        <phingcall target="phpcpd" />
+        <phingcall target="phpdoc" />
+        <phingcall target="phpcs" />
 
         <!-- 
         <phingcall target="phpunit" />
@@ -56,17 +59,18 @@
     </target>
     
     <target name="pdepend">
-        <exec logoutput="true" dir="${project.basedir}/" command="pdepend --ignore=system --ignore=assets --ignore=build --ignore=user_guide --ignore=application/third_party --ignore=application/cache --ignore=application/logs  --jdepend-chart=build/jdepend-chart.svg --jdepend-xml=build/jdepend-log.xml --overview-pyramid=build/pyramid.svg --summary-xml=build/pdepend-summary.xml ." escape="false" />
+        <exec logoutput="true" dir="${project.basedir}/" command="pdepend --jdepend-chart=build/jdepend-chart.svg --jdepend-xml=build/jdepend-log.xml --overview-pyramid=build/pyramid.svg --summary-xml=build/pdepensummary.xml application/controllers,application/helpers,application/libraries,application/models,application/views" escape="false" />
      </target>
     
     <target name="phpmd">
-        <exec logoutput="true" dir="${project.basedir}/" command="phpmd application xml cleancode,codesize" escape="false" />
+        <exec logoutput="true" dir="${project.basedir}/" command="phpmd ./application/controllers,./application/helpers,./application/libraries,./application/models,./application/views xml cleancode,codesize > build/logs/md.xml" escape="false" />
     </target>
     
     <target name="phpcpd">
-        <exec logoutput="true" dir="${project.basedir}/" command="phpcpd --log-pmd=build/logs/phpcpd.xml application" escape="false" />
+        <exec logoutput="true" dir="${project.basedir}/" command="phpcpd application --exclude third_party --exclude logs --log-pmd=build/logs/phpcpd.xml " escape="false" />
     </target>
     
+    <!--
     <target name="phpcs">
         <phpcodesniffer standard="Zend">
             <fileset dir="${project.basedir}/application">
@@ -75,7 +79,12 @@
             <formatter type="checkstyle" outfile="${project.basedir}/build/logs/checkstyle.xml"/>
         </phpcodesniffer>
     </target>
+    -->
+    <target name="phpcs">
+        <exec logoutput="true" dir="${project.basedir}/" command="phpcs application --report-checkstyle=build/checkstyle.xml" escape="false" />
+    </target>
     
+    <!--
     <target name="phpdoc">
         <phpdoc title="API Documentation"
             destdir="${project.basedir}/build/api"
@@ -91,9 +100,13 @@
             </projdocfileset>
         </phpdoc>
     </target>
+    -->
+    <target name="phpdoc">
+        <exec logoutput="true" dir="${project.basedir}/" command="phpdoc run -d ./application/controllers,./application/helpers,.application/libraries,./application/models,./application/views -t build/doc" escape="false" />
+    </target>
     
     <target name="phpunit">
-         <exec logoutput="true" dir="${project.basedir}/application/tests" command="phpunit" escape="false" />
+         <exec logoutput="true" dir="${project.basedir}/tests" command="phpunit --log-junit ../build/logs/ut_phpunit.xml --coverage-html ../build/coverage" escape="false" />
     </target>
     
     <target name="phpcb">
