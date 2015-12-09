@@ -106,7 +106,7 @@
     </target>
     
     <target name="phpunit">
-         <exec logoutput="true" dir="${project.basedir}/tests" command="phpunit --log-junit ../build/logs/ut_phpunit.xml --coverage-html ../build/coverage" escape="false" />
+         <exec logoutput="true" dir="${project.basedir}/application/tests" command="phpunit" escape="false" />
     </target>
     
     <target name="phpcb">
