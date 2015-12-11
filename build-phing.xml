@@ -67,40 +67,13 @@
     </target>
     
     <target name="phpcpd">
-        <exec logoutput="true" dir="${project.basedir}/" command="phpcpd application --exclude third_party --exclude logs --log-pmd=build/logs/phpcpd.xml " escape="false" />
+        <exec logoutput="true" dir="${project.basedir}/" command="phpcpd application/controllers application/helpers application/libraries application/models application/views --exclude third_party --exclude logs --log-pmd=build/logs/phpcpd.xml " escape="false" />
     </target>
     
-    <!--
     <target name="phpcs">
-        <phpcodesniffer standard="Zend">
-            <fileset dir="${project.basedir}/application">
-                <include name="**/*.php"/>
-            </fileset>
-            <formatter type="checkstyle" outfile="${project.basedir}/build/logs/checkstyle.xml"/>
-        </phpcodesniffer>
-    </target>
-    -->
-    <target name="phpcs">
-        <exec logoutput="true" dir="${project.basedir}/" command="phpcs application --report-checkstyle=build/checkstyle.xml" escape="false" />
+        <exec logoutput="true" dir="${project.basedir}/" command="phpcs application/controllers application/helpers application/libraries application/models application/views --report-checkstyle=build/checkstyle.xml" escape="false" />
     </target>
     
-    <!--
-    <target name="phpdoc">
-        <phpdoc title="API Documentation"
-            destdir="${project.basedir}/build/api"
-            sourcecode="false"
-            output="HTML:Smarty:PHP">
-            <fileset dir="${project.basedir}/application">
-                <include name="**/*.php"/>
-            </fileset>
-            <projdocfileset dir=".">
-                <include name="README"/>
-                <include name="INSTALL"/>
-                <include name="CHANGELOG"/>
-            </projdocfileset>
-        </phpdoc>
-    </target>
-    -->
     <target name="phpdoc">
         <exec logoutput="true" dir="${project.basedir}/" command="phpdoc run -d ./application/controllers,./application/helpers,.application/libraries,./application/models,./application/views -t build/doc" escape="false" />
     </target>
@@ -110,7 +83,7 @@
     </target>
     
     <target name="phpcb">
-        <exec logoutput="true" command="phpcb --log '${project.basedir}/build/logs' --source '${project.basedir}/application' --output '${project.basedir}/build/code-browser'" escape="false" />
+        <exec logoutput="true" command="phpcb --log '${project.basedir}/build/logs' --source '${project.basedir}/application/controllers' --source '${project.basedir}/application/helpers' --source '${project.basedir}/application/libraries' --source '${project.basedir}/application/models' --source '${project.basedir}/application/views' --output '${project.basedir}/build/code-browser'" escape="false" />
     </target>
     
 </project>
