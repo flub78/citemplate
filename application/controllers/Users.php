@@ -28,7 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  */
 class Users extends MY_Controller {
-	
+
 	var $default_table = 'ciauth_user_accounts';
 	var $controller = 'users';
 	var $table_fields = array('username', 'email', 'creation_date', 'last_login', 'admin', '__edit', '__delete');
@@ -36,7 +36,7 @@ class Users extends MY_Controller {
 		'create' => array('email', 'username', 'password', 'confirm-password'),
 		'edit' =>  array('email', 'username', 'password', 'confirm-password', 'creation_date', 'last_login', 'admin')
 	);
-	
+
 	/**
 	 * Constructor
 	 */
@@ -45,31 +45,31 @@ class Users extends MY_Controller {
 		// specific initialization
 		$this->load->model('users_model', 'model');
 		$this->load->model("m_ciauth");
-	}	
-		
+	}
+
 	/**
 	 * Add a new element
-	 * 
+	 *
 	 * Special version because the password must be encoded
 	 */
 	public function add($data = array()) {
-		echo "creating user :" . var_export($data, true);
+		echo "creating user :" . var_export($data, true);exit;
 		$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 		$this->m_ciauth->add_user_account($data);
-		
+
 		redirect(controller_url($this->controller));
 	}
 
 	/**
 	 * Update an element
-	 * 
-	 * Special version because the password may be empty when 
+	 *
+	 * Special version because the password may be empty when
 	 * it is not modified.
 	 */
 	public function update($id, $data = array()) {
-		
+
 		if (isset($data['password']) && ($data['password'] != "")) {
-			$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);				
+			$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 		} else {
 			unset($data['password']);
 		}
@@ -77,12 +77,12 @@ class Users extends MY_Controller {
 		$this->model->update($this->default_table, $id_field, $data, $id);
 		redirect(controller_url($this->controller));
 	}
-	
+
 	/**
 	 * Display a form to create a new element
 	 */
 	public function create() {
-		
+
 		$data = array();
 		$data['title'] = translation('Please Register');
 		$data['controller'] = $this->controller;
@@ -94,10 +94,10 @@ class Users extends MY_Controller {
 		$data['submit_label'] = 'button_submit_register';
 		$this->load->view('default_form', $data);
 	}
-	
+
 	/**
 	 * Form validation callback
-	 * 
+	 *
 	 * @param unknown $str
 	 * @return boolean
 	 */
@@ -113,5 +113,5 @@ class Users extends MY_Controller {
 			return FALSE;
 		}
 	}
-	
+
 }

@@ -10,11 +10,11 @@ class Welcome extends CI_Controller {
 		parent :: __construct();
 		$this->load->helper('metadata');
 		$this->load->library('logger');
-	
+
 		$this->logger = new Logger("class=" . get_class($this));
 		$this->logger->debug('New instance of ' . get_class($this));
 	}
-	
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -34,12 +34,12 @@ class Welcome extends CI_Controller {
 	{
 		$this->home();
 	}
-	
+
 	/**
 	 * Check installation
-	 *  
+	 *
 	 * Display errors when some are detected.
-	 * 
+	 *
 	 * Return true when installation is OK
 	 */
 	protected function install_ok() {
@@ -47,39 +47,49 @@ class Welcome extends CI_Controller {
 			return true;
 		}
 
-		
+		$this->load->library('database');
+
 		$errors = array();
-		
+
 		# Check that uploads is writable
 		$uploads = getcwd() . '/uploads';
 		if (!is_really_writable($uploads)) {
 			$errors[] =  "$uploads not writable";
 		}
-		
+
 		# Check that uploads/restore is writable
 		$uploads .= '/restore';
 		if (!is_really_writable($uploads)) {
 			$errors[] =  "$uploads not writable";
 		}
-		
+
 		# Check that tables are defined
 		$tables = $this->db->list_tables();
 		if (!$tables) {
 			# Tables are not defined, install the initial database
 			echo  "Installation check " . date("d/m/Y h:i:s") . br();
-			echo "database not initialized"; exit;
+			echo "database not initialized" .br();
+			$sqlfile = getcwd() . "/install/structure.sql";
+			$sql = file_get_contents($sqlfile);
+			$this->database->sql($sql);
+
+			// Create default user
+			$data = array ( 'email' => 'admin@free.fr', 'username' => 'admin');
+			$data['password'] = password_hash('password', PASSWORD_DEFAULT);
+			$this->m_ciauth->add_user_account($data);
+
 		}
-		
+
 		if ($errors) {
 			$data = array();
-			$data['title'] = "Installation errors";				
+			$data['title'] = "Installation errors";
 			$data['message'] = '<div class="error">' . ul($errors) . '</div>';
 			$this->load->view('message', $data);
 			return false;
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Project home page
 	 */
@@ -87,32 +97,32 @@ class Welcome extends CI_Controller {
 		if (!$this->install_ok()) {
 			return;
 		}
-		
+
 		if (!$this->ciauth->is_logged_in ()) {
 			redirect(base_url() . 'login');
 		}
 		$this->load->view(translation('language') . '/home');
 	}
-	
+
 	/**
 	 * User login
 	 */
 	public function login() {
 		// $this->load->library('form_validation');
-		
+
 		$this->form_validation->set_rules('login_value', translation("login_user_label"), 'required|min_length[3]');
 		$this->form_validation->set_rules('password', translation('login_password_label'), 'required');
 		$data['error_msg'] = "";
-		
+
 		if ($this->form_validation->run() == FALSE) {
 			# invalid input, reload the form
-			$this->load->view('login', $data);				
+			$this->load->view('login', $data);
 		} else {
 			# form validated
 			$login_value = $this->input->post('login_value');
 			$password = $this->input->post('password');
 			$remember_me = $this->input->post('keep_logged_in');
-			
+
 			if (!$this->ciauth->login($login_value, $password, $remember_me)) {
 				# error unknown user
 				$data['error_msg'] = translation('error_user_not_found');
@@ -121,7 +131,7 @@ class Welcome extends CI_Controller {
 			} else {
 				# logged in
 				redirect(base_url());
-			}				
+			}
 		}
 	}
 
@@ -132,11 +142,11 @@ class Welcome extends CI_Controller {
 		$this->ciauth->logout();
 		redirect(base_url());
 	}
-	
+
 	/**
 	 * Project about
 	 */
-	public function about() {		
+	public function about() {
 		$this->load->view('about');
 	}
 }
