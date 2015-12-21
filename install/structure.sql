@@ -113,12 +113,9 @@ CREATE TABLE `ciauth_user_accounts` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
-INSERT INTO `ciauth_user_accounts` (`user_id`, `email`, `username`, `password`, `creation_date`, `last_login`, `admin`, `remember_me`) VALUES ('1', 'frederic.peignot@free.fr', 'flub78', '$2y$10$TazguczdotOZyuHNJqOKX.eiRW4JlTdqH3Gb2l0bzCA5GYTBNSc1G', '2015-08-15 08:48:12', '2015-12-12 21:35:35', '1', '0');
-INSERT INTO `ciauth_user_accounts` (`user_id`, `email`, `username`, `password`, `creation_date`, `last_login`, `admin`, `remember_me`) VALUES ('2', 'frederic.peignot@gmail.com', 'taz2', '$2y$10$8Bc633mpP8rTL2EkI5Aal.I8tf.AG.nkPddByA/aezA0AYC2ZUHjW', '2015-08-16 19:05:57', '2015-12-12 21:35:35', '0', '0');
 INSERT INTO `ciauth_user_accounts` (`user_id`, `email`, `username`, `password`, `creation_date`, `last_login`, `admin`, `remember_me`) VALUES ('3', 'testadmin@free.fr', 'testadmin', '$2y$10$AAvPuXimYxIdjEhFoN71AeNIIEVgiiUX2./WZh0tgaQXOHuWguV9K', '2015-08-20 22:19:19', '2015-12-12 21:35:35', 'Y', '0');
 INSERT INTO `ciauth_user_accounts` (`user_id`, `email`, `username`, `password`, `creation_date`, `last_login`, `admin`, `remember_me`) VALUES ('5', 'testgroup@free.fr', 'testgroup', '$2y$10$iWIe/IyFByPbHtigyvGk8u.UsOuO/TizfiKjp9hhH/WKOStvERdF6', '2015-08-14 10:22:00', '2015-12-12 21:35:35', '1', '0');
 INSERT INTO `ciauth_user_accounts` (`user_id`, `email`, `username`, `password`, `creation_date`, `last_login`, `admin`, `remember_me`) VALUES ('6', 'testuser@free.fr', 'testuser', '$2y$10$wbwpqYmR2nLVFJmUgku09O/DZJ8BE2H5dtaADNdnoX3fSR8nmPKSK', '2015-08-20 22:30:25', '2015-12-12 21:35:35', '', '0');
-INSERT INTO `ciauth_user_accounts` (`user_id`, `email`, `username`, `password`, `creation_date`, `last_login`, `admin`, `remember_me`) VALUES ('12', 'titi@free.fr', 'titi', '$2y$10$9GvX34ErEFMeNhJDG/qnC.W8sKqnP8ajaRLh2ZK1P3sQpZQJjJe1G', '2015-11-07 12:46:28', '2015-12-12 21:35:35', '', '0');
 
 
 #

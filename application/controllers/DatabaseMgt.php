@@ -140,9 +140,14 @@ class DatabaseMgt extends MY_Controller {
 	function reset() {
 		$this->database->drop_all ();
 		
-		$this->lang->load ( 'admin' );
-		$data ['title'] = translation ( 'admin_title_reset' );
-		$data ['message'] = translation ( 'admin_reset_success' );
-		$this->load->view ( 'message', $data );
+		// after database reset nothing works any more
+		// so we must logout so a new installation is triggered
+		$this->ciauth->logout();
+		redirect(base_url());
+		
+// 		$this->lang->load ( 'admin' );
+// 		$data ['title'] = translation ( 'admin_title_reset' );
+// 		$data ['message'] = translation ( 'admin_reset_success' );
+// 		$this->load->view ( 'message', $data );
 	}
 }

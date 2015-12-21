@@ -67,14 +67,15 @@ class Welcome extends CI_Controller {
 		$tables = $this->db->list_tables();
 		if (!$tables) {
 			# Tables are not defined, install the initial database
-			echo  "Installation check " . date("d/m/Y h:i:s") . br();
-			echo "database not initialized" .br();
+			$this->logger->info('No tables in database, trigger automatic installation');
+				
 			$sqlfile = getcwd() . "/install/structure.sql";
 			$sql = file_get_contents($sqlfile);
-			$this->database->sql($sql);
-
+			$res = $this->database->sql($sql);
+			$this->logger->info("sql installation script result = " . var_export($res, true));
+			
 			// Create default user
-			$data = array ( 'email' => 'admin@free.fr', 'username' => 'admin');
+			$data = array ( 'email' => 'admin@free.fr', 'username' => 'admin', 'admin' => 'Y');
 			$data['password'] = password_hash('password', PASSWORD_DEFAULT);
 			$this->m_ciauth->add_user_account($data);
 

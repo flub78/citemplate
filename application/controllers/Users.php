@@ -53,7 +53,7 @@ class Users extends MY_Controller {
 	 * Special version because the password must be encoded
 	 */
 	public function add($data = array()) {
-		echo "creating user :" . var_export($data, true);exit;
+		// echo "creating user :" . var_export($data, true);exit;
 		$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 		$this->m_ciauth->add_user_account($data);
 
