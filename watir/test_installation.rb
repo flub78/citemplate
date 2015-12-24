@@ -22,7 +22,7 @@ class TestInstallation < ApplicationTest
   # --------------------------------------------------------------------------------
   def teardown
     self.db_disconnect
-    self.logout()
+#    self.logout()
     super
   end
 
@@ -35,10 +35,33 @@ class TestInstallation < ApplicationTest
   #   - check that it is possible to log in with default user
   # --------------------------------------------------------------------------------
   def test_install
-    puts "#\tTest case: test"
-    @b.goto @root_url
-    screenshot('scr_test.png')
-    check(true, "Vérification")
+    puts "#\tTest case: installation"
+
+    # Reset the database    
+    sql = 'DROP DATABASE `ci3`;'
+    sth = @db.execute(sql)
+
+    sql = 'CREATE DATABASE `ci3`;'
+    sth = @db.execute(sql)
+
+    @db.disconnect
+    @db = DBI.connect('DBI:Mysql:ci3', 'ci3', 'ci3')
+        
+    # check that there is no table
+    count = self.table_count(@db)
+    self.check(count == 0, 'No tables after reset');    
+
+    # goto to base url to trigger the installation
+     @b.goto @root_url
+    
+    # check that it is possible to log with default username
+    self.login('testadmin', 'testadmin')
+
+    # check that tables have been created
+    count = self.table_count(@db)
+    self.check(count > 0, 'Tables have been created during installation');    
+
+    self.logout()
   end
           
 end

@@ -162,7 +162,7 @@ class ApplicationTest < MiniTest::Test
   # --------------------------------------------------------------------------------
   # Return the number of rows in a table
   # --------------------------------------------------------------------------------
-  def table_count (dbh, table, where = "")
+  def table_size (dbh, table, where = "")
     sql = "select COUNT(*) from #{table}"
     if (where != "")
       sql += " WHERE #{where}"
@@ -174,13 +174,21 @@ class ApplicationTest < MiniTest::Test
     return row[0]
   end
 
+# --------------------------------------------------------------------------------
+# Return the number of tables in the database
+# --------------------------------------------------------------------------------
+def table_count (dbh)
+  sql = 'show tables;'
+  sth = dbh.select_all(sql)
+  return sth.size  
+end
 
   
   # --------------------------------------------------------------------------------
   # Create an element into a table
   # --------------------------------------------------------------------------------
   def fill_form(table, url, values, must_find, created, screenshot_name = "")
-    initial_count = self.table_count(@db, table)
+    initial_count = self.table_size(@db, table)
 
     @b.goto  @root_url + url
     @b.wait_until {@b.text.include? "Page rendered"}
@@ -225,7 +233,7 @@ class ApplicationTest < MiniTest::Test
       check(@b.text.include?(str), '"' + str + "\" found after #{table} form filled")
     end
 
-    count = self.table_count(@db, table)
+    count = self.table_size(@db, table)
     check(count - initial_count == created, "#{created} element created in #{table}")
   end
 
@@ -233,9 +241,9 @@ class ApplicationTest < MiniTest::Test
   # Delete an element from a table
   # --------------------------------------------------------------------------------
   def delete(table, url, deleted = 1)
-    initial_count = self.table_count(@db, table)
+    initial_count = self.table_size(@db, table)
     @b.goto  @root_url + url
-    count = self.table_count(@db, table)
+    count = self.table_size(@db, table)
     check(initial_count - count == deleted, "#{deleted} element deleted in #{table} #{url}")
   end
 
