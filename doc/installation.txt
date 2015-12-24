@@ -38,7 +38,8 @@ Instructions:
 		adapt the base_url address
 		chose your language $config['language']
 		encryption_key (at some point https://flub78.ddns.net/encryption_key)
-	5) ouvrez l'URL de l'application dans un navigateur WEB
+	5) ouvrez l'URL de l'application dans un navigateur WEB.
+	   L'application va détecter que la base n'existe pas et la créer.
 
 
 

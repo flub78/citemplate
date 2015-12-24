@@ -3,77 +3,18 @@ Todo list
 The goal of the project is to provide an application template from which real application
 can be derived really fast.
 
-Features:
-    * installation procedure
-    * Database
-        - backup
-        - restore
-        - migration
-    * Authentication (using ciauth) http://ciauth.com/
-        - login/logout
-        - privileges management
-        - register
-        - forgotten password
-        - control maximal number of attempts
-        - ciauth has not been updated since July 29 2015. I should consider something else.
-        - http://www.tutorials.kode-blog.com/codeigniter-authentication
-        - http://benedmunds.com/ion_auth/
-        
-    * Navigation
-        - privilege controlled menu
-        
-    * Metadata
-        - Form generation and validation
-        - Datatable display
-        - Data filtering and selection
-        
-    * Librairies
-        - Easy to filter loggers
-        - Metadata form support
-        
-    * Testing and validation
-        - PHPunit with high coverage
-        - Watir functional tests with high coverage
-        - Jenkins
-        - Javascripts unit tests
 ============================================================================================================================    
 
-Done:
-    * replace authentication library
-    * Fill the authentication database.
-    * Internationalization of the list view
-        - Titles and heading
-        - language comparison
-        - datatables
-        - form validation error messages
-        - Datepicker
-    * basic Excel and PDF export
-    * Metadata
-        - create first form based on metadata
-        - create first table based on metadata
-        - Add actions on table view
-        - password, confirm-password
-        - French translation
-    * Submit button labels 
-        (Valider, Créer, Créer et continuer)
-        Validate, Create, Create and continue, Register
-        
 Todo:
-    * DatePicker is displayed under the menu
-    .ui-datepicker {z-index: 100000; } does not work because z-index is set by the javascript itself.
-    When jquery-ui.js itself is modified and z-index set to 2 10E6 it works
-    2 solutions:
-        - set it in javascript (not so easy)
-        - set the display so that menu and body do not overlap
-        
+     
     * Manage null dates
     * Manage dates with default values
     
     * Set the title for pdf export
     * Database save, restore and migrations
         - migration
-    * Internationalization
-    * Installation
+        
+    * Installation: documentation
     * Metadata
         * second CRUD (users)
             * default values on create (understand why last login is used)
@@ -97,6 +38,7 @@ Todo:
     * Google calendar
         - display
         - event CRUD
+        
     * graphisme and diagrams
     * emails with attachements
     * Template PDF generation or whole page export
@@ -105,6 +47,38 @@ Todo:
     * REST interface
     * REST service access
     
+============================================================================================================================    
+May be later:        
+
+    * DatePicker is displayed under the menu
+    .ui-datepicker {z-index: 100000; } does not work because z-index is set by the javascript itself.
+    When jquery-ui.js itself is modified and z-index set to 2 10E6 it works
+    2 solutions:
+        - set it in javascript (not so easy)
+        - set the display so that menu and body do not overlap
+
+============================================================================================================================    
+Done:
+
+    * Installation
+    * replace authentication library
+    * Fill the authentication database.
+    * Internationalization of the list view
+        - Titles and heading
+        - language comparison
+        - datatables
+        - form validation error messages
+        - Datepicker
+    * basic Excel and PDF export
+    * Metadata
+        - create first form based on metadata
+        - create first table based on metadata
+        - Add actions on table view
+        - password, confirm-password
+        - French translation
+    * Submit button labels 
+        (Valider, Créer, Créer et continuer)
+        Validate, Create, Create and continue, Register
         
 
 ============================================================================================================================    

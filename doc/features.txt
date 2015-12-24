@@ -1,0 +1,38 @@
+Todo list
+
+The goal of the project is to provide an application template from which real application
+can be derived really fast.
+
+Features:
+    * installation procedure
+    * Database
+        - backup
+        - restore
+        - migration
+    * Authentication (using ciauth) http://ciauth.com/
+        - login/logout
+        - privileges management
+        - register
+        - forgotten password
+        - control maximal number of attempts
+        - ciauth has not been updated since July 29 2015. I should consider something else.
+        - http://www.tutorials.kode-blog.com/codeigniter-authentication
+        - http://benedmunds.com/ion_auth/
+        
+    * Navigation
+        - privilege controlled menu
+        
+    * Metadata
+        - Form generation and validation
+        - Datatable display
+        - Data filtering and selection
+        
+    * Librairies
+        - Easy to filter loggers
+        - Metadata form support
+        
+    * Testing and validation
+        - PHPunit with high coverage
+        - Watir functional tests with high coverage
+        - Jenkins
+        - Javascripts unit tests
