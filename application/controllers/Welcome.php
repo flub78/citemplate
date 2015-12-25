@@ -68,17 +68,23 @@ class Welcome extends CI_Controller {
 		if (!$tables) {
 			# Tables are not defined, install the initial database
 			$this->logger->info('No tables in database, trigger automatic installation');
-				
+
 			$sqlfile = getcwd() . "/install/structure.sql";
 			$sql = file_get_contents($sqlfile);
 			$res = $this->database->sql($sql);
 			$this->logger->info("sql installation script result = " . var_export($res, true));
-			
+
+			// check migration especially ion_auth tables
+			$this->check_migration();
+
 			// Create default user
 			$data = array ( 'email' => 'admin@free.fr', 'username' => 'admin', 'admin' => 'Y');
 			$data['password'] = password_hash('password', PASSWORD_DEFAULT);
 			$this->m_ciauth->add_user_account($data);
 
+		} else {
+		    // Check migration
+		    $res = $this->check_migration();
 		}
 
 		if ($errors) {
@@ -89,6 +95,42 @@ class Welcome extends CI_Controller {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * Run a migration if required.
+	 *
+	 * There is a bug in the CodeIgniter migration library and the target migration
+	 * is done over and over even when the value in the configuration file
+	 * and the database are equal.
+	 */
+	protected function check_migration() {
+		$this->load->library('migration');
+		$this->config->load('migration');
+
+		# look for the current migration level in database
+		$query = $this->db->query('SELECT version FROM migrations LIMIT 1');
+		$row = $query->row();
+		$db_version = $row->version;
+		# echo "DB version = " . $row->version;
+
+		# Look for the target migration in configuration file
+	    $program_level = $this->config->item('migration_version');
+        # echo "program= $program_level";
+
+        if ($program_level == $db_version) {
+            # echo "No migration needed";
+            return;
+        }
+
+        # Execute migrations
+        $res = $this->migration->current();
+
+        if ($res) {
+            $this->logger->info("Migration to $res, config['migration_version'] = $program_level");
+        } else {
+            $this->logger->info("Pas de migration, config['migration_version'] = $program_level");
+        }
 	}
 
 	/**

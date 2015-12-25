@@ -18,12 +18,12 @@
  *
  * Menu
  * @package vues
- * 
+ *
  * Menus are rendered hierachical list of anchors
  * - the tree must be determine from the contex: current user, page and privileges
  * - it must be rendered in HTML
  * - every level must be decorated depending on the framework used for rendering (bootstrap, etc).
- * 
+ *
  * a menu element has
  *   a label
  *   an url to call
@@ -117,9 +117,9 @@ $menu_dev = array (
 						'label' => "Check French",
 						'url' => controller_url("dev/check_lang/french/1")
 				)
-				
-				
-				
+
+
+
 		)
 );
 
@@ -138,15 +138,11 @@ $menu_database = array (
 						'url' => controller_url ( "databaseMgt/restore" )
 				),
 				array (
-						'label' => "Migration",
-						'url' => controller_url ( "migration" )
-				),
-				array (
 						'label' => "Reset",
 						'url' => controller_url ( "databaseMgt/reset" ),
 						'onclick' => "return confirm('" . translation('reset_database') . "')"
 				)
-		)				
+		)
 );
 
 $menu_admin = array (
@@ -180,17 +176,17 @@ $menu_crud = array (
 		'submenu' => array (
 				array (
 						'label' => "List",
-						'url' => controller_url ( "users/all" ) 
+						'url' => controller_url ( "users/all" )
 				),
 				array (
 						'label' => "Create",
-						'url' => controller_url ( "users/create" ) 
+						'url' => controller_url ( "users/create" )
 				),
 				array (
 						'label' => "Stats",
-						'url' => controller_url ( "users/stats" ) 
+						'url' => controller_url ( "users/stats" )
 				)
-		) 
+		)
 );
 
 $menu_help = array (
@@ -199,14 +195,14 @@ $menu_help = array (
 		'submenu' => array (
 				array (
 						'label' => "About",
-						'url' => controller_url ( "welcome/about" ) 
+						'url' => controller_url ( "welcome/about" )
 				)
-		) 
+		)
 );
 
 if (ENVIRONMENT == 'development') {
 	$menubar = array ('class' => 'menubar',
-		'submenu' => array($menu_admin, $menu_dev, $menu_crud, $menu_help) 
+		'submenu' => array($menu_admin, $menu_dev, $menu_crud, $menu_help)
 	);
 } else {
 	$menubar = array ('class' => 'menubar',
@@ -235,7 +231,7 @@ if (ENVIRONMENT == 'development') {
 		<div id="navbar" class="collapse navbar-collapse">
 
 			<?php echo bootstrap_menu($menubar); ?>
-			
+
 			<ul id="main-menu" class="nav navbar-nav navbar-right">
             <?php
 			  if ($this->ciauth->is_logged_in ()) {
@@ -250,7 +246,7 @@ if (ENVIRONMENT == 'development') {
 				}
 			  }
 			?>
-                        
+
             </ul>
 		</div>
 		<!--container-fluid -->
