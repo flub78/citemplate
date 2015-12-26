@@ -58,26 +58,26 @@ class Dev extends MY_Controller {
 		include($filename);
 		return $lang;
 	}
-	
+
 	/**
 	 * Display information on ..
 	 */
 	public function test()
 	{
-		$fields = $this->db->field_data('ciauth_user_privileges');
+		$fields = $this->db->field_data('users');
 		var_dump($fields);
 	}
 
-	
+
 	/*
 	 * Check that the support for a language is complete
 	*/
 	private function check_entries ($ref_file, $lang_file, $identical) {
 		$missing_keys = 0;
-	
+
 		$ref_hash = $this->to_hash($ref_file);
 		$lang_hash = $this->to_hash($lang_file);
-	
+
 		foreach ($ref_hash as $key => $value) {
 			if (!array_key_exists($key, $lang_hash)) {
 				echo nbs(8) . "key $key not found in $lang_file" . br();
@@ -94,7 +94,7 @@ class Dev extends MY_Controller {
 		}
 		return $missing_keys;
 	}
-	
+
 	/*
 	 * Check that the support for a language is complete
 	*/
@@ -106,16 +106,16 @@ class Dev extends MY_Controller {
 		echo "Checked language=" .$lang .br();
 		$data['lang_ref'] = $lang_ref;
 		$data['checked_lang'] = $lang;
-		
+
 		$missing_files = 0;
 		$missing_keys = 0;
 		$not_translated = 0;
-			
+
 		$pwd = getcwd();
 
 		$ref_files = array();
 		$lang_files = array();
-			
+
 		$ref_dir = $pwd . "/$type/language/" . $lang_ref;
 		if (!is_dir($ref_dir)) {
 			echo "Reference language $ref_dir not found" . br();
@@ -127,9 +127,9 @@ class Dev extends MY_Controller {
 			echo "Language directory $lang_dir not found" . br();
 			exit;
 		}
-			
+
 		echo br();
-			
+
 		# Check that all files are found in the checked language
 		if ($dh = opendir($ref_dir)) {
 			while (($file = readdir($dh)) !== false) {
@@ -169,7 +169,7 @@ class Dev extends MY_Controller {
 		echo "Missing files = $missing_files, missing entries = $missing_keys" .br();
 
 		$this->load->view(translation('language') . '/dev/check_lang');
-		
+
 	}
 
 }

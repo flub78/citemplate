@@ -110,10 +110,6 @@ $menu_dev = array (
 						'url' => controller_url ( "metadata/tables" )
 				),
 				array (
-						'label' => "CIAuth demo",
-						'url' => 'http://localhost/citemplate/C_ciauth'
-				),
-				array (
 						'label' => "Check French",
 						'url' => controller_url("dev/check_lang/french/1")
 				)
@@ -234,9 +230,12 @@ if (ENVIRONMENT == 'development') {
 
 			<ul id="main-menu" class="nav navbar-nav navbar-right">
             <?php
-			  if ($this->ciauth->is_logged_in ()) {
-				$userdata = $this->ciauth->get_user_data ();
-				echo "<li class=\"nav-welcome\"><h5>" . translation('login_welcome') . " " . $userdata->username . "</h5></li>";
+			  if ($this->ion_auth->logged_in ()) {
+				$user = $this->ion_auth->user()->row();
+				echo $user->email;
+				$username = $user->first_name . ' ' . $user->last_name;
+
+				echo "<li class=\"nav-welcome\"><h5>" . translation('login_welcome') . " " . $username . "</h5></li>";
 				echo "<li>&nbsp;</li>";
 				echo "<li><a id=\"logout\" href=\"" . controller_url("welcome/logout") ."\">" . translation('button_logout') . "</a></li>";
  			  } else {

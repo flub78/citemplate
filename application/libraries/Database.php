@@ -33,25 +33,19 @@ class Database  {
 	// So everything which is referenced by another table must be above the referencing table
 
 	protected $application_tables = array (
-			'ciauth_navigation',
-			'ciauth_sessions',
-			'ciauth_user_accounts',
-			'ciauth_user_groups',
-			'ciauth_user_privileges',
-			'ciauth_user_privileges_groups',
-			'ciauth_user_privileges_users',
-			'ciauth_user_profiles',
-			'ciauth_user_token' 
+	        'migrations',
+	        'users',
+	        'groups',
+	        'users_groups',
+	        'login_attempts'
 	);
 
 	protected $table_list;
-		
+
 	protected $defaut_list = array (
-			'ciauth_navigation',
-			'ciauth_user_privileges'
 	);
-	
-	
+
+
 	protected $CI;
 
 	/**
@@ -76,10 +70,10 @@ class Database  {
 	 */
 	public function backup($type = "") {
 		date_default_timezone_set('Europe/Paris');
-		 
+
 		// Load the DB utility class
 		$this->CI->load->dbutil();
-		 
+
 		$dt = date("Y_m_d");
 		$format = 'zip';
 		if ($type == "" | $type == 'backup') {
@@ -101,7 +95,7 @@ class Database  {
 			$format = 'txt';
 			$list = $this->defaut_list;
 		}
-		 
+
 		// Backup your entire database and assign it to a variable
 		$prefs = array (
 				'filename' => $filename,
@@ -110,12 +104,12 @@ class Database  {
 				'add_drop' => $add_drop,
 				'tables' => array_reverse($list)
 		);
-		 
+
 		$backup = & $this->CI->dbutil->backup($prefs);
-		 
+
 		// Load the file helper and write the file to your server
 		$this->CI->load->helper('file');
-		 
+
 		// Load the download helper and send the file to your desktop
 		$this->CI->load->helper('download');
 		force_download($filename, $backup);
@@ -137,7 +131,7 @@ class Database  {
 		foreach ($reqs as $req) { // et on les éxécute
 			if (trim($req) != "") {
 				// echo "req = $req<br>";
-				$res = $this->CI->db->query($req); 
+				$res = $this->CI->db->query($req);
 				if ($return_result && $res)
 	                $all_results[] = $res->result_array();
 			}

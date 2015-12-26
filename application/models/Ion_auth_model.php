@@ -2234,7 +2234,8 @@ class Ion_auth_model extends CI_Model
 	protected function _filter_data($table, $data)
 	{
 		$filtered_data = array();
-		$columns = $this->db->list_fields($table);
+		// fp $columns = $this->db->list_fields($table);
+		$columns = $this->db->fields_list($table);
 
 		if (is_array($data))
 		{

@@ -52,18 +52,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
-/*
- * Ciauth routes
- */
-
-$route['login'] = 'welcome/login';
-$route['logout'] = 'welcome/logout';
-$route['register'] = 'welcome/register';
-$route['about'] = 'welcome/about';
-
-/*
- * Ciauth Admin Routes
- */
-$route['nav_admin'] = 'C_ciauth_admin/nav_admin';
-$route['update_nav_ajax'] = 'C_ciauth_admin/update_nav_ajax';

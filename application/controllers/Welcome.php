@@ -69,18 +69,34 @@ class Welcome extends CI_Controller {
 			# Tables are not defined, install the initial database
 			$this->logger->info('No tables in database, trigger automatic installation');
 
-			$sqlfile = getcwd() . "/install/structure.sql";
-			$sql = file_get_contents($sqlfile);
-			$res = $this->database->sql($sql);
-			$this->logger->info("sql installation script result = " . var_export($res, true));
+			# Removed, I'll try to do all database structure changes though migrations
+			# I keep thecode just in case
+// 			$sqlfile = getcwd() . "/install/structure.sql";
+// 			$sql = file_get_contents($sqlfile);
+// 			$res = $this->database->sql($sql);
+// 			$this->logger->info("sql installation script result = " . var_export($res, true));
 
 			// check migration especially ion_auth tables
 			$this->check_migration();
 
 			// Create default user
-			$data = array ( 'email' => 'admin@free.fr', 'username' => 'admin', 'admin' => 'Y');
-			$data['password'] = password_hash('password', PASSWORD_DEFAULT);
-			$this->m_ciauth->add_user_account($data);
+
+			$username = 'admin';
+			$password = 'admin';
+			$email = 'admin@gmail.com';
+			$additional_data = array(
+			        'first_name' => 'Admin',
+			        'last_name' => 'Admin',
+			);
+			$group = array('1'); // Sets user to admin. No need for array('1', '2') as user is always set to member by default
+
+			$userid = $this->ion_auth->register($username, $password, $email, $additional_data, $group);
+			if ($userid) {
+			    $this->logger->info("Default user $userid created");
+			} else {
+			    $this->logger->error("Error creating default user $username");
+			}
+
 
 		} else {
 		    // Check migration
@@ -141,8 +157,8 @@ class Welcome extends CI_Controller {
 			return;
 		}
 
-		if (!$this->ciauth->is_logged_in ()) {
-			redirect(base_url() . 'login');
+		if (!$this->ion_auth->logged_in ()) {
+			redirect(base_url() . 'auth/login');
 		}
 		$this->load->view(translation('language') . '/home');
 	}
@@ -166,7 +182,7 @@ class Welcome extends CI_Controller {
 			$password = $this->input->post('password');
 			$remember_me = $this->input->post('keep_logged_in');
 
-			if (!$this->ciauth->login($login_value, $password, $remember_me)) {
+			if (!$this->ion_auth->login($login_value, $password, $remember_me)) {
 				# error unknown user
 				$data['error_msg'] = translation('error_user_not_found');
 				$this->load->view('login', $data);
@@ -182,7 +198,7 @@ class Welcome extends CI_Controller {
 	 * User logout
 	 */
 	public function logout() {
-		$this->ciauth->logout();
+		$this->ion_auth->logout();
 		redirect(base_url());
 	}
 

@@ -1,0 +1,13 @@
+Citemplate authentication
+
+	Initially authentication has been done with ciauth.
+	https://github.com/barnent1/ciauth
+
+	Ciauth provides an authentication mechanism, a template mechanism and a navigation mechanism. The authentication is not bad,
+	but is the group management is not complete. The project looks dead last update in july 2015.
+
+	So I am going to look for another authentication library.
+
+	ion_auth looks more active and it is only an authentication mechanism.
+
+
