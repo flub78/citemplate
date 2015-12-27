@@ -6,20 +6,20 @@
  * @license    MIT License
  * @copyright  2015 Kenji Suzuki
  * @link       https://github.com/kenjis/ci-phpunit-test
- * 
+ *
  */
 
-class Menu_helper_test extends TestCase
+class Helper_menu_test extends TestCase
 {
 	public function setUp()
 	{
 		$this->resetInstance();
 		$this->CI->load->library("Menu");
-		$this->CI->load->library("Ciauth");
+		$this->CI->load->library("Ion_auth");
 		$this->CI->load->helper('metadata');
 		$this->CI->load->helper('menu');
 	}
-	
+
 	/**
 	 * Test legacy menus
 	 */
@@ -56,7 +56,7 @@ class Menu_helper_test extends TestCase
 // 						)
 // 				)
 // 		);
-		
+
 // 		// #################################################################################################
 // 		$menu_crud = array (
 // 				'label' => translation ( "menu_crud" ),
@@ -81,7 +81,7 @@ class Menu_helper_test extends TestCase
 // 						)
 // 				)
 // 		);
-		
+
 // 		$menu_help = array (
 // 				'label' => translation ( "menu_help" ),
 // 				'class' => 'menuheader',
@@ -104,7 +104,7 @@ class Menu_helper_test extends TestCase
 // 						)
 // 				)
 // 		);
-		
+
 // 		$menubar = array ('class' => 'menubar',
 // 				'submenu' => array($menu_file, $menu_crud, $menu_help)
 // 		);
@@ -133,19 +133,19 @@ class Menu_helper_test extends TestCase
 // 		</ul>
 // 		</li>
 // 		</ul>';
-		
+
 // 		$html = html_menu($menubar);
 // 		// echo $html;
 // 		$this->assertNotEquals("", $html, 'Menu Html');
 // 	}
 
-	
+
 	/**
 	 * Test Bootstrap menus
 	 */
 	public function test_bootstrap()
 	{
-		
+
 		// #################################################################################################
 		$menu_file = array (
 				'label' => translation ( "menu_file" ),
@@ -177,7 +177,7 @@ class Menu_helper_test extends TestCase
 		);
 
 		// #################################################################################################
-		
+
 		$menu_database = array (
 				'label' => translation ( "menu_database" ),
 				'class' => 'dropdown-menu multi-level',
@@ -196,7 +196,7 @@ class Menu_helper_test extends TestCase
 								'url' => controller_url ( "database/migration" )
 						)				)
 		);
-		
+
 		$menu_admin = array (
 				'label' => translation ( "menu_admin" ),
 				'class' => 'dropdown-menu multi-level',
@@ -213,7 +213,7 @@ class Menu_helper_test extends TestCase
 						)
 				)
 		);
-		
+
 		// #################################################################################################
 		$menu_crud = array (
 				'label' => translation ( "menu_crud" ),
@@ -238,7 +238,7 @@ class Menu_helper_test extends TestCase
 						)
 				)
 		);
-		
+
 		$menu_help = array (
 				'label' => translation ( "menu_help" ),
 				'class' => 'dropdown-menu multi-level',
@@ -261,17 +261,17 @@ class Menu_helper_test extends TestCase
 						)
 				)
 		);
-		
+
 		$menubar = array (
 				'submenu' => array($menu_file, $menu_admin, $menu_crud, $menu_help)
 		);
-		
+
 		# a User needs to be logged in to get a menu
-		$this->CI->ciauth->login('testuser', 'testuser', true);
-		
+		$this->CI->ion_auth->login('admin@gmail.com', 'admin', true);
+
 		$bootstrap = bootstrap_menu($menubar);
 		# echo "bootstrap menu = " . $bootstrap;
 		$this->assertNotEquals("", $bootstrap, 'Bootstrap Html');
 	}
-	
+
 }

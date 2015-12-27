@@ -9,7 +9,7 @@
  * 
  */
 
-class Url_helper_test extends TestCase
+class Helper_url_test extends TestCase
 {
 	public function setUp()
 	{

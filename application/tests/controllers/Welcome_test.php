@@ -13,27 +13,27 @@ class Welcome_controller_test extends TestCase
 	public function test_index()
 	{
 		$this->resetInstance();
-		$this->CI->load->library('ciauth');
-		$this->CI->ciauth->login('testuser', 'testuser', true);
-		
+		$this->CI->load->library('Ion_auth');
+		$this->CI->ion_auth->login('admin@gmail.com', 'admin', true);
+
 		$output = $this->request('GET', ['Welcome', 'index']);
 		# $this->assertContains('<title>Welcome to CodeIgniter</title>', $output);
 		$this->assertNotContains('A PHP Error was encountered', $output);
-		
+
 		$output = $this->request('GET', ['Welcome', 'home']);
 		$this->assertNotContains('A PHP Error was encountered', $output);
-		
+
 		$output = $this->request('GET', ['Welcome', 'login']);
 		$this->assertNotContains('A PHP Error was encountered', $output);
-		
+
 		$output = $this->request('GET', ['Welcome', 'about']);
 		$this->assertNotContains('A PHP Error was encountered', $output);
-		
+
 		# To improve coverage and go through not log in branches
 		$output = $this->request('GET', ['Welcome', 'logout']);
 		$output = $this->request('GET', ['Welcome', 'about']);
 		$output = $this->request('GET', ['Welcome', 'home']);
-		
+
 	}
 
 	public function test_method_404()

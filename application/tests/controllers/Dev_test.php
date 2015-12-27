@@ -13,13 +13,14 @@ class Dev_controller_test extends TestCase
 	public function setUp()
 	{
 		$this->resetInstance();
-		$this->CI->ciauth->login('testuser', 'testuser', true);
+		$this->CI->load->library('Ion_auth');
+		$this->CI->ion_auth->login('admin@gmail.com', 'admin', true);
 	}
-	
+
 	public function tearDown() {
-		$this->CI->ciauth->logout();
+		$this->CI->ion_auth->logout();
 	}
-	
+
 	public function test_phpinfo()
 	{
 		$output = $this->request('GET', ['Dev', 'phpinfo']);
@@ -37,7 +38,7 @@ class Dev_controller_test extends TestCase
 		$output = $this->request('GET', ['Dev', 'check_lang', 'french', 1]);
 		$this->assertContains('Reference language', $output);
 	}
-	
+
 	public function test_method_404()
 	{
 		$this->request('GET', ['Dev', 'undefined_method']);

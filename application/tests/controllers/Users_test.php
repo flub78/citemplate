@@ -17,14 +17,14 @@ class Users_test extends TestCase
 			session_start();
 		}
 		$this->resetInstance();
-		$this->CI->load->library('ciauth');
-		$this->CI->ciauth->login('testuser', 'testuser', true);
-		
+		$this->CI->load->library('Ion_auth');
+		$this->CI->ion_auth->login('admin@gmail.com', 'admin', true);
+
 		// Also load the model, controller test are a little more than unit tests
 		$this->CI->load->model('crud_model', 'model');
-		$this->model = $this->CI->model;		
+		$this->model = $this->CI->model;
 	}
-		
+
 	public function test_method_404()
 	{
 		$this->request('GET', ['Users', 'unknow_method']);
@@ -36,10 +36,10 @@ class Users_test extends TestCase
 		# Check create form
 		$output =  $this->request('GET', ['Users', 'create']);
 		$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in User create form");
-	
+
 		# Actually create something
-		$count =  $this->model->count('ciauth_user_accounts');
-	
+		$count =  $this->model->count('users');
+
 // 		echo "\nattempt to create a user with no password";
 		$args = array("email_value"	=> "test@free.fr",
 				"username_value" => "test",
@@ -50,7 +50,7 @@ class Users_test extends TestCase
 		// echo $output;
 // 		echo "\nuser with no password validated";
 
-	
+
 		$args = array("email_value"	=> "test@free.fr",
 				"username_value" => "test",
 				"password" => "password",
@@ -59,11 +59,11 @@ class Users_test extends TestCase
 		// $this->request('POST', ['users', 'add'], $args);
 		$this->request('POST', ['users', 'validate', 'create'], $args);
 		$id = $this->model->get_last_inserted();
-		
+
 // 		echo "\ncheck that a user has been created id=$id";
-		$new_count =  $this->model->count('ciauth_user_accounts');
+		$new_count =  $this->model->count('users');
 		$this->assertEquals($count +1, $new_count, "One User has been created");
-			
+
 		// change it
 		// http://localhost/citemplate/index.php/Users/validate/create
 		$args = array("email_value"	=> "test@free.fr",
@@ -74,16 +74,16 @@ class Users_test extends TestCase
 		);
 		$output =  $this->request('POST', ['Users', 'validate', 'edit'], $args);
 // 		$output =  $this->request('SET', ['Users', 'update', $id], $args);
-		
+
 		// read it
 		$output =  $this->request('GET', ['Users', 'edit', $id]);
 		$this->assertNotEquals("", $output, "Edit");
 		$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in User edit form");
-	
+
 		// delete it
 		$output =  $this->request('GET', ['Users', 'delete', $id]);
-		$new_count =  $this->model->count('ciauth_user_accounts');
+		$new_count =  $this->model->count('users');
 		$this->assertEquals($count, $new_count, "One user has been deleted");
 	}
-	
+
 }

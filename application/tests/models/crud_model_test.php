@@ -11,8 +11,8 @@ class Crud_model_test extends TestCase
 
     public function test_get_category_list()
     {
-        $list = $this->model->select_all('ciauth_user_privileges');
-        $count =  $this->model->count('ciauth_user_privileges');
+        $list = $this->model->select_all('groups');
+        $count =  $this->model->count('groups');
         $this->assertEquals(true, count($list) >= $count, "Correct number of elements");
     }
 
@@ -121,32 +121,32 @@ class Crud_model_test extends TestCase
     public $allow_null =>
     bool(true)
   }
-     
+
      */
     public function test_get_table_MetaData() {
-    	
-    	$meta = $this->model->getTableMetaData('ciauth_user_privileges');
-    	
+
+    	$meta = $this->model->getTableMetaData('groups');
+
     	$index = array();
     	foreach ($meta as $obj) {
     		$index[$obj->name] = $obj;
     	}
-    	
+
     	$this->assertEquals('int', $index['privilege_id']->type, "Correct int type");
     	$this->assertEquals(11, $index['privilege_id']->max_length, "Correct int length");
     	$this->assertEquals(true, $index['privilege_id']->auto_increment, "Correct int auto_increment");
     	$this->assertEquals(false, $index['privilege_id']->allow_null, "Correct int allow_null");
 
-    	$meta = $this->model->getTableMetaData('ciauth_user_accounts');
-    	 
+    	$meta = $this->model->getTableMetaData('users');
+
     	$index = array();
     	foreach ($meta as $obj) {
     		$index[$obj->name] = $obj;
     	}
     	// var_dump($index);
-    	 
-     	$this->assertEquals('timestamp', $index['creation_date']->type, "Correct timestamp type");
-     	$this->assertEquals('CURRENT_TIMESTAMP', $index['creation_date']->default, "Correct timestamp default");
-    	 
+
+     	$this->assertEquals('timestamp', $index['created_on']->type, "Correct timestamp type");
+     	$this->assertEquals('CURRENT_TIMESTAMP', $index['created_on']->default, "Correct timestamp default");
+
     }
 }

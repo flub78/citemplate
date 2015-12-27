@@ -8,7 +8,7 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-class Metadata_helper_test extends TestCase
+class Helper_metadata_test extends TestCase
 {
 	public function setUp()
 	{
@@ -17,22 +17,22 @@ class Metadata_helper_test extends TestCase
 		$this->CI->lang->load('application');
         $this->CI->load->model('crud_model', 'model');
 	}
-	
+
 	public function test_loaded()
 	{
-		$table = 'ciauth_user_privileges';
+		$table = 'groups';
 		$field = 'privilege_name';
-		
+
 		$datatable = datatable('crud');
 		$expected = "";
 		$this->assertEquals($expected,
 			$datatable,
 			'check that datable return nothing on non existing tables'
 		);
-		
+
 		$expected = "";
 		$actual = field_label_text($table, $field);
-		$this->assertEquals($expected, $actual, 
+		$this->assertEquals($expected, $actual,
 			"field_label"
 		);
 
@@ -47,7 +47,7 @@ class Metadata_helper_test extends TestCase
 		$this->assertNotEquals($expected, $actual,
 				"basic form: $actual not empty"
 		);
-		
-		
+
+
 	}
 }

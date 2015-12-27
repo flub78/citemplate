@@ -11,13 +11,13 @@ class User_model_test extends TestCase
 
     public function test_image()
     {
-        $image = $this->model->image('ciauth_user_accounts', 'testadmin');
+        $image = $this->model->image('users', 'testadmin');
         $this->assertEquals('testadmin', $image, "image = 'testadmin'");
-        
-        $image = $this->model->image('ciauth_user_accounts', 'undefined_user');
+
+        $image = $this->model->image('users', 'undefined_user');
         $this->assertEquals('undefined_user', $image, "image = identity for unknow element");
     }
 
-     
-    
+
+
 }

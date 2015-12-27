@@ -11,7 +11,7 @@
  * 
  */
 
-class Log_helper_test extends TestCase
+class Helper_log_test extends TestCase
 {
 	public function setUp()
 	{

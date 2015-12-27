@@ -18,7 +18,7 @@ class Rights_controller_test extends TestCase
 			session_start();
 		}
 		$this->resetInstance();
-		$this->CI->ciauth->login('testuser', 'testuser', true);
+		$this->CI->ion_auth->login('admin@gmail.com', 'admin', true);
 
 		// Also load the model, controller test a a little more than unit tests
 		$this->CI->load->model('crud_model', 'model');
@@ -26,18 +26,18 @@ class Rights_controller_test extends TestCase
 	}
 
 	public function tearDown() {
-		$this->CI->ciauth->logout();
+		$this->CI->ion_auth->logout();
 	}
-	
+
 	public function test_all() {
 		$methods = array('index', 'create');
 		foreach ($methods as $method) {
 			$id = 42;
 			$output = $this->request('GET', ['Rights', $method]);
 			$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in $method");
-		}	
+		}
 	}
-	
+
 	public function test_method_404()
 	{
 		$this->request('GET', ['Rights', 'unknow_method']);
@@ -49,10 +49,10 @@ class Rights_controller_test extends TestCase
 		# Check create form
 		$output =  $this->request('GET', ['Rights', 'create']);
 		$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in $method");
-		
+
 		# Actually create something
-        $count =  $this->model->count('ciauth_user_privileges');
-        
+        $count =  $this->model->count('groups');
+
 		$args = array("privilege_description"	=> "For super hero",
 					"privilege_name" => "Superpower",
 					"submit" => "submit");
@@ -61,10 +61,10 @@ class Rights_controller_test extends TestCase
  		$id = $this->model->get_last_inserted();
  		// file_put_contents ("/tmp/output.html", $output);
  		$this->assertEquals("", $output, "POST create should not return anything ???");
- 		
- 		$new_count =  $this->model->count('ciauth_user_privileges');
+
+ 		$new_count =  $this->model->count('groups');
  		$this->assertEquals($count +1, $new_count, "One privilege has been created");
- 		
+
  		// change it
  		$args = array("privilege_description"	=> "For really super hero",
  				"privilege_name" => "Superpower",
@@ -72,16 +72,16 @@ class Rights_controller_test extends TestCase
  				"submit" => "submit");
  		// http://localhost/citemplate/index.php/rights/validate/create
  		$output =  $this->request('POST', ['Rights', 'validate', 'edit'], $args);
- 		
+
  		// read it
  		$output =  $this->request('GET', ['Rights', 'edit', $id]);
  		$this->assertNotEquals("", $output, "Edit");
  		$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in $method");
- 			
+
 		// delete if
  		$output =  $this->request('GET', ['Rights', 'delete', $id]);
- 		$new_count =  $this->model->count('ciauth_user_privileges');
+ 		$new_count =  $this->model->count('groups');
  		$this->assertEquals($count, $new_count, "One privilege has been deleted");
 	}
-	
+
 }

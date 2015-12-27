@@ -9,7 +9,7 @@
  * 
  */
 
-class Html_helper_test extends TestCase
+class Helper_html_test extends TestCase
 {
 	public function setUp()
 	{

@@ -17,24 +17,24 @@ class Bootstrap_controller_test extends TestCase
 			session_start();
 		}
 		$this->resetInstance();
-		$this->CI->load->library('ciauth');
-		$this->CI->ciauth->login('testuser', 'testuser', true);
+		$this->CI->load->library('Ion_auth');
+		$this->CI->ion_auth->login('admin@gmail.com', 'admin', true);
 	}
-	
+
 	public function test_all() {
 		$views = array('basic', 'blog', 'carousel', 'cover', 'dashboard', 'grids', 'jumbotron',
 				'narrow_jumbotron', 'sign_in', 'sticky_footer_with_navbar',
 				'theme');
-		
+
 		foreach ($views as $view) {
 			# echo ("\ntesting $view");
 			$output = $this->request('GET', ['Bootstrap', $view]);
 			if (isset($output)) {
 				$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in $view");
 			}
-		}	
+		}
 	}
-	
+
 	public function test_method_404()
 	{
 		$this->request('GET', ['Bootstrap', 'unknow_method']);

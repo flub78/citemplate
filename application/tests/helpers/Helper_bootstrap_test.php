@@ -9,7 +9,7 @@
  * 
  */
 
-class Bootstrap_helper_test extends TestCase
+class Helper_bootstrap_test extends TestCase
 {
 	public function setUp()
 	{
