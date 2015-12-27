@@ -14,7 +14,7 @@ class Welcome_controller_test extends TestCase
 	{
 		$this->resetInstance();
 		$this->CI->load->library('Ion_auth');
-		$this->CI->ion_auth->login('admin@gmail.com', 'admin', true);
+		$this->CI->ion_auth->login('admin', 'admin', true);
 
 		$output = $this->request('GET', ['Welcome', 'index']);
 		# $this->assertContains('<title>Welcome to CodeIgniter</title>', $output);

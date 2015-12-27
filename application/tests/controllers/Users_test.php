@@ -18,7 +18,7 @@ class Users_test extends TestCase
 		}
 		$this->resetInstance();
 		$this->CI->load->library('Ion_auth');
-		$this->CI->ion_auth->login('admin@gmail.com', 'admin', true);
+		$this->CI->ion_auth->login('admin', 'admin', true);
 
 		// Also load the model, controller test are a little more than unit tests
 		$this->CI->load->model('crud_model', 'model');

@@ -18,7 +18,7 @@ class Rights_controller_test extends TestCase
 			session_start();
 		}
 		$this->resetInstance();
-		$this->CI->ion_auth->login('admin@gmail.com', 'admin', true);
+		$this->CI->ion_auth->login('admin', 'admin', true);
 
 		// Also load the model, controller test a a little more than unit tests
 		$this->CI->load->model('crud_model', 'model');

@@ -267,7 +267,7 @@ class Helper_menu_test extends TestCase
 		);
 
 		# a User needs to be logged in to get a menu
-		$this->CI->ion_auth->login('admin@gmail.com', 'admin', true);
+		$this->CI->ion_auth->login('admin', 'admin', true);
 
 		$bootstrap = bootstrap_menu($menubar);
 		# echo "bootstrap menu = " . $bootstrap;
