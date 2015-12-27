@@ -29,12 +29,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Users extends MY_Controller {
 
-	var $default_table = 'ciauth_user_accounts';
+	var $default_table = 'users';
 	var $controller = 'users';
-	var $table_fields = array('username', 'email', 'creation_date', 'last_login', 'admin', '__edit', '__delete');
+	var $table_fields = array('username', 'email', 'created_on', 'last_login', '__edit', '__delete');
 	var $form_fields = array(
 		'create' => array('email', 'username', 'password', 'confirm-password'),
-		'edit' =>  array('email', 'username', 'password', 'confirm-password', 'creation_date', 'last_login', 'admin')
+		'edit' =>  array('email', 'username', 'password', 'confirm-password', 'created_on', 'last_login')
 	);
 
 	/**
@@ -44,7 +44,6 @@ class Users extends MY_Controller {
 		parent :: __construct();
 		// specific initialization
 		$this->load->model('users_model', 'model');
-		$this->load->model("m_ciauth");
 	}
 
 	/**
@@ -55,7 +54,7 @@ class Users extends MY_Controller {
 	public function add($data = array()) {
 		// echo "creating user :" . var_export($data, true);exit;
 		$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-		$this->m_ciauth->add_user_account($data);
+		$this->model->create('users', $data);
 
 		redirect(controller_url($this->controller));
 	}

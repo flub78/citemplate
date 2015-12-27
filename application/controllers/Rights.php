@@ -28,11 +28,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Rights extends MY_Controller {
 
-	var $default_table = 'ciauth_user_privileges';
+	var $default_table = 'groups';
 	var $controller = 'rights';
 	var $form_fields = array('privilege_name', 'privilege_description');
 	var $table_fields = array('privilege_name', 'privilege_description', '__edit', '__delete');
-		
+
 	/**
 	 * Constructor
 	 */
@@ -40,7 +40,7 @@ class Rights extends MY_Controller {
 		parent :: __construct();
 		// specific initialization
 		$this->load->model('rights_model', 'model');
-		
-	}	
-		
+
+	}
+
 }

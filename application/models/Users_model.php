@@ -18,7 +18,7 @@
  *
  * @filesource Users_model.php
  * @package model
- * 
+ *
  * The CRUD model is a standard model for CRUD access. All its implementation
  * is done in MY_Model
  */
@@ -32,11 +32,11 @@ class Users_model extends MY_Model {
 	 * @param $key identifiant de la ligne à représenter
 	 */
 	public function image($table, $key) {
-		$vals = $this->get_by_id($table, 'user_id', $key);
+		$vals = $this->get_by_id($table, 'id', $key);
 		// var_dump($vals);
 		$img = (isset($vals['username'])) ? $vals['username'] : $key;
 		return $img;
 	}
-	
+
 }
 /* End of file */

@@ -4,7 +4,7 @@
 */
 
 $lang['language'] = "french";	// must match value in config.php
-$lang['html_language'] = "fr";	
+$lang['html_language'] = "fr";
 
 # Titles
 $lang['app_title'] = "Bienvenue des cette application WEB!!!";
@@ -93,7 +93,7 @@ $lang['title_ciauth_user_accounts_create'] = "Nouvel utilisateur";
 $lang['heading_email'] = "Courriel";
 $lang['heading_username'] = "Nom";
 $lang['heading_password'] = "Mot de passe";
-$lang['heading_creation_date'] = "Crée le";
+$lang['heading_created_on'] = "Crée le";
 $lang['heading_last_login'] = "Dernière connexion";
 $lang['heading_admin'] = "Administrateur";
 
@@ -106,7 +106,7 @@ $lang['label_ciauth_user_accounts_email'] = "Courriel";
 $lang['label_ciauth_user_accounts_username'] = "Nom";
 $lang['label_ciauth_user_accounts_password'] = "Mot de passe";
 $lang['label_ciauth_user_accounts_confirm-password'] = "Confirmez le mot de passe";
-$lang['label_ciauth_user_accounts_creation_date'] = "Date de création";
+$lang['label_ciauth_user_accounts_created_on'] = "Date de création";
 $lang['label_ciauth_user_accounts_last_login'] = "Dernière connexion";
 $lang['label_ciauth_user_accounts_admin'] = "Administrateur";
 

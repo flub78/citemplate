@@ -4,7 +4,7 @@
 */
 
 $lang['language'] = "english";	// must match value in config.php
-$lang['html_language'] = "en";	
+$lang['html_language'] = "en";
 
 # Titles
 $lang['app_title'] = "Welcome to This template application!!!";
@@ -15,7 +15,7 @@ $lang['Dev'] = "Development";
 
 # Login
 $lang['login_title'] = "Please sign in";
-$lang['login_user_label'] = "User ID or email address"; 
+$lang['login_user_label'] = "User ID or email address";
 $lang['login_password_label'] = "Password";
 $lang['login_remember_me_label'] = "Remember me";
 $lang['login_sign_in_button'] = "Sign in";
@@ -57,7 +57,7 @@ $lang['title_ciauth_user_accounts_create'] = "Create user";
 
 $lang['heading_email'] = "Email address";
 $lang['heading_username'] = "User name";
-$lang['heading_creation_date'] = "Creation";
+$lang['heading_created_on'] = "Creation";
 $lang['heading_last_login'] = "Last login";
 $lang['heading_admin'] = "Admin";
 
@@ -70,7 +70,7 @@ $lang['label_ciauth_user_accounts_email'] = "Email address";
 $lang['label_ciauth_user_accounts_username'] = "User name";
 $lang['label_ciauth_user_accounts_password'] = "Password";
 $lang['label_ciauth_user_accounts_confirm-password'] = "Confirm Password";
-$lang['label_ciauth_user_accounts_creation_date'] = "Creation date";
+$lang['label_ciauth_user_accounts_created_on'] = "Creation date";
 $lang['label_ciauth_user_accounts_last_login'] = "Last login";
 $lang['label_ciauth_user_accounts_admin'] = "Administrator";
 

@@ -25,24 +25,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * The metadata helper provides a functional API to metadata services.
  * This class singleton is in charge of fetching the information from the database
  * and to cache it.
- * 
+ *
  * For performance, metadata are only fetched once and on demand from database
  * even if the same information is used several times to build a view.
- * 
+ *
  * Design
- * 
+ *
  * Initially I thought about to put all metadata in database, as some of the metadata
  * information are fetch from database if seems logical to have only one source
  * of information. But then I need a model just to fetch it and have it available
  * from a PHP class. So it is more efficient to just put the additional metadata
  * as a set of arrays into the PHP class, it save all database related accesses
  * and this information is static, it is never change following a user action.
- * 
+ *
  * Data fetched from the databaser are:
  *    * The list or table
  *    * The list of fields for each table
  *    * a list of attributes for each fields
- *      
+ *
           public 'name' => string 'user_id' (length=7)
           public 'type' => string 'int' (length=3)
           public 'max_length' => int 11
@@ -53,32 +53,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           public 'allow_null' => boolean false
  *
  * Supported metadata types:
- *    
+ *
  *    boolean:
  *       - display with a tick in tables
  *       - checkbox for inputs
- *       
+ *
  *    date:
  *    time:
  *    timestamp:
  *       - http://trentrichardson.com/examples/timepicker/
  *    datetime:
- *    
+ *
  *    email:
  *    password:
  *    password-confirm:
  *    keys:
- * 
+ *
  * Addition of new metadata types
  * ------------------------------
- * 
+ *
  *    * Modify display_field in this class
  *    * Modify field_input in this class
  *    * Modify rules in this class
  *    * Add validation callback in the core
- *    
+ *
  *    Note that it would be more elegant to declare a MetadataType class.
- *    
+ *
  * @author frederic
  *
  */
@@ -90,15 +90,15 @@ class Meta {
 	protected $field_data;      # database metadata
 	protected $fields;	        # additional metadata
 	protected $logger;
-	
+
 	/**
 	 * Constructor
 	 */
 	public function __construct($attrs = array ()) {
 		$this->CI = & get_instance ();
-		
+
 		$this->logger = new Logger("Metadata" );
-		
+
 		# initialize the caches
 		$this->table_exist = array();
 		$this->table_keys = array();
@@ -106,21 +106,21 @@ class Meta {
 		$this->field_data = array();
 		$this->init();
 	}
-	
+
 	/*
 	 * Here starts the metadata description itself
-	 * 
+	 *
 	 */
-	
+
 	/**
-	 * Initialize the fields metadata 
+	 * Initialize the fields metadata
 	 */
 	protected function init() {
-		
+
 		$this->fields = array();
-		
+
 	}
- 	
+
 	/**
 	 * Returns the list of fields to be displayed in a form
 	 *
@@ -128,38 +128,38 @@ class Meta {
 	 */
 	function form_field_list($table) {
 		$CI = & get_instance ();
-		
+
 		$list = array (
-			'ciauth_user_accounts' => array ('email', 'username', 'password', 'confirm-password', 'creation_date', 'last_login', 'admin'),
-			'ciauth_user_privileges' => array('privilege_name', 'privilege_description')
+			'users' => array ('email', 'username', 'password', 'confirm-password', 'created_on', 'last_login'),
+			'groups' => array('privilege_name', 'privilege_description')
 		);
 		return $list[$table];
 	}
-	
+
 	/*
 	 * End of metadata description
-	 * 
+	 *
 	 */
-	
+
 	/**
 	 * Check if a table or view exist in the database
-	 * 
+	 *
 	 * The routine also fetch table information
-	 * 
+	 *
 	 * @param unknown $table
 	 */
 	function table_exists ($table) {
 		if (!array_key_exists($table, $this->table_exist)) {
 			$this->table_exist[$table] = $this->CI->db->table_exists($table);
-			
+
 			if ($this->table_exist[$table]) {
-				
+
 				# fetch database metadata
 				$this->fields_list[$table] = $this->CI->db->fields_list($table);
-				// Do not use the CI>db->field_data, it does not report enough information 
+				// Do not use the CI>db->field_data, it does not report enough information
 				$fields = $this->CI->model->getTableMetaData($table);
 				// $fields = $this->CI->db->field_data($table);
-				
+
 				// var_dump($fields);
 				/*
 				 * object(stdClass)[31]
@@ -174,7 +174,7 @@ class Meta {
 					if ($field->primary_key) {
 						$this->table_keys[$table] = $field->name;
 					}
-				}				
+				}
 			}
 		}
 		return $this->table_exist[$table];
@@ -186,11 +186,11 @@ class Meta {
 	 */
 	function fields_list ($table) {
 		if (!$this->table_exists($table)) {throw new Exception("Table $table does not exist");}
-		
+
 		return $this->fields_list[$table];
 	}
-	
-	
+
+
 	/**
 	 * Check if a field exists in database
 	 * @param unknown_type $table
@@ -200,9 +200,9 @@ class Meta {
 		if (!$this->table_exists($table)) {
 			return false;
 		}
-		return array_key_exists($field, $this->field_data[$table]);	
+		return array_key_exists($field, $this->field_data[$table]);
 	}
-	
+
 	/**
 	 * Returns the field database type
 	 * @param unknown_type $table
@@ -213,15 +213,15 @@ class Meta {
 		if (!$this->table_exists($table)) {
 			return '';
 		}
-		
+
 		if (isset($this->field_data[$table][$field]->type)) {
 			return $this->field_data[$table][$field]->type;
 		} else {
 			return '';
 		}
 	}
-	
-	
+
+
 	/**
 	 * Returns the field type as it will be used for HTML forms. This is also the metadata type.
 	 * @param unknown_type $table
@@ -229,7 +229,7 @@ class Meta {
 	 * @return string
 	 */
 	function field_type($table, $field) {
-		
+
 		if (! isset($this->fields[$table][$field]['metadata_type'])) {
 			// try to deduce it from the database type
 			if ($this->field_exists($table, $field)) {
@@ -261,7 +261,7 @@ class Meta {
 		$size = $this->field_data[$table][$field]->max_length;
 		return $size;
 	}
-	
+
 	/**
 	 * Returns the field default
 	 * @param unknown_type $table
@@ -277,7 +277,7 @@ class Meta {
 		}
 		return '';
 	}
-	
+
 
 	/**
 	 * Returns the field placeholder
@@ -292,10 +292,10 @@ class Meta {
 			$translated = $this->CI->lang->line('placeholder_' . $placeholder);
 			// returns direct or translated value
 			return ($translated) ? $translated : $placeholder;
-		} 
+		}
 		$translated = $this->CI->lang->line('placeholder_' . $table . '_' . $field);
-		
-		return ($translated) ? $translated : "";		
+
+		return ($translated) ? $translated : "";
 	}
 
 	/**
@@ -305,11 +305,11 @@ class Meta {
 	 * @return string
 	 */
 	function field_name($table, $field, $full = false) {
-	
+
 		if (isset($this->fields[$table][$field]['name'])) {
 			return $this->fields[$table][$field]['name'];
 		} else {
-			return ($full) ? $table . '_' . $field : $field;			
+			return ($full) ? $table . '_' . $field : $field;
 		}
 	}
 
@@ -320,17 +320,17 @@ class Meta {
 	 * @return string
 	 */
 	function field_id($table, $field) {
-	
+
 		if (isset($this->fields[$table][$field]['id'])) {
 			return $this->fields[$table][$field]['id'];
 		} else {
 			return $this->field_name($table, $field);
 		}
 	}
-	
+
 	/*
 	 * Returns a table primary key
-	 * 
+	 *
 	 * TODO: define what to do in case of multiple keys, return an array ?
 	 * TODO: get the information from database
 	 */
@@ -343,10 +343,10 @@ class Meta {
 // 			'ciauth_user_accounts' => 'username',
 // 			'ciauth_user_privileges' => 'privilege_id'
 // 		);
-	
+
 // 		return $key[$table];
 	}
-	
+
 	/**
 	 * Return the default values for an element
 	 * @param unknown $table
@@ -366,24 +366,24 @@ class Meta {
 		}
 		return array($table => $values);
 	}
-	
+
 	protected function add_rule(&$rule, $new_rule) {
 		if ($rule) {
 			$rule .= '|';
 		}
 		$rule .= $new_rule;
 	}
-	
+
 	/**
 	 * Return the validation rules deduced from metadata
 	 *
 	 * rules is invoked in form validation method, metadata must be loaded on demand
-	 * 
+	 *
 	 * @param unknown_type $table
 	 * @param unknown_type $field
 	 * @param unknown_type $action
-	 * 
-	 *   'user_id' => 
+	 *
+	 *   'user_id' =>
     object(stdClass)[34]
       public 'name' => string 'user_id' (length=7)
       public 'type' => string 'int' (length=3)
@@ -392,7 +392,7 @@ class Meta {
       public 'primary_key' => int 1
       public 'auto_increment' => int 1
       public 'allow_null' => boolean false
-  'email' => 
+  'email' =>
     object(stdClass)[43]
       public 'name' => string 'email' (length=5)
       public 'type' => string 'varchar' (length=7)
@@ -401,7 +401,7 @@ class Meta {
       public 'primary_key' => int 0
       public 'auto_increment' => int 0
       public 'allow_null' => boolean false
-  'username' => 
+  'username' =>
     object(stdClass)[44]
       public 'name' => string 'username' (length=8)
       public 'type' => string 'varchar' (length=7)
@@ -410,7 +410,7 @@ class Meta {
       public 'primary_key' => int 0
       public 'auto_increment' => int 0
       public 'allow_null' => boolean false
-  'password' => 
+  'password' =>
     object(stdClass)[45]
       public 'name' => string 'password' (length=8)
       public 'type' => string 'varchar' (length=7)
@@ -419,7 +419,7 @@ class Meta {
       public 'primary_key' => int 0
       public 'auto_increment' => int 0
       public 'allow_null' => boolean false
-  'creation_date' => 
+  'creation_date' =>
     object(stdClass)[46]
       public 'name' => string 'creation_date' (length=13)
       public 'type' => string 'timestamp' (length=9)
@@ -428,7 +428,7 @@ class Meta {
       public 'primary_key' => int 0
       public 'auto_increment' => int 0
       public 'allow_null' => boolean false
-  'last_login' => 
+  'last_login' =>
     object(stdClass)[47]
       public 'name' => string 'last_login' (length=10)
       public 'type' => string 'timestamp' (length=9)
@@ -437,7 +437,7 @@ class Meta {
       public 'primary_key' => int 0
       public 'auto_increment' => int 0
       public 'allow_null' => boolean true
-  'admin' => 
+  'admin' =>
     object(stdClass)[48]
       public 'name' => string 'admin' (length=5)
       public 'type' => string 'varchar' (length=7)
@@ -446,7 +446,7 @@ class Meta {
       public 'primary_key' => int 0
       public 'auto_increment' => int 0
       public 'allow_null' => boolean false
-  'remember_me' => 
+  'remember_me' =>
     object(stdClass)[49]
       public 'name' => string 'remember_me' (length=11)
       public 'type' => string 'int' (length=3)
@@ -457,21 +457,21 @@ class Meta {
       public 'allow_null' => boolean false
 	 */
 	function rules($table, $field, $action) {
-		
+
 		$rule = "";
-		
+
 		// Rules deduced from the database info
 		if ($this->table_exists($table)) {
 			if (isset($this->field_data[$table][$field])) {
-				
+
 				// if this field exist in database
 				$meta = $this->field_data[$table][$field];
 				// var_dump($meta);
-				
+
 				$metadata_type = (isset($this->fields[$table][$field]['metadata_type'])) ?
 						$this->fields[$table][$field]['metadata_type'] :
 						'';
-				
+
 				if ($meta->type == 'timestamp') {
 					$this->add_rule($rule, 'callback_valid_timestamp');
 				} elseif ($meta->type == 'date') {
@@ -479,25 +479,25 @@ class Meta {
 				} elseif ($meta->type == 'time') {
 					$this->add_rule($rule, 'callback_valid_time');
 				}
-				
+
 				if (!$meta->allow_null) {
 					if ($metadata_type != 'boolean') {
 						$this->add_rule($rule, 'required');
 					}
 				}
-				
+
 				if (array_key_exists('max_length', $meta) && $meta->max_length) {
 					$rl = 'max_length[' .  $meta->max_length . ']';
 					$this->add_rule($rule, $rl);
 				}
 			}
 		}
-		
-		
-		
+
+
+
 		// additional rules deduced from metadata types
 		if (isset($this->fields[$table][$field]['metadata_type'])) {
-			
+
 			if ($this->fields[$table][$field]['metadata_type'] == 'email') {
 				$this->add_rule($rule, 'valid_email');
 			}
@@ -505,14 +505,14 @@ class Meta {
 
 		// additional metadata explicit rules
 		if (isset($this->fields[$table][$field]['rules'])) {
-			$this->add_rule($rule, $this->fields[$table][$field]['rules']);			
+			$this->add_rule($rule, $this->fields[$table][$field]['rules']);
 		}
 
 		// Replace default rules
 		if (isset($this->fields[$table][$field][$action . '_rules'])) {
 			$rule = $this->fields[$table][$field][$action . '_rules'];
 		}
-		
+
 		// remove is_unique in edit mode
 		if ($action != 'create') {
 			$splitted = preg_split('/\|/', $rule);
@@ -524,43 +524,43 @@ class Meta {
 			}
 			$rule = $rls;
 		}
-		
+
 		$this->log("rules($table,$field) = " . $rule);
 		// return '';
 		return $rule;
 	}
-	
+
 	/**
 	 * Transform a field from the database into something suitable for display
-	 * 
+	 *
 	 * So it mainly takes formating and languages into account.
-	 * 
+	 *
 	 * @param unknown $table
 	 * @param unknown $field
 	 * @param unknown $value
 	 * @param $format
 	 */
 	function display_field($table, $field, $value, $format = "html") {
-		
+
 		/**
 		 * # type is defined by the database
 		 * $meta_type = $this->field_db_type($table, $field);
-		 * 
+		 *
 		 * # or overloaded
 		 * if (isset($this->fields[$table][$field]['metadata_type'])) {
 		 *    $meta_type = $this->fields[$table][$field]['metadata_type'];
 		 * }
-		 * 
+		 *
 		 * $type_object = $this->type_manager->instance($meta_type);
 		 * $type_object->display_field($table, $field, $value, $format);
 		 */
 
 		$db_type = $this->field_db_type($table, $field);
-		
-			
+
+
 		if (isset($this->fields[$table][$field]['metadata_type'])) {
 			$metadata_type = $this->fields[$table][$field]['metadata_type'];
-			
+
 			if ($metadata_type == 'password') {
 				return '';
 			}
@@ -579,16 +579,16 @@ class Meta {
 					}
 				}
 			}
-			
+
 		}
-		
+
 		/*
 		 * Mysql handels several time related types:
 		 *    DATE: date without time part
 		 *    DATETIME: dates with time part, range '1000-01-01 00:00:00' to '999-12-31 23:59:59'
 		 *    TIMESTAMP: dates with time part, Unix range '1970-01-01 00:00:01' to '2038-01-19 03:14:07' UTC
 		 *    TIME: time of the day or result of DATETIME difference.
-		 *    
+		 *
 		 *    TIMESTAMPs are stored in UTC but converted to local when retrieved.
 		 */
 		if ($db_type == 'timestamp') {
@@ -599,34 +599,34 @@ class Meta {
 			}
 			return date($format, strtotime($value));
 		}
-		
+
 		return $value;
 	}
 
 	/**
 	 * Generate a form field input
-	 * 
+	 *
 	 * @param unknown $table
 	 * @param unknown $field
 	 * @param unknown $value
 	 * @param $format
 	 */
 	function field_input($table, $field, $value = '', $attrs = array()) {
-				
+
 		$type = $this->field_type ($table, $field);
 		$name = $this->field_name ($table, $field);
 		$id = $this->field_id ($table, $field);
 		$db_type = $this->field_db_type ($table, $field);
 		$size = $this->field_size ($table, $field);
 		$placeholder = $this->field_placeholder ($table, $field);
-		
+
 		$info = "field_input($table, $field) ";
-		$info .= "type=$type, size=$size, placeholder=$placeholder, value=$value";		
+		$info .= "type=$type, size=$size, placeholder=$placeholder, value=$value";
 		$this->log($info);
 
 		// set_value is not used as values are fully managed in to be prep
 		// from and to database
-		
+
 		if ($type == 'boolean') {
 			return nbs() . form_checkbox(array (
 					'name' => $field,
@@ -634,9 +634,9 @@ class Meta {
 					'value' => 1,
 					'checked' => (0 != $value)
 			));
-		
+
 		}
-		
+
 		// TODO: use form_input
 		$input = '<input';
 		if ($type) {
@@ -650,7 +650,7 @@ class Meta {
 		}
 		$class = 'form-control';
 		if ($db_type == 'date') {
-			$class .= ' date';			
+			$class .= ' date';
 		}
 		if ($db_type == 'time') {
 			$class .= ' time';
@@ -664,27 +664,27 @@ class Meta {
 		if ($type) {
 			$class .= ' ' . $type;
 		}
-		
+
 		$input .= " class=\"$class\"";
-		$input .= " value=\"$value\""; 
+		$input .= " value=\"$value\"";
 		if ($placeholder) {
 			$input .= " placeholder=\"$placeholder\"";
 		}
 		if ($size) {
 			$input .= " size=\"$size\"";
 		}
-		
+
 		$input .= ' />';
 		return $input;
 	}
-	
+
 	/**
 	 * The prep function transforms data extracted from the database into data that
 	 * can be displayed into a form or table. It takes localisation into account.
-	 * 
+	 *
 	 * Input format: array (
 	 *    'table_name' => array('field_name' => 'field_value', ...))
-	 * 
+	 *
 	 */
 	function prep($values, $format = "html") {
 		foreach ($values as $table => $table_values) {
@@ -694,7 +694,7 @@ class Meta {
 		}
 		return $values;
 	}
-	
+
 	/**
 	 * Log information on the metadata logger
 	 * @param unknown_type $msg
