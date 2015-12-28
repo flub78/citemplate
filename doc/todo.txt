@@ -6,7 +6,9 @@ can be derived really fast.
 ============================================================================================================================    
 
 Todo:
-     
+    
+    * Replace ciauth by ion_auth
+    
     * Manage null dates
     * Manage dates with default values
     
@@ -16,11 +18,10 @@ Todo:
         
     * Installation: documentation
     * Metadata
-        * second CRUD (users)
-            * default values on create (understand why last login is used)
-            * unit tests            
+        * one class per metadate type
+        
         * jointure
-        * date
+        * epoch
         * currency
         * attachement, pictures
         * Automated filtering

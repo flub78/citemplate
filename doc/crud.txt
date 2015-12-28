@@ -1,0 +1,27 @@
+CRUD Create Read Update Delete
+
+Here are the steps 
+
+1)  Create a controller (groups)
+
+2)  Create a model
+
+3)  Edit language/english/application_lang.php
+
+    For the table
+        title_$table        title for the table view
+        title_$table_form   Edition form
+        title_$table_create Creation form
+    
+    For each field
+        heading_$table_$field       Heading for table view
+        label_$table_$view          Form label
+        placeholder_$table_$view    Form placeholder
+
+4)  Edit authers languages
+
+5) Define the field types in librarie/Metadata.php
+
+6) Edit the menu
+
+7)  Controller test 

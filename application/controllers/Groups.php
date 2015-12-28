@@ -26,12 +26,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author frederic
  *
  */
-class Rights extends MY_Controller {
+class Groups extends MY_Controller {
 
 	var $default_table = 'groups';
-	var $controller = 'rights';
-	var $form_fields = array('privilege_name', 'privilege_description');
-	var $table_fields = array('privilege_name', 'privilege_description', '__edit', '__delete');
+	var $controller = 'groups';
+	var $form_fields = array('name', 'description');
+	var $table_fields = array('name', 'description', '__edit', '__delete');
 
 	/**
 	 * Constructor
@@ -39,7 +39,7 @@ class Rights extends MY_Controller {
 	function __construct() {
 		parent :: __construct();
 		// specific initialization
-		$this->load->model('rights_model', 'model');
+		$this->load->model('groups_model', 'model');
 
 	}
 

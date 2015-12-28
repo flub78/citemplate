@@ -16,33 +16,33 @@
  *    You should have received a copy of the GNU General Public License
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *    The metadata helper is in charge of generating views element using 
+ *    The metadata helper is in charge of generating views element using
  *    the metada description. It is a helper because object oriented syntax
  *    brings an overhead to views.
- *    The metadata librarie is in charge of fetching table and fields 
+ *    The metadata librarie is in charge of fetching table and fields
  *    descriptions. It is a class because it provides both persistend data
- *    and access method. 
- *    
+ *    and access method.
+ *
  *    Metadata supports several subtypes of data
  *    * varchar
  *       * emails dot separated strings with one @
  *       * password
  *       * url
  *       * key to others table
- *       
+ *
  *    * tinyint
  *       * booleans
- *       
+ *
  *    * int
  *       * enumerates
- *       * keys to others tables 
- *       
+ *       * keys to others tables
+ *
  *    * decimal
  *       * currency
- *       
+ *
  *    * date
  *    * timestamp
- *    
+ *
  */
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
@@ -50,27 +50,31 @@ if (! defined ( 'BASEPATH' ))
 if (! function_exists ( 'heading_row' )) {
 	/**
 	 * Return an Array of labels for datatable
-	 * 
-	 * @param unknown_type $table        	
+	 *
+	 * @param unknown_type $table
 	 * @param unknown_type $fields
 	 *        	= array()
 	 */
 	function heading_row($table, $fields = array()) {
 		$CI = & get_instance ();
-		
+
+		# check if the table exists
 		if (!$CI->metadata->table_exists($table)) {return array();};
-		
+
+		# when fields is not specified return a whole list
 		if (count ( $fields ) == 0) {
 			// default, all fields
 			if ($CI->metadata->table_exists ( $table )) {
 				$fields = $CI->metadata->fields_list ( $table );
 			}
 		}
-		
+
+		// Generate the header for each field
 		$res = array ();
 		foreach ( $fields as $field ) {
-			$translated = $CI->lang->line ( "heading_" . $field );
+			$translated = $CI->lang->line ( "heading_" . $table . '_' . $field );
 			if (preg_match ( '/^__/', $field )) {
+			    # by default no name for action fields
 				$res [] = '';
 			} elseif ($translated) {
 				$res [] = $translated;
@@ -85,27 +89,27 @@ if (! function_exists ( 'heading_row' )) {
 if (! function_exists ( 'datatable' )) {
 	/**
 	 * Generate a two dimentional array for HTML display or export
-	 * 
-	 * @param unknown_type $table        	
-	 * @param unknown_type $data        	
-	 * @param unknown_type $filter        	
+	 *
+	 * @param unknown_type $table
+	 * @param unknown_type $data
+	 * @param unknown_type $filter
 	 */
 	function datatable($table, $data = array(), $attrs = array()) {
 		$fields = (array_key_exists ( 'fields', $attrs )) ? $attrs ['fields'] : array ();
 		$controller = (array_key_exists ( 'controller', $attrs )) ? $attrs ['controller'] : $table;
-		
+
 		$CI = & get_instance ();
 		if (!$CI->metadata->table_exists($table)) {
 			return "";
 		};
-		
+
 		// insert heading row
 		$res = array (
-				heading_row ( $table, $fields ) 
+				heading_row ( $table, $fields )
 		);
-		
+
 		foreach ( $data as $elt ) {
-			
+
 			$id = $elt [table_key ( $table )];
 			$image = $CI->model->image($table, $id);
 			// echo "image=$image"; exit;
@@ -124,7 +128,7 @@ if (! function_exists ( 'datatable' )) {
 			// Add actions and special field
 			$res [] = $row;
 		}
-		
+
 		return $res;
 	}
 }
@@ -164,13 +168,13 @@ if (! function_exists ( 'form_title' )) {
 	function form_title($table, $action) {
 		$CI = & get_instance();
 		$title = $CI->lang->line('title_' . $table . "_$action");
-		
+
 		if ($title) {
 			return $title;
 		}
 
 		$title = $CI->lang->line('title_' . $table . "_form");
-		
+
 		return ($title) ? $title : $table;
 	}
 }
@@ -178,15 +182,15 @@ if (! function_exists ( 'form_title' )) {
 if (! function_exists ( 'field_label_text' )) {
 	/**
 	 * Generate a form field label
-	 * 
-	 * @param unknown_type $table        	
-	 * @param unknown_type $field        	
-	 * @param unknown_type $attrs        	
+	 *
+	 * @param unknown_type $table
+	 * @param unknown_type $field
+	 * @param unknown_type $attrs
 	 */
 	function field_label_text($table, $field) {
 		$CI = & get_instance();
 		$label = $CI->lang->line('label_' . $table . '_' . $field);
-		
+
 		return ($label) ? $label : "";
 	}
 }
@@ -202,12 +206,12 @@ if (! function_exists ( 'field_label' )) {
 	function field_label($table, $field, $attrs = array()) {
 
 		$CI = & get_instance ();
-		
+
 		$text = field_label_text($table, $field);
-		
+
 		if ($text) {
 			$id = $CI->metadata->field_id ($table, $field);
-		
+
 			return '<label for="' . $id . '">' . $text . '</label>';
 		} else {
 			return "";
@@ -226,7 +230,7 @@ if (! function_exists ( 'field_name' )) {
 	function field_name($table, $field, $full = false) {
 
 		$CI = & get_instance ();
-		return $CI->metadata->field_name ($table, $field, $full);		
+		return $CI->metadata->field_name ($table, $field, $full);
 	}
 }
 
@@ -234,15 +238,15 @@ if (! function_exists ( 'field_name' )) {
 if (! function_exists ( 'field_input' )) {
 	/**
 	 * Generate a form field input
-	 * 
-	 * @param unknown_type $table        	
-	 * @param unknown_type $field        	
-	 * @param unknown_type $data        	
-	 * @param unknown_type $attrs        	
+	 *
+	 * @param unknown_type $table
+	 * @param unknown_type $field
+	 * @param unknown_type $data
+	 * @param unknown_type $attrs
 	 */
 	function field_input($table, $field, $value = '', $attrs = array()) {
 		$CI = & get_instance ();
-		
+
 		return $CI->metadata->field_input($table, $field, $value, $attrs);
 	}
 }
@@ -250,23 +254,23 @@ if (! function_exists ( 'field_input' )) {
 if (! function_exists ( 'form_field_list' )) {
 	/**
 	 * Returns the list of fields to be displayed in the form
-	 * 
-	 * @param unknown_type $table        	
+	 *
+	 * @param unknown_type $table
 	 */
 	function form_field_list($table) {
 		$CI = & get_instance ();
-		
-		return $CI->metadata->form_field_list ($table);		
+
+		return $CI->metadata->form_field_list ($table);
 	}
 }
 
 if (! function_exists ( 'form' )) {
 	/**
 	 * Generate a basic form
-	 * 
-	 * @param unknown_type $table        	
-	 * @param unknown_type $data        	
-	 * @param unknown_type $attrs        	
+	 *
+	 * @param unknown_type $table
+	 * @param unknown_type $data
+	 * @param unknown_type $attrs
 	 * @return string
 	 */
 	function form($table, $field_list, $data = array(), $attrs = array()) {
@@ -284,10 +288,10 @@ if (! function_exists ( 'form' )) {
 if (! function_exists ( 'submit' )) {
 	/**
 	 * Generate a basic form
-	 * 
-	 * @param unknown_type $table        	
-	 * @param unknown_type $data        	
-	 * @param unknown_type $attrs        	
+	 *
+	 * @param unknown_type $table
+	 * @param unknown_type $data
+	 * @param unknown_type $attrs
 	 * @return string
 	 */
 	function submit($label, $attrs = array()) {
@@ -301,11 +305,11 @@ if (! function_exists ( 'table_key' )) {
 	/**
 	 *
 	 * return the name of the column containing the element id
-	 * 
-	 * @param unknown_type $table        	
+	 *
+	 * @param unknown_type $table
 	 */
 	function table_key($table) {
-		$CI = & get_instance ();		
+		$CI = & get_instance ();
 		return $CI->metadata->table_key($table);
 	}
 }
@@ -313,8 +317,8 @@ if (! function_exists ( 'table_key' )) {
 if (! function_exists ( 'autogen_key' )) {
 	/**
 	 * Returns the key when autogenerated, FALSE if not
-	 * 
-	 * @param unknown_type $table        	
+	 *
+	 * @param unknown_type $table
 	 */
 	function autogen_key($table) {
 		// $key = $this->table_key($table);
@@ -335,7 +339,7 @@ if (! function_exists ( 'rules' )) {
 	 */
 	function rules($table, $field, $action) {
 		$CI = & get_instance();
-		return $CI->metadata->rules($table, $field, $action);		
+		return $CI->metadata->rules($table, $field, $action);
 	}
 }
 

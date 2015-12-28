@@ -160,8 +160,8 @@ $menu_admin = array (
 						'url' => controller_url ( "admin/users" )
 				),
 				array (
-						'label' => "Rights",
-						'url' => controller_url ( "rights/all" )
+						'label' => "Groups",
+						'url' => controller_url ( "groups/all" )
 				)
 		)
 );

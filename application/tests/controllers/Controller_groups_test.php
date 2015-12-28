@@ -8,7 +8,7 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-class Rights_controller_test extends TestCase
+class Groups_controller_test extends TestCase
 {
 
 	public function setUp()
@@ -32,56 +32,55 @@ class Rights_controller_test extends TestCase
 	public function test_all() {
 		$methods = array('index', 'create');
 		foreach ($methods as $method) {
-			$id = 42;
-			$output = $this->request('GET', ['Rights', $method]);
+			$output = $this->request('GET', ['Groups', $method]);
 			$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in $method");
 		}
 	}
 
 	public function test_method_404()
 	{
-		$this->request('GET', ['Rights', 'unknow_method']);
+		$this->request('GET', ['Groups', 'unknow_method']);
 		$this->assertResponseCode(404);
 	}
 
 	public function test_crud()
 	{
 		# Check create form
-		$output =  $this->request('GET', ['Rights', 'create']);
+		$output =  $this->request('GET', ['Groups', 'create']);
 		$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in $method");
 
 		# Actually create something
         $count =  $this->model->count('groups');
 
-		$args = array("privilege_description"	=> "For super hero",
-					"privilege_name" => "Superpower",
+		$args = array("description"	=> "For super hero",
+					"name" => "Superpower",
 					"submit" => "submit");
-		// http://localhost/citemplate/index.php/rights/validate/create
- 		$output =  $this->request('POST', ['Rights', 'validate', 'create'], $args);
+		// http://localhost/citemplate/index.php/Groups/validate/create
+ 		$output =  $this->request('POST', ['Groups', 'validate', 'create'], $args);
  		$id = $this->model->get_last_inserted();
  		// file_put_contents ("/tmp/output.html", $output);
  		$this->assertEquals("", $output, "POST create should not return anything ???");
 
  		$new_count =  $this->model->count('groups');
- 		$this->assertEquals($count +1, $new_count, "One privilege has been created");
+ 		$this->assertEquals($count +1, $new_count, "One group has been created");
 
  		// change it
- 		$args = array("privilege_description"	=> "For really super hero",
- 				"privilege_name" => "Superpower",
- 				"privilege_id" => $id,
+ 		$args = array("description"	=> "For really super hero",
+ 				"name" => "Superpower",
+ 				"id" => $id,
  				"submit" => "submit");
- 		// http://localhost/citemplate/index.php/rights/validate/create
- 		$output =  $this->request('POST', ['Rights', 'validate', 'edit'], $args);
+ 		// http://localhost/citemplate/index.php/Groups/validate/create
+ 		$output =  $this->request('POST', ['Groups', 'validate', 'edit'], $args);
 
  		// read it
- 		$output =  $this->request('GET', ['Rights', 'edit', $id]);
+ 		$output =  $this->request('GET', ['Groups', 'edit', $id]);
  		$this->assertNotEquals("", $output, "Edit");
  		$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in $method");
 
 		// delete if
- 		$output =  $this->request('GET', ['Rights', 'delete', $id]);
+ 		$output =  $this->request('GET', ['Groups', 'delete', $id]);
  		$new_count =  $this->model->count('groups');
- 		$this->assertEquals($count, $new_count, "One privilege has been deleted");
+ 		$this->assertEquals($count, $new_count, "One group has been deleted");
 	}
 
 }

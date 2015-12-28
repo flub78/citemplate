@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 <?php
 /**
  *    Project {$PROJECT}
@@ -25,13 +18,13 @@
  *
  * @filesource Crud_model.php
  * @package model
- * 
+ *
  * The CRUD model is a standard model for CRUD access. All its implementation
  * is done in MY_Model
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Rights_model extends MY_Model {
+class Groups_model extends MY_Model {
 
 	/**
 	 * This string identifies an element in human readable maned.
@@ -39,11 +32,11 @@ class Rights_model extends MY_Model {
 	 * @param $key identifiant de la ligne à représenter
 	 */
 	public function image($table, $key) {
-		$vals = $this->get_by_id($table, 'privilege_id', $key);
+		$vals = $this->get_by_id($table, 'id', $key);
 		// var_dump($vals);
-		$img = (isset($vals['privilege_name'])) ? $vals['privilege_name'] : $key;
+		$img = (isset($vals['name'])) ? $vals['name'] : $key;
 		return $img;
 	}
-	
+
 }
 /* End of file */

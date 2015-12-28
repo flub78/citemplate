@@ -127,13 +127,8 @@ class Meta {
 	 * @param unknown_type $table
 	 */
 	function form_field_list($table) {
-		$CI = & get_instance ();
 
-		$list = array (
-			'users' => array ('email', 'username', 'password', 'confirm-password', 'created_on', 'last_login'),
-			'groups' => array('privilege_name', 'privilege_description')
-		);
-		return $list[$table];
+		return $this->field_list[$table];
 	}
 
 	/*

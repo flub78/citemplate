@@ -36,17 +36,20 @@ $lang['button_submit_create'] = "Create";
 $lang['button_submit_register'] = "Register";
 $lang['delete_confirm'] = "Delete ";
 
-// ciauth_user_privileges
-$lang['title_ciauth_user_privileges'] = "Rights definition";
-$lang['title_ciauth_user_privileges_form'] = "Rights definition";
-$lang['title_ciauth_user_privileges_create'] = "New right definition";
+// groups
+$lang['title_groups'] = "Authentication groups";
+$lang['title_groups_form'] = "Authentication group";
+$lang['title_groups_create'] = "Authentication group";
 
-$lang['heading_privilege_id'] = "Id";
-$lang['heading_privilege_name'] = "Name";
-$lang['heading_privilege_description'] = "Description";
-$lang['placeholder_ciauth_user_privileges_privilege_description'] = "Privilege description";
-$lang['label_ciauth_user_privileges_privilege_description'] = "Privilege description";
+$lang['heading_groups_id'] = "Id";
+$lang['heading_groups_name'] = "Name";
+$lang['heading_groups_description'] = "Description";
 
+$lang['placeholder_groups_name'] = "Name";
+$lang['placeholder_groups_description'] = "Privilege description";
+
+$lang['label_groups_name'] = "Group name";
+$lang['label_groups_description'] = "Privilege description";
 
 /*
  * ciauth_user_accounts

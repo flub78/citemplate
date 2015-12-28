@@ -70,10 +70,12 @@ class Metadata extends Meta {
 	protected function init() {
 
 		$this->fields = array();
+		$this->field_list = array();
 
 		/*
 		 * users
 		 */
+		$this->field_list['users'] = array('email', 'username', 'password', 'confirm-password', 'created_on', 'last_login');
 		$this->fields['users']['email'] = array(
             'name' => 'email_value',
 			'metadata_type' => 'email',
@@ -110,13 +112,14 @@ class Metadata extends Meta {
 		/*
 		 * groups
 		 */
-		$this->fields['groups']['privilege_id'] = array('metadata_type' => 'int');
-		$this->fields['groups']['privilege_name'] = array(
+		$this->field_list['groups'] = array('name', 'description');
+		$this->fields['groups']['id'] = array('metadata_type' => 'int');
+		$this->fields['groups']['name'] = array(
 				'metadata_type' => 'text',
 				'placeholder' => "Privilege name",
             	'size' => '25'
 		);
-		$this->fields['groups']['privilege_description'] = array(
+		$this->fields['groups']['description'] = array(
             	'size' => '25'
 		);
 	}
