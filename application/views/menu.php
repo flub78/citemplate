@@ -157,7 +157,7 @@ $menu_admin = array (
 				),
 				array (
 						'label' => "Users",
-						'url' => controller_url ( "admin/users" )
+						'url' => controller_url ( "users/all" )
 				),
 				array (
 						'label' => "Groups",

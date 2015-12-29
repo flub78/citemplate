@@ -8,13 +8,15 @@ can be derived really fast.
 Todo:
     
     * Replace ciauth by ion_auth
+    * fix phpunit tests 
+    * fix watir tests (at least for jenkins)
+    * reject access for non admin to admin pages
+    * manage session flash data
     
     * Manage null dates
     * Manage dates with default values
     
     * Set the title for pdf export
-    * Database save, restore and migrations
-        - migration
         
     * Installation: documentation
     * Metadata
@@ -80,6 +82,7 @@ Done:
     * Submit button labels 
         (Valider, Créer, Créer et continuer)
         Validate, Create, Create and continue, Register
+     * Database save, restore and migrations
         
 
 ============================================================================================================================    

@@ -34,7 +34,8 @@ class Library_auth_test extends TestCase
     public function test_admin()
     {
         $this->CI->ion_auth->logout();
-    	$this->assertEquals(false, $this->CI->ion_auth->logged_in(), "Not logged in");
+        $logged_in = $this->CI->ion_auth->logged_in();
+    	$this->assertEquals(false, $logged_in, "Not logged in after logout: logged_in=" . var_export($logged_in, true));
 
     	$this->CI->ion_auth->login("admin", "admin", true);
     	$this->assertEquals(true, $this->CI->ion_auth->logged_in(), "Logged in");

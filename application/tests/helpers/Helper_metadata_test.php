@@ -21,7 +21,7 @@ class Helper_metadata_test extends TestCase
 	public function test_loaded()
 	{
 		$table = 'groups';
-		$field = 'privilege_name';
+		$field = 'name';
 
 		$datatable = datatable('crud');
 		$expected = "";
@@ -30,7 +30,7 @@ class Helper_metadata_test extends TestCase
 			'check that datable return nothing on non existing tables'
 		);
 
-		$expected = "";
+		$expected = "Group name";
 		$actual = field_label_text($table, $field);
 		$this->assertEquals($expected, $actual,
 			"field_label"

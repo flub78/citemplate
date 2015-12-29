@@ -8,7 +8,7 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-class Users_test extends TestCase
+class Controller_users_test extends TestCase
 {
 
 	function __construct() {
