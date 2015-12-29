@@ -14,9 +14,6 @@ class Groups_controller_test extends TestCase
 	public function setUp()
 	{
 		parent :: __construct();
-		if (!isset($_SESSION)) {
-			session_start();
-		}
 		$this->resetInstance();
 		$this->CI->ion_auth->login('admin', 'admin', true);
 

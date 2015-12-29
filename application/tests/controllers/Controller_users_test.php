@@ -13,9 +13,6 @@ class Controller_users_test extends TestCase
 
 	function __construct() {
 		parent :: __construct();
-		if (!isset($_SESSION)) {
-			session_start();
-		}
 		$this->resetInstance();
 		$this->CI->load->library('Ion_auth');
 		$this->CI->ion_auth->login('admin', 'admin', true);

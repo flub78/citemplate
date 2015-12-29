@@ -13,12 +13,17 @@ class Dev_controller_test extends TestCase
 	public function setUp()
 	{
 		$this->resetInstance();
-		$this->CI->load->library('Ion_auth');
-		$this->CI->ion_auth->login('admin', 'admin', true);
+// 		# $this->CI->load->library('Ion_auth');
+// 		if ($this->CI->ion_auth->logged_in()) {
+// 		    $this->CI->ion_auth->logout();
+// 		}
+// 		$this->CI->ion_auth->login('admin', 'admin', true);
 	}
 
 	public function tearDown() {
-		$this->CI->ion_auth->logout();
+// 	    if ($this->CI->ion_auth->logged_in()) {
+// 		  $this->CI->ion_auth->logout();
+// 	    }
 	}
 
 	public function test_phpinfo()
