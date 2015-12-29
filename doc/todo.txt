@@ -104,3 +104,7 @@ CRUD scaffolding
     # Create a model
     # Create a model test
     
+https://github.com/flub78/citemplate.git
+file:///home/frederic/git/citemplate/.git
+
+    

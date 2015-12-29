@@ -79,7 +79,7 @@
     </target>
     
     <target name="phpunit">
-         <exec logoutput="true" dir="${project.basedir}/application/tests" command="phpunit" escape="false" />
+         <exec logoutput="true" dir="${project.basedir}/application/tests" command="phpunit --stderr" escape="false" />
     </target>
     
     <target name="phpcb">
