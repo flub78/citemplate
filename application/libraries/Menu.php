@@ -48,70 +48,22 @@ class Menu {
 	 * @return boolean
 	 */
 	protected function has_privilege($role = "") {
+        if ($this->CI->ion_auth->is_admin()) {
+            return true;
+        }
 
-//		DX_AUTH implementation (deprecated)
-// 		if ($this->CI->dx_auth->is_admin ()) {
-// 			return true;
-// 		}
-// 		// Not admin and privilege required
-// 		if ($role) {
-// 			// Et qu'on ne l'a pas
-// 			if (! $this->CI->dx_auth->is_logged_in ()) {
-// 				return false;
-// 			}
-// 			if ($this->CI->dx_auth->is_role ( $role, true, true )) {
-// 				return true;
-// 			}
-// 		}
-		return true;
+        if ($this->CI->ion_auth->in_group($role)) {
+            return true;
+        }
+
+		return false;
 	}
 
 	/**
 	 * Génération d'un menu en HTML
 	 *
 	 * @param unknown_type $menu
-	 */
-// 	public function html($menu, $level = 0, $li = false, $button_class = "") {
-// 		$ul_attr = 'data-role="listview" data-divider-theme="b" data-inset="true"';
-// 		$li_attr = 'data-theme="c"';
-// 		$anchor_attr = 'data-transition="slide"';
-
-// 		$res = "";
-
-// 		if (isset ( $menu ['role'] ) && ! $this->has_privilege ( $menu ['role'] )) {
-// 			return $res;
-// 		}
-
-// 		$class = (isset ( $menu ['class'] )) ? 'class="' . $menu ['class'] . '"' : "";
-// 		$href = (isset ( $menu ['url'] )) ?  $menu ['url'] : '';
-// 		$label = (isset ( $menu ['label'] )) ? $menu ['label'] : '';
-
-// 		if ($li) {
-// 			$res .= "<li $class $li_attr>";
-// 		}
-
-// 		if ($href || $label) {
-// 		    $res .= anchor($href, $label, "$button_class $anchor_attr");
-// 		}
-
-// 		if (isset ( $menu ['submenu'] )) {
-// 			// $res .= tabs($level) . "<ul $class>\n";
-// 			$res .= tabs ( $level ) . "<ul $ul_attr>\n";
-// 			foreach ( $menu ['submenu'] as $elt ) {
-// 				$res .= tabs ( $level );
-// 				$res .= $this->html ( $elt, $level + 1, true, $button_class );
-// 				$res .= "\n";
-// 			}
-// 			$res .= tabs ( $level ) . "</ul>\n";
-// 		}
-
-// 		if ($li)
-// 			$res .= '</li>';
-
-// 		return $res;
-// 	}
-
-	/**
+	 *
 	 * Generate bootstrap navbar subset at the following format:
 	 *
 			<ul id="main-menu" class="nav navbar-nav sm">

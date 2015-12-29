@@ -111,10 +111,9 @@ $menu_dev = array (
 				),
 				array (
 						'label' => "Check French",
-						'url' => controller_url("dev/check_lang/french/1")
+						'url' => controller_url("dev/check_lang/french/1"),
+				        'role' => 'admin'
 				)
-
-
 
 		)
 );
@@ -123,6 +122,7 @@ $menu_dev = array (
 
 $menu_database = array (
 		'label' => "Database",
+        'role' => array('admin', 'dba'),
 //		'class' => 'dropdown-menu multi-level',
 		'submenu' => array (
 				array (

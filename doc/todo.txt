@@ -8,10 +8,16 @@ can be derived really fast.
 Todo:
     
     * Replace ciauth by ion_auth
-    * fix phpunit tests 
+        * manage session flash data
+        * reject access for non admin to admin pages
+        * bootstrap style for login page
+        * check user creation
+        - forgotten password
+        - changement de mot de passe
+        
+    * create selector for element list (group for users)
+        
     * fix watir tests (at least for jenkins)
-    * reject access for non admin to admin pages
-    * manage session flash data
     
     * Manage null dates
     * Manage dates with default values
@@ -34,10 +40,6 @@ Todo:
         - tutorial
         - ajax pagination
             
-    * Rights management
-        - forgotten password
-        - url access
-        - changement de mot de passe
     * Google calendar
         - display
         - event CRUD
