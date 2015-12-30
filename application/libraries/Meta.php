@@ -107,11 +107,6 @@ class Meta {
 		$this->init();
 	}
 
-	/*
-	 * Here starts the metadata description itself
-	 *
-	 */
-
 	/**
 	 * Initialize the fields metadata
 	 */
@@ -121,20 +116,6 @@ class Meta {
 
 	}
 
-	/**
-	 * Returns the list of fields to be displayed in a form
-	 *
-	 * @param unknown_type $table
-	 */
-	function form_field_list($table) {
-
-		return $this->field_list[$table];
-	}
-
-	/*
-	 * End of metadata description
-	 *
-	 */
 
 	/**
 	 * Check if a table or view exist in the database

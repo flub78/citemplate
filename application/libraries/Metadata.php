@@ -108,6 +108,9 @@ class Metadata extends Meta {
 				'size' => '25',
 				'rules' => 'trim|matches[password]'
 		);
+		$this->fields['users']['active'] = array(
+		        'metadata_type' => 'boolean'
+		);
 
 		/*
 		 * groups
@@ -116,11 +119,7 @@ class Metadata extends Meta {
 		$this->fields['groups']['id'] = array('metadata_type' => 'int');
 		$this->fields['groups']['name'] = array(
 				'metadata_type' => 'text',
-				'placeholder' => "Privilege name",
-            	'size' => '25'
-		);
-		$this->fields['groups']['description'] = array(
-            	'size' => '25'
+				'placeholder' => "Privilege name"
 		);
 	}
 

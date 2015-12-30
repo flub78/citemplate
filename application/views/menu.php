@@ -141,6 +141,28 @@ $menu_database = array (
 		)
 );
 
+$menu_database = array (
+        'label' => "Database",
+        'role' => array('admin'),
+        //		'class' => 'dropdown-menu multi-level',
+        'submenu' => array (
+                array (
+                        'label' => "Backup",
+                        'url' => controller_url ( "databaseMgt/backup" )
+                ),
+                array (
+                        'label' => "Restore",
+                        'url' => controller_url ( "databaseMgt/restore" )
+                ),
+                array (
+                        'label' => "Reset",
+                        'url' => controller_url ( "databaseMgt/reset" ),
+                        'onclick' => "return confirm('" . translation('reset_database') . "')"
+                )
+        )
+);
+
+
 $menu_admin = array (
 		'label' => "Admin",
 //		'class' => 'dropdown-menu multi-level',
@@ -157,7 +179,7 @@ $menu_admin = array (
 				),
 				array (
 						'label' => "Users",
-						'url' => controller_url ( "users/all" )
+						'url' => controller_url ( "auth" )
 				),
 				array (
 						'label' => "Groups",
@@ -167,21 +189,18 @@ $menu_admin = array (
 );
 
 // #################################################################################################
-$menu_crud = array (
+$menu_user = array (
 		'label' => "Users",
 		'submenu' => array (
 				array (
-						'label' => "List",
-						'url' => controller_url ( "users/all" )
+						'label' => "Change password",
+						'url' => controller_url ( "auth/change_password" )
 				),
-				array (
-						'label' => "Create",
-						'url' => controller_url ( "users/create" )
-				),
-				array (
-						'label' => "Stats",
-						'url' => controller_url ( "users/stats" )
-				)
+		        array (
+		                'label' => "Users",
+		                'url' => controller_url ( "users" )
+		        )
+
 		)
 );
 
@@ -198,11 +217,11 @@ $menu_help = array (
 
 if (ENVIRONMENT == 'development') {
 	$menubar = array ('class' => 'menubar',
-		'submenu' => array($menu_admin, $menu_dev, $menu_crud, $menu_help)
+		'submenu' => array($menu_admin, $menu_dev, $menu_user, $menu_help)
 	);
 } else {
 	$menubar = array ('class' => 'menubar',
-			'submenu' => array($menu_admin, $menu_crud, $menu_help)
+			'submenu' => array($menu_admin, $menu_user, $menu_help)
 	);
 }
 

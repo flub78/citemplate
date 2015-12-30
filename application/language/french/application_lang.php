@@ -92,8 +92,11 @@ $lang['title_users'] = "Utilisateurs";
 $lang['title_users_form'] = "Utilisateur";
 $lang['title_users_create'] = "Nouvel utilisateur";
 
+$lang['heading_users_first_name'] = "Prénom";
+$lang['heading_users_last_name'] = "Nom";
+$lang['heading_users_active'] = "Actif";
 $lang['heading_users_email'] = "Courriel";
-$lang['heading_users_username'] = "Nom";
+$lang['heading_users_username'] = "Identifiant";
 $lang['heading_users_created_on'] = "Création";
 $lang['heading_users_last_login'] = "Dernière connexion";
 $lang['heading_users_admin'] = "Admin";

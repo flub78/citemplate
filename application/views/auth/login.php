@@ -20,23 +20,6 @@
  * @package vues
  */
 ?>
-<?php $this->load->view('header'); ?>
-<!-- Additional view specific header elements below -->
-<?= link_tag(bootstrap_css('signin'));?>
-<?= link_tag(project_css('project'));?>
-</head>
-
-<body>
-	<?php $this->load->view('menu'); ?>
-
-	<div class="container-fluid starter-template">
-
-		<div class="row">
-			<div class="col-lg-6 col-lg-offset-4 text-error">
-				<p class="text-warning"><?php echo validation_errors(); ?></p>
-				<p class="text-warning"><?php # echo $error_msg; ?></p>
-			</div>
-		</div>
 
 <h1><?php echo lang('login_heading');?></h1>
 <p><?php echo lang('login_subheading');?></p>
@@ -66,12 +49,3 @@
 <?php echo form_close();?>
 
 <p><a href="forgot_password"><?php echo lang('login_forgot_password');?></a></p>
-
-    </div>
-	<footer class="row">
-		<?php $this->load->view('footer'); ?>
-	</footer>
-	<!-- /.container -->
-
-</body>
-</html>

@@ -43,9 +43,9 @@
 						<p class="text-warning"><?php echo isset($error_msg) ? $error_msg : ""; ?></p>
 					</div>
 				</div>
-				<div class="container">
+				<div class="">
 				<?= form_open($controller . "/validate/$action", array("class" => "form-register")); ?>
-				
+
 					<h2 class="form-heading"><?= isset($title) ? $title : "" ?></h2>
 					<?= form($table, $field_list, $values);?>
 					<div id='message'></div>
@@ -64,6 +64,6 @@
 	<!-- /.container -->
 
     <?= script(base_url() . '/js/project.js')?>
-    
+
 </body>
 </html>

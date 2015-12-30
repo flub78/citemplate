@@ -3,6 +3,8 @@ CRUD Create Read Update Delete
 Here are the steps 
 
 1)  Create a controller (groups)
+    define:
+        table and fields
 
 2)  Create a model
 

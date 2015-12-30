@@ -36,7 +36,9 @@ $lang['button_submit_create'] = "Create";
 $lang['button_submit_register'] = "Register";
 $lang['delete_confirm'] = "Delete ";
 
-// groups
+/**
+ * groups
+ */
 $lang['title_groups'] = "Authentication groups";
 $lang['title_groups_form'] = "Authentication group";
 $lang['title_groups_create'] = "Authentication group";
@@ -58,19 +60,26 @@ $lang['title_users'] = "Users";
 $lang['title_users_form'] = "User";
 $lang['title_users_create'] = "Create user";
 
+$lang['heading_users_first_name'] = "First name";
+$lang['heading_users_last_name'] = "Last name";
+$lang['heading_users_active'] = "Active";
 $lang['heading_users_email'] = "Email address";
 $lang['heading_users_username'] = "User name";
 $lang['heading_users_created_on'] = "Creation";
 $lang['heading_users_last_login'] = "Last login";
-$lang['heading_users_admin'] = "Admin";
+# $lang['heading_users_admin'] = "Admin";
 
 $lang['placeholder_users_email'] = "Email address";
 $lang['placeholder_users_username'] = "User name";
 $lang['placeholder_users_password'] = "Password";
 $lang['placeholder_users_confirm-password'] = "Confirm Password";
 
+$lang['label_users_first_name'] = "First name";
+$lang['label_users_last_name'] = "Last name";
 $lang['label_users_email'] = "Email address";
-$lang['label_users_username'] = "User name";
+$lang['label_users_username'] = "Identifier";
+$lang['label_users_company'] = "Company";
+$lang['label_users_phone'] = "Phone";
 $lang['label_users_password'] = "Password";
 $lang['label_users_confirm-password'] = "Confirm Password";
 $lang['label_users_created_on'] = "Creation date";

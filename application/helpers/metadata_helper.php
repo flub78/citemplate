@@ -251,18 +251,6 @@ if (! function_exists ( 'field_input' )) {
 	}
 }
 
-if (! function_exists ( 'form_field_list' )) {
-	/**
-	 * Returns the list of fields to be displayed in the form
-	 *
-	 * @param unknown_type $table
-	 */
-	function form_field_list($table) {
-		$CI = & get_instance ();
-
-		return $CI->metadata->form_field_list ($table);
-	}
-}
 
 if (! function_exists ( 'form' )) {
 	/**
