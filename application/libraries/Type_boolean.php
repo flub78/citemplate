@@ -29,27 +29,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author frederic
  *
  */
-class Metadata_type {
+class Type_boolean extends Metadata_type {
     var $name = "";
 
-    static $registered = array();
-
-    /**
-     * Children of Metadata_type must register so one may call them by name
-     *
-     * @param unknown $name
-     * @param unknown $object
-     */
-    protected static function register ($name, $object) {
-        self::$registered[$name] = $object;
-    }
-
-    /*
-     * Return the instance object in charge of managing one type
-     */
-    public static function instance_of($name) {
-        return isset(self::$registered[$name]) ? self::$registered[$name] : null;
-    }
 
     /**
      * Constructor
@@ -57,7 +39,9 @@ class Metadata_type {
      * @param array $attrs
      */
     function __construct($attrs = array()) {
+        $name = 'boolean';
 		// register itself to the type manager
+		parent::register($name, $this);
     }
 
     /**
@@ -71,6 +55,19 @@ class Metadata_type {
      * @param $format
      */
     function display_field($table, $field, $value, $format = "html") {
+        if ($format == "html") {
+            if ($value) {
+                return '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
+            } else {
+                return '';
+            }
+        } else {
+            if ($value) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
     }
 
     /**
@@ -79,9 +76,16 @@ class Metadata_type {
      * @param unknown $table
      * @param unknown $field
      * @param unknown $value
-     * @param $format
+     * @param
+     *            $format
      */
     function field_input($table, $field, $value = '', $attrs = array()) {
+        return nbs() . form_checkbox(array (
+                'name' => $field,
+                'id' => $field,
+                'value' => 1,
+                'checked' => (0 != $value)
+        ));
     }
 
     /**

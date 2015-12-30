@@ -85,6 +85,7 @@ $lang['label_users_confirm-password'] = "Confirm Password";
 $lang['label_users_created_on'] = "Creation date";
 $lang['label_users_last_login'] = "Last login";
 $lang['label_users_admin'] = "Administrator";
+$lang['label_users_active'] = "Active";
 
 // Date and time format
 $lang['format_timestamp'] = "m/d/Y H:i";

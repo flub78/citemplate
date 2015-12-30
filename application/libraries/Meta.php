@@ -105,6 +105,9 @@ class Meta {
 		$this->fields_list = array();
 		$this->field_data = array();
 		$this->init();
+
+		$this->CI->load->library("Metadata_type");
+		$this->CI->load->library("Type_boolean");
 	}
 
 	/**
@@ -533,28 +536,32 @@ class Meta {
 
 		$db_type = $this->field_db_type($table, $field);
 
-
 		if (isset($this->fields[$table][$field]['metadata_type'])) {
 			$metadata_type = $this->fields[$table][$field]['metadata_type'];
+
+            $type_manager = Metadata_type::instance_of($metadata_type);
+            if ($type_manager) {
+                return $type_manager->display_field($table, $field, $value, $format);
+            }
 
 			if ($metadata_type == 'password') {
 				return '';
 			}
-			if ($metadata_type == 'boolean') {
-				if ($format == "html") {
-					if ($value) {
-						return '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
-					} else {
-						return '';
-					}
-				} else {
-					if ($value) {
-						return 1;
-					} else {
-						return 0;
-					}
-				}
-			}
+// 			if ($metadata_type == 'boolean') {
+// 				if ($format == "html") {
+// 					if ($value) {
+// 						return '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
+// 					} else {
+// 						return '';
+// 					}
+// 				} else {
+// 					if ($value) {
+// 						return 1;
+// 					} else {
+// 						return 0;
+// 					}
+// 				}
+// 			}
 
 		}
 
@@ -603,15 +610,19 @@ class Meta {
 		// set_value is not used as values are fully managed in to be prep
 		// from and to database
 
-		if ($type == 'boolean') {
-			return nbs() . form_checkbox(array (
-					'name' => $field,
-					'id' => $field,
-					'value' => 1,
-					'checked' => (0 != $value)
-			));
+	    $type_manager = Metadata_type::instance_of($type);
+        if ($type_manager) {
+            return $type_manager->field_input($table, $field, $value, $attrs);
+        }
+// 		if ($type == 'boolean') {
+// 			return nbs() . form_checkbox(array (
+// 					'name' => $field,
+// 					'id' => $field,
+// 					'value' => 1,
+// 					'checked' => (0 != $value)
+// 			));
 
-		}
+// 		}
 
 		// TODO: use form_input
 		$input = '<input';

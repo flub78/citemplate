@@ -13,7 +13,6 @@ Todo:
         * bootstrap style for login page
         * check user creation
         - forgotten password
-        - changement de mot de passe
         
     * draw a diagram of the bootstrap page structure
         
@@ -69,6 +68,7 @@ Done:
 
     * Installation
     * replace authentication library
+         - changement de mot de passe
     * Fill the authentication database.
     * Internationalization of the list view
         - Titles and heading

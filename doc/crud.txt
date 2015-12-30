@@ -27,3 +27,37 @@ Here are the steps
 6) Edit the menu
 
 7)  Controller test 
+
+===============================================================================================
+
+CRUD information
+
+tables
+    users
+        title = "Users";
+        form_title = "User";
+        create_title = "Create user";
+        table_fields = array('first_name', 'last_name', 'username', 'email', 'active', '__edit', '__delete'),
+        form_fields
+            create = array('first_name', 'last_name', 'username', 'company', 'email', 'phone', 'password', 'confirm-password'),
+            edit = array('first_name', 'last_name', 'email', 'username', 'phone', 'password', 'confirm-password', 'active', 'created_on', 'last_login')
+            
+        fields
+            first_name
+                language
+                    english
+                        label = "First name";
+                        place_holder = "First_Name";
+                        heading = "First name";
+                    french
+                name
+                type
+                id
+                class
+                size
+                rules
+                    default
+                    create
+                    edit
+                    
+        
