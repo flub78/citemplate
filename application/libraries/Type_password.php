@@ -29,7 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author frederic
  *
  */
-class Type_boolean extends Metadata_type {
+class Type_password extends Metadata_type {
     var $name = "";
 
 
@@ -39,7 +39,7 @@ class Type_boolean extends Metadata_type {
      * @param array $attrs
      */
     function __construct($attrs = array()) {
-        $name = 'boolean';
+        $name = 'password';
 		// register itself to the type manager
 		Metadata_type::register($name, $this);
     }
@@ -55,19 +55,7 @@ class Type_boolean extends Metadata_type {
      * @param $format
      */
     function display_field($table, $field, $value, $format = "html") {
-        if ($format == "html") {
-            if ($value) {
-                return '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
-            } else {
-                return '';
-            }
-        } else {
-            if ($value) {
-                return 1;
-            } else {
-                return 0;
-            }
-        }
+        return '';
     }
 
     /**
@@ -80,12 +68,7 @@ class Type_boolean extends Metadata_type {
      *            $format
      */
     function field_input($table, $field, $value = '', $attrs = array()) {
-        return nbs() . form_checkbox(array (
-                'name' => $field,
-                'id' => $field,
-                'value' => 1,
-                'checked' => (0 != $value)
-        ));
+        return parent::field_input($table, $field, $value, $attrs);
     }
 
     /**
@@ -107,8 +90,8 @@ class Type_boolean extends Metadata_type {
      public 'auto_increment' => int 1
      public 'allow_null' => boolean false
      */
-//     function rules($table, $field, $action) {
-//         return parent::rules($table, $field, $action);
-//     }
+    function rules($table, $field, $action) {
+        return parent::rules($table, $field, $action);
+    }
 }
 

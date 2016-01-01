@@ -28,8 +28,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @author frederic
  *
+ * Mysql handels several time related types:
+ *    DATE: date without time part
+ *    DATETIME: dates with time part, range '1000-01-01 00:00:00' to '999-12-31 23:59:59'
+ *    TIMESTAMP: dates with time part, Unix range '1970-01-01 00:00:01' to '2038-01-19 03:14:07' UTC
+ *    TIME: time of the day or result of DATETIME difference.
+ *
+ *    TIMESTAMPs are stored in UTC but converted to local when retrieved.
  */
-class Type_boolean extends Metadata_type {
+class Type_email extends Metadata_type {
     var $name = "";
 
 
@@ -39,36 +46,11 @@ class Type_boolean extends Metadata_type {
      * @param array $attrs
      */
     function __construct($attrs = array()) {
-        $name = 'boolean';
+        $name = 'email';
 		// register itself to the type manager
 		Metadata_type::register($name, $this);
     }
 
-    /**
-     * Transform a field from the database into something suitable for display
-     *
-     * So it mainly takes formating and languages into account.
-     *
-     * @param unknown $table
-     * @param unknown $field
-     * @param unknown $value
-     * @param $format
-     */
-    function display_field($table, $field, $value, $format = "html") {
-        if ($format == "html") {
-            if ($value) {
-                return '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
-            } else {
-                return '';
-            }
-        } else {
-            if ($value) {
-                return 1;
-            } else {
-                return 0;
-            }
-        }
-    }
 
     /**
      * Generate a form field input
@@ -80,12 +62,8 @@ class Type_boolean extends Metadata_type {
      *            $format
      */
     function field_input($table, $field, $value = '', $attrs = array()) {
-        return nbs() . form_checkbox(array (
-                'name' => $field,
-                'id' => $field,
-                'value' => 1,
-                'checked' => (0 != $value)
-        ));
+        $attrs['class'] = "form-control $name";
+        return parent::field_input($table, $field, $value, $attrs);
     }
 
     /**
@@ -97,18 +75,11 @@ class Type_boolean extends Metadata_type {
      * @param unknown_type $field
      * @param unknown_type $action
      *
-     *   'user_id' =>
-     object(stdClass)[34]
-     public 'name' => string 'user_id' (length=7)
-     public 'type' => string 'int' (length=3)
-     public 'default' => null
-     public 'max_length' => null
-     public 'primary_key' => int 1
-     public 'auto_increment' => int 1
-     public 'allow_null' => boolean false
      */
-//     function rules($table, $field, $action) {
-//         return parent::rules($table, $field, $action);
-//     }
+    function rules($table, $field, $action) {
+        $rule = parent::rules($table, $field, $action);
+        $this->add_rule($rule, "valid_email");
+        return $rule;
+    }
 }
 

@@ -19,7 +19,7 @@
  * @filesource Logger.php
  * @package libraries
  */
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * Metadata types provide specific methods to display or input this kind of data.
@@ -31,8 +31,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Metadata_type {
     var $name = "";
-
-    static $registered = array();
+    static $registered = array ();
 
     /**
      * Children of Metadata_type must register so one may call them by name
@@ -40,15 +39,18 @@ class Metadata_type {
      * @param unknown $name
      * @param unknown $object
      */
-    protected static function register ($name, $object) {
-        self::$registered[$name] = $object;
+    protected static function register($name, $object) {
+        self::$registered [$name] = $object;
     }
 
     /*
      * Return the instance object in charge of managing one type
      */
     public static function instance_of($name) {
-        return isset(self::$registered[$name]) ? self::$registered[$name] : null;
+        if (!isset(self::$registered [$name])) {
+            $name = 'default';
+        }
+        return self::$registered [$name];
     }
 
     /**
@@ -57,7 +59,9 @@ class Metadata_type {
      * @param array $attrs
      */
     function __construct($attrs = array()) {
-		// register itself to the type manager
+        // register itself to the type manager
+        Metadata_type::register('default', $this);
+        $this->CI = & get_instance();
     }
 
     /**
@@ -68,9 +72,12 @@ class Metadata_type {
      * @param unknown $table
      * @param unknown $field
      * @param unknown $value
-     * @param $format
+     * @param
+     *            $format
      */
     function display_field($table, $field, $value, $format = "html") {
+        // by default no formatting
+        return $value;
     }
 
     /**
@@ -79,9 +86,61 @@ class Metadata_type {
      * @param unknown $table
      * @param unknown $field
      * @param unknown $value
-     * @param $format
+     * @param
+     *            $format
      */
     function field_input($table, $field, $value = '', $attrs = array()) {
+        $type = $this->CI->metadata->field_type($table, $field);
+        $name = $this->CI->metadata->field_name($table, $field);
+        $id = $this->CI->metadata->field_id($table, $field);
+        $db_type = $this->CI->metadata->field_db_type($table, $field);
+        $size = $this->CI->metadata->field_size($table, $field);
+        $placeholder = $this->CI->metadata->field_placeholder($table, $field);
+
+        $info = "field_input($table, $field) ";
+        $info .= "type=$type, size=$size, placeholder=$placeholder, value=$value";
+        $this->CI->metadata->log($info);
+
+        // TODO: use form_input
+        $input = '<input';
+        if ($type) {
+            $input .= " type=\"$type\"";
+        }
+        if ($name) {
+            $input .= " name=\"$name\"";
+        }
+        if ($id) {
+            $input .= " id=\"$id\"";
+        }
+
+        $class = 'form-control';
+        if ($db_type == 'date') {
+            $class .= ' date';
+        }
+        if ($db_type == 'time') {
+            $class .= ' time';
+        }
+        if ($db_type == 'datetime') {
+            $class .= ' datetime';
+        }
+        if ($type) {
+            $class .= ' ' . $type;
+        }
+        if (array_key_exists('class', $attrs)) {
+            $class = $attrs['class'];
+        }
+
+        $input .= " class=\"$class\"";
+        $input .= " value=\"$value\"";
+        if ($placeholder) {
+            $input .= " placeholder=\"$placeholder\"";
+        }
+        if ($size) {
+            $input .= " size=\"$size\"";
+        }
+
+        $input .= ' />';
+        return $input;
     }
 
     /**
@@ -92,18 +151,81 @@ class Metadata_type {
      * @param unknown_type $table
      * @param unknown_type $field
      * @param unknown_type $action
-     *
-     *   'user_id' =>
-     object(stdClass)[34]
-     public 'name' => string 'user_id' (length=7)
-     public 'type' => string 'int' (length=3)
-     public 'default' => null
-     public 'max_length' => null
-     public 'primary_key' => int 1
-     public 'auto_increment' => int 1
-     public 'allow_null' => boolean false
+     *            'user_id' =>
+     *            object(stdClass)[34]
+     *            public 'name' => string 'user_id' (length=7)
+     *            public 'type' => string 'int' (length=3)
+     *            public 'default' => null
+     *            public 'max_length' => null
+     *            public 'primary_key' => int 1
+     *            public 'auto_increment' => int 1
+     *            public 'allow_null' => boolean false
      */
     function rules($table, $field, $action) {
+        $rule = "";
+
+        // If the rules for this field are forced
+        $absolute_rules = $this->CI->metadata->absolute_rules($table, $field, $action);
+        if ($absolute_rules) {
+            return $absolute_rules;
+        }
+
+        // Rules deduced from the database info
+        if (!$this->CI->metadata->allow_null($table, $field)) {
+            $this->add_rule($rule, 'required');
+        }
+
+        $max_length = $this->CI->metadata->max_length($table, $field);
+        if ($max_length) {
+            $rl = 'max_length[' .  $max_length . ']';
+            $this->add_rule($rule, $rl);
+        }
+
+        // remove is_unique in edit mode
+        if ($action != 'create') {
+            $this->remove_rule($rule, 'is_unique');
+        }
+
+        // add user defined rules
+        $additional_rules = $this->CI->metadata->additional_rules($table, $field, $action);
+        if ($additional_rules) {
+            $this->add_rule($rule, $additional_rules);
+        }
+
+        $this->CI->metadata->log("rules($table,$field) = " . $rule);
+        // return '';
+        return $rule;
     }
+
+    /**
+     * Add a rule to the rules string
+     *
+     * @param unknown $rules
+     * @param unknown $new_rule
+     */
+    protected function add_rule(&$rules, $new_rule) {
+        if ($rules) {
+            $rules .= '|';
+        }
+        $rules .= $new_rule;
+    }
+
+    /**
+     * Remove a rule from the rules string
+     *
+     * @param unknown $rules
+     * @param unknown $delete_rule
+     */
+    protected function remove_rule(&$rules, $delete_rule) {
+        $splitted = preg_split('/\|/', $rules);
+        $rls = "";
+        foreach ( $splitted as $rl ) {
+            if (! preg_match("/$delete_rule/", $rl)) {
+                $this->add_rule($rls, $rl);
+            }
+        }
+        $rules = $rls;
+    }
+
 }
 

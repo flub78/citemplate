@@ -106,6 +106,7 @@ class Meta {
 		$this->field_data = array();
 		$this->init();
 
+		// load all the supported types
 		$this->CI->load->library("Metadata_type");
 		$this->CI->load->library("Type_boolean");
 	}
@@ -116,7 +117,6 @@ class Meta {
 	protected function init() {
 
 		$this->fields = array();
-
 	}
 
 
@@ -207,7 +207,7 @@ class Meta {
 	 * @param unknown_type $field
 	 * @return string
 	 */
-	function field_type($table, $field) {
+	public function field_type($table, $field) {
 
 		if (! isset($this->fields[$table][$field]['metadata_type'])) {
 			// try to deduce it from the database type
@@ -318,12 +318,6 @@ class Meta {
 			return '';
 		}
 		return $this->table_keys[$table];
-// 		$key = array(
-// 			'ciauth_user_accounts' => 'username',
-// 			'ciauth_user_privileges' => 'privilege_id'
-// 		);
-
-// 		return $key[$table];
 	}
 
 	/**
@@ -346,12 +340,6 @@ class Meta {
 		return array($table => $values);
 	}
 
-	protected function add_rule(&$rule, $new_rule) {
-		if ($rule) {
-			$rule .= '|';
-		}
-		$rule .= $new_rule;
-	}
 
 	/**
 	 * Return the validation rules deduced from metadata
@@ -437,77 +425,102 @@ class Meta {
 	 */
 	function rules($table, $field, $action) {
 
-		$rule = "";
+		if (isset($this->fields[$table][$field]['metadata_type'])) {
+			$field_type = $this->fields[$table][$field]['metadata_type'];
+		} else {
+		    $field_type = $this->field_db_type($table, $field);
+		}
+
+        $type_manager = Metadata_type::instance_of($field_type);
+        if ($type_manager) {
+            return $type_manager->rules($table, $field, $action);
+        }
+
+        throw new Exception("Type manager not found");
+//         $rule = "";
 
 		// Rules deduced from the database info
-		if ($this->table_exists($table)) {
-			if (isset($this->field_data[$table][$field])) {
+// 		if ($this->table_exists($table)) {
+// 			if (isset($this->field_data[$table][$field])) {
 
-				// if this field exist in database
-				$meta = $this->field_data[$table][$field];
-				// var_dump($meta);
+// 				// if this field exist in database
+// 				$meta = $this->field_data[$table][$field];
+// 				// var_dump($meta);
 
-				$metadata_type = (isset($this->fields[$table][$field]['metadata_type'])) ?
-						$this->fields[$table][$field]['metadata_type'] :
-						'';
+// 				$metadata_type = (isset($this->fields[$table][$field]['metadata_type'])) ?
+// 						$this->fields[$table][$field]['metadata_type'] :
+// 						'';
 
-				if ($meta->type == 'timestamp') {
-					$this->add_rule($rule, 'callback_valid_timestamp');
-				} elseif ($meta->type == 'date') {
-					$this->add_rule($rule, 'callback_valid_date');
-				} elseif ($meta->type == 'time') {
-					$this->add_rule($rule, 'callback_valid_time');
-				}
+// 				if ($meta->type == 'timestamp') {
+// 					$this->add_rule($rule, 'callback_valid_timestamp');
+// 				} elseif ($meta->type == 'date') {
+// 					$this->add_rule($rule, 'callback_valid_date');
+// 				} elseif ($meta->type == 'time') {
+// 					$this->add_rule($rule, 'callback_valid_time');
+// 				}
 
-				if (!$meta->allow_null) {
-					if ($metadata_type != 'boolean') {
-						$this->add_rule($rule, 'required');
-					}
-				}
-
-				if (array_key_exists('max_length', $meta) && $meta->max_length) {
-					$rl = 'max_length[' .  $meta->max_length . ']';
-					$this->add_rule($rule, $rl);
-				}
-			}
-		}
-
-
-
-		// additional rules deduced from metadata types
-		if (isset($this->fields[$table][$field]['metadata_type'])) {
-
-			if ($this->fields[$table][$field]['metadata_type'] == 'email') {
-				$this->add_rule($rule, 'valid_email');
-			}
-		}
-
-		// additional metadata explicit rules
-		if (isset($this->fields[$table][$field]['rules'])) {
-			$this->add_rule($rule, $this->fields[$table][$field]['rules']);
-		}
-
-		// Replace default rules
-		if (isset($this->fields[$table][$field][$action . '_rules'])) {
-			$rule = $this->fields[$table][$field][$action . '_rules'];
-		}
-
-		// remove is_unique in edit mode
-		if ($action != 'create') {
-			$splitted = preg_split('/\|/', $rule);
-			$rls = "";
-			foreach ($splitted as $rl) {
-				if (!preg_match('/is_unique/', $rl) ) {
-					$this->add_rule($rls, $rl);
-				}
-			}
-			$rule = $rls;
-		}
-
-		$this->log("rules($table,$field) = " . $rule);
-		// return '';
-		return $rule;
 	}
+
+	/**
+	 * Rules to replace computed rules
+	 *
+	 * @param unknown_type $table
+	 * @param unknown_type $field
+	 */
+	 public function absolute_rules ($table, $field, $action) {
+	 	// Replace default rules
+		if (isset($this->fields[$table][$field][$action . '_rules'])) {
+			return $this->fields[$table][$field][$action . '_rules'];
+		}
+	    return null;
+	}
+
+	/**
+	 * Rules to add to computed rules
+	 *
+	 * @param unknown_type $table
+	 * @param unknown_type $field
+	 */
+	public function additional_rules ($table, $field) {
+		if (isset($this->fields[$table][$field]['rules'])) {
+		    return $this->fields[$table][$field]['rules'];
+		}
+	    return "";
+	}
+
+	/**
+	 * Can the field be null
+	 *
+	 * @param unknown_type $table
+	 * @param unknown_type $field
+	 */
+	public function allow_null ($table, $field) {
+	    if (isset($this->field_data[$table][$field])) {
+	        $meta = $this->field_data[$table][$field];
+	        return $meta->allow_null;
+	    }
+        return false;
+	}
+
+	/**
+	 * Can the field be null
+	 *
+	 * @param unknown_type $table
+	 * @param unknown_type $field
+	 */
+	public function max_length ($table, $field) {
+	    if (isset($this->field_data[$table][$field])) {
+	        // if this field exist in database
+	        $meta = $this->field_data[$table][$field];
+
+	        if (array_key_exists('max_length', $meta) && $meta->max_length) {
+	            return $meta->max_length;
+	        }
+	        return 0;
+	    }
+	    return 0;
+	}
+
 
 	/**
 	 * Transform a field from the database into something suitable for display
@@ -521,69 +534,17 @@ class Meta {
 	 */
 	function display_field($table, $field, $value, $format = "html") {
 
-		/**
-		 * # type is defined by the database
-		 * $meta_type = $this->field_db_type($table, $field);
-		 *
-		 * # or overloaded
-		 * if (isset($this->fields[$table][$field]['metadata_type'])) {
-		 *    $meta_type = $this->fields[$table][$field]['metadata_type'];
-		 * }
-		 *
-		 * $type_object = $this->type_manager->instance($meta_type);
-		 * $type_object->display_field($table, $field, $value, $format);
-		 */
-
-		$db_type = $this->field_db_type($table, $field);
-
 		if (isset($this->fields[$table][$field]['metadata_type'])) {
-			$metadata_type = $this->fields[$table][$field]['metadata_type'];
-
-            $type_manager = Metadata_type::instance_of($metadata_type);
-            if ($type_manager) {
-                return $type_manager->display_field($table, $field, $value, $format);
-            }
-
-			if ($metadata_type == 'password') {
-				return '';
-			}
-// 			if ($metadata_type == 'boolean') {
-// 				if ($format == "html") {
-// 					if ($value) {
-// 						return '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
-// 					} else {
-// 						return '';
-// 					}
-// 				} else {
-// 					if ($value) {
-// 						return 1;
-// 					} else {
-// 						return 0;
-// 					}
-// 				}
-// 			}
-
+			$field_type = $this->fields[$table][$field]['metadata_type'];
+		} else {
+		    $field_type = $this->field_db_type($table, $field);
 		}
 
-		/*
-		 * Mysql handels several time related types:
-		 *    DATE: date without time part
-		 *    DATETIME: dates with time part, range '1000-01-01 00:00:00' to '999-12-31 23:59:59'
-		 *    TIMESTAMP: dates with time part, Unix range '1970-01-01 00:00:01' to '2038-01-19 03:14:07' UTC
-		 *    TIME: time of the day or result of DATETIME difference.
-		 *
-		 *    TIMESTAMPs are stored in UTC but converted to local when retrieved.
-		 */
-		if ($db_type == 'timestamp') {
-			$format = "Y-m-s h:i:s";
-			$translated = $this->CI->lang->line('format_timestamp');
-			if ($translated) {
-				$format = $translated;
-			}
-			return date($format, strtotime($value));
-		}
-
-		return $value;
+        $type_manager = Metadata_type::instance_of($field_type);
+        if ($type_manager) {
+            return $type_manager->display_field($table, $field, $value, $format);
+        }
+        throw new Exception("Type manager not found");
 	}
 
 	/**
@@ -596,73 +557,20 @@ class Meta {
 	 */
 	function field_input($table, $field, $value = '', $attrs = array()) {
 
-		$type = $this->field_type ($table, $field);
-		$name = $this->field_name ($table, $field);
-		$id = $this->field_id ($table, $field);
-		$db_type = $this->field_db_type ($table, $field);
-		$size = $this->field_size ($table, $field);
-		$placeholder = $this->field_placeholder ($table, $field);
-
-		$info = "field_input($table, $field) ";
-		$info .= "type=$type, size=$size, placeholder=$placeholder, value=$value";
-		$this->log($info);
-
 		// set_value is not used as values are fully managed in to be prep
 		// from and to database
 
-	    $type_manager = Metadata_type::instance_of($type);
+		if (isset($this->fields[$table][$field]['metadata_type'])) {
+			$field_type = $this->fields[$table][$field]['metadata_type'];
+		} else {
+		    $field_type = $this->field_db_type($table, $field);
+		}
+
+        $type_manager = Metadata_type::instance_of($field_type);
         if ($type_manager) {
             return $type_manager->field_input($table, $field, $value, $attrs);
         }
-// 		if ($type == 'boolean') {
-// 			return nbs() . form_checkbox(array (
-// 					'name' => $field,
-// 					'id' => $field,
-// 					'value' => 1,
-// 					'checked' => (0 != $value)
-// 			));
-
-// 		}
-
-		// TODO: use form_input
-		$input = '<input';
-		if ($type) {
-			$input .= " type=\"$type\"";
-		}
-		if ($name) {
-			$input .= " name=\"$name\"";
-		}
-		if ($id) {
-			$input .= " id=\"$id\"";
-		}
-		$class = 'form-control';
-		if ($db_type == 'date') {
-			$class .= ' date';
-		}
-		if ($db_type == 'time') {
-			$class .= ' time';
-		}
-		if ($db_type == 'datetime') {
-			$class .= ' datetime';
-		}
-		if ($db_type == 'timestamp') {
-			$class .= ' timestamp';
-		}
-		if ($type) {
-			$class .= ' ' . $type;
-		}
-
-		$input .= " class=\"$class\"";
-		$input .= " value=\"$value\"";
-		if ($placeholder) {
-			$input .= " placeholder=\"$placeholder\"";
-		}
-		if ($size) {
-			$input .= " size=\"$size\"";
-		}
-
-		$input .= ' />';
-		return $input;
+        throw new Exception("Type manager not found");
 	}
 
 	/**
