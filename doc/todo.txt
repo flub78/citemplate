@@ -11,7 +11,7 @@ Todo:
         * manage session flash data
         * reject access for non admin to admin pages
         * bootstrap style for login page
-        * check user creation
+        * check user modification
         - forgotten password
         
     * draw a diagram of the bootstrap page structure
@@ -27,7 +27,7 @@ Todo:
         
     * Installation: documentation
     * Metadata
-        * one class per metadate type
+        * one class per metadate type (done)
         
         * jointure
         * epoch

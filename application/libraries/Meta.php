@@ -91,6 +91,27 @@ class Meta {
 	protected $fields;	        # additional metadata
 	protected $logger;
 
+	protected $registered = array ();
+
+    /**
+     * Children of Metadata_type must register so one may call them by name
+     *
+     * @param unknown $name
+     * @param unknown $object
+     */
+    protected function register($name, $object) {
+        $this->registered [$name] = $object;
+    }
+
+    /*
+     * Return the instance object in charge of managing one type
+     */
+    protected function instance_of($name) {
+        if (!isset($this->registered [$name])) {
+            $name = 'default';
+        }
+        return $this->registered [$name];
+    }
 	/**
 	 * Constructor
 	 */
@@ -108,7 +129,20 @@ class Meta {
 
 		// load all the supported types
 		$this->CI->load->library("Metadata_type");
+		$this->register('default', $this->CI->metadata_type);
+
 		$this->CI->load->library("Type_boolean");
+		$this->register('boolean', $this->CI->type_boolean);
+
+ 		$this->CI->load->library("Type_email");
+		$this->register('email', $this->CI->type_email);
+
+ 		$this->CI->load->library("Type_password");
+ 		$this->register('password', $this->CI->type_password);
+
+//  		$this->CI->load->library("Type_timestamp");
+//  		$this->register('timestamp', $this->CI->type_timestamp);
+
 	}
 
 	/**
@@ -431,7 +465,8 @@ class Meta {
 		    $field_type = $this->field_db_type($table, $field);
 		}
 
-        $type_manager = Metadata_type::instance_of($field_type);
+        $type_manager = $this->instance_of($field_type);
+        // $type_manager = Metadata_type::instance_of($field_type);
         if ($type_manager) {
             return $type_manager->rules($table, $field, $action);
         }
@@ -540,7 +575,8 @@ class Meta {
 		    $field_type = $this->field_db_type($table, $field);
 		}
 
-        $type_manager = Metadata_type::instance_of($field_type);
+        //$type_manager = Metadata_type::instance_of($field_type);
+        $type_manager = $this->instance_of($field_type);
         if ($type_manager) {
             return $type_manager->display_field($table, $field, $value, $format);
         }
@@ -566,7 +602,8 @@ class Meta {
 		    $field_type = $this->field_db_type($table, $field);
 		}
 
-        $type_manager = Metadata_type::instance_of($field_type);
+        // $type_manager = Metadata_type::instance_of($field_type);
+		$type_manager = $this->instance_of($field_type);
         if ($type_manager) {
             return $type_manager->field_input($table, $field, $value, $attrs);
         }

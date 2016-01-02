@@ -72,7 +72,7 @@ class Groups_controller_test extends TestCase
  		// read it
  		$output =  $this->request('GET', ['Groups', 'edit', $id]);
  		$this->assertNotEquals("", $output, "Edit");
- 		$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in $method");
+ 		$this->assertNotContains('A PHP Error was encountered', $output, "no PHP error in edit");
 
 		// delete if
  		$output =  $this->request('GET', ['Groups', 'delete', $id]);

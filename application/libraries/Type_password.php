@@ -67,9 +67,9 @@ class Type_password extends Metadata_type {
      * @param
      *            $format
      */
-    function field_input($table, $field, $value = '', $attrs = array()) {
-        return parent::field_input($table, $field, $value, $attrs);
-    }
+//     function field_input($table, $field, $value = '', $attrs = array()) {
+//         return parent::field_input($table, $field, $value, $attrs);
+//     }
 
     /**
      * Return the validation rules deduced from metadata

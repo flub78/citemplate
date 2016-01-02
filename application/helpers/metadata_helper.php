@@ -251,6 +251,22 @@ if (! function_exists ( 'field_input' )) {
 	}
 }
 
+if (! function_exists ( 'field_type' )) {
+    /**
+	 * Returns the field type as it will be used for HTML forms. This is also the metadata type.
+     *
+     * @param unknown_type $table
+     * @param unknown_type $field
+     * @param unknown_type $data
+     * @param unknown_type $attrs
+     */
+    function field_type($table, $field) {
+        $CI = & get_instance ();
+
+        return $CI->metadata->field_type($table, $field);
+    }
+}
+
 
 if (! function_exists ( 'form' )) {
 	/**

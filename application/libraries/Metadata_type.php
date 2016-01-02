@@ -30,6 +30,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  *
  */
 class Metadata_type {
+
 	protected $CI;
 
     var $name = "";
@@ -92,16 +93,21 @@ class Metadata_type {
      *            $format
      */
     function field_input($table, $field, $value = '', $attrs = array()) {
-        $type = $this->CI->metadata->field_type($table, $field);
-        $name = $this->CI->metadata->field_name($table, $field);
-        $id = $this->CI->metadata->field_id($table, $field);
-        $db_type = $this->CI->metadata->field_db_type($table, $field);
-        $size = $this->CI->metadata->field_size($table, $field);
-        $placeholder = $this->CI->metadata->field_placeholder($table, $field);
+
+        $CI = & get_instance ();
+
+        //echo "field_input table=$table, field=$field, value=$value\n" . br();
+
+        $type = $CI->metadata->field_type($table, $field);
+        $name = $CI->metadata->field_name($table, $field);
+        $id = $CI->metadata->field_id($table, $field);
+        $db_type = $CI->metadata->field_db_type($table, $field);
+        $size = $CI->metadata->field_size($table, $field);
+        $placeholder = $CI->metadata->field_placeholder($table, $field);
 
         $info = "field_input($table, $field) ";
         $info .= "type=$type, size=$size, placeholder=$placeholder, value=$value";
-        $this->CI->metadata->log($info);
+        $CI->metadata->log($info);
 
         // TODO: use form_input
         $input = '<input';
@@ -186,15 +192,16 @@ class Metadata_type {
             $this->add_rule($rule, $rl);
         }
 
-        // remove is_unique in edit mode
-        if ($action != 'create') {
-            $this->remove_rule($rule, 'is_unique');
-        }
 
         // add user defined rules
         $additional_rules = $this->CI->metadata->additional_rules($table, $field, $action);
         if ($additional_rules) {
             $this->add_rule($rule, $additional_rules);
+        }
+
+        // remove is_unique in edit mode
+        if ($action != 'create') {
+            $this->remove_rule($rule, 'is_unique');
         }
 
         $this->CI->metadata->log("rules($table,$field) = " . $rule);
@@ -222,6 +229,8 @@ class Metadata_type {
      * @param unknown $delete_rule
      */
     protected function remove_rule(&$rules, $delete_rule) {
+
+        // echo "removing $delete_rule from $rules\n";
         $splitted = preg_split('/\|/', $rules);
         $rls = "";
         foreach ( $splitted as $rl ) {

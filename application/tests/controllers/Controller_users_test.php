@@ -38,23 +38,34 @@ class Controller_users_test extends TestCase
 		$count =  $this->model->count('users');
 
 // 		echo "\nattempt to create a user with no password";
-		$args = array("email_value"	=> "test@free.fr",
+		$args = array(
+		        "first_name" => "John",
+		        "last_name" => "Doe",
 				"username_value" => "test",
-				"password" => "pas",
-				"password-confirm" => "password"
+		        "company" => "World Wide",
+		        "email_value"	=> "test@free.fr",
+		        "phone" => "0123456789"
 		);
 		$output =  $this->request('POST', ['users', 'validate', 'create'], $args);
-		// echo $output;
+		$error = 'The Password field is required';
+		$this->assertContains($error, $output, "Error reported when missing password");
+
 // 		echo "\nuser with no password validated";
 
 
-		$args = array("email_value"	=> "test@free.fr",
+		$args = array(
+		        "first_name" => "John",
+		        "last_name" => "Doe",
 				"username_value" => "test",
-				"password" => "password",
-				"password-confirm" => "password"
+		        "company" => "World Wide",
+		        "email_value"	=> "test@free.fr",
+		        "phone" => "0123456789",
+		        "password" => "password314",
+		        "confirm-password" => "password314"
 		);
 		// $this->request('POST', ['users', 'add'], $args);
 		$this->request('POST', ['users', 'validate', 'create'], $args);
+
 		$id = $this->model->get_last_inserted();
 
 // 		echo "\ncheck that a user has been created id=$id";

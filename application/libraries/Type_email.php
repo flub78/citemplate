@@ -51,7 +51,6 @@ class Type_email extends Metadata_type {
 		Metadata_type::register($name, $this);
     }
 
-
     /**
      * Generate a form field input
      *
@@ -62,8 +61,10 @@ class Type_email extends Metadata_type {
      *            $format
      */
     function field_input($table, $field, $value = '', $attrs = array()) {
-        $attrs['class'] = "form-control $name";
-        return parent::field_input($table, $field, $value, $attrs);
+        $attrs['class'] = "form-control " . $this->name;
+        //return parent::field_input($table, $field, $value, $attrs);
+        $this->CI = & get_instance();
+        return $this->CI->metadata_type->field_input($table, $field, $value, $attrs);
     }
 
     /**
