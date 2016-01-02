@@ -67,7 +67,7 @@ class TestInternational < ApplicationTest
     
     puts "#\tTest case: English"
     self.set_language('english')
-    self.login('testadmin', 'testadmin')
+    self.login('admin', 'admin')
     
     @b.goto @root_url
     
@@ -87,7 +87,7 @@ class TestInternational < ApplicationTest
     
     puts "#\tTest case: French"
     self.set_language('french')
-    self.login('testadmin', 'testadmin')
+    self.login('admin', 'admin')
     
     @b.goto @root_url
     check(@b.html.include?('Sortie'), 'Logout button in french')

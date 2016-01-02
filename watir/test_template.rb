@@ -14,7 +14,7 @@ class TestTemplate < ApplicationTest
   def setup
     super
     self.db_connect
-    self.login('testadmin', 'testadmin')
+    self.login('admin', 'admin')
   end
 
   # --------------------------------------------------------------------------------

@@ -46,9 +46,9 @@ class Type_email extends Metadata_type {
      * @param array $attrs
      */
     function __construct($attrs = array()) {
-        $name = 'email';
+        $this->name = 'email';
 		// register itself to the type manager
-		Metadata_type::register($name, $this);
+		// Metadata_type::register($this->name, $this);
     }
 
     /**

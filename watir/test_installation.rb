@@ -14,7 +14,7 @@ class TestInstallation < ApplicationTest
   def setup
     super
     self.db_connect
-    # self.login('testadmin', 'testadmin')
+    # self.login('admin', 'admin')
   end
 
   # --------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ class TestInstallation < ApplicationTest
      @b.goto @root_url
     
     # check that it is possible to log with default username
-    self.login('testadmin', 'testadmin')
+    self.login('admin', 'admin')
 
     # check that tables have been created
     count = self.table_count(@db)

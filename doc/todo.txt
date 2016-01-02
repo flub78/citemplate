@@ -6,13 +6,12 @@ can be derived really fast.
 ============================================================================================================================    
 
 Todo:
-    
-    * Replace ciauth by ion_auth
-        * manage session flash data
-        * reject access for non admin to admin pages
+ 
+     * Replace ciauth by ion_auth   
         * bootstrap style for login page
-        * check user modification
         - forgotten password
+        * check user modification
+        
         
     * draw a diagram of the bootstrap page structure
         
@@ -87,6 +86,10 @@ Done:
         (Valider, Créer, Créer et continuer)
         Validate, Create, Create and continue, Register
      * Database save, restore and migrations
+     
+     * Replace ciauth by ion_auth
+        * manage session flash data
+        * reject access for non admin to admin pages
         
 
 ============================================================================================================================    
