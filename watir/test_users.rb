@@ -44,15 +44,20 @@ class TestUsers < ApplicationTest
 
       'incorrect_values' => [
          {name: 'email_value', value: '', type: 'text_field'},
-         {name: 'username_value', value: 'testadmin', type: 'text_field'},
+         {name: 'username_value', value: 'admin', type: 'text_field'},
          {name: 'password', value: '', type: 'text_field'},
          {name: 'confirm-password', value: 'tutu', type: 'text_field'}],
 
       'error_patterns' => ["Email address field is required",
-        "User name field must contain a unique", 
+        "Identifier field must contain a unique", 
         "Confirm Password field does not match"],
       
-      'values' => [         {name: 'email_value', value: 'testing@free.fr', type: 'text_field'},
+      'values' => [         
+        {name: 'first_name', value: 'John', type: 'text_field'},
+        {name: 'last_name', value: 'Doe', type: 'text_field'},
+        {name: 'company', value: 'World Wide', type: 'text_field'},
+        {name: 'phone', value: '0123456789', type: 'text_field'},
+        {name: 'email_value', value: 'testing@free.fr', type: 'text_field'},
         {name: 'username_value', value: 'testing', type: 'text_field'},
         {name: 'password', value: 'testing', type: 'text_field'},
         {name: 'confirm-password', value: 'testing', type: 'text_field'}

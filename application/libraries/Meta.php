@@ -534,7 +534,7 @@ class Meta {
 	        $meta = $this->field_data[$table][$field];
 	        return $meta->allow_null;
 	    }
-        return false;
+        return true;
 	}
 
 	/**
