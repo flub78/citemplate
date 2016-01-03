@@ -62,6 +62,7 @@ class Type_timestamp extends Metadata_type {
      * @param $format
      */
     function display_field($table, $field, $value, $format = "html") {
+        $this->CI = & get_instance();
         $format = "Y-m-s h:i:s";
         $translated = $this->CI->lang->line('format_timestamp');
         if ($translated) {
@@ -80,7 +81,7 @@ class Type_timestamp extends Metadata_type {
      *            $format
      */
     function field_input($table, $field, $value = '', $attrs = array()) {
-        $attrs['class'] = "form-control $name";
+        $attrs['class'] = "form-control timestamp";
         return parent::field_input($table, $field, $value, $attrs);
     }
 
@@ -96,7 +97,7 @@ class Type_timestamp extends Metadata_type {
      */
     function rules($table, $field, $action) {
         $rule = parent::rules($table, $field, $action);
-        $this->add_rule($rule, "callback_valid_$name");
+        $this->add_rule($rule, "callback_valid_" . $this->name);
         return $rule;
     }
 }

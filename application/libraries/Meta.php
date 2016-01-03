@@ -140,8 +140,8 @@ class Meta {
  		$this->CI->load->library("Type_password");
  		$this->register('password', $this->CI->type_password);
 
-//  		$this->CI->load->library("Type_timestamp");
-//  		$this->register('timestamp', $this->CI->type_timestamp);
+  		$this->CI->load->library("Type_timestamp");
+  		$this->register('timestamp', $this->CI->type_timestamp);
 
 	}
 
@@ -602,7 +602,8 @@ class Meta {
 		    $field_type = $this->field_db_type($table, $field);
 		}
 
-        // $type_manager = Metadata_type::instance_of($field_type);
+		// echo "field_input $table $field $field_type" . br();
+
 		$type_manager = $this->instance_of($field_type);
         if ($type_manager) {
             return $type_manager->field_input($table, $field, $value, $attrs);

@@ -11,6 +11,7 @@ Todo:
         * bootstrap style for login page (partially done)
         - forgotten password
         * check user modification
+        * remember me
         
     * Convenience
         - number of element per page should be store in context
@@ -24,9 +25,7 @@ Todo:
     * draw a diagram of the bootstrap page structure
         
     * create selector for element list (group for users)
-        
-    * fix watir tests (at least for jenkins)
-    
+            
     * Manage null dates
     * Manage dates with default values
     

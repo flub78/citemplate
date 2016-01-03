@@ -67,6 +67,7 @@ $lang['heading_users_email'] = "Email address";
 $lang['heading_users_username'] = "User name";
 $lang['heading_users_created_on'] = "Creation";
 $lang['heading_users_last_login'] = "Last login";
+$lang['expiration_date'] = "Expiration date";
 # $lang['heading_users_admin'] = "Admin";
 
 $lang['placeholder_users_email'] = "Email address";
@@ -86,6 +87,7 @@ $lang['label_users_created_on'] = "Creation date";
 $lang['label_users_last_login'] = "Last login";
 $lang['label_users_admin'] = "Administrator";
 $lang['label_users_active'] = "Active";
+$lang['label_users_expiration_date'] = "Expiration date";
 
 // Date and time format
 $lang['format_timestamp'] = "m/d/Y H:i";
