@@ -8,10 +8,18 @@ can be derived really fast.
 Todo:
  
      * Replace ciauth by ion_auth   
-        * bootstrap style for login page
+        * bootstrap style for login page (partially done)
         - forgotten password
         * check user modification
         
+    * Convenience
+        - number of element per page should be store in context
+        (global or per page?)
+        - filtering should be stored (datatable option that I had to disable)
+        
+        - possibility to switch boolean from the page view. Is is a global edition capacity ?
+        
+        - Possibility to apply the same operation globaly to all selected rows (delete, set check).
         
     * draw a diagram of the bootstrap page structure
         

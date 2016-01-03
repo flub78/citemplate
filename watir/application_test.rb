@@ -54,7 +54,7 @@ class ApplicationTest < MiniTest::Test
   def login (user, password, expected_success=true)
     @b.goto @base_url
     screenshot('scr_before_login.png')
-    @b.text_field(:id => 'login_value').set user
+    @b.text_field(:id => 'identity').set user
     @b.text_field(:id => 'password').set password
     @b.button(:type => 'submit').click
     screenshot('scr_after_login_click.png')

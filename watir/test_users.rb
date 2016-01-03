@@ -32,7 +32,7 @@ class TestUsers < ApplicationTest
   # --------------------------------------------------------------------------------
   def test_crud
     
-    table = 'ciauth_user_accounts'
+    table = 'users'
     controller = 'users'
     
     puts "#\tTest case: CRUD for #{table}"
