@@ -34,6 +34,6 @@ class Migration_test_db extends CI_Migration {
 
 	public function down()
 	{
-		$this->dbforge->drop_column('meta_test1', 'expiration_date');
+		$this->dbforge->drop_table('meta_test1', true);
 	}
 }

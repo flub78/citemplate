@@ -31,10 +31,10 @@ class Users extends MY_Controller {
 
 	var $default_table = 'users';
 	var $controller = 'users';
-	var $table_fields = array('first_name', 'last_name', 'username', 'email', 'active', 'expiration_date',  '__edit', '__delete');
+	var $table_fields = array('first_name', 'last_name', 'username', 'email', 'active',  '__edit', '__delete');
 	var $form_fields = array(
-		'create' => array('first_name', 'last_name', 'username', 'company', 'email', 'phone', 'password', 'confirm-password', 'expiration_date'),
-		'edit' =>  array('first_name', 'last_name', 'email', 'username', 'phone', 'password', 'confirm-password', 'active', 'expiration_date', 'created_on', 'last_login')
+		'create' => array('first_name', 'last_name', 'username', 'company', 'email', 'phone', 'password', 'confirm-password'),
+		'edit' =>  array('first_name', 'last_name', 'email', 'username', 'phone', 'password', 'confirm-password', 'active', 'created_on', 'last_login')
 	);
 
 	/**
