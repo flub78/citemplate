@@ -1,12 +1,4 @@
-# Execute certaines commandes après obtention des sources
-#
-# Le but est de configurer les droits sur les répertoires,
-# l'URL de base du site ainsi que tout ce qui est nécéssaire
-# pour que l'installation ne rapporte pas d'erreur.
-#
-# Il est possible de modifier la section suivante ou de définir
-# les variables d'environement avant d'executer le script.
-#
+# Annule certaines modification d'installation
 # Exemple:
 # export BASE_URL="https://flub78.ddns.net/citemplate"
 # export PROJECT_DIR="$HOME/git/citemplate"
@@ -43,25 +35,7 @@ echo "    \$CONFIG_FILE=$CONFIG_FILE"
 echo "    \$BASE_URL_PATTERN=$BASE_URL_PATTERN"
 
 # temporairement faire une copy
-mv $CONFIG_FILE "$CONFIG_FILE.svg"
-cp /opt/citemplate/config.php $CONFIG_FILE
-
-
-# Vérifie les droits d'écriture
-#sed s|$BASE_URL_PATTERN|$BASE_URL| $CONFIG_FILE > $CONFIG_FILE
-# sed -i s#http://localhost/citemplate#http://localhost/citemplate_bb# $CONFIG_FILE 
-
-# Nettoyage des répertoires
-
-# Vérification des droits
-chmod a+w $PROJECT_DIR/application/config/program.php
-
-chmod 777 $PROJECT_DIR/application/logs
-chmod 777 $PROJECT_DIR/uploads
-mkdir -p $PROJECT_DIR/uploads/restore
-chmod 777 $PROJECT_DIR/uploads/restore
-
-find $PROJECT_DIR -type d -exec chmod a+wx {} \;
-chmod -R a+r $PROJECT_DIR
+rm $CONFIG_FILE
+mv "$CONFIG_FILE.svg" $CONFIG_FILE
 
 

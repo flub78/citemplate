@@ -23,11 +23,11 @@ class Migration_test_db extends CI_Migration {
 				'constraint' => '100',
 			),
 	       'expiration_date' => array('type' => 'TIMESTAMP',
-	       'null' => true)
+				'null' => true)
 	    );
-	    $this->dbforge->add_field('meta_test1', $fields);
+	    $this->dbforge->add_field($fields);
 	    $this->dbforge->add_key('id', TRUE);
-		$this->dbforge->create_table('groups');
+		$this->dbforge->create_table('meta_test1');
 
 
 	}
