@@ -113,7 +113,12 @@ $menu_dev = array (
 						'label' => "Check French",
 						'url' => controller_url("dev/check_lang/french/1"),
 				        'role' => 'admin'
-				)
+				),
+		        array (
+		                'label' => "Meta test",
+		                'url' => controller_url("meta_test1"),
+		                'role' => 'admin'
+		        ),
 
 		)
 );

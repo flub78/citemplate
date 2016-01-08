@@ -121,6 +121,10 @@ class Metadata extends Meta {
 				'metadata_type' => 'text',
 				'placeholder' => "Privilege name"
 		);
+
+		$this->fields['meta_test1']['active'] = array('metadata_type' => 'boolean');
+		$this->fields['meta_test1']['email'] = array('metadata_type' => 'email');
+
 	}
 
 }
