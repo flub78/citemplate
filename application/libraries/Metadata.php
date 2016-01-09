@@ -119,7 +119,7 @@ class Metadata extends Meta {
 		$this->fields['groups']['id'] = array('metadata_type' => 'int');
 		$this->fields['groups']['name'] = array(
 				'metadata_type' => 'text',
-				'placeholder' => "Privilege name"
+				'placeholder' => "Privilege name placeholder"
 		);
 
 		$this->fields['meta_test1']['active'] = array('metadata_type' => 'boolean');
