@@ -30,12 +30,12 @@
 	</p>
 
   <p>
-    <?php echo lang('login_identity_label', 'identity');?>
+    <?php echo lang('login_identity_label', 'identity');?><br>
     <?php echo form_input($identity);?>
   </p>
 
   <p>
-    <?php echo lang('login_password_label', 'password');?>
+    <?php echo lang('login_password_label', 'password');?><br>
     <?php echo form_input($password);?>
   </p>
 

@@ -19,6 +19,8 @@ $lang['heading_meta_test1_active'] = "Active";
 $lang['heading_meta_test1_expiration_date'] = "Expiration date";
 $lang['heading_meta_test1_birthday'] = "Birthday";
 $lang['heading_meta_test1_time'] = "Time";
+$lang['heading_meta_test1_epoch'] = "Epoch";
+$lang['heading_meta_test1_price'] = "Price";
 
 $lang['placeholder_meta_test1_name'] = "Name";
 $lang['placeholder_meta_test1_description'] = "Description";
@@ -32,5 +34,7 @@ $lang['label_meta_test1_phone'] = "Phone";
 $lang['label_meta_test1_expiration_date'] = "Expiration date";
 $lang['label_meta_test1_birthday'] = "Birthday";
 $lang['label_meta_test1_time'] = "Time";
+$lang['label_meta_test1_epoch'] = "Epoch";
+$lang['label_meta_test1_price'] = "Price";
 
 

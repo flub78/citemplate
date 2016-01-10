@@ -46,9 +46,7 @@ class Type_timestamp extends Metadata_type {
      * @param array $attrs
      */
     function __construct($attrs = array()) {
-        $name = 'timestamp';
-		// register itself to the type manager
-		Metadata_type::register($name, $this);
+        $this->name = 'timestamp';
     }
 
     /**

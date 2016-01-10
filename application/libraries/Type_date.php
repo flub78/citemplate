@@ -28,8 +28,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @author frederic
  *
+ * Mysql handels several time related types:
+ *    DATE: date without time part
+ *    DATETIME: dates with time part, range '1000-01-01 00:00:00' to '999-12-31 23:59:59'
+ *    TIMESTAMP: dates with time part, Unix range '1970-01-01 00:00:01' to '2038-01-19 03:14:07' UTC
+ *    TIME: time of the day or result of DATETIME difference.
+ *
+ *    TIMESTAMPs are stored in UTC but converted to local when retrieved.
  */
-class Type_password extends Metadata_type {
+class Type_date extends Metadata_type {
     var $name = "";
 
 
@@ -39,7 +46,7 @@ class Type_password extends Metadata_type {
      * @param array $attrs
      */
     function __construct($attrs = array()) {
-        $name = 'password';
+        $this->name = 'date';
     }
 
     /**
@@ -53,8 +60,13 @@ class Type_password extends Metadata_type {
      * @param $format
      */
     function display_field($table, $field, $value, $format = "html") {
-        // passwords are never displayed
-        return '';
+        $this->CI = & get_instance();
+        $format = "Y-m-s";
+        $translated = $this->CI->lang->line('format_date');
+        if ($translated) {
+            $format = $translated;
+        }
+        return date($format, strtotime($value));
     }
 
     /**
@@ -66,10 +78,10 @@ class Type_password extends Metadata_type {
      * @param
      *            $format
      */
-    // just inherit
-    //     function field_input($table, $field, $value = '', $attrs = array()) {
-    //         return parent::field_input($table, $field, $value, $attrs);
-    //     }
+    function field_input($table, $field, $value = '', $attrs = array()) {
+        $attrs['class'] = "form-control date";
+        return parent::field_input($table, $field, $value, $attrs);
+    }
 
     /**
      * Return the validation rules deduced from metadata
@@ -80,18 +92,11 @@ class Type_password extends Metadata_type {
      * @param unknown_type $field
      * @param unknown_type $action
      *
-     *   'user_id' =>
-     object(stdClass)[34]
-     public 'name' => string 'user_id' (length=7)
-     public 'type' => string 'int' (length=3)
-     public 'default' => null
-     public 'max_length' => null
-     public 'primary_key' => int 1
-     public 'auto_increment' => int 1
-     public 'allow_null' => boolean false
      */
     function rules($table, $field, $action) {
-        return parent::rules($table, $field, $action);
+        $rule = parent::rules($table, $field, $action);
+        $this->add_rule($rule, "callback_valid_" . $this->name);
+        return $rule;
     }
 }
 

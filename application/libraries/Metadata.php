@@ -111,6 +111,8 @@ class Metadata extends Meta {
 		$this->fields['users']['active'] = array(
 		        'metadata_type' => 'boolean'
 		);
+		$this->fields['users']['created_on'] = array('metadata_type' => 'epoch');
+		$this->fields['users']['last_login'] = array('metadata_type' => 'epoch');
 
 		/*
 		 * groups
@@ -122,8 +124,13 @@ class Metadata extends Meta {
 				'placeholder' => "Privilege name placeholder"
 		);
 
+		/**
+		 * Meta test
+		 */
 		$this->fields['meta_test1']['active'] = array('metadata_type' => 'boolean');
 		$this->fields['meta_test1']['email'] = array('metadata_type' => 'email');
+		$this->fields['meta_test1']['epoch'] = array('metadata_type' => 'epoch');
+		$this->fields['meta_test1']['price'] = array('metadata_type' => 'currency');
 
 	}
 

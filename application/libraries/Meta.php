@@ -143,6 +143,18 @@ class Meta {
   		$this->CI->load->library("Type_timestamp");
   		$this->register('timestamp', $this->CI->type_timestamp);
 
+  		$this->CI->load->library("Type_time");
+  		$this->register('time', $this->CI->type_time);
+
+  		$this->CI->load->library("Type_date");
+  		$this->register('date', $this->CI->type_date);
+
+  		$this->CI->load->library("Type_epoch");
+  		$this->register('epoch', $this->CI->type_epoch);
+
+  		$this->CI->load->library("Type_currency");
+  		$this->register('currency', $this->CI->type_currency);
+
 	}
 
 	/**
@@ -519,11 +531,14 @@ class Meta {
 	 * @param unknown_type $table
 	 * @param unknown_type $field
 	 */
-	public function additional_rules ($table, $field) {
+	public function additional_rules ($table, $field, $action) {
 		if (isset($this->fields[$table][$field]['rules'])) {
 		    return $this->fields[$table][$field]['rules'];
 		}
-	    return "";
+		if (isset($this->fields[$table][$field][$action . '_rules'])) {
+		    return $this->fields[$table][$field][$action . '_rules'];
+		}
+		return "";
 	}
 
 	/**

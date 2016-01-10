@@ -26,7 +26,17 @@ Here are the steps
 
 6) Edit the menu
 
-7)  Controller test 
+7)  Controller test
+
+8)  If a new data type is required
+
+8.1)    Create a librairie/Type_xxx.php
+
+8.2)    Load and register it into Meta.php
+
+8.3)    Create validation callback in MY_Controler.php
+
+8.4)    Load JQUery pickers into js/project.js
 
 ===============================================================================================
 

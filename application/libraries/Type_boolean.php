@@ -40,8 +40,6 @@ class Type_boolean extends Metadata_type {
      */
     function __construct($attrs = array()) {
         $name = 'boolean';
-		// register itself to the type manager
-		Metadata_type::register($name, $this);
     }
 
     /**

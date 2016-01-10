@@ -30,7 +30,9 @@ class Meta_test1 extends MY_Controller {
 
 	var $default_table = 'meta_test1';
 	var $controller = 'meta_test1';
-	var $form_fields = array('name', 'description', 'expiration_date', 'email', 'active', 'birthday', 'time');
+	var $form_fields = array('name', 'description', 'expiration_date', 'email', 'active', 'birthday', 'time',
+	        'epoch', 'price'
+	);
 // 	var $table_fields = array('name', 'description', 'expiration_date', '__edit', '__delete');
 	var $table_fields; // = array_merge($form_field, array('__edit', '__delete'));
 

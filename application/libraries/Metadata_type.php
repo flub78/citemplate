@@ -26,6 +26,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * Each type register itself to the Type_Manager. On demand the type manager
  * the correct type of object in each context.
  *
+ *  - display_field : to display a database field into a table
+ *  - field_input : to generate an input area for the field in forms
+ *  - rules : to validate the fiel after input.
+ *
+ *  display_field is in charge of formating the database data and make it suitable
+ *  for display taking into account languages and localisation.
+ *
+ *  The rules should include filters in charge of the reverse operation, for example
+ *  transforming a local date format into a mysql date format.
+ *
  * @author frederic
  *
  */
@@ -34,27 +44,27 @@ class Metadata_type {
 	protected $CI;
 
     var $name = "";
-    static $registered = array ();
+//     static $registered = array ();
 
-    /**
-     * Children of Metadata_type must register so one may call them by name
-     *
-     * @param unknown $name
-     * @param unknown $object
-     */
-    protected static function register($name, $object) {
-        self::$registered [$name] = $object;
-    }
+//     /**
+//      * Children of Metadata_type must register so one may call them by name
+//      *
+//      * @param unknown $name
+//      * @param unknown $object
+//      */
+//     protected static function register($name, $object) {
+//         self::$registered [$name] = $object;
+//     }
 
-    /*
-     * Return the instance object in charge of managing one type
-     */
-    public static function instance_of($name) {
-        if (!isset(self::$registered [$name])) {
-            $name = 'default';
-        }
-        return self::$registered [$name];
-    }
+//     /*
+//      * Return the instance object in charge of managing one type
+//      */
+//     public static function instance_of($name) {
+//         if (!isset(self::$registered [$name])) {
+//             $name = 'default';
+//         }
+//         return self::$registered [$name];
+//     }
 
     /**
      * Constructor
@@ -63,7 +73,7 @@ class Metadata_type {
      */
     function __construct($attrs = array()) {
         // register itself to the type manager
-        Metadata_type::register('default', $this);
+//         Metadata_type::register('default', $this);
         $this->CI = & get_instance();
     }
 
@@ -178,6 +188,7 @@ class Metadata_type {
         // If the rules for this field are forced
         $absolute_rules = $this->CI->metadata->absolute_rules($table, $field, $action);
         if ($absolute_rules) {
+            // echo "absolute_rules($table, $field, $action) = $absolute_rules";
             return $absolute_rules;
         }
 

@@ -36,8 +36,16 @@ class Migration_test_db extends CI_Migration {
                         'null' => true
                 ),
                 'time' => array (
-                        'type' => 'DATE',
+                        'type' => 'TIME',
                         'null' => true
+                ),
+                'epoch' => array(
+                        'type' => 'INT',
+                        'constraint' => 11
+                ),
+                'price' => array(
+                        'type' => 'DECIMAL',
+                        'constraint' => '8,2'
                 )
         );
         $this->dbforge->add_field($fields);

@@ -278,4 +278,44 @@ class MY_Controller extends CI_Controller {
 		return $timestamp;
 	}
 
+    /**
+     *
+     * @param unknown $time
+     */
+	public function valid_time($time) {
+	    return $time;
+	}
+
+	/**
+	 *
+	 * @param unknown $time
+	 */
+	public function valid_date($date) {
+		$parsed = date_parse_from_format ( translation ( "format_date" ), $date );
+
+		if (isset ( $parsed ['error_count'] ) && $parsed ['error_count']) {
+			$this->form_validation->set_message ( 'valid_date', translation ( 'valid_date' ) );
+			return FALSE;
+		}
+		$year = $parsed ['year'];
+		$month = $parsed ['month'];
+		$day = $parsed ['day'];
+
+		$result = "$year-$month-$day";
+		return $result;
+	}
+
+	/**
+	 *
+	 * @param unknown $epoch
+	 */
+	public function valid_epoch($epoch) {
+	    $parsed = date_parse_from_format ( translation ( "format_epoch" ), $epoch );
+		if (isset ( $parsed ['error_count'] ) && $parsed ['error_count']) {
+			$this->form_validation->set_message ( 'valid_epoch', translation ( 'valid_epoch' ) );
+			return FALSE;
+		}
+		return strtotime($epoch);
+	}
+
 }

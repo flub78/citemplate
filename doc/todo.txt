@@ -7,16 +7,14 @@ can be derived really fast.
 
 Todo:
 
-    * groups: name is mandatory but the rule is not enforced.
-    INFO - 2016-01-09 09:26:48 --> Metadata: rules(groups,name) = 
-    DEBUG - 2016-01-09 09:26:48 --> Metadata class already loaded. Second attempt ignored.
-    INFO - 2016-01-09 09:26:48 --> Metadata: rules(groups,description) = required|max_length[100]
-
  
      * Replace ciauth by ion_auth   
         * bootstrap style for login page (partially done)
         - forgotten password
-        * check user modification
+        * check user modification and password
+            password is not mandatory (yes it is, but a default is set)
+            the default is wrong
+            
         * remember me
         
     * Convenience
@@ -103,6 +101,11 @@ Done:
      * Replace ciauth by ion_auth
         * manage session flash data
         * reject access for non admin to admin pages
+        
+    * groups: name is mandatory but the rule is not enforced.
+    INFO - 2016-01-09 09:26:48 --> Metadata: rules(groups,name) = 
+    INFO - 2016-01-09 09:26:48 --> Metadata: rules(groups,description) = required|max_length[100]
+
         
 
 ============================================================================================================================    

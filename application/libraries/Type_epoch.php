@@ -36,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  *    TIMESTAMPs are stored in UTC but converted to local when retrieved.
  */
-class Type_email extends Metadata_type {
+class Type_epoch extends Metadata_type {
     var $name = "";
 
 
@@ -46,7 +46,27 @@ class Type_email extends Metadata_type {
      * @param array $attrs
      */
     function __construct($attrs = array()) {
-        $this->name = 'email';
+        $this->name = 'epoch';
+    }
+
+    /**
+     * Transform a field from the database into something suitable for display
+     *
+     * So it mainly takes formating and languages into account.
+     *
+     * @param unknown $table
+     * @param unknown $field
+     * @param unknown $value
+     * @param $format
+     */
+    function display_field($table, $field, $value, $format = "html") {
+        $this->CI = & get_instance();
+        $format = "m/d/Y h:i:s";
+        $translated = $this->CI->lang->line('format_epoch');
+        if ($translated) {
+            $format = $translated;
+        }
+        return date($format, $value);
     }
 
     /**
@@ -59,10 +79,8 @@ class Type_email extends Metadata_type {
      *            $format
      */
     function field_input($table, $field, $value = '', $attrs = array()) {
-        $attrs['class'] = "form-control " . $this->name;
-        //return parent::field_input($table, $field, $value, $attrs);
-        $this->CI = & get_instance();
-        return $this->CI->metadata_type->field_input($table, $field, $value, $attrs);
+        $attrs['class'] = "form-control epoch";
+        return parent::field_input($table, $field, $value, $attrs);
     }
 
     /**
@@ -76,8 +94,44 @@ class Type_email extends Metadata_type {
      *
      */
     function rules($table, $field, $action) {
-        $rule = parent::rules($table, $field, $action);
-        $this->add_rule($rule, "valid_email");
+        $this->CI = & get_instance();
+        $this->CI->load->library("Metadata");
+
+        $rule = "";
+
+        // If the rules for this field are forced
+        $absolute_rules = $this->CI->metadata->absolute_rules($table, $field, $action);
+        if ($absolute_rules) {
+            // echo "absolute_rules($table, $field, $action) = $absolute_rules";
+            return $absolute_rules;
+        }
+
+        // Rules deduced from the database info
+        if (!$this->CI->metadata->allow_null($table, $field)) {
+            $this->add_rule($rule, 'required');
+        }
+
+//         $max_length = $this->CI->metadata->max_length($table, $field);
+//         if ($max_length) {
+//             $rl = 'max_length[' .  $max_length . ']';
+//             $this->add_rule($rule, $rl);
+//         }
+
+        // add user defined rules
+        $additional_rules = $this->CI->metadata->additional_rules($table, $field, $action);
+        if ($additional_rules) {
+            $this->add_rule($rule, $additional_rules);
+        }
+
+        // remove is_unique in edit mode
+        if ($action != 'create') {
+            $this->remove_rule($rule, 'is_unique');
+        }
+
+        $this->add_rule($rule, "callback_valid_" . $this->name);
+
+        $this->CI->metadata->log("rules($table,$field) = " . $rule);
+
         return $rule;
     }
 }

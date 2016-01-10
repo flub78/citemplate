@@ -70,8 +70,8 @@ $lang['heading_users_last_login'] = "Last login";
 
 $lang['placeholder_users_email'] = "Email address";
 $lang['placeholder_users_username'] = "User name";
-$lang['placeholder_users_password'] = "Password";
-$lang['placeholder_users_confirm-password'] = "Confirm Password";
+# $lang['placeholder_users_password'] = "Password";
+# $lang['placeholder_users_confirm-password'] = "Confirm Password";
 
 $lang['label_users_first_name'] = "First name";
 $lang['label_users_last_name'] = "Last name";
@@ -90,9 +90,11 @@ $lang['label_users_expiration_date'] = "Expiration date";
 
 // Date and time format
 $lang['format_timestamp'] = "m/d/Y H:i";
+$lang['format_epoch'] = "m/d/Y H:i:s";
 $lang['format_date'] = "m/d/Y";
 $lang['format_time'] = "H:i";
 $lang['valid_timestamp'] = '{field} invalid (MM/DD/YYYY HH:MM)' ;
+$lang['valid_epoch'] = '{field} invalid (MM/DD/YYYY HH:MM:SS)' ;
 $lang['valid_date'] = '{field} invalid (MM/DD/YYYY)' ;
 $lang['valid_time'] = "{field} invalid (HH:MM)";
 
