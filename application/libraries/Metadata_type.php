@@ -89,6 +89,10 @@ class Metadata_type {
      *            $format
      */
     function display_field($table, $field, $value, $format = "html") {
+        if (! $value) {
+            // to support null fields
+            return '';
+        }
         // by default no formatting
         return $value;
     }

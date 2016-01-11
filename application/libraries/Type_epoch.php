@@ -60,6 +60,10 @@ class Type_epoch extends Metadata_type {
      * @param $format
      */
     function display_field($table, $field, $value, $format = "html") {
+        if (! $value) {
+            // to support null fields
+            return '';
+        }
         $this->CI = & get_instance();
         $format = "m/d/Y h:i:s";
         $translated = $this->CI->lang->line('format_epoch');

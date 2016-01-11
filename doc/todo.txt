@@ -30,7 +30,6 @@ Todo:
         
     * create selector for element list (group for users)
             
-    * Manage null dates
     * Manage dates with default values
     
     * Set the title for pdf export
@@ -93,6 +92,7 @@ Done:
         - Add actions on table view
         - password, confirm-password
         - French translation
+        - Manage null dates
     * Submit button labels 
         (Valider, Créer, Créer et continuer)
         Validate, Create, Create and continue, Register

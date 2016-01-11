@@ -80,6 +80,7 @@ class Welcome extends CI_Controller {
 			$this->check_migration();
 
 			// Create default user
+			$this->logger->info("Create default user");
 
 			$username = 'admin';
 			$password = 'admin';
@@ -96,6 +97,7 @@ class Welcome extends CI_Controller {
 			} else {
 			    $this->logger->error("Error creating default user $username");
 			}
+			$this->logger->info("Default user created");
 
 
 		} else {

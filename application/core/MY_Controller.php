@@ -227,6 +227,10 @@ class MY_Controller extends CI_Controller {
 					$field_name = field_name($this->default_table, $field);
 					$values[$field] = $this->input->post($field_name);
 				}
+				if ($this->metadata->allow_null($this->default_table, $field) &&
+				    ($values[$field] == '')) {
+                    unset($values[$field]);
+				}
 			}
 			if ($action == "edit") {
 				# update
@@ -262,7 +266,10 @@ class MY_Controller extends CI_Controller {
 	 *         'is_localtime' => boolean false
 	 */
 	public function valid_timestamp($ts) {
-		$parsed = date_parse_from_format ( translation ( "format_timestamp" ), $ts );
+		if ($ts == '') {
+	        return true;
+	    }
+	    $parsed = date_parse_from_format ( translation ( "format_timestamp" ), $ts );
 
 		if (isset ( $parsed ['error_count'] ) && $parsed ['error_count']) {
 			$this->form_validation->set_message ( 'valid_timestamp', translation ( 'valid_timestamp' ) );
@@ -291,6 +298,9 @@ class MY_Controller extends CI_Controller {
 	 * @param unknown $time
 	 */
 	public function valid_date($date) {
+	    if ($date == '') {
+	        return true;
+	    }
 		$parsed = date_parse_from_format ( translation ( "format_date" ), $date );
 
 		if (isset ( $parsed ['error_count'] ) && $parsed ['error_count']) {
@@ -316,6 +326,14 @@ class MY_Controller extends CI_Controller {
 			return FALSE;
 		}
 		return strtotime($epoch);
+	}
+
+	/**
+	 *
+	 * @param unknown $time
+	 */
+	public function valid_currency($currency) {
+	    return $currency;
 	}
 
 }
