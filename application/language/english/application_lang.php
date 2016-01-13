@@ -100,3 +100,4 @@ $lang['valid_time'] = "{field} invalid (HH:MM)";
 
 $lang['reset_database'] = 'Reset database to factory configuration ?' ;
 
+$lang['with_all'] = "All";

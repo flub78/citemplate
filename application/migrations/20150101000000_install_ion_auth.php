@@ -161,27 +161,36 @@ class Migration_Install_ion_auth extends CI_Migration {
 		// Drop table 'users_groups' if it exists
 		$this->dbforge->drop_table('users_groups', TRUE);
 
+        $sql="create table users_groups (
+	    id unsigned mediumint(8) primary key auto_increment,
+        user_id unsigned mediumint(8),
+        group_id unsigned mediumint(8),
+	    foreign key(user_id) references users(id),
+	    foreign key(group_id) references groups(id)";
+
+	    $this->db-query($sql);
+
 		// Table structure for table 'users_groups'
-		$this->dbforge->add_field(array(
-			'id' => array(
-				'type' => 'MEDIUMINT',
-				'constraint' => '8',
-				'unsigned' => TRUE,
-				'auto_increment' => TRUE
-			),
-			'user_id' => array(
-				'type' => 'MEDIUMINT',
-				'constraint' => '8',
-				'unsigned' => TRUE
-			),
-			'group_id' => array(
-				'type' => 'MEDIUMINT',
-				'constraint' => '8',
-				'unsigned' => TRUE
-			)
-		));
-		$this->dbforge->add_key('id', TRUE);
-		$this->dbforge->create_table('users_groups');
+		// $this->dbforge->add_field(array(
+		// 	'id' => array(
+		// 		'type' => 'MEDIUMINT',
+		// 		'constraint' => '8',
+		// 		'unsigned' => TRUE,
+		// 		'auto_increment' => TRUE
+		// 	),
+		// 	'user_id' => array(
+		// 		'type' => 'MEDIUMINT',
+		// 		'constraint' => '8',
+		//		'unsigned' => TRUE
+		//	),
+		//	'group_id' => array(
+		//		'type' => 'MEDIUMINT',
+		//		'constraint' => '8',
+		//		'unsigned' => TRUE
+		//	)
+	//	));
+	//	$this->dbforge->add_key('id', TRUE);
+	//	$this->dbforge->create_table('users_groups');
 
 		// Dumping data for table 'users_groups'
 		$data = array(

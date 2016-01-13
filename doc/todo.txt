@@ -6,7 +6,6 @@ can be derived really fast.
 ============================================================================================================================    
 
 Todo:
-
  
      * Replace ciauth by ion_auth   
         * bootstrap style for login page (partially done)
@@ -20,9 +19,9 @@ Todo:
     * Convenience
         - number of element per page should be store in context
         (global or per page?)
-        - filtering should be stored (datatable option that I had to disable)
-        
-        - possibility to switch boolean from the page view. Is is a global edition capacity ?
+
+	It is done by stateSave on Datatable. pagination position, display length, filtering and sorting
+        Option disabled with GVV due to an assumed unstability.
         
         - Possibility to apply the same operation globaly to all selected rows (delete, set check).
         
@@ -35,11 +34,9 @@ Todo:
     * Set the title for pdf export
         
     * Installation: documentation
+
     * Metadata
-        * one class per metadate type (done)
-        
         * jointure
-        * epoch
         * currency
         * attachement, pictures
         * Automated filtering
@@ -61,6 +58,11 @@ Todo:
     * QR code, ticket impression
     * REST interface
     * REST service access
+
+    * Measure performance impact of the metadata approach
+
+	if the impact is significant, replace it by a template mechanism
+        to statically generates the views.
     
 ============================================================================================================================    
 May be later:        
@@ -92,8 +94,10 @@ Done:
         - Add actions on table view
         - password, confirm-password
         - French translation
+        - one class per metadate type (done)
         - Manage null dates
-    * Submit button labels 
+        - epoch   
+     * Submit button labels 
         (Valider, Créer, Créer et continuer)
         Validate, Create, Create and continue, Register
      * Database save, restore and migrations

@@ -29,7 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author frederic
  *
  */
-class Type_password extends Metadata_type {
+class Type_selector extends Metadata_type {
     var $name = "";
 
 
@@ -39,7 +39,7 @@ class Type_password extends Metadata_type {
      * @param array $attrs
      */
     function __construct($attrs = array()) {
-        $name = 'password';
+        $name = 'selector';
     }
 
     /**
@@ -53,8 +53,14 @@ class Type_password extends Metadata_type {
      * @param $format
      */
     function display_field($table, $field, $value, $format = "html") {
-        // passwords are never displayed
-        return '';
+        // in this case the value is the table primary key
+        $CI = & get_instance ();
+
+        // The correct model must be loaded to get the correct image function
+        $model = $CI->metadata->table_model($table);
+        $CI->load->model($model, 'model');
+
+        return $CI->model->image($table, $value);
     }
 
     /**
@@ -66,29 +72,23 @@ class Type_password extends Metadata_type {
      * @param
      *            $format
      */
-    // just inherit
-    //     function field_input($table, $field, $value = '', $attrs = array()) {
-    //         return parent::field_input($table, $field, $value, $attrs);
-    //     }
+    function field_input($table, $field, $value = '', $attrs = array()) {
+        return "";
+    }
 
     /**
      * Return the validation rules deduced from metadata
      *
-     * rules is invoked in form validation method, metadata must be loaded on demand
+     * rules is invoked in form validation method, metadata must be loaded on demand.
+     *
+     * There is no way to get the input wrong with a selector, however rules are used
+     * on the server side, so they protect the coherency enven when the request
+     * for edition or creation does not come from an official form.
      *
      * @param unknown_type $table
      * @param unknown_type $field
      * @param unknown_type $action
      *
-     *   'user_id' =>
-     object(stdClass)[34]
-     public 'name' => string 'user_id' (length=7)
-     public 'type' => string 'int' (length=3)
-     public 'default' => null
-     public 'max_length' => null
-     public 'primary_key' => int 1
-     public 'auto_increment' => int 1
-     public 'allow_null' => boolean false
      */
     function rules($table, $field, $action) {
         return parent::rules($table, $field, $action);

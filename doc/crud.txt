@@ -69,5 +69,50 @@ tables
                     default
                     create
                     edit
+ 
+ ===============================================================================================
                     
+Type_selector
+
+    basic selector amongst table elements (one to one relation)
+    
+        attrs
+            table to select from
+            filter: where clause
+       
+        display image
+        input
+            list of checkboxes (small lists)
+            dropdown           (medium list)
+            input area from a list of possible values (for big lists)
+            
+N to N relation
+    for example one user belong to several groups
+    groups contains several users
+    
+    a display in a specific context is a list of image of the other table
+        list of groups to which belong a user
+        list of users contained into a group
+        
+        In edit mode:
+            for small lists: a full list of checkboxes
+            
+            for bigger lists
+            - with delete buttons
+            - with selector + add button
+            
+    It should be possible to handle that from a simple model
+    
+        - list should use regular
+        
+        select_all($table, $where = array (), $order_by = "") {
+        
+        select_all('users_groups', array('user_id' => $uid))
+                 
+        CREATE VIEW `view_users_groups` AS 
+        select `users`.`username` AS `username`, `groups`.`name` AS `groupname`
+        from users, users_groups, groups
+        where (`users`.`id` = `users_groups`.`user_id`  and `groups`.`id` = `users_groups`.`group_id`)
+        
+        
         

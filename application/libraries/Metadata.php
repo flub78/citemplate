@@ -71,11 +71,13 @@ class Metadata extends Meta {
 
 		$this->fields = array();
 		$this->field_list = array();
+		$this->table_model = array();
 
 		/*
 		 * users
 		 */
 		$this->field_list['users'] = array('email', 'username', 'password', 'confirm-password', 'created_on', 'last_login');
+		$this->table_model['users'] = 'users_model';
 		$this->fields['users']['email'] = array(
             'name' => 'email_value',
 			'metadata_type' => 'email',
@@ -117,6 +119,7 @@ class Metadata extends Meta {
 		/*
 		 * groups
 		 */
+		$this->table_model['groups'] = 'groups_model';
 		$this->field_list['groups'] = array('name', 'description');
 		$this->fields['groups']['id'] = array('metadata_type' => 'int');
 		$this->fields['groups']['name'] = array(

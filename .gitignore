@@ -14,3 +14,7 @@ watir/downloads/*
 build/logs/*
 
 /.htaccess
+
+.project
+.settings/*
+

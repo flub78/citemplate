@@ -124,4 +124,7 @@ $lang['valid_time'] = "{field} non valide (HH:MM)";
 
 $lang['reset_database'] = 'Réinitialiser la base de données à la configuration usine ?' ;
 
+$lang['with_all'] = "Tous";
+
+
 

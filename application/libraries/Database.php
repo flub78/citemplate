@@ -37,7 +37,9 @@ class Database  {
 	        'users',
 	        'groups',
 	        'users_groups',
-	        'login_attempts'
+	        'login_attempts',
+	        'meta_test1',
+	        'users_groups_view'
 	);
 
 	protected $table_list;

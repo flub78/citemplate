@@ -23,7 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * Metadata types provide specific methods to display or input this kind of data.
- * Each type register itself to the Type_Manager. On demand the type manager
+ * Each type is registered to the Type_Manager. On demand the type manager
  * the correct type of object in each context.
  *
  *  - display_field : to display a database field into a table
@@ -44,27 +44,6 @@ class Metadata_type {
 	protected $CI;
 
     var $name = "";
-//     static $registered = array ();
-
-//     /**
-//      * Children of Metadata_type must register so one may call them by name
-//      *
-//      * @param unknown $name
-//      * @param unknown $object
-//      */
-//     protected static function register($name, $object) {
-//         self::$registered [$name] = $object;
-//     }
-
-//     /*
-//      * Return the instance object in charge of managing one type
-//      */
-//     public static function instance_of($name) {
-//         if (!isset(self::$registered [$name])) {
-//             $name = 'default';
-//         }
-//         return self::$registered [$name];
-//     }
 
     /**
      * Constructor
@@ -72,8 +51,6 @@ class Metadata_type {
      * @param array $attrs
      */
     function __construct($attrs = array()) {
-        // register itself to the type manager
-//         Metadata_type::register('default', $this);
         $this->CI = & get_instance();
     }
 

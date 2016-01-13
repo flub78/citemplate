@@ -155,6 +155,9 @@ class Meta {
   		$this->CI->load->library("Type_currency");
   		$this->register('currency', $this->CI->type_currency);
 
+  		$this->CI->load->library("Type_selector");
+  		$this->register('selector', $this->CI->type_selector);
+
 	}
 
 	/**
@@ -215,6 +218,19 @@ class Meta {
 		return $this->fields_list[$table];
 	}
 
+	/**
+	 * Return the recommended model to access a table
+	 * @param unknown_type $table
+	 */
+	function table_model($table) {
+	    if (array_key_exists($table, $this->table_model[$table])) {
+	        // specific model
+	        return $this->table_model[$table];
+	    } else {
+	        // generic model
+	        return 'crud_model';
+	    }
+	}
 
 	/**
 	 * Check if a field exists in database
@@ -396,78 +412,6 @@ class Meta {
 	 * @param unknown_type $field
 	 * @param unknown_type $action
 	 *
-	 *   'user_id' =>
-    object(stdClass)[34]
-      public 'name' => string 'user_id' (length=7)
-      public 'type' => string 'int' (length=3)
-      public 'default' => null
-      public 'max_length' => null
-      public 'primary_key' => int 1
-      public 'auto_increment' => int 1
-      public 'allow_null' => boolean false
-  'email' =>
-    object(stdClass)[43]
-      public 'name' => string 'email' (length=5)
-      public 'type' => string 'varchar' (length=7)
-      public 'default' => null
-      public 'max_length' => null
-      public 'primary_key' => int 0
-      public 'auto_increment' => int 0
-      public 'allow_null' => boolean false
-  'username' =>
-    object(stdClass)[44]
-      public 'name' => string 'username' (length=8)
-      public 'type' => string 'varchar' (length=7)
-      public 'default' => null
-      public 'max_length' => null
-      public 'primary_key' => int 0
-      public 'auto_increment' => int 0
-      public 'allow_null' => boolean false
-  'password' =>
-    object(stdClass)[45]
-      public 'name' => string 'password' (length=8)
-      public 'type' => string 'varchar' (length=7)
-      public 'default' => null
-      public 'max_length' => null
-      public 'primary_key' => int 0
-      public 'auto_increment' => int 0
-      public 'allow_null' => boolean false
-  'creation_date' =>
-    object(stdClass)[46]
-      public 'name' => string 'creation_date' (length=13)
-      public 'type' => string 'timestamp' (length=9)
-      public 'default' => string 'CURRENT_TIMESTAMP' (length=17)
-      public 'max_length' => null
-      public 'primary_key' => int 0
-      public 'auto_increment' => int 0
-      public 'allow_null' => boolean false
-  'last_login' =>
-    object(stdClass)[47]
-      public 'name' => string 'last_login' (length=10)
-      public 'type' => string 'timestamp' (length=9)
-      public 'default' => null
-      public 'max_length' => null
-      public 'primary_key' => int 0
-      public 'auto_increment' => int 0
-      public 'allow_null' => boolean true
-  'admin' =>
-    object(stdClass)[48]
-      public 'name' => string 'admin' (length=5)
-      public 'type' => string 'varchar' (length=7)
-      public 'default' => null
-      public 'max_length' => null
-      public 'primary_key' => int 0
-      public 'auto_increment' => int 0
-      public 'allow_null' => boolean false
-  'remember_me' =>
-    object(stdClass)[49]
-      public 'name' => string 'remember_me' (length=11)
-      public 'type' => string 'int' (length=3)
-      public 'default' => null
-      public 'max_length' => null
-      public 'primary_key' => int 0
-      public 'auto_increment' => int 0
-      public 'allow_null' => boolean false
 	 */
 	function rules($table, $field, $action) {
 
@@ -487,28 +431,6 @@ class Meta {
         }
 
         throw new Exception("Type manager not found");
-//         $rule = "";
-
-		// Rules deduced from the database info
-// 		if ($this->table_exists($table)) {
-// 			if (isset($this->field_data[$table][$field])) {
-
-// 				// if this field exist in database
-// 				$meta = $this->field_data[$table][$field];
-// 				// var_dump($meta);
-
-// 				$metadata_type = (isset($this->fields[$table][$field]['metadata_type'])) ?
-// 						$this->fields[$table][$field]['metadata_type'] :
-// 						'';
-
-// 				if ($meta->type == 'timestamp') {
-// 					$this->add_rule($rule, 'callback_valid_timestamp');
-// 				} elseif ($meta->type == 'date') {
-// 					$this->add_rule($rule, 'callback_valid_date');
-// 				} elseif ($meta->type == 'time') {
-// 					$this->add_rule($rule, 'callback_valid_time');
-// 				}
-
 	}
 
 	/**

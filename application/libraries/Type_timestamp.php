@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Metadata types provide specific methods to display or input this kind of data.
- * Each type register itself to the Type_Manager. On demand the type manager
+ * Each type is registered to the Type_Manager. On demand the type manager
  * the correct type of object in each context.
  *
  * @author frederic
