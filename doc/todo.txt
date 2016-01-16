@@ -55,9 +55,9 @@ Todo:
     * emails with attachements
     * Template PDF generation or whole page export
     * Shopping cart and paiement
-    * QR code, ticket impression
     * REST interface
     * REST service access
+    * QR code, ticket impression
 
     * Measure performance impact of the metadata approach
 

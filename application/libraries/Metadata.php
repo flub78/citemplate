@@ -130,10 +130,17 @@ class Metadata extends Meta {
 		/**
 		 * Meta test
 		 */
+		// $this->table_model['meta_test1'] = 'meta_test1_model';
+
 		$this->fields['meta_test1']['active'] = array('metadata_type' => 'boolean');
 		$this->fields['meta_test1']['email'] = array('metadata_type' => 'email');
 		$this->fields['meta_test1']['epoch'] = array('metadata_type' => 'epoch');
 		$this->fields['meta_test1']['price'] = array('metadata_type' => 'currency');
+		$this->fields['meta_test1']['oaci'] =
+		  array('metadata_type' => 'selector',
+		          'table' => 'meta_test2',
+		          'where' => array()
+		  );
 
 	}
 

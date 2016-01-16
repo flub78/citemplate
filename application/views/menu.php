@@ -119,6 +119,11 @@ $menu_dev = array (
 		                'url' => controller_url("meta_test1"),
 		                'role' => 'admin'
 		        ),
+		        array (
+		                'label' => "Meta test 2",
+		                'url' => controller_url("meta_test2"),
+		                'role' => 'admin'
+		        ),
 
 		)
 );

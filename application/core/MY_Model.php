@@ -259,11 +259,10 @@ class MY_Model extends CI_Model {
      * This string identifies an element in human readable maned.
      * Likely overloaded.
      *
-     * @param $key identifiant
-     *            de la ligne à représenter
+     * @param $key_value
      */
-    public function image($table, $key) {
-        return $key;
+    public function image($table, $key_value) {
+        return $key_value;
     }
 
     /**

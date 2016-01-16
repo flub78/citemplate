@@ -26,13 +26,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author frederic
  *
  */
-class Meta_test1 extends MY_Controller {
+class Meta_test2 extends MY_Controller {
 
-	var $default_table = 'meta_test1';
-	var $controller = 'meta_test1';
-	var $form_fields = array('name', 'description', 'expiration_date', 'email', 'active', 'birthday', 'time',
-	        'epoch', 'price', 'oaci'
-	);
+	var $default_table = 'meta_test2';
+	var $controller = 'meta_test2';
+	var $form_fields = array('oaci', 'description');
 // 	var $table_fields = array('name', 'description', 'expiration_date', '__edit', '__delete');
 	var $table_fields; // = array_merge($form_field, array('__edit', '__delete'));
 
@@ -42,8 +40,8 @@ class Meta_test1 extends MY_Controller {
 	function __construct() {
 		parent :: __construct();
 		// specific initialization
-		$this->load->model('meta_test1_model', 'model');
-		$this->load->language("meta_test1");
+		$this->load->model('crud_model', 'model');
+		$this->load->language("meta_test2");
 		$this->table_fields = array_merge($this->form_fields, array('__edit', '__delete'));
 	}
 

@@ -223,7 +223,7 @@ class Meta {
 	 * @param unknown_type $table
 	 */
 	function table_model($table) {
-	    if (array_key_exists($table, $this->table_model[$table])) {
+	    if (isset($this->table_model[$table])) {
 	        // specific model
 	        return $this->table_model[$table];
 	    } else {
@@ -542,6 +542,7 @@ class Meta {
 
 		if (isset($this->fields[$table][$field]['metadata_type'])) {
 			$field_type = $this->fields[$table][$field]['metadata_type'];
+			$attrs = array_merge($attrs, $this->fields[$table][$field]);
 		} else {
 		    $field_type = $this->field_db_type($table, $field);
 		}

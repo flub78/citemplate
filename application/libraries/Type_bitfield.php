@@ -29,7 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author frederic
  *
  */
-class Type_selector extends Metadata_type {
+class Type_bitfield extends Metadata_type {
     var $name = "";
 
 
@@ -39,7 +39,7 @@ class Type_selector extends Metadata_type {
      * @param array $attrs
      */
     function __construct($attrs = array()) {
-        $name = 'selector';
+        $name = 'bitfield';
     }
 
     /**
@@ -53,14 +53,19 @@ class Type_selector extends Metadata_type {
      * @param $format
      */
     function display_field($table, $field, $value, $format = "html") {
-        // in this case the value is the table primary key
-        $CI = & get_instance ();
-
-        // The correct model must be loaded to get the correct image function
-        $model = $CI->metadata->table_model($table);
-        $CI->load->model($model, 'model');
-
-        return $CI->model->image($table, $value);
+        if ($format == "html") {
+            if ($value) {
+                return '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
+            } else {
+                return '';
+            }
+        } else {
+            if ($value) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
     }
 
     /**
@@ -73,35 +78,35 @@ class Type_selector extends Metadata_type {
      *            $format
      */
     function field_input($table, $field, $value = '', $attrs = array()) {
-        $CI = & get_instance ();
-
-        // The correct model must be loaded to get the correct image function
-        $model = $CI->metadata->table_model($attrs['table']);
-        $CI->load->model($model, 'attribute');
-
-        $key = $CI->metadata->table_key($attrs['table']);
-        $list = $CI->attribute->selector($attrs['table'], $key, $attrs['where'], $attrs);
-
-        return form_dropdown($field, $list, $value);
-
+        return nbs() . form_checkbox(array (
+                'name' => $field,
+                'id' => $field,
+                'value' => 1,
+                'checked' => (0 != $value)
+        ));
     }
 
     /**
      * Return the validation rules deduced from metadata
      *
-     * rules is invoked in form validation method, metadata must be loaded on demand.
-     *
-     * There is no way to get the input wrong with a selector, however rules are used
-     * on the server side, so they protect the coherency enven when the request
-     * for edition or creation does not come from an official form.
+     * rules is invoked in form validation method, metadata must be loaded on demand
      *
      * @param unknown_type $table
      * @param unknown_type $field
      * @param unknown_type $action
      *
+     *   'user_id' =>
+     object(stdClass)[34]
+     public 'name' => string 'user_id' (length=7)
+     public 'type' => string 'int' (length=3)
+     public 'default' => null
+     public 'max_length' => null
+     public 'primary_key' => int 1
+     public 'auto_increment' => int 1
+     public 'allow_null' => boolean false
      */
-    function rules($table, $field, $action) {
-        return parent::rules($table, $field, $action);
-    }
+//     function rules($table, $field, $action) {
+//         return parent::rules($table, $field, $action);
+//     }
 }
 

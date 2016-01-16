@@ -21,6 +21,7 @@ $lang['heading_meta_test1_birthday'] = "Birthday";
 $lang['heading_meta_test1_time'] = "Time";
 $lang['heading_meta_test1_epoch'] = "Epoch";
 $lang['heading_meta_test1_price'] = "Price";
+$lang['heading_meta_test1_oaci'] = "OACI";
 
 $lang['placeholder_meta_test1_name'] = "Name";
 $lang['placeholder_meta_test1_description'] = "Description";
@@ -36,5 +37,6 @@ $lang['label_meta_test1_birthday'] = "Birthday";
 $lang['label_meta_test1_time'] = "Time";
 $lang['label_meta_test1_epoch'] = "Epoch";
 $lang['label_meta_test1_price'] = "Price";
+$lang['label_meta_test1_oaci'] = "OACI";
 
 
