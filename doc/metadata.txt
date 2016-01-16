@@ -1,0 +1,76 @@
+Data oriented programming or metadata
+-------------------------------------
+
+To avoid to do the same thing over and over, fetch data, prepare it for display and create a view. The program
+uses metada information to know how to prepare and display data according to the data type.
+
+Data types and attributes (length, null or not null, primary key) are fetched from the database itself. 
+These metadata are completed by additional information defined by the programer. FOr example a varchar may
+contains an address email or a name and in both cases the constraints and way to display them are different.
+
+The system handle at lest the following types of metadata:
+
+    default or text: a character string
+    email: string containing an email address
+    decimal
+    int
+    currency: a 8,2 decimal
+    date
+    timestamp: date + time into a database timestamp
+    time: 
+    epoch: timestamp internally stored as an unix epoch (number of seconds since 1970)
+    selector: a foreign key on another table
+    
+    
+Implementation
+--------------
+
+    The initial implementation has been in the metadata libray.
+    
+    The second one two, but with a more object oriented approach. A Class Metadata_type is the ancestor
+    of several type managers. Each of one is in charge of providing a method to display, get and provide 
+    the rules of a field.
+    
+    One thing that took me some time to realize (several years with a few period of s consciousness)
+    is that all this computation can be done before hand to generate the views instead of dynamically.
+    
+    So it is possible to write a view generator that generates full or partial elements of views
+    from the metadata. 
+    
+    pros:
+        
+        * It is not more complicated than the dynamic approach. Probaly even simpler by splitting
+        the data rendering in two well separate steps.
+        
+        * It is more efficient regarding performances. Note that it probably does not mater for the
+        kind of project that I manage. Less than a few thousand requests a day. Each of them taking
+        globally far less than a second. When I experiment low performance it is much more likely from
+        load of the share server by other application or bottlenecks in the network.
+        
+        However improved performance could make the framework usable for more demanding applications.
+        
+        * It would improve the ease of prototyping by allowing direct modification and experimentation
+        on the views (simpler than modifying a generator)
+
+    
+    cons:
+    
+        * I have to start again
+        
+        * Until now the data for selectors (and others use case) was available before to do 
+        the rendering. So it was usually done with a routine to which the data was passed as input parameter.
+        
+        With the new approach, the rendering must be generated without prior knowledge of the
+        data to display. It changes the architecture a bit.
+        
+Note on technology:
+
+    I intend to use mustache the template management system.
+    
+    About the language:
+    
+        * It could be done in PHP inside the project
+        
+        * It could be done in PHP outside the project as a command line tool
+        
+        * It could be done in Ruby outside the project.

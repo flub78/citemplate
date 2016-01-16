@@ -126,27 +126,6 @@ $menu_dev = array (
 // #################################################################################################
 
 $menu_database = array (
-		'label' => "Database",
-        'role' => array('admin', 'dba'),
-//		'class' => 'dropdown-menu multi-level',
-		'submenu' => array (
-				array (
-						'label' => "Backup",
-						'url' => controller_url ( "databaseMgt/backup" )
-				),
-				array (
-						'label' => "Restore",
-						'url' => controller_url ( "databaseMgt/restore" )
-				),
-				array (
-						'label' => "Reset",
-						'url' => controller_url ( "databaseMgt/reset" ),
-						'onclick' => "return confirm('" . translation('reset_database') . "')"
-				)
-		)
-);
-
-$menu_database = array (
         'label' => "Database",
         'role' => array('admin'),
         //		'class' => 'dropdown-menu multi-level',
@@ -155,6 +134,10 @@ $menu_database = array (
                         'label' => "Backup",
                         'url' => controller_url ( "databaseMgt/backup" )
                 ),
+				array (
+						'label' => "Backup views",
+						'url' => controller_url ( "databaseMgt/backup/views" )
+				),
                 array (
                         'label' => "Restore",
                         'url' => controller_url ( "databaseMgt/restore" )

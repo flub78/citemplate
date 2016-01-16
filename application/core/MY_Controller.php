@@ -36,7 +36,11 @@ class MY_Controller extends CI_Controller {
 	 * Constructor
 	 */
 	function __construct() {
+
 		parent :: __construct();
+
+		$this->output->enable_profiler(TRUE);
+		$this->benchmark->mark('controller_start');
 
 		$this->logger = new Logger("class=" . get_class($this));
 		$this->logger->debug('New instance of ' . get_class($this));
@@ -59,6 +63,8 @@ class MY_Controller extends CI_Controller {
 	 */
 	public function all() {
 
+	    $this->benchmark->mark('data_fetch_start');
+
 		$data = array();
 		$data['table_title'] = table_title($this->default_table);
 		$select = $this->model->select_all($this->default_table);
@@ -68,7 +74,13 @@ class MY_Controller extends CI_Controller {
 		$data['controller'] = $this->controller;
 		$data['data_table'] = datatable($this->default_table, $select, $attrs);
 
+		$this->benchmark->mark('data_fetch_end');
+
+		$this->benchmark->mark('load_view_start');
 		$this->load->view('default_table', $data);
+
+		$this->benchmark->mark('load_view_end');
+		$this->benchmark->mark('controller_end');
 	}
 
 	/**

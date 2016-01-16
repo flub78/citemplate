@@ -161,14 +161,16 @@ class Migration_Install_ion_auth extends CI_Migration {
 		// Drop table 'users_groups' if it exists
 		$this->dbforge->drop_table('users_groups', TRUE);
 
-        $sql="create table users_groups (
-	    id unsigned mediumint(8) primary key auto_increment,
-        user_id unsigned mediumint(8),
-        group_id unsigned mediumint(8),
-	    foreign key(user_id) references users(id),
-	    foreign key(group_id) references groups(id)";
+        $sql = "create table users_groups (
+            `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+            `user_id` mediumint(8) unsigned NOT NULL,
+            `group_id` mediumint(8) unsigned NOT NULL,
+             PRIMARY KEY (`id`),
+	         foreign key(user_id) references users(id),
+	         foreign key(group_id) references groups(id))
+             ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
-	    $this->db-query($sql);
+	    $this->db->query($sql);
 
 		// Table structure for table 'users_groups'
 		// $this->dbforge->add_field(array(

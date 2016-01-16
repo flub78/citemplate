@@ -27,10 +27,10 @@ if (!defined('BASEPATH'))
 */
 class Database  {
 
-	// backup order, the database is restored in the reverse order. All referenced tables
+	// backup order, the database is restored in the order of the list. All referenced tables
 	// must already exist before each restored one. Put the tables that depends on others ones
-	// on top of the list.
-	// So everything which is referenced by another table must be above the referencing table
+	// on bottom of the list.
+	// Everything which is referenced by another table must be above the referencing table
 
 	protected $application_tables = array (
 	        'migrations',
@@ -38,11 +38,13 @@ class Database  {
 	        'groups',
 	        'users_groups',
 	        'login_attempts',
-	        'meta_test1',
-	        'users_groups_view'
+	        'meta_test2',
+	        'meta_test1'
 	);
 
-	protected $table_list;
+	protected $application_views = array (
+	        'users_groups_view'
+	);
 
 	protected $defaut_list = array (
 	);
@@ -58,10 +60,6 @@ class Database  {
 	public function __construct() {
 		$this->CI = & get_instance();
 		$this->CI->load->dbforge();
-
-		$this->table_list = array_merge (array (),
-				$this->application_tables
-		);
 	}
 
 
@@ -76,22 +74,28 @@ class Database  {
 		// Load the DB utility class
 		$this->CI->load->dbutil();
 
-		$dt = date("Y_m_d");
+		$dt = date("Ymd_His");
 		$format = 'zip';
 		if ($type == "" | $type == 'backup') {
 			$filename = "backup_$dt.zip";
 			$add_drop = TRUE;
 			$add_insert = TRUE;
-			$list = $this->table_list;
+			$list = $this->application_tables;
 		} else
 			if ($type == "structure") {
-			$filename = "structure.sql";
+			$filename = "structure_$dt.sql";
 			$add_drop = FALSE;
 			$add_insert = FALSE;
 			$format = 'txt';
-			$list = $this->table_list;
+			$list = $this->application_tables;
+		} else
+			if ($type == "views") {
+			$filename = "views_$dt.zip";
+			$add_drop = FALSE;
+			$add_insert = FALSE;
+			$list = $this->application_views;
 		} else {
-			$filename = "defaut.sql";
+			$filename = "defaut_$dt.zip";
 			$add_drop = TRUE;
 			$add_insert = TRUE;
 			$format = 'txt';
@@ -104,7 +108,7 @@ class Database  {
 				'format' => $format,
 				'add_insert' => $add_insert,
 				'add_drop' => $add_drop,
-				'tables' => array_reverse($list)
+				'tables' => $list
 		);
 
 		$backup = & $this->CI->dbutil->backup($prefs);
@@ -121,9 +125,15 @@ class Database  {
 	 * Drop all the tables
 	*/
 	public function drop_all () {
+	    $this->CI->db->query('SET FOREIGN_KEY_CHECKS=0;');
 		foreach ($this->application_tables as $table) {
 			$this->CI->dbforge->drop_table($table);
 		}
+		foreach ($this->application_views as $table) {
+		    $sql = "DROP VIEW `$table`";
+		    $this->CI->db->query($sql);
+		}
+		$this->CI->db->query('SET FOREIGN_KEY_CHECKS=1;');
 	}
 
 	public function sql ($sql, $return_result = false) {
@@ -132,7 +142,11 @@ class Database  {
         $all_results = array();
 		foreach ($reqs as $req) { // et on les éxécute
 			if (trim($req) != "") {
-				// echo "req = $req<br>";
+			    // echo "req = '$req'<br>";
+
+				if (preg_match('/.*utf8_general_ci$/', $req)) {
+				    continue;
+				}
 				$res = $this->CI->db->query($req);
 				if ($return_result && $res)
 	                $all_results[] = $res->result_array();

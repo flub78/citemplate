@@ -80,7 +80,7 @@ class DatabaseMgt extends MY_Controller {
 
 		// upload archive
 		$config['upload_path'] = $upload_path;
-		$config['allowed_types'] = 'zip';
+		$config['allowed_types'] = 'zip|sql';
 		$config['max_size'] = '500';
 
 		$this->load->library('upload', $config);
@@ -102,7 +102,9 @@ class DatabaseMgt extends MY_Controller {
 			$this->load->library('unzip');
 			$filename = $config['upload_path'] . $data['file_name'];
 			$orig_name = $config['upload_path'] . $data['orig_name'];
-			$this->unzip->extract($filename, $upload_path);
+			if (preg_match('/.*\.zip$/', $filename)) {
+			    $this->unzip->extract($filename, $upload_path);
+			}
 
 			// $sqlfile = str_replace('.zip', '.sql', $orig_name);
 			$sqlfiles = glob($upload_path . '*.sql');
@@ -145,9 +147,5 @@ class DatabaseMgt extends MY_Controller {
 		$this->ion_auth->logout();
 		redirect(base_url());
 
-// 		$this->lang->load ( 'admin' );
-// 		$data ['title'] = translation ( 'admin_title_reset' );
-// 		$data ['message'] = translation ( 'admin_reset_success' );
-// 		$this->load->view ( 'message', $data );
 	}
 }
