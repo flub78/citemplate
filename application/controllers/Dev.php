@@ -46,9 +46,76 @@ class Dev extends MY_Controller {
 	 */
 	public function info()
 	{
-		echo "base_url=" . base_url() . br();
-		echo "site_url=" . site_url() . br();
-		echo "current_url=" . current_url() . br();
+	    $this->load->model('crud_model', 'model');
+
+		$data = array();
+		$data['controller'] = 'dev';
+		$data['base_url'] = base_url();
+		$data['site_url'] = site_url();
+		$data['current_url'] = current_url();
+
+		$select = $this->model->select_all('information_schema.tables');
+        $header = array (
+                'TABLE_CATALOG',
+                'TABLE_SCHEMA',
+                'TABLE_NAME',
+                'TABLE_TYPE',
+                'ENGINE',
+                'VERSION',
+                'ROW_FORMAT',
+                'TABLE_ROWS',
+                'AVG_ROW_LENGTH',
+                'DATA_LENGTH',
+                'MAX_DATA_LENGTH',
+                'INDEX_LENGTH',
+                'DATA_FREE',
+                'AUTO_INCREMENT',
+                'CREATE_TIME',
+                'UPDATE_TIME',
+                'CHECK_TIME',
+                'TABLE_COLLATION',
+                'CHECKSUM',
+                'CREATE_OPTIONS',
+                'TABLE_COMMENT'
+        );
+        $tables = array_merge(array($header), $select);
+		$data['data_tables'] = $tables;
+
+
+		$header = array ('TABLE_CATALOG', 'TABLE_SCHEMA', 'TABLE_NAME', 'VIEW_DEFINITION',
+		        'CHECK_OPTION', 'IS_UPDATABLE', 'DEFINER', 'SECURITY_TYPE', 'CHARACTER_SET_CLIENT', 'COLLATION_CONNECTION'
+		);
+		$header = array ( 'TABLE_NAME', 'VIEW_DEFINITION');
+		$select = $this->model->select('information_schema.views', $header);
+		$views = array_merge(array($header), $select);
+		$data['data_views'] = $views;
+
+		/**
+		 * preg_match
+		 * $reqs = preg_split("/;\n/", $sql); // on sépare les requêtes
+		 *
+		 * select `ci3`.`users`.`username` AS `username`,`ci3`.`groups`.`name` AS `groupname` from ((`ci3`.`users` join `ci3`.`users_groups`) join `ci3`.`groups`) where ((`ci3`.`users`.`id` = `ci3`.`users_groups`.`user_id`) and (`ci3`.`groups`.`id` = `ci3`.`users_groups`.`group_id`))
+		 * select `ci3`.`users`.`id` AS `id`,`ci3`.`users`.`ip_address` AS `ip_address`,`ci3`.`users`.`username` AS `username`,`ci3`.`users`.`password` AS `password`,`ci3`.`users`.`salt` AS `salt`,`ci3`.`users`.`email` AS `email`,`ci3`.`users`.`activation_code` AS `activation_code`,`ci3`.`users`.`forgotten_password_code` AS `forgotten_password_code`,`ci3`.`users`.`forgotten_password_time` AS `forgotten_password_time`,`ci3`.`users`.`remember_code` AS `remember_code`,`ci3`.`users`.`created_on` AS `created_on`,`ci3`.`users`.`last_login` AS `last_login`,`ci3`.`users`.`active` AS `active`,`ci3`.`users`.`first_name` AS `first_name`,`ci3`.`users`.`last_name` AS `last_name`,`ci3`.`users`.`company` AS `company`,`ci3`.`users`.`phone` AS `phone`,concat(`ci3`.`users`.`first_name`,' ',`ci3`.`users`.`last_name`) AS `image` from `ci3`.`users`
+		 *
+		 */
+
+		/**
+		 * SELECT `CONSTRAINT_SCHEMA` , `CONSTRAINT_NAME` , `TABLE_SCHEMA` , `TABLE_NAME` , `COLUMN_NAME` , `REFERENCED_TABLE_SCHEMA` , `REFERENCED_TABLE_NAME` , `REFERENCED_COLUMN_NAME`
+FROM `KEY_COLUMN_USAGE`
+WHERE `CONSTRAINT_SCHEMA` LIKE 'ci3'
+AND `CONSTRAINT_NAME` NOT LIKE 'PRIMARY'
+LIMIT 0 , 30
+		 */
+
+        $header = array('CONSTRAINT_SCHEMA', 'CONSTRAINT_NAME', 'TABLE_SCHEMA', 'TABLE_NAME', 'COLUMN_NAME', 'REFERENCED_TABLE_SCHEMA', 'REFERENCED_TABLE_NAME', 'REFERENCED_COLUMN_NAME');
+
+		$select = $this->model->select('information_schema.KEY_COLUMN_USAGE',
+		        $header,
+		        array('CONSTRAINT_SCHEMA' => 'ci3', 'CONSTRAINT_NAME !=' => 'PRIMARY'));
+		$foreign_keys = array_merge(array($header), $select);
+		$data['data_foreign_keys'] = $foreign_keys;
+
+		$this->load->view('test/info', $data);
 	}
 
 	/*

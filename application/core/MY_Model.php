@@ -256,6 +256,18 @@ class MY_Model extends CI_Model {
     }
 
     /**
+     *
+     * @param unknown $table
+     * @param unknown $key
+     * @param array $where
+     * @param array $attrs
+     */
+    public function select($table, $key, $where = array(), $attrs = array()) {
+        $results = $this->db->select($key)->from($table)->where($where)->get()->result_array();
+        return $results;
+    }
+
+    /**
      * This string identifies an element in human readable maned.
      * Likely overloaded.
      *

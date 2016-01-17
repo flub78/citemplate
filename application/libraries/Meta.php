@@ -188,7 +188,7 @@ class Meta {
 				$fields = $this->CI->model->getTableMetaData($table);
 				// $fields = $this->CI->db->field_data($table);
 
-				// var_dump($fields);
+				var_dump($fields);
 				/*
 				 * object(stdClass)[31]
   					public 'name' => string 'privilege_id' (length=12)
@@ -198,6 +198,7 @@ class Meta {
   					public 'primary_key' => int 1
 				 */
 				foreach ($fields as $field) {
+				    var_dump($field);
 					$this->field_data[$table][$field->name] = $field;
 					if ($field->primary_key) {
 						$this->table_keys[$table] = $field->name;

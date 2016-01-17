@@ -47,6 +47,13 @@ class Migration_test_db extends CI_Migration {
 	            and (`groups`.`id` = `users_groups`.`group_id`));
 	    ";
 	    $this->db->query($sql);
+
+	    // SELECT *, concat(first_name, ' ', last_name) as image From users
+	    $sql = "CREATE ALGORITHM=UNDEFINED DEFINER=`ci3`@`localhost` SQL SECURITY DEFINER VIEW
+	            `users_view` AS select
+	            *, concat(first_name, ' ', last_name) as image From users
+	    ";
+	    $this->db->query($sql);
     }
 
     public function down() {
