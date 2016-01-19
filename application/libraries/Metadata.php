@@ -136,11 +136,10 @@ class Metadata extends Meta {
 		$this->fields['meta_test1']['email'] = array('metadata_type' => 'email');
 		$this->fields['meta_test1']['epoch'] = array('metadata_type' => 'epoch');
 		$this->fields['meta_test1']['price'] = array('metadata_type' => 'currency');
-		$this->fields['meta_test1']['oaci'] =
-		  array('metadata_type' => 'selector',
-		          'table' => 'meta_test2',
-		          'where' => array()
-		  );
+// 		$this->fields['meta_test1']['oaci'] =
+// 		  array(
+// 		          'where' => array('oaci' => 'LFOI')
+// 		  );
 
 	}
 

@@ -19,6 +19,11 @@ class Migration_test_db extends CI_Migration {
         $this->dbforge->add_key('oaci', TRUE);
         $this->dbforge->create_table('meta_test2');
 
+        $sql = "INSERT INTO `meta_test2` (`oaci`, `description`) VALUES
+            ('LFOI', 'Abbeville'),
+            ('LFQB', 'Troyes');";
+        $this->db->query($sql);
+
 
         $this->dbforge->drop_table('meta_test1', TRUE);
         // As db_forge does not handle foreign keys, use

@@ -79,8 +79,13 @@ class Type_selector extends Metadata_type {
         $model = $CI->metadata->table_model($attrs['table']);
         $CI->load->model($model, 'attribute');
 
+        if (isset($attrs['where'])) {
+            $where = $attrs['where'];
+        } else {
+            $where = array();
+        }
         $key = $CI->metadata->table_key($attrs['table']);
-        $list = $CI->attribute->selector($attrs['table'], $key, $attrs['where'], $attrs);
+        $list = $CI->attribute->selector($attrs['table'], $key, $where, $attrs);
 
         return form_dropdown($field, $list, $value);
 

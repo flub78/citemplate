@@ -3,7 +3,7 @@
  *    Project {$PROJECT}
  *    Copyright (C) 2015 {$AUTHOR}
  *
- *    This program is free software: you can redistribute it and/or modify
+ *    This program is free software: you can redistribute it ciand/or modify
  *    it under the terms of the GNU General Public License as published by
  *    the Free Software Foundation, either version 3 of the License, or
  *    (at your option) any later version.
@@ -188,7 +188,7 @@ class Meta {
 				$fields = $this->CI->model->getTableMetaData($table);
 				// $fields = $this->CI->db->field_data($table);
 
-				var_dump($fields);
+				// var_dump($fields);
 				/*
 				 * object(stdClass)[31]
   					public 'name' => string 'privilege_id' (length=12)
@@ -198,7 +198,7 @@ class Meta {
   					public 'primary_key' => int 1
 				 */
 				foreach ($fields as $field) {
-				    var_dump($field);
+				    // var_dump($field);
 					$this->field_data[$table][$field->name] = $field;
 					if ($field->primary_key) {
 						$this->table_keys[$table] = $field->name;
@@ -418,7 +418,19 @@ class Meta {
 
 	    if (!$this->table_exists($table)) {throw new Exception("Table $table does not exist");}
 
-		if (isset($this->fields[$table][$field]['metadata_type'])) {
+	    $attrs = array();
+	    if (isset($this->fields[$table][$field])) {
+	        $attrs = array_merge($attrs, $this->fields[$table][$field]);
+	    }
+	    $foreign_key = $this->foreign_key($table, $field);
+	    if ($foreign_key) {
+	        $field_type = 'selector';
+	        $attrs['table'] = $foreign_key['referenced_table'];
+	        $attrs['metadata_type'] = 'selector';
+	        if ($this->allow_null($table, $field)) {
+	            $attrs['with'] = 'null';
+	        }
+	    } elseif (isset($this->fields[$table][$field]['metadata_type'])) {
 			$field_type = $this->fields[$table][$field]['metadata_type'];
 		} else {
 		    $field_type = $this->field_db_type($table, $field);
@@ -512,7 +524,21 @@ class Meta {
 
 	    if (!$this->table_exists($table)) {throw new Exception("Table $table does not exist");}
 
-		if (isset($this->fields[$table][$field]['metadata_type'])) {
+	    $attrs = array();
+	    if (isset($this->fields[$table][$field])) {
+	        $attrs = array_merge($attrs, $this->fields[$table][$field]);
+	    }
+
+	    $foreign_key = $this->foreign_key($table, $field);
+	    if ($foreign_key) {
+	        $field_type = 'selector';
+	        $attrs['table'] = $foreign_key['referenced_table'];
+	        $attrs['metadata_type'] = 'selector';
+	        if ($this->allow_null($table, $field)) {
+	            $attrs['with'] = 'null';
+	        }
+
+	    } elseif (isset($this->fields[$table][$field]['metadata_type'])) {
 			$field_type = $this->fields[$table][$field]['metadata_type'];
 		} else {
 		    $field_type = $this->field_db_type($table, $field);
@@ -541,12 +567,24 @@ class Meta {
 		// set_value is not used as values are fully managed in to be prep
 		// from and to database
 
-		if (isset($this->fields[$table][$field]['metadata_type'])) {
+	    if (isset($this->fields[$table][$field])) {
+	        $attrs = array_merge($attrs, $this->fields[$table][$field]);
+	    }
+	    $foreign_key = $this->foreign_key($table, $field);
+	    if ($foreign_key) {
+	        $field_type = 'selector';
+	        $attrs['table'] = $foreign_key['referenced_table'];
+	        $attrs['metadata_type'] = 'selector';
+	        if ($this->allow_null($table, $field)) {
+	            $attrs['with'] = 'null';
+	        }
+
+	    } elseif (isset($this->fields[$table][$field]['metadata_type'])) {
 			$field_type = $this->fields[$table][$field]['metadata_type'];
-			$attrs = array_merge($attrs, $this->fields[$table][$field]);
 		} else {
 		    $field_type = $this->field_db_type($table, $field);
 		}
+
 
 		// echo "field_input $table $field $field_type" . br();
 
@@ -581,6 +619,38 @@ class Meta {
 	 */
 	function log($msg, $level = "info") {
 		$this->logger->log($level, $msg);
+	}
+
+	/**
+	 * Check if a database field is a foreign key referencing another table.
+	 *
+	 * @param unknown $table
+	 * @param unknown $field
+	 * @return a hash array('referenced_table' => xxx, 'referenced_field' => yyy)
+	 */
+	function foreign_key($table, $field) {
+
+	    $this->CI->load->model('crud_model', 'model');
+
+	    $header = array('CONSTRAINT_SCHEMA', 'CONSTRAINT_NAME', 'TABLE_SCHEMA', 'TABLE_NAME', 'COLUMN_NAME', 'REFERENCED_TABLE_SCHEMA', 'REFERENCED_TABLE_NAME', 'REFERENCED_COLUMN_NAME');
+
+	    $database = 'ci3';
+	    $select = $this->CI->model->select('information_schema.KEY_COLUMN_USAGE',
+	            $header,
+	            array('CONSTRAINT_SCHEMA' => $database,
+	                  'CONSTRAINT_NAME !=' => 'PRIMARY',
+	                  'TABLE_NAME' => $table,
+	                  'COLUMN_NAME' => $field
+	            ));
+	    if (! $select) {
+	        return false;
+	    }
+//         echo "foreign_key($table, $field)";
+// 	    var_dump($select);
+	    return array(
+	       'referenced_table' => $select[0]['REFERENCED_TABLE_NAME'],
+	       'referenced_field' => $select[0]['REFERENCED_COLUMN_NAME']
+	    );
 	}
 }
 
