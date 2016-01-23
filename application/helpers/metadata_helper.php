@@ -72,6 +72,11 @@ if (! function_exists ( 'heading_row' )) {
 		// Generate the header for each field
 		$res = array ();
 		foreach ( $fields as $field ) {
+
+		    $reference = $CI->metadata->reference($table, $field);
+		    $table = $reference ['table'];
+		    $field = $reference ['field'];
+
 			$translated = $CI->lang->line ( "heading_" . $table . '_' . $field );
 			if (preg_match ( '/^__/', $field )) {
 			    # by default no name for action fields

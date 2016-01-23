@@ -56,7 +56,7 @@ $lang['label_groups_description'] = "Privilege description";
 /*
  * users
  */
-$lang['title_users'] = "Users";
+$lang['title_users_view'] = "Users";
 $lang['title_users_form'] = "User";
 $lang['title_users_create'] = "Create user";
 
@@ -64,9 +64,10 @@ $lang['heading_users_first_name'] = "First name";
 $lang['heading_users_last_name'] = "Last name";
 $lang['heading_users_active'] = "Active";
 $lang['heading_users_email'] = "Email address";
-$lang['heading_users_username'] = "User name";
+$lang['heading_users_username'] = "Identifier";
 $lang['heading_users_created_on'] = "Creation";
 $lang['heading_users_last_login'] = "Last login";
+$lang['heading_users_view_image'] = "Name";
 
 $lang['placeholder_users_email'] = "Email address";
 $lang['placeholder_users_username'] = "User name";

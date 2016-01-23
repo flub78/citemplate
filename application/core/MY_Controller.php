@@ -48,6 +48,10 @@ class MY_Controller extends CI_Controller {
 		if (!$this->ion_auth->logged_in()) {
 			redirect(controller_url('auth/login'));
 		}
+
+		if (! isset($this->default_view) ) {
+		    $this->default_view = $this->default_table;
+		}
 	}
 
 	/**
@@ -66,13 +70,13 @@ class MY_Controller extends CI_Controller {
 	    $this->benchmark->mark('data_fetch_start');
 
 		$data = array();
-		$data['table_title'] = table_title($this->default_table);
-		$select = $this->model->select_all($this->default_table);
+		$data['table_title'] = table_title($this->default_view);
+		$select = $this->model->select_all($this->default_view);
 
 		$attrs['fields'] = $this->table_fields;
 		$attrs['controller'] = $this->controller;
 		$data['controller'] = $this->controller;
-		$data['data_table'] = datatable($this->default_table, $select, $attrs);
+		$data['data_table'] = datatable($this->default_view, $select, $attrs);
 
 		$this->benchmark->mark('data_fetch_end');
 
