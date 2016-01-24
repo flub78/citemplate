@@ -31,7 +31,7 @@ $this->load->library ( 'table' );
     <?php // hidden contrller url for java script access
 		echo form_hidden ( 'controller_url', controller_url ( $controller ), '"id"="controller_url"' );
 	?>
-    
+
 	<div class="container-fluid starter-template">
 		<header class="row">
 			<div class="col-lg-12">
@@ -42,13 +42,13 @@ $this->load->library ( 'table' );
 		<div class="row">
 			<nav class="col-sm-1"></nav>
 			<section class="col-sm-11">
-			    <?= heading($table_title, 3); ?>	
+			    <?= heading($table_title, 3); ?>
 
 				<div class="row">
 					<article class="col-sm-12 row">
 						<?php
 						$template = array (
-								'table_open' => '<table class="display" cellspacing="0" width="100%">' 
+								'table_open' => '<table class="display" cellspacing="0" width="100%">'
 						);
 						$this->table->set_template ( $template );
 						echo $this->table->generate ( $data_table );
@@ -67,21 +67,21 @@ $this->load->library ( 'table' );
 	<?= script(base_url() . '/components/DataTables/datatables.js')?>
 	<?= script(base_url() . '/components/DataTables/Buttons-1.0.3/js/dataTables.buttons.min.js')?>
 	<?= script(base_url() . '/components/DataTables/Buttons-1.0.3/js/buttons.bootstrap.min.js')?>
-	
+
     <?= script('https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js')?>
     <?= script('https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js')?>
     <?= script('https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js')?>
 
     <?= script(base_url() . '/components/DataTables/Buttons-1.0.3/js/buttons.html5.min.js')?>
     <?= script(base_url() . '/components/DataTables/Buttons-1.0.3/js/buttons.print.min.js')?>
-    
+
 <script type="text/javascript">
 <!--
 $(document).ready(function(){
-		
+
     var table = $('.display').dataTable( {
         stateSave: true,
-        dom: 'Bfrtip',
+        dom: 'Blfrtip',
         "oLanguage": olanguage,
         buttons: [
                   'excel', 'pdf', 'print',
@@ -115,7 +115,7 @@ $(document).ready(function(){
     table.buttons( 1, null ).container().appendTo(
             table.table().container()
         );
-       
+
 });
 
 //-->

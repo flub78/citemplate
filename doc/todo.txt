@@ -7,7 +7,9 @@ can be derived really fast.
 
 Todo:
  
-     * Replace ciauth by ion_auth   
+    * Manage dates with default values
+
+    * Replace ciauth by ion_auth   
         * bootstrap style for login page (partially done)
         - forgotten password
         * check user modification and password
@@ -15,21 +17,11 @@ Todo:
             the default is wrong
             
         * remember me
-        
-    * Convenience
-        - number of element per page should be store in context
-        (global or per page?)
-
-	It is done by stateSave on Datatable. pagination position, display length, filtering and sorting
-        Option disabled with GVV due to an assumed unstability.
-        
+              
         - Possibility to apply the same operation globaly to all selected rows (delete, set check).
         
-    * draw a diagram of the bootstrap page structure
-        
+    * draw a diagram of the bootstrap page structure      
             
-    * Manage dates with default values
-    
     * Set the title for pdf export
         
     * Installation: documentation
@@ -57,7 +49,6 @@ Todo:
     * REST interface
     * REST service access
     * QR code, ticket impression
-
 
 	if the performance impact is significant, replace it by a template mechanism
         to statically generates the views.
@@ -111,6 +102,12 @@ Done:
 
      * Measure performance impact of the metadata approach
         
+    * Convenience
+        - number of element per page should be store in context
+        (global or per page?)
+
+    It is done by stateSave on Datatable. pagination position, display length, filtering and sorting
+        Option disabled with GVV due to an assumed unstability.
 
 ============================================================================================================================    
 Git repo

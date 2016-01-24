@@ -91,19 +91,19 @@ $this->load->library ( 'table' );
 $(document).ready(function(){
 
     var table = $('.display').dataTable( {
-        stateSave: true,
-        dom: 'Bfrtip',
-        "oLanguage": olanguage,
-        buttons: [
-                  'excel', 'pdf', 'print',
-                  {
-                      text: 'Create',
-                      action: function ( e, dt, node, config ) {
-                          var url = $('input[name="controller_url"]').val() + '/create';
-                          window.location.href = url;
-                      }
-                  }
-              ]
+    	stateSave: true,
+    	"oLanguage": olanguage,
+    	dom: 'Blfrtip',
+    	buttons: [
+			'excel', 'pdf', 'print',
+			{
+ 				text: 'Create',
+ 				action: function ( e, dt, node, config ) {
+     			var url = $('input[name="controller_url"]').val() + '/create';
+     			window.location.href = url;
+ 				}
+			}
+		]
     });
 
     new $.fn.dataTable.Buttons( table, {
