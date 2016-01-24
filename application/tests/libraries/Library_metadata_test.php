@@ -59,12 +59,13 @@ class Metadata_library_test extends TestCase {
     }
 
     /**
-     *
+     * <input type="text" name="username_value" id="username_value" class="form-control" value="fred" placeholder="User name" size="25" />
+     * <input type="text" name="username_value" id="username_value" class="form-control text" value="fred" placeholder="User name" size="25" />
      */
     public function test_users_metadata() {
         $this->check_field('users', 'username', 'fred', array (
                 'display_field' => 'fred',
-                'field_input' => '<input type="text" name="username_value" id="username_value" class="form-control text" value="fred" placeholder="User name" size="25" />',
+                'field_input' => '<input type="text" name="username_value" id="username_value" class="form-control" value="fred" placeholder="User name" size="25" />',
                 'create_rules' => 'required|max_length[100]|is_unique[users.username]|alpha_dash',
                 'edit_rules' => 'required|max_length[100]|alpha_dash'
         ));

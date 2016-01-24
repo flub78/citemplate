@@ -27,7 +27,6 @@ Todo:
         
     * draw a diagram of the bootstrap page structure
         
-    * create selector for element list (group for users)
             
     * Manage dates with default values
     
@@ -59,9 +58,8 @@ Todo:
     * REST service access
     * QR code, ticket impression
 
-    * Measure performance impact of the metadata approach
 
-	if the impact is significant, replace it by a template mechanism
+	if the performance impact is significant, replace it by a template mechanism
         to statically generates the views.
     
 ============================================================================================================================    
@@ -97,6 +95,7 @@ Done:
         - one class per metadate type (done)
         - Manage null dates
         - epoch   
+        - create selector for element list (group for users)
      * Submit button labels 
         (Valider, Créer, Créer et continuer)
         Validate, Create, Create and continue, Register
@@ -110,6 +109,7 @@ Done:
     INFO - 2016-01-09 09:26:48 --> Metadata: rules(groups,name) = 
     INFO - 2016-01-09 09:26:48 --> Metadata: rules(groups,description) = required|max_length[100]
 
+     * Measure performance impact of the metadata approach
         
 
 ============================================================================================================================    

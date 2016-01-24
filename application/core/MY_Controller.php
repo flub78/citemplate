@@ -49,7 +49,7 @@ class MY_Controller extends CI_Controller {
 			redirect(controller_url('auth/login'));
 		}
 
-		if (! isset($this->default_view) ) {
+		if (! isset($this->default_view) && (isset($this->default_table)) ) {
 		    $this->default_view = $this->default_table;
 		}
 	}

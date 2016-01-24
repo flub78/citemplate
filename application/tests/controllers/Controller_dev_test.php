@@ -35,7 +35,7 @@ class Dev_controller_test extends TestCase
 	public function test_info()
 	{
 		$output = $this->request('GET', ['Dev', 'info']);
-		$this->assertContains('base_url', $output);
+		$this->assertContains('Base url', $output);
 	}
 
 	public function test_check_lang()
