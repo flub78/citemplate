@@ -124,6 +124,11 @@ $menu_dev = array (
 		                'url' => controller_url("meta_test2"),
 		                'role' => 'admin'
 		        ),
+		        array (
+		                'label' => "REST",
+		                'url' => controller_url("rest_server"),
+		                'role' => 'admin'
+		        ),
 
 		)
 );
