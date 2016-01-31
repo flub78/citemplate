@@ -15,7 +15,7 @@ What:
 
     https://your.domain/Api/Resourcename
     
-    We are going to focus on json API (most widely used and groing)
+    We are going to focus on json API (most widely used and growing)
     
     
     GET /task       retreive a list of tasks
@@ -109,4 +109,133 @@ What:
     
     
     
+GET http://localhost/gvv_dev/index.php/vols_planeur/a...able_17=false&bSortable_18=false&_=1454255742054
     
+
+dataTable query parameters 
+bRegex  false
+bRegex_0    false
+bRegex_1    false
+bRegex_10   false
+bRegex_11   false
+bRegex_12   false
+bRegex_13   false
+bRegex_14   false
+bRegex_15   false
+bRegex_16   false
+bRegex_17   false
+bRegex_18   false
+bRegex_2    false
+bRegex_3    false
+bRegex_4    false
+bRegex_5    false
+bRegex_6    false
+bRegex_7    false
+bRegex_8    false
+bRegex_9    false
+bSearchable_0   true
+bSearchable_1   true
+bSearchable_10  true
+bSearchable_11  true
+bSearchable_12  true
+bSearchable_13  true
+bSearchable_14  true
+bSearchable_15  true
+bSearchable_16  true
+bSearchable_17  true
+bSearchable_18  true
+bSearchable_2   true
+bSearchable_3   true
+bSearchable_4   true
+bSearchable_5   true
+bSearchable_6   true
+bSearchable_7   true
+bSearchable_8   true
+bSearchable_9   true
+bSortable_0 true
+bSortable_1 false
+bSortable_10  false
+bSortable_11   false
+bSortable_12   false
+bSortable_13   false
+bSortable_14   false
+bSortable_15   false
+bSortable_16   false
+bSortable_17   false
+bSortable_18   false
+bSortable_2 false
+bSortable_3 false
+bSortable_4 false
+bSortable_5 false
+bSortable_6 false
+bSortable_7 false
+bSortable_8 false
+bSortable_9 false
+iColumns    19
+iDisplayLength  25
+iDisplayStart   0
+iSortCol_0  0
+iSortingCols   1
+mDataProp_0 0
+mDataProp_1 1
+mDataProp_10 10
+mDataProp_11  11
+mDataProp_12  12
+mDataProp_13  13
+mDataProp_14  14
+mDataProp_15  15
+mDataProp_16  16
+mDataProp_17  17
+mDataProp_18  18
+mDataProp_2 
+mDataProp_3 3
+mDataProp_4 4
+mDataProp_5 
+5
+mDataProp_6 
+6
+mDataProp_7 
+7
+mDataProp_8 
+8
+mDataProp_9 9
+sColumns    
+sEcho   1
+sSearch 
+sSearch_0   
+sSearch_1   
+sSearch_10  
+sSearch_11  
+sSearch_12  
+sSearch_13  
+sSearch_14  
+sSearch_15  
+sSearch_16  
+sSearch_17  
+sSearch_18  
+sSearch_2   
+sSearch_3   
+sSearch_4   
+sSearch_5   
+sSearch_6   
+sSearch_7   
+sSearch_8   
+sSearch_9   
+sSortDir_0  asc
+
+bRegex  false
+iColumns    19
+iDisplayLength  25
+iDisplayStart   0
+iSortingCols   1
+sColumns    
+sEcho   1
+sSearch 
+sSortDir_0  asc
+    {
+        bRegex_i    false
+        bSearchable_i   true
+        sSearch_i   
+        bSortable_i true
+        iSortCol_i  0
+    }

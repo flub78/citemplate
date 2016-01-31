@@ -1,0 +1,36 @@
+Javascript usage in this project
+--------------------------------
+
+Usage of bare javascript is not recommended. 
+
+However high level libraries and compontents are used.
+
+    * Jquery to take care of the browser compatibilty and offer a simpler syntax
+    * Datatable to display tables
+    * FullCalendar a JavaScript calendar http://fullcalendar.io/
+    * bootstrap to manage the menus and insure a responsive design
+    
+
+To access a PHP variable
+------------------------
+
+    in the view:
+        echo form_hidden('filter_active', $filter_active);
+        
+    which generates:
+        <input type="hidden" name="filter_active" value="1" />
+        
+    access by name attribute
+            var year = $('[name="year"]').val();
+            var first_year = $('[name="first_year"]').val();
+            var jsonurl = $('[name="jsonurl"]').val();
+            var titre = $('[name="titre"]').val();
+
+    access by id
+
+        var balance_date = $("#balance_date").val();
+        
+    access by class
+        $(".description")
+        
+  

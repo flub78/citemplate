@@ -75,7 +75,17 @@ Form validation
     * Rules: there are some that are defined by the database null, not null,
     Sometime it is useful to define additional business rules.
     
+Datatable
+
+    Datable provides a good looking, convenient way to display data.
     
+    At least for the big tables, the server_side method is used that
+    fecth data in Ajax each time that a page is displayed.
+    
+    It implies that the data returned by the REST interface must
+    already bee in a format directly usable by datable.
+        localisation, anchor generation, etc.
+        
 User documentation
 ==================
 

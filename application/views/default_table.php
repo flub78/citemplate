@@ -29,8 +29,9 @@ $this->load->library ( 'table' );
 
 <body>
     <?php // hidden contrller url for java script access
-		echo form_hidden ( 'controller_url', controller_url ( $controller ), '"id"="controller_url"' );
-	?>
+		echo form_hidden ( 'controller_url', controller_url ( $controller ));
+        echo form_hidden('server_side', false);
+		?>
 
 	<div class="container-fluid starter-template">
 		<header class="row">
@@ -51,6 +52,7 @@ $this->load->library ( 'table' );
 								'table_open' => '<table class="display" cellspacing="0" width="100%">'
 						);
 						$this->table->set_template ( $template );
+						// var_dump($data_table);
 						echo $this->table->generate ( $data_table );
 						?>
 					</article>
@@ -79,10 +81,15 @@ $this->load->library ( 'table' );
 <!--
 $(document).ready(function(){
 
+	var server_side = $('[name="server_side"]').val();
+	// alert('server_side=' + server_side);
+
     var table = $('.display').dataTable( {
         stateSave: true,
         dom: 'Blfrtip',
         "oLanguage": olanguage,
+        "bServerSide": server_side,
+        "sAjaxSource": "api/user",
         buttons: [
                   'excel', 'pdf', 'print',
                   {

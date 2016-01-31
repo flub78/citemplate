@@ -646,6 +646,7 @@ abstract class REST_Controller extends CI_Controller {
             $this->response([
                     $this->config->item('rest_status_field_name') => FALSE,
                     $this->config->item('rest_message_field_name') => $this->lang->line('text_rest_unknown_method')
+                        . ': ' . $controller_method
                 ], self::HTTP_NOT_FOUND);
         }
 
@@ -770,6 +771,7 @@ abstract class REST_Controller extends CI_Controller {
             $this->_log_response_code($http_code);
         }
 
+        echo  $output; exit;
         // Output the data
         $this->output->set_output($output);
 
