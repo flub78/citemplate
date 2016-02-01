@@ -89,7 +89,7 @@ $(document).ready(function(){
         dom: 'Blfrtip',
         "oLanguage": olanguage,
         "bServerSide": server_side,
-        "sAjaxSource": "api/user",
+        "sAjaxSource": "api/user?datatable=1",
         buttons: [
                   'excel', 'pdf', 'print',
                   {
