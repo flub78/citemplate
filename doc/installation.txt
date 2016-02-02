@@ -32,6 +32,9 @@ Check to perform on the welcome page
 Instructions:
 
 	1) download GVV and put it in your web server directory
+	   * download citemplate
+	   * download gvv
+	   * merge them
 	2) Create a MYSQL database and a user to access it
 	3) Edit the application/config/database.php and change it according to your database user.
 	4) edit application/config/config.php and 

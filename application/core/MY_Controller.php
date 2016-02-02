@@ -21,335 +21,341 @@
  * @filesource MY_Controller.php
  * @package controllers
  */
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * MY_Controller controller
+ *
  * @author frederic
  *
  */
 class MY_Controller extends CI_Controller {
+    var $logger;
 
-	var $logger;
+    /**
+     * Constructor
+     */
+    function __construct() {
+        parent::__construct();
 
-	/**
-	 * Constructor
-	 */
-	function __construct() {
+        $this->output->enable_profiler(TRUE);
+        $this->benchmark->mark('controller_start');
 
-		parent :: __construct();
+        $this->logger = new Logger("class=" . get_class($this));
+        $this->logger->debug('New instance of ' . get_class($this));
 
-		$this->output->enable_profiler(TRUE);
-		$this->benchmark->mark('controller_start');
+        if (! $this->ion_auth->logged_in()) {
+            redirect(controller_url('auth/login'));
+        }
 
-		$this->logger = new Logger("class=" . get_class($this));
-		$this->logger->debug('New instance of ' . get_class($this));
+        if (! isset($this->default_view) && (isset($this->default_table))) {
+            $this->default_view = $this->default_table;
+        }
 
-		if (!$this->ion_auth->logged_in()) {
-			redirect(controller_url('auth/login'));
-		}
+        if (! isset($this->server_side)) {
+            $this->server_side = false;
+        }
+    }
 
-		if (! isset($this->default_view) && (isset($this->default_table)) ) {
-		    $this->default_view = $this->default_table;
-		}
-	}
+    /**
+     * Default is to list all elements
+     */
+    public function index() {
+        $this->all();
+    }
 
-	/**
-	 * Default is to list all elements
-	 */
-	public function index()
-	{
-		$this->all();
-	}
+    /**
+     * List of elements
+     */
+    public function all() {
+        $this->benchmark->mark('data_fetch_start');
 
-	/**
-	 * List of elements
-	 */
-	public function all() {
+        $data = array ();
+        $data ['table_title'] = table_title($this->default_view);
 
-	    $this->benchmark->mark('data_fetch_start');
+        if ($this->server_side) {
+            $select = array ();
+        } else {
+            $select = $this->model->select_all($this->default_view);
+        }
+        $attrs ['fields'] = $this->table_fields;
+        $attrs ['controller'] = $this->controller;
+        $data ['controller'] = $this->controller;
+        $data ['data_table'] = datatable($this->default_view, $select, $attrs);
+        $data ['server_side'] = $this->server_side;
 
-		$data = array();
-		$data['table_title'] = table_title($this->default_view);
-		$select = $this->model->select_all($this->default_view);
+        $this->benchmark->mark('data_fetch_end');
+        $this->benchmark->mark('load_view_start');
 
-		$attrs['fields'] = $this->table_fields;
-		$attrs['controller'] = $this->controller;
-		$data['controller'] = $this->controller;
-		$data['data_table'] = datatable($this->default_view, $select, $attrs);
+        $this->load->view('default_table', $data);
 
-		$this->benchmark->mark('data_fetch_end');
+        $this->benchmark->mark('load_view_end');
+        $this->benchmark->mark('controller_end');
+    }
 
-		$this->benchmark->mark('load_view_start');
-		$this->load->view('default_table', $data);
+    /**
+     * Delete an element
+     *
+     * @param unknown $id
+     */
+    public function delete($id) {
+        $id_field = table_key($this->default_table);
+        $this->model->delete($this->default_table, array (
+                $id_field => $id
+        ));
+        redirect(controller_url($this->controller));
+    }
 
-		$this->benchmark->mark('load_view_end');
-		$this->benchmark->mark('controller_end');
-	}
+    /**
+     * Add a new element
+     */
+    public function add($data = array()) {
+        $this->model->create($this->default_table, $data);
+        redirect(controller_url($this->controller));
+    }
 
-	/**
-	 * Delete an element
-	 * @param unknown $id
-	 */
-	public function delete($id) {
-		$id_field = table_key($this->default_table);
-		$this->model->delete($this->default_table, array($id_field  => $id));
-		redirect(controller_url($this->controller));
-	}
+    /**
+     * Update an element
+     */
+    public function update($id, $data = array()) {
+        $id_field = table_key($this->default_table);
+        $this->model->update($this->default_table, $id_field, $data, $id);
+        redirect(controller_url($this->controller));
+    }
 
-	/**
-	 * Add a new element
-	 */
-	public function add($data = array()) {
-		$this->model->create($this->default_table, $data);
-		redirect(controller_url($this->controller));
-	}
+    /**
+     * Initialize the data to send to the form
+     *
+     * @param unknown $action
+     * @return multitype:
+     */
+    protected function init_form($action, $id = "") {
+        $data = array ();
+        $data ['title'] = form_title($this->default_table, $action);
+        $data ['controller'] = $this->controller;
+        $data ['action'] = ($id) ? "$action/$id" : $action;
+        $data ['table'] = $this->default_table;
+        $data ['field_list'] = $this->form_fields($action); // Different field list depending on the context ?
+        $data ['error_msg'] = "";
+        if ($action == 'create') {
+            $data ['submit_label'] = 'button_submit_create';
+        } else {
+            $data ['submit_label'] = 'button_validate';
+        }
+        return $data;
+    }
 
-	/**
-	 * Update an element
-	 */
-	public function update($id, $data = array()) {
-		$id_field = table_key($this->default_table);
-		$this->model->update($this->default_table, $id_field, $data, $id);
-		redirect(controller_url($this->controller));
-	}
+    /**
+     * Return a field list to validate
+     *
+     * @param string $action
+     */
+    protected function form_fields($action = "") {
+        if (isset($this->form_fields [$action])) {
+            return $this->form_fields [$action];
+        }
 
-	/**
-	 * Initialize the data to send to the form
-	 * @param unknown $action
-	 * @return multitype:
-	 */
-	protected function init_form($action, $id = "") {
-		$data = array();
-		$data['title'] = form_title($this->default_table, $action);
-		$data['controller'] = $this->controller;
-		$data['action'] = ($id) ? "$action/$id" : $action;
-		$data['table'] = $this->default_table;
-		$data['field_list'] = $this->form_fields($action); // Different field list depending on the context ?
-		$data['error_msg'] = "";
-		if ($action == 'create') {
-			$data['submit_label'] = 'button_submit_create';
-		} else {
-			$data['submit_label'] = 'button_validate';
-		}
-		return $data;
-	}
+        if (isset($this->form_fields)) {
+            return $this->form_fields;
+        }
 
-	/**
-	 * Return a field list to validate
-	 *
-	 * @param string $action
-	 */
-	protected function form_fields($action = "") {
+        return array ();
+    }
 
-		if (isset($this->form_fields[$action])) {
-			return $this->form_fields[$action];
-		}
+    /**
+     * Display a form to create a new element
+     */
+    public function create() {
+        $data = $this->init_form("create");
+        $data ['values'] = array (); // TODO should be default values
+        $data ['field_list'] = $this->form_fields('create');
+        $this->load->view('default_form', $data);
+    }
 
-		if (isset($this->form_fields)) {
-			return $this->form_fields;
-		}
+    /**
+     * Display a form to edit an existing element
+     *
+     * @param unknown $id
+     */
+    public function edit($id) {
+        // load data
+        $id_field = table_key($this->default_table);
 
-		return array();
-	}
+        $values = $this->metadata->prep(array (
+                $this->default_table => $this->model->get_by_id($this->default_table, $id_field, $id)
+        ), 'input');
 
-	/**
-	 * Display a form to create a new element
-	 */
-	public function create() {
-		$data = $this->init_form("create");
-		$data['values'] = array();		# TODO should be default values
-		$data['field_list'] = $this->form_fields('create');
-		$this->load->view('default_form', $data);
-	}
+        $data = $this->init_form("edit", $id);
+        $data ['values'] = $values;
+        $data ['field_list'] = $this->form_fields('edit');
 
-	/**
-	 * Display a form to edit an existing element
-	 * @param unknown $id
-	 */
-	public function edit($id) {
-		// load data
-		$id_field = table_key($this->default_table);
+        $this->load->view('default_form', $data);
 
-		$values = $this->metadata->prep(array($this->default_table =>
-				$this->model->get_by_id($this->default_table, $id_field, $id)), 'input');
+        // https://cdn.rawgit.com
+    }
 
-		$data = $this->init_form("edit", $id);
-		$data['values'] = $values;
-		$data['field_list'] = $this->form_fields('edit');
+    /**
+     * Reload the form after validation errors
+     *
+     * @param unknown $action
+     */
+    protected function reload_form($action, $post) {
+        $data = $this->init_form($action);
+        $data ['values'] = element_default_values($this->default_table, $post);
+        // var_dump($data['values']);
+        $this->load->view('default_form', $data);
+    }
 
-		$this->load->view('default_form', $data);
+    /**
+     * Validate inputs for creation or modification.
+     *
+     * @param unknown $id
+     *            Question what do we do with the form when the key fields are
+     *            modified ? several options are possible:
+     *            1) to forbid it
+     *            2) to reload the other elements when the key is modified (GVV for pilots and accounts)
+     *            3) to consider that is is a renaming and propagate the renaming
+     *
+     *            Option 2 is both relatively simple and convenient. So lets not do anything when a form
+     *            is validated with a key different from the inital value but rather setup an Ajax call
+     *            to reload the form when the key is changed.
+     */
+    public function validate($action, $id = "") {
 
-		// https://cdn.rawgit.com
-	}
+        // set rules
+        foreach ( $this->form_fields($action) as $field ) {
+            $name = field_name($this->default_table, $field);
+            $label = field_label_text($this->default_table, $field);
+            $rules = rules($this->default_table, $field, $action);
+            // echo "name=$name, label=$label, rules=$rules";
 
-	/**
-	 * Reload the form after validation errors
-	 *
-	 * @param unknown $action
-	 */
-	protected function reload_form($action, $post) {
-		$data = $this->init_form($action);
-		$data['values'] = element_default_values($this->default_table, $post);
-		// var_dump($data['values']);
-		$this->load->view('default_form', $data);
-	}
+            if ($rules) {
+                $this->form_validation->set_rules($name, $label, $rules);
+            }
+        }
 
-	/**
-	 * Validate inputs for creation or modification.
-	 *
-	 * @param unknown $id
-	 *
-	 * Question what do we do with the form when the key fields are
-	 * modified ? several options are possible:
-	 * 		1) to forbid it
-	 * 		2) to reload the other elements when the key is modified (GVV for pilots and accounts)
-	 * 		3) to consider that is is a renaming and propagate the renaming
-	 *
-	 * Option 2 is both relatively simple and convenient. So lets not do anything when a form
-	 * is validated with a key different from the inital value but rather setup an Ajax call
-	 * to reload the form when the key is changed.
-	 */
-	public function validate($action, $id = "") {
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+        // var_dump($_POST);exit;
+        $post = $_POST;
 
-		// set rules
-		foreach ($this->form_fields($action) as $field) {
-			$name = field_name($this->default_table, $field);
-			$label = field_label_text($this->default_table, $field);
-			$rules = rules($this->default_table, $field, $action);
-			// echo "name=$name, label=$label, rules=$rules";
+        if ($this->form_validation->run() == FALSE) {
+            // invalid input, reload the form
 
-			if ($rules) {
-				$this->form_validation->set_rules($name, $label, $rules);
-			}
-		}
+            // here the $_POST array has been modified by all the rules modification filters
+            // so it is not these values that we want to reload
+            $this->reload_form($action, $post);
+        } else {
+            // successful validation
+            $values = array ();
+            foreach ( $this->form_fields($action) as $field ) {
+                if ($this->metadata->field_exists($this->default_table, $field)) {
+                    $field_name = field_name($this->default_table, $field);
+                    $values [$field] = $this->input->post($field_name);
+                }
+                if ($this->metadata->allow_null($this->default_table, $field) && ($values [$field] == '')) {
+                    unset($values [$field]);
+                }
+            }
+            if ($action == "edit") {
+                // update
+                $this->update($id, $values);
+            } else {
+                // create
+                $this->add($values);
+            }
+        }
+    }
 
-		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-// 		var_dump($_POST);exit;
-		$post = $_POST;
+    /**
+     * Form validation callback
+     *
+     * @param unknown $timestamp
+     * @return boolean date_parse_from_format returns array (size=12)
+     *         'year' => int 2015
+     *         'month' => int 11
+     *         'day' => int 5
+     *         'hour' => int 13
+     *         'minute' => int 20
+     *         'second' => int 0
+     *         'fraction' => boolean false
+     *         'warning_count' => int 0
+     *         'warnings' =>
+     *         array (size=0)
+     *         empty
+     *         'error_count' => int 0
+     *         'errors' =>
+     *         array (size=0)
+     *         empty
+     *         'is_localtime' => boolean false
+     */
+    public function valid_timestamp($ts) {
+        if ($ts == '') {
+            return true;
+        }
+        $parsed = date_parse_from_format(translation("format_timestamp"), $ts);
 
-		if ($this->form_validation->run() == FALSE) {
-			// invalid input, reload the form
-
-			// here the $_POST array has been modified by all the rules modification filters
-			// so it is not these values that we want to reload
-			$this->reload_form($action, $post);
-
-		} else {
-			# successful validation
-			$values = array();
-			foreach ($this->form_fields($action) as $field) {
-				if ($this->metadata->field_exists($this->default_table, $field)) {
-					$field_name = field_name($this->default_table, $field);
-					$values[$field] = $this->input->post($field_name);
-				}
-				if ($this->metadata->allow_null($this->default_table, $field) &&
-				    ($values[$field] == '')) {
-                    unset($values[$field]);
-				}
-			}
-			if ($action == "edit") {
-				# update
-				$this->update($id, $values);
-
-			} else {
-				# create
-				$this->add($values);
-			}
-		}
-	}
-
-	/**
-	 * Form validation callback
-	 *
-	 * @param unknown $timestamp
-	 * @return boolean date_parse_from_format returns array (size=12)
-	 *         'year' => int 2015
-	 *         'month' => int 11
-	 *         'day' => int 5
-	 *         'hour' => int 13
-	 *         'minute' => int 20
-	 *         'second' => int 0
-	 *         'fraction' => boolean false
-	 *         'warning_count' => int 0
-	 *         'warnings' =>
-	 *         array (size=0)
-	 *         empty
-	 *         'error_count' => int 0
-	 *         'errors' =>
-	 *         array (size=0)
-	 *         empty
-	 *         'is_localtime' => boolean false
-	 */
-	public function valid_timestamp($ts) {
-		if ($ts == '') {
-	        return true;
-	    }
-	    $parsed = date_parse_from_format ( translation ( "format_timestamp" ), $ts );
-
-		if (isset ( $parsed ['error_count'] ) && $parsed ['error_count']) {
-			$this->form_validation->set_message ( 'valid_timestamp', translation ( 'valid_timestamp' ) );
-			return FALSE;
-		}
-		$year = $parsed ['year'];
-		$month = $parsed ['month'];
-		$day = $parsed ['day'];
-		$hour = $parsed ['hour'];
-		$minute = $parsed ['minute'];
-		$second = $parsed ['second'];
-		$timestamp = "$year-$month-$day $hour:$minute:$second";
-		return $timestamp;
-	}
+        if (isset($parsed ['error_count']) && $parsed ['error_count']) {
+            $this->form_validation->set_message('valid_timestamp', translation('valid_timestamp'));
+            return FALSE;
+        }
+        $year = $parsed ['year'];
+        $month = $parsed ['month'];
+        $day = $parsed ['day'];
+        $hour = $parsed ['hour'];
+        $minute = $parsed ['minute'];
+        $second = $parsed ['second'];
+        $timestamp = "$year-$month-$day $hour:$minute:$second";
+        return $timestamp;
+    }
 
     /**
      *
      * @param unknown $time
      */
-	public function valid_time($time) {
-	    return $time;
-	}
+    public function valid_time($time) {
+        return $time;
+    }
 
-	/**
-	 *
-	 * @param unknown $time
-	 */
-	public function valid_date($date) {
-	    if ($date == '') {
-	        return true;
-	    }
-		$parsed = date_parse_from_format ( translation ( "format_date" ), $date );
+    /**
+     *
+     * @param unknown $time
+     */
+    public function valid_date($date) {
+        if ($date == '') {
+            return true;
+        }
+        $parsed = date_parse_from_format(translation("format_date"), $date);
 
-		if (isset ( $parsed ['error_count'] ) && $parsed ['error_count']) {
-			$this->form_validation->set_message ( 'valid_date', translation ( 'valid_date' ) );
-			return FALSE;
-		}
-		$year = $parsed ['year'];
-		$month = $parsed ['month'];
-		$day = $parsed ['day'];
+        if (isset($parsed ['error_count']) && $parsed ['error_count']) {
+            $this->form_validation->set_message('valid_date', translation('valid_date'));
+            return FALSE;
+        }
+        $year = $parsed ['year'];
+        $month = $parsed ['month'];
+        $day = $parsed ['day'];
 
-		$result = "$year-$month-$day";
-		return $result;
-	}
+        $result = "$year-$month-$day";
+        return $result;
+    }
 
-	/**
-	 *
-	 * @param unknown $epoch
-	 */
-	public function valid_epoch($epoch) {
-	    $parsed = date_parse_from_format ( translation ( "format_epoch" ), $epoch );
-		if (isset ( $parsed ['error_count'] ) && $parsed ['error_count']) {
-			$this->form_validation->set_message ( 'valid_epoch', translation ( 'valid_epoch' ) );
-			return FALSE;
-		}
-		return strtotime($epoch);
-	}
+    /**
+     *
+     * @param unknown $epoch
+     */
+    public function valid_epoch($epoch) {
+        $parsed = date_parse_from_format(translation("format_epoch"), $epoch);
+        if (isset($parsed ['error_count']) && $parsed ['error_count']) {
+            $this->form_validation->set_message('valid_epoch', translation('valid_epoch'));
+            return FALSE;
+        }
+        return strtotime($epoch);
+    }
 
-	/**
-	 *
-	 * @param unknown $time
-	 */
-	public function valid_currency($currency) {
-	    return $currency;
-	}
-
+    /**
+     *
+     * @param unknown $time
+     */
+    public function valid_currency($currency) {
+        return $currency;
+    }
 }

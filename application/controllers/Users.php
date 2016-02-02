@@ -39,6 +39,7 @@ class Users extends MY_Controller {
 		'create' => array('first_name', 'last_name', 'username', 'company', 'email', 'phone', 'password', 'confirm-password'),
 		'edit' =>  array('first_name', 'last_name', 'email', 'username', 'phone', 'password', 'confirm-password', 'active', 'created_on', 'last_login')
 	);
+	var $server_side = true;
 
 	/**
 	 * Constructor
@@ -115,31 +116,5 @@ class Users extends MY_Controller {
 			return FALSE;
 		}
 	}
-
-	/**
-	 * List of elements
-	 */
-	public function all() {
-
-	    $this->benchmark->mark('data_fetch_start');
-
-	    $data = array();
-	    $data['table_title'] = table_title($this->default_view);
-	    $select = $this->model->select_all($this->default_view);
-
-	    $attrs['fields'] = $this->table_fields;
-	    $attrs['controller'] = $this->controller;
-	    $data['controller'] = $this->controller;
-	    $data['data_table'] = datatable($this->default_view, array(), $attrs);
-
-	    $this->benchmark->mark('data_fetch_end');
-
-	    $this->benchmark->mark('load_view_start');
-	    $this->load->view('default_table', $data);
-
-	    $this->benchmark->mark('load_view_end');
-	    $this->benchmark->mark('controller_end');
-	}
-
 
 }

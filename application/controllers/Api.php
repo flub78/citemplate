@@ -73,36 +73,21 @@ class Api extends REST_Controller {
         $this->logger->debug("\$iDisplayStart=$iDisplayStart, \$iDisplayLength=$iDisplayLength");
 
         if (!$id) {
-            $users = $this->model->select('users_view', array('image', 'username', 'email', 'active', 'created_on', 'last_login'), array(), array('format' => 'datatable'));
+            //$users = $this->model->select('users_view', array('image', 'username', 'email', 'active', 'created_on', 'last_login'), array(), array('format' => 'datatable'));
             $users = $this->model->select_all('users_view');
             // Check if the users data store contains users (in case the database result returns NULL)
             if ($users) {
                 // Set the response and exit
 
                 $attrs = ['controller' => 'users',
-                        array('image', 'username', 'email', 'active', 'created_on', 'last_login', '__edit', '__delete')
+                        'fields' => array('image', 'username', 'email', 'active', 'created_on', 'last_login', '__edit', '__delete'),
+                        'no_header' => true
                 ];
                 $datatable = datatable('users_view', $users, $attrs);
-                $users = [
-                        ["Admin istrator",
-       "administrator",
-      "admin@admin.com",
-       "1",
-       "1268889823",
-      "1268889823", "edit", "delete"],
-                        ["Admin Admin",
-      "admin",
-       "admin@gmail.com",
-       "1",
-      "1454218673",
-       "1454271347", "edit", "delete"]
-                ];
-//                     'status' => true,
                 $this->response(array(
-                    "sEcho" => "0",
                     "iTotalRecords" => "2",
                     "iTotalDisplayRecords" => "2",
-                    'aaData' => $users), REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+                    'aaData' => $datatable), REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
             } else {
                 // Set the response and exit
                 $this->response([

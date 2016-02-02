@@ -30,7 +30,7 @@ $this->load->library ( 'table' );
 <body>
     <?php // hidden contrller url for java script access
 		echo form_hidden ( 'controller_url', controller_url ( $controller ));
-        echo form_hidden('server_side', false);
+        echo form_hidden('server_side', $server_side);
 		?>
 
 	<div class="container-fluid starter-template">
@@ -82,15 +82,22 @@ $this->load->library ( 'table' );
 $(document).ready(function(){
 
 	var server_side = $('[name="server_side"]').val();
-	// alert('server_side=' + server_side);
+	var ajax_url = "api/user";
 
-    var table = $('.display').dataTable( {
-        stateSave: true,
-        dom: 'Blfrtip',
-        "oLanguage": olanguage,
-        "bServerSide": server_side,
-        "sAjaxSource": "api/user?datatable=1",
-        buttons: [
+	if (server_side) {
+		// alert("Server side !!!");
+		var table = $('.display').dataTable( {
+            stateSave: true,
+            dom: 'Blfrtip',
+            "oLanguage": olanguage,
+            "bServerSide": true,
+            "ajax": {
+                "url": ajax_url,
+                "data": function ( d ) {
+                   d.datatable = 1;
+                }
+            },
+            buttons: [
                   'excel', 'pdf', 'print',
                   {
                       text: 'Create',
@@ -100,7 +107,26 @@ $(document).ready(function(){
                       }
                   }
               ]
-    });
+        });
+	} else {
+
+        var table = $('.display').dataTable( {
+            stateSave: true,
+            dom: 'Blfrtip',
+            "oLanguage": olanguage,
+
+            buttons: [
+                  'excel', 'pdf', 'print',
+                  {
+                      text: 'Create',
+                      action: function ( e, dt, node, config ) {
+                          var url = $('input[name="controller_url"]').val() + '/create';
+                          window.location.href = url;
+                      }
+                  }
+              ]
+        });
+	}
 
     new $.fn.dataTable.Buttons( table, {
         buttons: [

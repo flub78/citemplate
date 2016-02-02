@@ -108,10 +108,12 @@ if (! function_exists ( 'datatable' )) {
 			return "";
 		};
 
+		$res = array();
 		// insert heading row
-		$res = array (
-				heading_row ( $table, $fields )
-		);
+		if (isset($attrs['no_header']) && $attrs['no_header']) {
+		} else {
+		    $res[] = heading_row ( $table, $fields );
+		}
 
 		foreach ( $data as $elt ) {
 
