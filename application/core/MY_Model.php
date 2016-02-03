@@ -243,15 +243,21 @@ class MY_Model extends CI_Model {
      * @param $where selection
      * @return objet La liste
      */
-    public function select_all($table, $where = array (), $order_by = "") {
+    public function select_all($table, $where = array (), $attrs = array(), $order_by = "") {
         if (! $table) {
             throw new Exception("select_all called with no table");
         }
 
+        $start = isset($attrs['start']) ? $attrs['start'] : 0;
+        $length = isset($attrs['length']) ? $attrs['length'] : 1000000000;
+
         if ($order_by) {
-            return $this->db->from($table)->where($where)->order_by($order_by)->get()->result_array();
+            return $this->db->from($table)->where($where)->limit($length, $start)->order_by($order_by)->get()->result_array();
         } else {
-            return $this->db->from($table)->where($where)->get()->result_array();
+            $res = $this->db->from($table)->where($where)->limit($length, $start)->get()->result_array();
+            # $this->logger->debug("model start=$start, length=$length, count=" . count($res));
+
+            return $res;
         }
     }
 
@@ -262,8 +268,10 @@ class MY_Model extends CI_Model {
      * @param array $where
      * @param array $attrs
      */
-    public function select($table, $key, $where = array(), $attrs = array()) {
-        $results = $this->db->select($key)->from($table)->where($where)->get()->result_array();
+    public function select($table, $cols, $where = array(), $attrs = array()) {
+        $start = isset($attrs['start']) ? $attrs['start'] : 0;
+        $length = isset($attrs['length']) ? $attrs['length'] : 1000000000;
+        $results = $this->db->select($cols)->from($table)->where($where)->limit($length, $start)->get()->result_array();
         return $results;
     }
 

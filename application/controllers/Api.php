@@ -73,20 +73,28 @@ class Api extends REST_Controller {
         $this->logger->debug("\$iDisplayStart=$iDisplayStart, \$iDisplayLength=$iDisplayLength");
 
         if (!$id) {
+            // return several elements
+
+            $start = $this->get('start') ? $this->get('start') : 0;
+            $length = $this->get('length') ? $this->get('length') : 10;
+            $this->logger->debug("\$start=$start, \$length=$length");
+
             //$users = $this->model->select('users_view', array('image', 'username', 'email', 'active', 'created_on', 'last_login'), array(), array('format' => 'datatable'));
-            $users = $this->model->select_all('users_view');
+            $users = $this->model->select_all('users_view', array(), array('start' => $start, 'length' => $length));
             // Check if the users data store contains users (in case the database result returns NULL)
             if ($users) {
                 // Set the response and exit
 
+                $total = $this->model->count('users_view');
                 $attrs = ['controller' => 'users',
                         'fields' => array('image', 'username', 'email', 'active', 'created_on', 'last_login', '__edit', '__delete'),
                         'no_header' => true
                 ];
                 $datatable = datatable('users_view', $users, $attrs);
+                $count = count($users);
                 $this->response(array(
-                    "iTotalRecords" => "2",
-                    "iTotalDisplayRecords" => "2",
+                    "iTotalRecords" => $count,
+                    "iTotalDisplayRecords" => $total,
                     'aaData' => $datatable), REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
             } else {
                 // Set the response and exit

@@ -92,6 +92,16 @@ class Welcome extends CI_Controller {
 			$group = array('1'); // Sets user to admin. No need for array('1', '2') as user is always set to member by default
 
 			$userid = $this->ion_auth->register($username, $password, $email, $additional_data, $group);
+
+			for ($i = 0; $i < 100; $i++) {
+                $additional_data = array (
+                        'first_name' => $username . "_firstname_$i",
+                        'last_name' => $username . "_name_$i"
+                );
+                $username = "user_$i";
+                $userid = $this->ion_auth->register($username, $username, $username . "@gmail.com",
+                        $additional_data, $group);
+            }
 			if ($userid) {
 			    $this->logger->info("Default user $userid created");
 			} else {

@@ -6,7 +6,10 @@ can be derived really fast.
 ============================================================================================================================    
 
 Todo:
- 
+
+    * Search on server_side Ajax API
+    * sort per columns on Ajax API
+    
     * Manage dates with default values
 
     * Replace ciauth by ion_auth   
@@ -46,8 +49,8 @@ Todo:
     * emails with attachements
     * Template PDF generation or whole page export
     * Shopping cart and paiement
-    * REST interface
-    * REST service access
+    * REST interface key access
+    * REST service access (client)
     * QR code, ticket impression
 
 	if the performance impact is significant, replace it by a template mechanism
