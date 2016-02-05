@@ -49,6 +49,7 @@ $this->load->library ( 'table' );
 					<p>Base url = <?= $base_url?></p>
 					<p>Site url = <?= $site_url?></p>
 					<p>Current url = <?= $current_url?></p>
+					<p>Current directory = <?= $cwd?></p>
 
 						<?php
 						echo heading("List of tables", 2);

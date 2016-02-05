@@ -19,8 +19,18 @@
  * @filesource Metadata.php
  * @package controllers
  * Development tools controler
+ *
+ * It is just a controller for experiments and to display information useful
+ * during development. Could be disabled in production.
+ *
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+
+// First, include Requests
+include(APPPATH . '/third_party/Requests.php');
+
+// Next, make sure Requests can load internal classes
+Requests::register_autoloader();
 
 /**
  * Development controller
@@ -42,7 +52,7 @@ class Dev extends MY_Controller {
 	}
 
 	/**
-	 * Display info
+	 * Display execution and database schema info
 	 */
 	public function info()
 	{
@@ -53,6 +63,7 @@ class Dev extends MY_Controller {
 		$data['base_url'] = base_url();
 		$data['site_url'] = site_url();
 		$data['current_url'] = current_url();
+		$data['cwd'] = getcwd();
 
 		$select = $this->model->select_all('information_schema.tables');
         $header = array (
@@ -120,7 +131,9 @@ LIMIT 0 , 30
 
 	/*
 	 * Convert a language file into a hash
-	*/
+	 *
+	 * Used to compare entries of two languages
+	 */
 	private function to_hash ($filename) {
 		include($filename);
 		return $lang;
@@ -135,6 +148,20 @@ LIMIT 0 , 30
 		var_dump($fields);
 	}
 
+	/**
+	 * Experiment on REST client
+	 */
+	public function rest_client() {
+	    echo "REST client";
+
+	    // Now let's make a request!
+	    $request = Requests::get('http://httpbin.org/get', array('Accept' => 'application/json'));
+
+	    // Check what we received
+// 	    var_dump($request->status_code);
+// 	    var_dump($request->headers);
+	    var_dump($request->body);
+	}
 
 	/*
 	 * Check that the support for a language is complete

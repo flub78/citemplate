@@ -106,10 +106,6 @@ $menu_dev = array (
 						'url' => "http://localhost/citemplate/user_guide/"
 				),
 				array (
-						'label' => "Metadata",
-						'url' => controller_url ( "metadata/tables" )
-				),
-				array (
 						'label' => "Check French",
 						'url' => controller_url("dev/check_lang/french/1"),
 				        'role' => 'admin'
@@ -128,6 +124,15 @@ $menu_dev = array (
 		                'label' => "REST",
 		                'url' => controller_url("rest_server"),
 		                'role' => 'admin'
+		        ),
+		        array (
+		                'label' => "REST client",
+		                'url' => controller_url("dev/rest_client"),
+		                'role' => 'admin'
+		        ),
+		        array (
+		                'label' => "Flight logs",
+		                'url' => controller_url("flight_logs/select")
 		        ),
 
 		)

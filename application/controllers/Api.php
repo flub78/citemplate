@@ -23,7 +23,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
-require APPPATH . '/libraries/REST_Controller.php';
+require APPPATH . '/third_party/REST_Controller.php';
 
 /**
  * Users controller
@@ -61,6 +61,18 @@ class Api extends REST_Controller {
     }
 
     /**
+     * Vérifie qu'un des éléments du tableau match le pattern
+     */
+    function matching_row($row, $pattern) {
+        foreach ( $row as $elt ) {
+            if (preg_match('/' . $pattern . '/', $elt, $matches)) {
+                return TRUE;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Fetch users
      */
     function user_get() {
@@ -68,9 +80,7 @@ class Api extends REST_Controller {
         $this->logger->debug('user_get ' . var_export($_GET, true));
 
         $id = $this->get('id');
-        $iDisplayStart = $this->get('iDisplayStart');
-        $iDisplayLength = $this->get('iDisplayLength');
-        $this->logger->debug("\$iDisplayStart=$iDisplayStart, \$iDisplayLength=$iDisplayLength");
+        $search = $this->get('search');
 
         if (!$id) {
             // return several elements
@@ -79,8 +89,10 @@ class Api extends REST_Controller {
             $length = $this->get('length') ? $this->get('length') : 10;
             $this->logger->debug("\$start=$start, \$length=$length");
 
-            //$users = $this->model->select('users_view', array('image', 'username', 'email', 'active', 'created_on', 'last_login'), array(), array('format' => 'datatable'));
-            $users = $this->model->select_all('users_view', array(), array('start' => $start, 'length' => $length));
+            $users = $this->model->select('users_view', array('id', 'image', 'username', 'email', 'active', 'created_on', 'last_login'), array(),
+                    array('format' => 'datatable', 'start' => $start, 'length' => $length));
+            //$users = $this->model->select_all('users_view', array(), array('start' => $start, 'length' => $length));
+
             // Check if the users data store contains users (in case the database result returns NULL)
             if ($users) {
                 // Set the response and exit
@@ -91,7 +103,18 @@ class Api extends REST_Controller {
                         'no_header' => true
                 ];
                 $datatable = datatable('users_view', $users, $attrs);
-                $count = count($users);
+
+                if ($search['value'] && false) {
+                    $result = array ();
+                    foreach ($datatable as $row) {
+                        if ($this->matching_row($row, $search['value'])) {
+                            $result [] = $row;
+                        }
+                    }
+                } else {
+                    $result = $datatable;
+                }
+                $count = count($result);
                 $this->response(array(
                     "iTotalRecords" => $count,
                     "iTotalDisplayRecords" => $total,

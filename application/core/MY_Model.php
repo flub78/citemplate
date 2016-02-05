@@ -248,17 +248,21 @@ class MY_Model extends CI_Model {
             throw new Exception("select_all called with no table");
         }
 
-        $start = isset($attrs['start']) ? $attrs['start'] : 0;
-        $length = isset($attrs['length']) ? $attrs['length'] : 1000000000;
+        $this->db->from($table)->where($where);
+        if (isset($attrs['start']) && isset($attrs['length'])) {
+            $start =  $attrs['start'];
+            $length =  $attrs['length'];
+            $this->db->limit($length, $start);
+        }
 
         if ($order_by) {
-            return $this->db->from($table)->where($where)->limit($length, $start)->order_by($order_by)->get()->result_array();
-        } else {
-            $res = $this->db->from($table)->where($where)->limit($length, $start)->get()->result_array();
-            # $this->logger->debug("model start=$start, length=$length, count=" . count($res));
-
-            return $res;
+            $res = $this->db->order_by($order_by);
         }
+
+        $res = $this->db->get()->result_array();
+        # $this->logger->debug("model start=$start, length=$length, count=" . count($res));
+
+        return $res;
     }
 
     /**
@@ -269,9 +273,16 @@ class MY_Model extends CI_Model {
      * @param array $attrs
      */
     public function select($table, $cols, $where = array(), $attrs = array()) {
-        $start = isset($attrs['start']) ? $attrs['start'] : 0;
-        $length = isset($attrs['length']) ? $attrs['length'] : 1000000000;
-        $results = $this->db->select($cols)->from($table)->where($where)->limit($length, $start)->get()->result_array();
+
+        $this->db->select($cols);
+        $this->db->from($table);
+        $this->db->where($where);
+        if (isset($attrs['start']) && isset($attrs['length'])) {
+            $start =  $attrs['start'];
+            $length =  $attrs['length'];
+            $this->db->limit($length, $start);
+        }
+        $results = $this->db->get()->result_array();
         return $results;
     }
 
