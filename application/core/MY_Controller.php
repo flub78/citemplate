@@ -227,7 +227,7 @@ class MY_Controller extends CI_Controller {
             $name = field_name($this->default_table, $field);
             $label = field_label_text($this->default_table, $field);
             $rules = rules($this->default_table, $field, $action);
-            // echo "name=$name, label=$label, rules=$rules";
+            echo "name=$name, label=$label, rules=$rules" .br();
 
             if ($rules) {
                 $this->form_validation->set_rules($name, $label, $rules);
@@ -334,7 +334,7 @@ class MY_Controller extends CI_Controller {
         $month = $parsed ['month'];
         $day = $parsed ['day'];
 
-        $result = "$year-$month-$day";
+        $result = sprintf("%04d-%02d-%02d", $year, $month, $day);
         return $result;
     }
 

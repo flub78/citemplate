@@ -163,6 +163,13 @@ LIMIT 0 , 30
 	    var_dump($request->body);
 	}
 
+	function echo_params () {
+	    echo "echo_params" . br();
+	    echo "\$_SERVER"; var_dump($_SERVER);
+	    echo "\$_GET"; var_dump($_GET);
+	    echo "\$_POST"; var_dump($_POST);
+	}
+
 	/*
 	 * Check that the support for a language is complete
 	*/

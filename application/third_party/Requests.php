@@ -191,8 +191,8 @@ class Requests {
 	/**
 	 * Send a GET request
 	 */
-	public static function get($url, $headers = array(), $options = array()) {
-		return self::request($url, $headers, null, self::GET, $options);
+	public static function get($url, $headers = array(), $data = array(), $options = array()) {
+		return self::request($url, $headers, $data, self::GET, $options);
 	}
 
 	/**

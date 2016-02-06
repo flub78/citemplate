@@ -40,15 +40,15 @@
 
 		<!--   form class="form-signin" -->
 		<?php echo form_open('welcome/login', array("class" => "form-signin")); ?>
-		
+
 			<h2 class="form-signin-heading"><?= translation('login_title'); ?></h2>
 
-			<label for="inputEmail" class="sr-only"><?= translation("login_user_label");?></label>
+			<label for="login_value" class="sr-only"><?= translation("login_user_label");?></label>
 		    <input
 				type="text" id="login_value" name="login_value" class="form-control"
-				placeholder="<?= translation('login_user_label'); ?>" required autofocus /> 
+				placeholder="<?= translation('login_user_label'); ?>" required autofocus />
 			<label
-				for="inputPassword" class="sr-only"><?= translation('login_password_label'); ?></label>
+				for="password" class="sr-only"><?= translation('login_password_label'); ?></label>
 			<input
 				type="password" id="password" name="password" class="form-control"
 				placeholder="<?= translation('login_password_label'); ?>" required />
