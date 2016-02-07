@@ -30,7 +30,9 @@ $this->load->library ( 'table' );
 <body>
     <?php // hidden contrller url for java script access
 		echo form_hidden ( 'controller_url', controller_url ( $controller ));
-        echo form_hidden('server_side', $server_side);
+		if (isset($server_side)) {
+            echo form_hidden('server_side', $server_side);
+		}
 		?>
 
 	<div class="container-fluid starter-template">
@@ -46,13 +48,14 @@ $this->load->library ( 'table' );
 			    <?= heading($table_title, 3); ?>
 
 				<div class="row">
+					<div class="col-lg-6 col-lg-offset-4 text-error">
+						<p class="text"><?php echo isset($message) ? $message : ""; ?></p>
+					</div>
+				</div>
+				<div class="row">
 					<article class="col-sm-12 row">
 						<?php
-						$template = array (
-								'table_open' => '<table class="display" cellspacing="0" width="100%">'
-						);
-						$this->table->set_template ( $template );
-						// var_dump($data_table);
+						$this->table->set_template ( array ('table_open' => '<table class="display" cellspacing="0" width="100%">') );
 						echo $this->table->generate ( $data_table );
 						?>
 					</article>

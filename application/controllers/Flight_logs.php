@@ -58,6 +58,7 @@ class Flight_logs extends MY_Controller {
         parent::__construct();
         // specific initialization
         $this->load->model('groups_model', 'model');
+        $this->lang->load('flight_logs');
     }
 
     /**
@@ -71,7 +72,7 @@ class Flight_logs extends MY_Controller {
     }
 
     /**
-     * Display the flight logs for a airfield and a date
+     * Display the flight logs for an airfield and a date
      */
     function display() {
 
@@ -94,6 +95,10 @@ class Flight_logs extends MY_Controller {
             $s = $this->input->post('s');
             $u = $this->input->post('u');
             $z = $this->input->post('z');
+
+            // TODO: translate the date depending on the languange
+            // date=2016-05-02 french for february
+            // English version
             $sdate = substr($d, 8, 2) . substr($d, 5, 2) . substr($d, 0, 4); // mise au format jjmmaaaa
 
             $url = "http://live.glidernet.org/flightlog";
@@ -102,13 +107,60 @@ class Flight_logs extends MY_Controller {
             $headers = array('Accept' => 'application/json');
             $request = Requests::get($url, $headers, $data);
 
-            // var_dump($request);
-            echo "success: " .  $request->success .br();
-            echo "code: " .  $request->status_code .br();
-            // echo "body: " . $request->body;
+            if (!$request->success) {
+                $data['title'] = "Connection error";
+                $data['message'] = "Error from $url" . br() . "Code = " . $request->status_code;
+                $this->load->view('message', $data);
+            } else {
+                $planche = json_decode($request->body, true);
 
-            $planche = json_decode($request->body, true);
-            var_dump($planche);
+                /**
+                 * array (size=5)
+                 'date' => string '05022016' (length=8)
+                 'airfield' => string 'LFNF' (length=4)
+                 'alt_setting' => string 'QFE' (length=3)
+                 'unit' => string 'm' (length=1)
+                 'flights' =>
+                 array (size=6)
+                 0 =>
+                 array (size=8)
+                 'plane' => string 'F-GMKA' (length=6)
+                 'glider' => string '' (length=0)
+                 'takeoff' => string '13.59' (length=5)
+                 'plane_landing' => string '16.17' (length=5)
+                 'glider_landing' => string '' (length=0)
+                 'plane_time' => string '02h17' (length=5)
+                 'glider_time' => string '-----' (length=5)
+                 'towplane_max_alt' => string '' (length=0)
+                 1 =>
+                 array (size=8)
+                 'plane' => string 'F-GORY' (length=6)
+                 'glider' => string 'F-CHGO' (length=6)
+                 'takeoff' => string '14.18' (length=5)
+                 'plane_landing' => string '14.26' (length=5)
+                 'glider_landing' => string '14.39' (length=5)
+                 'plane_time' => string '00h07' (length=5)
+                 'glider_time' => string '00h21' (length=5)
+                 'towplane_max_alt' => string '818' (length=3)
+
+                 */
+
+                $attrs ['fields'] = array('plane', 'glider', 'takeoff', 'plane_landing', 'glider_landing',
+                        'plane_time', 'glider_time', 'towplane_max_alt');
+                $data ['controller'] = $this->controller;
+                $data ['data_table'] = datatable('flight_logs', $planche['flights'], $attrs);
+                $data['table_title'] = 'Flight logs ' . $planche['airfield'];
+
+                $date = $planche['date'];
+                $day = substr($date, 0, 2);
+                $month = substr($date, 2, 2);
+                $year = substr($date, 4, 4);
+                $sdate = "$day/$month/$year";
+                $data['message'] = "Date = " . $sdate;
+                $this->load->view('default_table', $data);
+
+            }
+
 
          }
     }

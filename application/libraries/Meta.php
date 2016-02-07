@@ -255,7 +255,8 @@ class Meta {
 
         // check that the table exists in the database
         if (! $this->table_exists($table)) {
-            throw new Exception("Table $table does not exist");
+            // throw new Exception("Table $table does not exist");
+            return array('table' => $table, 'field' => $field);
         }
 
         // return the cache value
@@ -266,7 +267,6 @@ class Meta {
         // if it is not a view
         if (! $this->is_a_view($table)) {
             // change nothing
-            // return array($table, $field);
             return array('table' => $table, 'field' => $field);
         }
 
@@ -650,7 +650,8 @@ class Meta {
         $field = $reference ['field'];
 
         if (! $this->table_exists($table)) {
-            throw new Exception("Table $table does not exist");
+            // throw new Exception("Table $table does not exist");
+            return $value;
         }
 
         $attrs = array ();

@@ -58,9 +58,6 @@ if (! function_exists ( 'heading_row' )) {
 	function heading_row($table, $fields = array()) {
 		$CI = & get_instance ();
 
-		# check if the table exists
-		if (!$CI->metadata->table_exists($table)) {return array();};
-
 		# when fields is not specified return a whole list
 		if (count ( $fields ) == 0) {
 			// default, all fields
@@ -104,9 +101,6 @@ if (! function_exists ( 'datatable' )) {
 		$controller = (array_key_exists ( 'controller', $attrs )) ? $attrs ['controller'] : $table;
 
 		$CI = & get_instance ();
-		if (!$CI->metadata->table_exists($table)) {
-			return "";
-		};
 
 		$res = array();
 		// insert heading row
@@ -115,11 +109,22 @@ if (! function_exists ( 'datatable' )) {
 		    $res[] = heading_row ( $table, $fields );
 		}
 
+		if (!$data) {
+		    return $res;
+		}
+
 		foreach ( $data as $elt ) {
 
-			$id = $elt [table_key ( $table )];
-			$image = $CI->model->image($table, $id);
-			// echo "image=$image"; exit;
+		    $key = table_key ( $table );
+		    if ($key) {
+		        $id = $elt [$key];
+		        // image is deprecated. In the future the column should exist in the table or view
+		        $image = $CI->model->image($table, $id);
+		    } else {
+		        $id = '';
+		        $image = '';
+		    }
+
 			// Select useful columns
 			$row = array ();
 			foreach ( $fields as $field ) {
@@ -135,7 +140,6 @@ if (! function_exists ( 'datatable' )) {
 			// Add actions and special field
 			$res [] = $row;
 		}
-
 		return $res;
 	}
 }
