@@ -65,7 +65,8 @@ class Api extends REST_Controller {
      */
     function matching_row($row, $pattern) {
         foreach ( $row as $elt ) {
-            if (preg_match('/' . $pattern . '/', $elt, $matches)) {
+//             if (preg_match('/' . $pattern . '/', $elt, $matches)) {
+            if (stripos($elt, $pattern) !== false) {
                 return TRUE;
             }
         }
@@ -76,62 +77,100 @@ class Api extends REST_Controller {
      * Fetch users
      */
     function user_get() {
-
         $this->logger->debug('user_get ' . var_export($_GET, true));
 
         $id = $this->get('id');
-        $search = $this->get('search');
+        $searchArray = $this->get('search');
+        $search = $searchArray ['value'];
 
-        if (!$id) {
+        // var_dump($search);
+
+        if (! $id) {
             // return several elements
 
             $start = $this->get('start') ? $this->get('start') : 0;
             $length = $this->get('length') ? $this->get('length') : 10;
             $this->logger->debug("\$start=$start, \$length=$length");
 
-            $users = $this->model->select('users_view', array('id', 'image', 'username', 'email', 'active', 'created_on', 'last_login'), array(),
-                    array('format' => 'datatable', 'start' => $start, 'length' => $length));
-            //$users = $this->model->select_all('users_view', array(), array('start' => $start, 'length' => $length));
+            $attrs = array (
+                    'format' => 'datatable'
+            );
+            if (! $search) {
+                // pagination is done by the database only if there is no search
+                $attrs ['start'] = $start;
+                $attrs ['length'] = $length;
+            }
+
+            $users = $this->model->select('users_view', array (
+                    'id',
+                    'image',
+                    'username',
+                    'email',
+                    'active',
+                    'created_on',
+                    'last_login'
+            ), array (), $attrs);
 
             // Check if the users data store contains users (in case the database result returns NULL)
             if ($users) {
-                // Set the response and exit
 
+                // Set the response and exit
                 $total = $this->model->count('users_view');
-                $attrs = ['controller' => 'users',
-                        'fields' => array('image', 'username', 'email', 'active', 'created_on', 'last_login', '__edit', '__delete'),
+                $attrs = [
+                        'controller' => 'users',
+                        'fields' => array (
+                                'image',
+                                'username',
+                                'email',
+                                'active',
+                                'created_on',
+                                'last_login',
+                                '__edit',
+                                '__delete'
+                        ),
                         'no_header' => true
                 ];
                 $datatable = datatable('users_view', $users, $attrs);
 
-                if ($search['value'] && false) {
+                if ($search) {
                     $result = array ();
-                    foreach ($datatable as $row) {
-                        if ($this->matching_row($row, $search['value'])) {
-                            $result [] = $row;
+                    $iFilteredTotal = 0;
+                    foreach ( $datatable as $row ) {
+                        if ($this->matching_row($row, $search)) {
+                            $iFilteredTotal ++;
+                            // in the window ?
+                            if (($iFilteredTotal >= $start) && ($iFilteredTotal < $start + $length)) {
+                                $result [] = $row;
+                            }
                         }
                     }
                 } else {
+                    $iFilteredTotal = $total;
                     $result = $datatable;
                 }
                 $count = count($result);
-                $this->response(array(
-                    "iTotalRecords" => $count,
-                    "iTotalDisplayRecords" => $total,
-                    'aaData' => $datatable), REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+                $this->response(array (
+                        "iTotalRecords" => $count,
+                        "iTotalDisplayRecords" => $iFilteredTotal,
+                        'aaData' => $result
+                ), REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
             } else {
+
                 // Set the response and exit
                 $this->response([
                         'status' => FALSE,
                         'message' => 'No users were found'
                 ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
             }
+
         } else {
+            // look for one element
             $user = $this->model->get_by_id('users_view', 'id', $id);
             if ($user) {
                 $this->response([
-                    'status' => true,
-                    'aaData' => $user], REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+                        'status' => true,
+                        'aaData' => $user
+                ], REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
             } else {
                 $this->response([
                         'status' => FALSE,
