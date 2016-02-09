@@ -36,6 +36,7 @@ class DatabaseMgt extends MY_Controller {
 	function __construct() {
 		parent :: __construct();
 		$this->load->library('database');
+	    $this->load->model('crud_model', 'model');
 	}
 
 	/**
@@ -140,7 +141,12 @@ class DatabaseMgt extends MY_Controller {
 	 * Restore to factory configuration
 	 */
 	function reset() {
+	    $this->logger->info("Reset database");
 		$this->database->drop_all ();
+
+		$tables = $this->model->count('information_schema.tables');
+		$views = $this->model->count('information_schema.views');
+		$this->logger->info("After database reset, tables=$tables, views=$views");
 
 		// after database reset nothing works any more
 		// so we must logout so a new installation is triggered

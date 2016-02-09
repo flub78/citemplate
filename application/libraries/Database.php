@@ -43,7 +43,7 @@ class Database  {
 	);
 
 	protected $application_views = array (
-	        'users_groups_view'
+	        'users_groups_view', 'users_view'
 	);
 
 	protected $defaut_list = array (
@@ -125,15 +125,25 @@ class Database  {
 	 * Drop all the tables
 	*/
 	public function drop_all () {
-	    $this->CI->db->query('SET FOREIGN_KEY_CHECKS=0;');
-		foreach ($this->application_tables as $table) {
-			$this->CI->dbforge->drop_table($table);
-		}
-		foreach ($this->application_views as $table) {
-		    $sql = "DROP VIEW `$table`";
-		    $this->CI->db->query($sql);
-		}
-		$this->CI->db->query('SET FOREIGN_KEY_CHECKS=1;');
+	    $database = $this->CI->db->database;
+	    if ($this->CI->dbforge->drop_database($database))
+	    {
+	        echo "Database $database deleted!" . br();
+	    }
+	    if ($this->CI->dbforge->create_database($database))
+	    {
+	        echo "Database $database created!" . br();
+	    }
+ 	    exit;
+// 	    $this->CI->db->query('SET FOREIGN_KEY_CHECKS=0;');
+// 		foreach ($this->application_tables as $table) {
+// 			$this->CI->dbforge->drop_table($table);
+// 		}
+// 		foreach ($this->application_views as $table) {
+// 		    $sql = "DROP VIEW `$table`";
+// 		    $this->CI->db->query($sql);
+// 		}
+// 		$this->CI->db->query('SET FOREIGN_KEY_CHECKS=1;');
 	}
 
 	public function sql ($sql, $return_result = false) {

@@ -69,13 +69,13 @@ class Welcome extends CI_Controller {
 			# Tables are not defined, install the initial database
 			$this->logger->info('No tables in database, trigger automatic installation');
 
-			# Removed, I'll try to do all database structure changes though migrations
-			# I keep thecode just in case
-// 			$sqlfile = getcwd() . "/install/structure.sql";
-// 			$sql = file_get_contents($sqlfile);
-// 			$res = $this->database->sql($sql);
-// 			$this->logger->info("sql installation script result = " . var_export($res, true));
-
+			# Can be used to import database from previous application
+			$sqlfile = getcwd() . "/install/database.sql";
+			if (file_exists($sqlfile)) {
+			    $sql = file_get_contents($sqlfile);
+			    $res = $this->database->sql($sql);
+			    $this->logger->info("sql installation script result = " . var_export($res, true));
+			}
 			// check migration especially ion_auth tables
 			$this->check_migration();
 

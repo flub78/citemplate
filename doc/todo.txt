@@ -7,7 +7,6 @@ can be derived really fast.
 
 Todo:
 
-    * Search on server_side Ajax API
     * sort per columns on Ajax API
     
     * Manage dates with default values
@@ -30,7 +29,8 @@ Todo:
     * Installation: documentation
 
     * Metadata
-        * jointure
+        * short and long texts
+        * selector with filters
         * currency
         * attachement, pictures
         * Automated filtering
@@ -50,7 +50,6 @@ Todo:
     * Template PDF generation or whole page export
     * Shopping cart and paiement
     * REST interface key access
-    * REST service access (client)
     * QR code, ticket impression
 
 	if the performance impact is significant, replace it by a template mechanism
@@ -66,8 +65,20 @@ May be later:
         - set it in javascript (not so easy)
         - set the display so that menu and body do not overlap
 
+    Installation with
+        * welcome screen
+        * licence agrement
+        * check of the writable directories
+        * database configuration
+        * summary and acceptance
+        * done screen
+        
 ============================================================================================================================    
 Done:
+
+    * Search on server_side Ajax API
+
+    * REST service access (client)
 
     * Installation
     * replace authentication library
