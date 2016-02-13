@@ -22,3 +22,8 @@ Development principles:
 * The project is fanatically DRY (do not repeat yourself). It is based on a generic controller and model from which are derived the actual controllers and models. Most simple functions can be derived from these controller and model without requiring additional code.
 * It is based on metadata, the program uses the database meta information to determine how to generate input fields or to display data. When the data contained into the database is not enough additional subtypes are managed (email is a subtype of varchar, currency is a subtype of decimal, etc)
 * Most of the complex database queries are stored directly into the database as views. That way complex processing can be performed by a relatively simple program.
+
+Git repo
+--------
+
+  [https://github.com/flub78/citemplate]
