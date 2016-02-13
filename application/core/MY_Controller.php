@@ -75,6 +75,7 @@ class MY_Controller extends CI_Controller {
 
         if ($this->server_side) {
             $select = array ();
+            $data ['ajax_url'] = $this->ajax_url;
         } else {
             $select = $this->model->select_all($this->default_view);
         }

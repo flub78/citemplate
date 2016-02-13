@@ -33,6 +33,9 @@ $this->load->library ( 'table' );
 		if (isset($server_side)) {
             echo form_hidden('server_side', $server_side);
 		}
+		if (isset($ajax_url)) {
+            echo form_hidden('ajax_url', $ajax_url);
+		}
 		?>
 
 	<div class="container-fluid starter-template">
@@ -85,7 +88,7 @@ $this->load->library ( 'table' );
 $(document).ready(function(){
 
 	var server_side = $('[name="server_side"]').val();
-	var ajax_url = "api/user";
+	var ajax_url = $('[name="ajax_url"]').val();
 
 	if (server_side) {
 		// alert("Server side !!!");

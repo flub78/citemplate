@@ -46,7 +46,7 @@ class Api extends REST_Controller {
         $this->methods ['user_post'] ['limit'] = 100; // 100 requests per hour per user/key
         $this->methods ['user_delete'] ['limit'] = 50; // 50 requests per hour per user/key
 
-        $this->load->model('users_model', 'model');
+        $this->load->model('crud_model', 'model');
 
         if (! $this->ion_auth->logged_in() && false) {
             // Set the response and exit
@@ -65,7 +65,6 @@ class Api extends REST_Controller {
      */
     function matching_row($row, $pattern) {
         foreach ( $row as $elt ) {
-//             if (preg_match('/' . $pattern . '/', $elt, $matches)) {
             if (stripos($elt, $pattern) !== false) {
                 return TRUE;
             }
@@ -77,7 +76,62 @@ class Api extends REST_Controller {
      * Fetch users
      */
     function user_get() {
-        $this->logger->debug('user_get ' . var_export($_GET, true));
+        $fields = array (
+                        'id',
+                        'image',
+                        'username',
+                        'email',
+                        'active',
+                        'created_on',
+                        'last_login'
+                );
+
+        $params = array (
+                'controller' => 'users',
+                'elt_name' => 'user',
+                'table' => 'users_view',
+                'fields' => $fields,
+                'display_fields' => array (
+                        'image',
+                        'username',
+                        'email',
+                        'active',
+                        'created_on',
+                        'last_login',
+                        '__edit',
+                        '__delete'
+                )
+        );
+        return $this->get_elements($params);
+    }
+
+    /**
+     * Fetch group
+     */
+    function group_get() {
+        $fields = array('name', 'description');
+
+        $params = array (
+                'controller' => 'groups',
+                'elt_name' => 'group',
+                'table' => 'groups',
+                'fields' => $fields,
+                'display_fields' => array('name', 'description', '__edit', '__delete')
+        );
+        return $this->get_elements($params);
+    }
+
+    /**
+     * Fetch something
+     */
+    protected function get_elements($params) {
+        $table = $params ['table'];
+        $fields = $params ['fields'];
+        $display_fields= $params ['display_fields'];
+        $elt_name = $params ['elt_name'];
+        $controller = $params ['controller'];
+
+        $this->logger->debug($elt_name . '_get ' . var_export($_GET, true));
 
         $id = $this->get('id');
         $searchArray = $this->get('search');
@@ -101,36 +155,19 @@ class Api extends REST_Controller {
                 $attrs ['length'] = $length;
             }
 
-            $users = $this->model->select('users_view', array (
-                    'id',
-                    'image',
-                    'username',
-                    'email',
-                    'active',
-                    'created_on',
-                    'last_login'
-            ), array (), $attrs);
+            $users = $this->model->select($table, $fields, array (), $attrs);
 
             // Check if the users data store contains users (in case the database result returns NULL)
             if ($users) {
 
                 // Set the response and exit
-                $total = $this->model->count('users_view');
+                $total = $this->model->count($table);
                 $attrs = [
-                        'controller' => 'users',
-                        'fields' => array (
-                                'image',
-                                'username',
-                                'email',
-                                'active',
-                                'created_on',
-                                'last_login',
-                                '__edit',
-                                '__delete'
-                        ),
+                        'controller' => $controller,
+                        'fields' => $display_fields,
                         'no_header' => true
                 ];
-                $datatable = datatable('users_view', $users, $attrs);
+                $datatable = datatable($table, $users, $attrs);
 
                 if ($search) {
                     $result = array ();
@@ -159,13 +196,12 @@ class Api extends REST_Controller {
                 // Set the response and exit
                 $this->response([
                         'status' => FALSE,
-                        'message' => 'No users were found'
+                        'message' => 'No '. $elt_name .'s were found'
                 ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
             }
-
         } else {
             // look for one element
-            $user = $this->model->get_by_id('users_view', 'id', $id);
+            $user = $this->model->get_by_id($table, 'id', $id);
             if ($user) {
                 $this->response([
                         'status' => true,
@@ -174,7 +210,7 @@ class Api extends REST_Controller {
             } else {
                 $this->response([
                         'status' => FALSE,
-                        'message' => 'Invalid user'
+                        'message' => 'Invalid ' . $elt_name
                 ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
             }
         }

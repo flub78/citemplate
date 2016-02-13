@@ -32,6 +32,8 @@ class Groups extends MY_Controller {
 	var $controller = 'groups';
 	var $form_fields = array('name', 'description');
 	var $table_fields = array('name', 'description', '__edit', '__delete');
+	var $server_side = true;
+	var $ajax_url = "api/group"; # url to get new pages
 
 	/**
 	 * Constructor
