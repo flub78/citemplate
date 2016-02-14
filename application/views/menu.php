@@ -130,11 +130,6 @@ $menu_dev = array (
 		                'url' => controller_url("dev/rest_client"),
 		                'role' => 'admin'
 		        ),
-		        array (
-		                'label' => "Flight logs",
-		                'url' => controller_url("flight_logs/select")
-		        ),
-
 		)
 );
 
