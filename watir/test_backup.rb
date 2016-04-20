@@ -38,21 +38,20 @@ class TestBackup < ApplicationTest
     
     download_dir = ENV['HOME'] + '/Téléchargements'
     download_dir = @download_directory
-    # puts "download=" + download_dir   
     
     check(File.directory?(download_dir), "download dir #{download_dir} exists")
     
     d = DateTime.now
-    pattern = d.strftime("backup_%Y_%m_%d")
+    pattern = d.strftime("backup_%Y%m%d")
     
     pwd = Dir.getwd
     Dir.chdir(download_dir)   #=> 0
     
     files = Dir.glob("#{pattern}*.zip")
-    # puts files
-    
+        
     count = files.count
     files.each do |file|
+      puts "#\t\tdeleting #{file}"
       FileUtils.rm(file)
     end
     
@@ -67,7 +66,7 @@ class TestBackup < ApplicationTest
     
     files = Dir.glob("#{pattern}*.zip")
     count = files.count
-    check(count == 1, "one backup has been created")
+    check(count == 1, "one backup has been created: " + files[0])
     
     Dir.chdir(pwd) 
 
