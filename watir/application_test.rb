@@ -101,11 +101,11 @@ class ApplicationTest < MiniTest::Test
   # Assert with traces
   # --------------------------------------------------------------------------------
   def check(assertion, description = "")
-    puts "#\t\tassert: #{description}"
-    assert(assertion, description)
+    puts "\t# assert: " + self.class.name + " #{description}"
     if (!assertion)
-      self.screenshot('failed-' + DateTime.now.to_s + '-' + description)
+      self.screenshot('failed-' + DateTime.now.to_s + '-' + description + '.png')
     end
+    assert(assertion, description)
   end
 
   # --------------------------------------------------------------------------------
