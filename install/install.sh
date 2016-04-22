@@ -64,4 +64,4 @@ chmod -f 777 $PROJECT_DIR/uploads/restore
 find $PROJECT_DIR -type d -exec chmod -f a+wx {} \;
 chmod -f -R a+r $PROJECT_DIR
 
-
+return 0
