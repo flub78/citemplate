@@ -24,7 +24,7 @@ class Helper_metadata_test extends TestCase
 		$field = 'name';
 
 		$datatable = datatable('crud');
-		$expected = "";
+		$expected = array(0 => array());
 		$this->assertEquals($expected,
 			$datatable,
 			'check that datable return nothing on non existing tables'
