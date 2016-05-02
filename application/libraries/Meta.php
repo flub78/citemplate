@@ -499,9 +499,9 @@ class Meta {
      */
     function table_key($table) {
         if (! $this->table_exists($table)) {
-            return '';
+            # return '';
         }
-        return $this->table_keys [$table];
+        return isset($this->table_keys [$table]) ? $this->table_keys [$table] : '';
     }
 
     /**

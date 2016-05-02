@@ -119,7 +119,13 @@ if (! function_exists ( 'datatable' )) {
 		    if ($key) {
 		        $id = $elt [$key];
 		        // image is deprecated. In the future the column should exist in the table or view
-		        $image = $CI->model->image($table, $id);
+		        if (isset($elt['image'])) {
+		            $image = $elt['image'];
+		        } elseif (isset($CI->model)) {
+		            $image = $CI->model->image($table, $id);
+		        } else {
+		            $image = '';
+		        }
 		    } else {
 		        $id = '';
 		        $image = '';
