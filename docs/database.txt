@@ -1,0 +1,39 @@
+Database default model
+======================
+
+By default citemplate includes:
+
+The tables for authentication
+    * groups
+    * login_attemp
+    * users
+    * users_groups
+    
+and their views
+    * users_groups_views
+    * user_views
+
+It also include the table for database migration "migration"
+
+and two examples
+    * meta_test1 
+    * meta_test2
+    
+Note: better to name the views view_ to get them at the end by alphabetical order
+
+
+Installation
+------------
+
+    When no tables exist in the database
+    * the script intall/database.sql is executed
+    * then migration are executed.
+        It is recommended to install everything from migrations
+        
+    * then the initial user is created
+    
+    To create a gvv3 project from citemplate and GVV3 application, use the clone tool from rtf
+    cd rtf/tools
+    ruby meta.rb clone $HOME/git/citemplate $HOME/git/gvv3
+    ruby meta.rb clone $HOME/git/GVV3 $HOME/git/gvv3
+    

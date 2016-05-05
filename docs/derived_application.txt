@@ -1,0 +1,29 @@
+CITEMPLATE applications
+=======================
+
+Citemplate is supposed to contains the components common to several applications.
+
+@startuml
+class Citemplate {
+  
+}
+
+class GVV3 {
+  
+}
+Citemplate *--  GVV3 : is_based_on
+Citemplate "1" *-- "many" Applications : is_based_on
+
+@enduml
+
+So it is more convenient to manage them as separate projects.
+
+It is recommended that each application maintain its component in specific sub directories
+
+controller/application1/
+helpers/application1/
+libraires/application1/
+
+During the integration/bild process the two directories structure are merged to create the CodeIgniter structure and one file exists both in citemplate and the application, the application file overwrite the citemplate one.
+
+It is slightly complex, but it is the only way that I have found to minimize the redundencay between citempalte and its applications.
