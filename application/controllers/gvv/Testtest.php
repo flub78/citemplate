@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Test extends CI_Controller {
+class Testtest extends CI_Controller {
 
 	/**
 	 * Constructor
@@ -31,7 +31,7 @@ class Test extends CI_Controller {
 	 */
 	public function index()
 	{
-		echo "test";
+		echo "test application";
 	}
 
 
@@ -40,6 +40,6 @@ class Test extends CI_Controller {
 	 * Project about
 	 */
 	public function about() {
-		$this->load->view('about');
+		$this->load->view('gvv/about');
 	}
 }
