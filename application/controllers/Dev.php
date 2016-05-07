@@ -27,7 +27,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 // First, include Requests
-include(APPPATH . '/third_party/Requests.php');
+include_once(APPPATH . '/third_party/Requests.php');
 
 // Next, make sure Requests can load internal classes
 Requests::register_autoloader();

@@ -8,7 +8,7 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-include(APPPATH . '/third_party/Requests.php');
+require_once(APPPATH . '/third_party/Requests.php');
 
 // Next, make sure Requests can load internal classes
 Requests::register_autoloader();
@@ -39,7 +39,10 @@ class Api_controller_test extends TestCase
 		// var_dump($request->body);
 		if ($request->success) {
 			$json = json_decode($request->body, true);
-			// var_dump($json);
+// 			var_dump($json); exit;
+			$total = $json['iTotalRecords'];
+			$this->assertEquals($total, 10, "10 users");
+			$this->assertEquals($json['iTotalDisplayRecords'], 102, "iTotalDisplayRecords");
 		}
 		
 	}

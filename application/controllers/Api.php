@@ -23,7 +23,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
-require APPPATH . '/third_party/REST_Controller.php';
+require_once APPPATH . '/third_party/REST_Controller.php';
 
 /**
  * Users controller
