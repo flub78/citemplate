@@ -110,6 +110,8 @@
             <li><a href="<?php echo site_url('api/example/users?format=html'); ?>">Users</a> - get it in HTML (users?format=html)</li>
         </ol>
 
+		<h2>In api.php controller</h2>
+		REST server compatible with datatable are not absolutely pure ???
         <ol>
             <li><a href="<?php echo site_url('api/user'); ?>">My Users</a> - defaulting to JSON</li>
             <li><a href="<?php echo site_url('api/user?format=csv'); ?>">Users</a> - get it in CSV</li>

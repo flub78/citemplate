@@ -37,6 +37,7 @@ class Welcome extends CI_Controller {
 
 	/**
 	 * Check installation
+	 *   - file rights and directory structure
 	 *
 	 * Display errors when some are detected.
 	 *
