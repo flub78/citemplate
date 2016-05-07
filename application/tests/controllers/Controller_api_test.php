@@ -52,5 +52,10 @@ class Api_controller_test extends TestCase
 		$this->request('GET', ['Api', 'method_not_exist']);
 		$this->assertResponseCode(404);
 	}
+	
+	public function test_direct()
+	{
+		$this->ajaxRequest('GET', ['Api', 'user_get']);
+	}
 
 }
