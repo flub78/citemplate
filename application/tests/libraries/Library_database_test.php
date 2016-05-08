@@ -1,6 +1,6 @@
 <?php
 
-class Database_library_test extends TestCase
+class Library_Database_test extends TestCase
 {
     public function setUp()
     {

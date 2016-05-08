@@ -1,6 +1,6 @@
 <?php
 
-class Crud_model_test extends TestCase
+class Model_crud_test extends TestCase
 {
     public function setUp()
     {

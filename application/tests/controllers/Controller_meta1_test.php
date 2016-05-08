@@ -8,7 +8,7 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-class Meta1_controller_test extends TestCase
+class Controller_Meta1_test extends TestCase
 {
 	public function test_index()
 	{
@@ -21,7 +21,7 @@ class Meta1_controller_test extends TestCase
 		$this->assertNotContains('A PHP Error was encountered', $output);
 	}
 
-	public function test_method_404()
+	public function test_unknown_method_returns_404()
 	{
 		$this->request('GET', ['Meta_test1', 'method_not_exist']);
 		$this->assertResponseCode(404);

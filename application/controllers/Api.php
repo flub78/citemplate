@@ -104,6 +104,17 @@ class Api extends REST_Controller {
         );
         return $this->get_elements($params);
     }
+    
+    /*
+     * PHPUNIT test support for get_user
+     */
+    function test_user_get () {
+    	// echo $this->user_get();
+    	
+    	// Todo: find an explaination to the json PHPUNIT incompatibility
+    	// for an unknow reason, the routine above breaks the PHPUNIT test site.
+    	// it works perfectly when invoked in CI application.
+    }
 
     /**
      * Fetch group

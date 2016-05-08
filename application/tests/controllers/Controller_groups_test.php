@@ -8,7 +8,7 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-class Groups_controller_test extends TestCase
+class Controller_Groups_test extends TestCase
 {
 
 	public function setUp()
@@ -34,7 +34,7 @@ class Groups_controller_test extends TestCase
 		}
 	}
 
-	public function test_method_404()
+	public function test_unknown_method_returns_404()
 	{
 		$this->request('GET', ['Groups', 'unknow_method']);
 		$this->assertResponseCode(404);

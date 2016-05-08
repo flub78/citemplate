@@ -8,7 +8,7 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-class Welcome_controller_test extends TestCase
+class Controller_Welcome_test extends TestCase
 {
 	public function test_index()
 	{
@@ -36,7 +36,7 @@ class Welcome_controller_test extends TestCase
 
 	}
 
-	public function test_method_404()
+	public function test_unknown_method_returns_404()
 	{
 		$this->request('GET', ['Welcome', 'method_not_exist']);
 		$this->assertResponseCode(404);

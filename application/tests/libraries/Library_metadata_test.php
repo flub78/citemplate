@@ -1,5 +1,5 @@
 <?php
-class Metadata_library_test extends TestCase {
+class Library_Metadata_test extends TestCase {
     public function setUp() {
         $this->resetInstance();
         $this->CI->load->library('metadata');

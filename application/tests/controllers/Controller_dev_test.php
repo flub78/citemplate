@@ -8,7 +8,7 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-class Dev_controller_test extends TestCase
+class Controller_Dev_test extends TestCase
 {
 	public function setUp()
 	{
@@ -44,7 +44,7 @@ class Dev_controller_test extends TestCase
 		$this->assertContains('Reference language', $output);
 	}
 
-	public function test_method_404()
+	public function test_unknown_method_returns_404()
 	{
 		$this->request('GET', ['Dev', 'undefined_method']);
 		$this->assertResponseCode(404);

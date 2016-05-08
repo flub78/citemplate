@@ -25,6 +25,14 @@
               <directory suffix=".php">../views/bootstrap</directory>
               <directory suffix=".php">../views/ciauth</directory>
               <directory suffix=".php">../views/errors</directory>
+              <directory suffix=".php">../views/auth</directory>
+              <file>../controllers/Auth.php</file>
+              <file>../controllers/Api.php</file>
+              <file>../models/Ion_auth_model.php</file>
+              <file>../libraries/Bcrypt.php</file>
+              <file>../libraries/Unzip.php</file>
+              <file>../libraries/Format.php</file>
+              <file>../libraries/Ion_auth.php</file>
             </exclude>
 		</whitelist>
 	</filter>
@@ -32,5 +40,6 @@
 		<log type="coverage-html" target="build/coverage"/>
 		<log type="coverage-clover" target="build/logs/clover.xml"/>
 		<log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false"/>
-	</logging>
+        <log type="testdox-html" target="build/testdox.html"/>	
+    </logging>
 </phpunit>

@@ -8,7 +8,7 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-class Bootstrap_controller_test extends TestCase
+class Controller_Bootstrap_test extends TestCase
 {
 
 	function __construct() {
@@ -32,7 +32,7 @@ class Bootstrap_controller_test extends TestCase
 		}
 	}
 
-	public function test_method_404()
+	public function test_unknown_method_returns_404()
 	{
 		$this->request('GET', ['Bootstrap', 'unknow_method']);
 		$this->assertResponseCode(404);

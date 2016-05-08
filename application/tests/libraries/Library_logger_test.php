@@ -1,6 +1,6 @@
 <?php
 
-class Logger_library_test extends TestCase
+class Library_Logger_test extends TestCase
 {
     public function setUp()
     {

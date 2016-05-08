@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Testtest extends CI_Controller {
+class TestApplication extends CI_Controller {
 
 	/**
 	 * Constructor

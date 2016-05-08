@@ -22,7 +22,7 @@ class Controller_users_test extends TestCase
 		$this->model = $this->CI->model;
 	}
 
-	public function test_method_404()
+	public function test_unknown_method_returns_404()
 	{
 		$this->request('GET', ['Users', 'unknow_method']);
 		$this->assertResponseCode(404);

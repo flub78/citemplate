@@ -1,6 +1,6 @@
 <?php
 
-class User_model_test extends TestCase
+class Model_User_test extends TestCase
 {
     public function setUp()
     {

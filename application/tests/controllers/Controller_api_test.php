@@ -13,9 +13,9 @@ require_once(APPPATH . '/third_party/Requests.php');
 // Next, make sure Requests can load internal classes
 Requests::register_autoloader();
 
-class Api_controller_test extends TestCase
+class Controller_Api_test extends TestCase
 {
-	public function test_index()
+	public function test_return_from_ajax_methods()
 	{
 		$this->resetInstance();
 		$this->CI->load->library('Ion_auth');
@@ -47,15 +47,15 @@ class Api_controller_test extends TestCase
 		
 	}
 
-	public function test_method_404()
+	public function test_unknown_method_returns_404()
 	{
 		$this->request('GET', ['Api', 'method_not_exist']);
 		$this->assertResponseCode(404);
 	}
 	
-	public function test_direct()
+	public function test_json_support_methods()
 	{
-// 		$this->ajaxRequest('GET', ['Api', 'user_get']);
+ 		$this->ajaxRequest('GET', ['Api', 'test_user_get']);
 	}
 
 }
