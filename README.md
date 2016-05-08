@@ -27,3 +27,40 @@ Git repo
 --------
 
   [https://github.com/flub78/citemplate]
+  
+Installation
+------------
+
+* upload the project in one WEB server directory
+* create a Mysql database
+* edit application/config/config.php to define the base URL
+* edit application/config/database.php to define the database access parameters
+
+Access to the application, the installation is automatic 
+
+Tests
+-----
+
+To run the unit tests:
+    cd application/tests
+    phpunit
+    
+    # to run one unit test
+    phpunit helpers/Helper_metadata_test.php
+    
+
+To run the watir tests:
+
+    cd watir
+    source setenv.sh
+    
+    # to run one test
+    ruby test_template.rb
+    
+    # to run all tests
+    rake test
+    
+    # to clean the test results
+    rake clean
+    
+    

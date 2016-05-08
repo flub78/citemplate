@@ -43,7 +43,7 @@ echo "    \$CONFIG_FILE=$CONFIG_FILE"
 echo "    \$BASE_URL_PATTERN=$BASE_URL_PATTERN"
 
 # temporairement faire une copy
-mv $CONFIG_FILE "$CONFIG_FILE.svg"
+mv -f $CONFIG_FILE "$CONFIG_FILE.svg"
 cp /opt/citemplate/config.php $CONFIG_FILE
 
 
@@ -54,14 +54,14 @@ cp /opt/citemplate/config.php $CONFIG_FILE
 # Nettoyage des répertoires
 
 # Vérification des droits
-chmod a+w $PROJECT_DIR/application/config/program.php
+chmod -f a+w $PROJECT_DIR/application/config/program.php
 
-chmod 777 $PROJECT_DIR/application/logs
-chmod 777 $PROJECT_DIR/uploads
+chmod -f 777 $PROJECT_DIR/application/logs
+chmod -f 777 $PROJECT_DIR/uploads
 mkdir -p $PROJECT_DIR/uploads/restore
-chmod 777 $PROJECT_DIR/uploads/restore
+chmod -f 777 $PROJECT_DIR/uploads/restore
 
-find $PROJECT_DIR -type d -exec chmod a+wx {} \;
-chmod -R a+r $PROJECT_DIR
+find $PROJECT_DIR -type d -exec chmod -f a+wx {} \;
+chmod -f -R a+r $PROJECT_DIR
 
-
+return 0

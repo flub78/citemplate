@@ -43,7 +43,7 @@ class Welcome extends CI_Controller {
 	 *
 	 * Return true when installation is OK
 	 */
-	protected function install_ok() {
+	protected function installation() {
 		if (!$this->config->item('check_install')) {
 			return true;
 		}
@@ -166,7 +166,7 @@ class Welcome extends CI_Controller {
 	 * Project home page
 	 */
 	public function home() {
-		if (!$this->install_ok()) {
+		if (!$this->installation()) {
 			return;
 		}
 
