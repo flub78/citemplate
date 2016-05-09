@@ -65,6 +65,8 @@ class TestInternational < ApplicationTest
   # --------------------------------------------------------------------------------
   def test_english
     
+    description('pages are displayed in English', 'English is set in config file')
+
     puts "#\tTest case: English"
     self.set_language('english')
     self.login('admin', 'admin')
@@ -85,7 +87,7 @@ class TestInternational < ApplicationTest
   # --------------------------------------------------------------------------------
   def test_french
     
-    puts "#\tTest case: French"
+    description('pages are displayed in French', 'French is set in config file')
     self.set_language('french')
     self.login('admin', 'admin')
     

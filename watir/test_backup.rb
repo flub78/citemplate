@@ -32,7 +32,8 @@ class TestBackup < ApplicationTest
   # Test test
   # --------------------------------------------------------------------------------
   def test_backup
-    puts "#\tTest case: backup"
+    description('backup is created', 'called by program')
+
     @b.goto @root_url
     screenshot('scr_test.png')
     

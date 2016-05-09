@@ -17,9 +17,37 @@ class ApplicationTest < MiniTest::Test
   # Constructor
   def initialize(arg)
     super
-    puts "\n# " + self.class.to_s
+    puts "\n# Test suite " + self.class.to_s
   end
   
+  # --------------------------------------------------------------------------------
+  # Display a comment during test
+  # --------------------------------------------------------------------------------
+  def comment(str)
+    puts "# " + str
+  end
+
+
+  # --------------------------------------------------------------------------------
+  # Display a test description
+  # @param verify what is tested
+  # @param pwhen on which action
+  # @param given in which context
+  # --------------------------------------------------------------------------------
+  def description(verify="", pwhen="", given="")
+    comment("test " + self.class.name + ':' + caller[0].split(' ')[1].slice(1..-2))
+
+    if (!verify.empty?)
+      comment('   Verify ' + verify)
+    end
+    if (!pwhen.empty?)
+      comment('   When ' + pwhen)
+    end
+    if (!given.empty?)
+      comment('   Given ' + given)
+    end
+  end
+
   # --------------------------------------------------------------------------------
   # Run before every test
   # --------------------------------------------------------------------------------
@@ -101,7 +129,7 @@ class ApplicationTest < MiniTest::Test
   # Assert with traces
   # --------------------------------------------------------------------------------
   def check(assertion, description = "")
-    puts "\t# assert: " + self.class.name + " #{description}"
+    puts "#\t assert: " + self.class.name + " #{description}"
     if (!assertion)
       self.screenshot('failed-' + DateTime.now.to_s + '-' + description + '.png')
     end
@@ -112,6 +140,8 @@ class ApplicationTest < MiniTest::Test
   # save a screenshot
   # --------------------------------------------------------------------------------
   def screenshot(filename)
+    screen_url = (ENV['SCREENSHOTS_URL']) ? ENV['SCREENSHOTS_URL'] : ''
+    puts "#\t screenshot: " + screen_url + filename
     @b.screenshot.save 'screenshots/' + filename
   end
 

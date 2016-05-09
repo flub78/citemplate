@@ -32,6 +32,8 @@ class TestUsers < ApplicationTest
   # --------------------------------------------------------------------------------
   def test_crud
     
+    description('CRUD operation', 'on user table')
+
     table = 'users'
     controller = 'users'
     

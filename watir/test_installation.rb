@@ -35,7 +35,8 @@ class TestInstallation < ApplicationTest
   #   - check that it is possible to log in with default user
   # --------------------------------------------------------------------------------
   def test_install
-    puts "#\tTest case: installation"
+    description('program is installed', 'on any database initial state')
+
 
     # Reset the database    
     sql = 'DROP DATABASE `ci3`;'
