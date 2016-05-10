@@ -45,6 +45,10 @@ To run the unit tests:
     cd application/tests
     phpunit
     
+    In this case the coverage analysis may be found in application/tests/build/coverage/index.html
+    
+    
+    
     # to run one unit test
     phpunit helpers/Helper_metadata_test.php
     
