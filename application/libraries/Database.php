@@ -23,7 +23,25 @@ if (!defined('BASEPATH'))
 	exit ('No direct script access allowed');
 
 /**
- * Database maangement
+ * Database management
+ * 
+ * This libraries provides both global services for the WEB application
+ * - backup to backup the database 
+ * - drop_all to delete and recreate the tables
+ * - sql a basic access to the database mainly used to restore an application database backup
+ * 
+ * and also database access to the PHPUNIT tests
+ * - drop to delete the databse using mysql CLI (to cleanup)
+ * - create to create a database using mysql CLI 
+ * - restore to reload a database using mysql CLI (to quickly reload a test database)
+ * 
+ * Others test related entries are
+ * - table_list to get the list of table in a database
+ * - table_count to get the number of elements of a table (or use the generic model)
+ * 
+ * Note that these low level routines are not recommended for complex database access. For complex 
+ * queries, better to use and enhance on demand the generic model in core/My_Model.php or
+ * develop specific model routines.
 */
 class Database  {
 
@@ -122,28 +140,18 @@ class Database  {
 	}
 
 	/*
-	 * Drop all the tables
+	 * Drop and recreate the database
 	*/
 	public function drop_all () {
 	    $database = $this->CI->db->database;
 	    if ($this->CI->dbforge->drop_database($database))
 	    {
-	        echo "Database $database deleted!" . br();
+	        echo "Database $database deleted!" . br() . "\n";
 	    }
 	    if ($this->CI->dbforge->create_database($database))
 	    {
-	        echo "Database $database created!" . br();
+	        echo "Database $database created!" . br() . "\n";
 	    }
- 	    exit;
-// 	    $this->CI->db->query('SET FOREIGN_KEY_CHECKS=0;');
-// 		foreach ($this->application_tables as $table) {
-// 			$this->CI->dbforge->drop_table($table);
-// 		}
-// 		foreach ($this->application_views as $table) {
-// 		    $sql = "DROP VIEW `$table`";
-// 		    $this->CI->db->query($sql);
-// 		}
-// 		$this->CI->db->query('SET FOREIGN_KEY_CHECKS=1;');
 	}
 
 	public function sql ($sql, $return_result = false) {
@@ -152,16 +160,63 @@ class Database  {
         $all_results = array();
 		foreach ($reqs as $req) { // et on les éxécute
 			if (trim($req) != "") {
-			    // echo "req = '$req'<br>";
+			    // echo "req = '$req'\n";
 
 				if (preg_match('/.*utf8_general_ci$/', $req)) {
 				    continue;
 				}
 				$res = $this->CI->db->query($req);
+				// var_dump($res->result());
+				
 				if ($return_result && $res)
 	                $all_results[] = $res->result_array();
 			}
 		}
         return $all_results;
+	}
+	
+	/**
+	 * restore a database using msql CLI
+	 * @param unknown $filename
+	 * @param string $user
+	 * @param string $password
+	 * @param string $database
+	 */
+	public function restore($filename, $user="", $password="", $database="") {
+		$cmd = "mysql --user=$user --password=$password $database < $filename";
+		system($cmd);
+	}
+	
+	/**
+	 * drop a database using mysql CLI
+	 * @param string $database
+	 * @param string $user
+	 * @param string $password
+	 */
+	public function drop($database = "", $user="", $password="") {
+		
+	}
+	
+	/**
+	 * Create a database using MySql CLI
+	 * @param unknown $database
+	 * @param string $user
+	 * @param string $password
+	 */
+	public function create($database, $user="", $password="") {
+	
+	}
+	
+	/**
+	 * Return the list of table in the database
+	 */
+	public function show_tables () {
+		$result = $this->sql('show tables;', true);
+		$res = array();
+		$database = $this->CI->db->database;
+		foreach ($result[0] as $table) {
+			$res[] = $table['Tables_in_' . $database];
+		}
+		return $res;
 	}
 }

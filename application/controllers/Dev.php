@@ -145,7 +145,10 @@ LIMIT 0 , 30
 	public function test()
 	{
 		$fields = $this->db->field_data('users');
-		var_dump($fields);
+		//var_dump($fields);
+		
+		$tables = $this->db->query("select * from users;");
+		var_dump($tables->result());
 	}
 
 	/**
