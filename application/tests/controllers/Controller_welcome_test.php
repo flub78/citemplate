@@ -52,4 +52,25 @@ class Controller_Welcome_test extends TestCase
 			'Your APPPATH seems to be wrong. Check your $application_folder in tests/Bootstrap.php'
 		);
 	}
+
+	public function test_installation()
+	{
+		$this->resetInstance();
+		$this->CI->load->library('Ion_auth');
+		$this->CI->ion_auth->login('admin', 'admin', true);
+		
+		
+        // to reload a test database
+        $this->CI->load->library('Database');
+        $this->database = new Database();
+        $this->database->drop_all();
+        $this->CI->db->close();
+        $this->CI->load->database();
+        
+		$output = $this->request('GET', ['Welcome', 'home']);
+		$this->assertNotContains('A PHP Error was encountered', $output);
+	
+	}
+	
+	
 }

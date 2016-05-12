@@ -182,31 +182,16 @@ class Database  {
 	 * @param string $password
 	 * @param string $database
 	 */
-	public function restore($filename, $user="", $password="", $database="") {
+	public function restore($filename, $user="", $password="", $database="", $reset=false) {
+		if ($reset) {
+			$this->drop_all();
+        	$this->CI->db->close();
+        	$this->CI->load->database();
+		}
 		$cmd = "mysql --user=$user --password=$password $database < $filename";
 		system($cmd);
 	}
-	
-	/**
-	 * drop a database using mysql CLI
-	 * @param string $database
-	 * @param string $user
-	 * @param string $password
-	 */
-	public function drop($database = "", $user="", $password="") {
 		
-	}
-	
-	/**
-	 * Create a database using MySql CLI
-	 * @param unknown $database
-	 * @param string $user
-	 * @param string $password
-	 */
-	public function create($database, $user="", $password="") {
-	
-	}
-	
 	/**
 	 * Return the list of table in the database
 	 */

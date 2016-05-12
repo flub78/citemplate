@@ -36,18 +36,21 @@ Installation
 * edit application/config/config.php to define the base URL
 * edit application/config/database.php to define the database access parameters
 
-Access to the application, the installation is automatic 
+Access to the application, the installation is automatic. If the program detects that the installation has not been done, it triggers the process. 
 
 Tests
 -----
 
+Testing is done at two level: unit tests using PHPUNIT for which the objective is a good code coverage. These tests should call the code both in correct and erroneous ways. There is also end to end, by controlling a WEB browser with ruby scripts using the WATIR framework. For these tests the objective is a good feature coverage including installation, backup and recovery, etc.
+
+The PHPUnit tests uses the Agile documentation feature and a short description of the test cases is generated in HTML format. WATIR tests are self documented, and youshould be able to understand the test cases from their output. 
+
 To run the unit tests:
+    
     cd application/tests
     phpunit
     
     In this case the coverage analysis may be found in application/tests/build/coverage/index.html
-    
-    
     
     # to run one unit test
     phpunit helpers/Helper_metadata_test.php

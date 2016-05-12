@@ -7,6 +7,11 @@ class Model_crud_test extends TestCase
         $this->resetInstance();
         $this->CI->load->model('crud_model', 'model');
         $this->model = $this->CI->model;
+        
+        // to reload a test database
+        $this->CI->load->library('Database');
+        $this->database = new Database();
+        $this->database->restore('./application/tests/test_database_1.sql', 'ci3', 'ci3', 'ci3', true);
     }
 
     public function test_get_category_list()

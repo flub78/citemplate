@@ -269,74 +269,31 @@ class MY_Controller extends CI_Controller {
 
     /**
      * Form validation callback
-     *
-     * @param unknown $timestamp
-     * @return boolean date_parse_from_format returns array (size=12)
-     *         'year' => int 2015
-     *         'month' => int 11
-     *         'day' => int 5
-     *         'hour' => int 13
-     *         'minute' => int 20
-     *         'second' => int 0
-     *         'fraction' => boolean false
-     *         'warning_count' => int 0
-     *         'warnings' =>
-     *         array (size=0)
-     *         empty
-     *         'error_count' => int 0
-     *         'errors' =>
-     *         array (size=0)
-     *         empty
-     *         'is_localtime' => boolean false
+     * 
+     * For easy unit testing implementations are done in the validators helper
      */
+    
+    /**
+     * @param unknown $timestamp
+     * @return boolean      */
     public function valid_timestamp($ts) {
-        if ($ts == '') {
-            return true;
-        }
-        $parsed = date_parse_from_format(translation("format_timestamp"), $ts);
-
-        if (isset($parsed ['error_count']) && $parsed ['error_count']) {
-            $this->form_validation->set_message('valid_timestamp', translation('valid_timestamp'));
-            return FALSE;
-        }
-        $year = $parsed ['year'];
-        $month = $parsed ['month'];
-        $day = $parsed ['day'];
-        $hour = $parsed ['hour'];
-        $minute = $parsed ['minute'];
-        $second = $parsed ['second'];
-        $timestamp = "$year-$month-$day $hour:$minute:$second";
-        return $timestamp;
-    }
+    	return valid_timestamp($ts);
+     }
 
     /**
      *
      * @param unknown $time
      */
     public function valid_time($time) {
-        return $time;
+        return valid_time($time);
     }
 
     /**
      *
-     * @param unknown $time
+     * @param unknown $date
      */
     public function valid_date($date) {
-        if ($date == '') {
-            return true;
-        }
-        $parsed = date_parse_from_format(translation("format_date"), $date);
-
-        if (isset($parsed ['error_count']) && $parsed ['error_count']) {
-            $this->form_validation->set_message('valid_date', translation('valid_date'));
-            return FALSE;
-        }
-        $year = $parsed ['year'];
-        $month = $parsed ['month'];
-        $day = $parsed ['day'];
-
-        $result = sprintf("%04d-%02d-%02d", $year, $month, $day);
-        return $result;
+    	return valid_date($date);
     }
 
     /**
@@ -344,19 +301,14 @@ class MY_Controller extends CI_Controller {
      * @param unknown $epoch
      */
     public function valid_epoch($epoch) {
-        $parsed = date_parse_from_format(translation("format_epoch"), $epoch);
-        if (isset($parsed ['error_count']) && $parsed ['error_count']) {
-            $this->form_validation->set_message('valid_epoch', translation('valid_epoch'));
-            return FALSE;
-        }
-        return strtotime($epoch);
+    	return valid_epoch($epoch);
     }
 
     /**
      *
-     * @param unknown $time
+     * @param unknown $currency
      */
     public function valid_currency($currency) {
-        return $currency;
+        return valid_currency($currency);
     }
 }

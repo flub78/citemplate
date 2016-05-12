@@ -16,9 +16,6 @@ class Controller_DatabaseMgt_test extends TestCase
 		$this->CI->load->library('Ion_auth');
 		$this->CI->ion_auth->login('admin', 'admin', true);
 
-//  		$output = $this->request('GET', ['DatabaseMgt', 'backup', 'structure']);
-// 		$this->assertNotContains('A PHP Error was encountered', $output);
-
 		$output = $this->request('GET', ['DatabaseMgt', 'restore']);
 		$this->assertNotContains('A PHP Error was encountered', $output);
 
@@ -29,4 +26,23 @@ class Controller_DatabaseMgt_test extends TestCase
 
 	}
 
+	public function test_reset() {
+		$this->resetInstance();
+		$this->CI->load->library('Ion_auth');
+		$this->CI->ion_auth->login('admin', 'admin', true);
+				
+		$output = $this->request('GET', ['DatabaseMgt', 'reset']);
+		
+		$this->CI->db->close();
+		$this->CI->load->database();
+		
+		$this->CI->load->library('Database');
+		$this->database = new Database();
+		
+		// to reload a test database
+		$this->database->restore('./application/tests/test_database_1.sql', 'ci3', 'ci3', 'ci3', true);
+		$tables = $this->database->show_tables();
+		$this->assertEquals(7, count($tables), "7 tables after reload");
+		
+	}
 }

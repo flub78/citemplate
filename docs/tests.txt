@@ -1,0 +1,31 @@
+See the Manifest file Readme.md for a global test description.
+
+PHPUNIT
+=======
+
+Comments on coverage, explain why some tests have not a good coverage
+
+controllers
+-----------
+
+    - DatabaseMgt
+        reset: difficult to survive
+        backup: interaction with the user
+        
+    - User
+        update: I have to understand how to pass an array of parameters
+        
+core
+----
+
+    - My_Model: should be improved
+    
+Libraries
+---------
+
+    to be completed
+    
+Models
+------
+
+    - Groups: should be improved
