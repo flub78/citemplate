@@ -19,5 +19,14 @@ class Model_User_test extends TestCase
     }
 
 
+    public function test_selector () {
+    	$selector =  $this->model->selector('users', 'id');
+    	var_dump($selector);
+    }
 
+    public function test_year_selector () {
+    	$selector =  $this->model->year_selector('meta_test1', 'expiration_date');
+    	var_dump($selector);
+    }
+    
 }
