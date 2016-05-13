@@ -69,6 +69,14 @@ class Users extends MY_Controller {
 	 * it is not modified.
 	 */
 	public function update($id, $data = array()) {
+		
+// 		echo "users.update id=$id";
+// 		var_dump($data);
+// 		echo "Post =";
+// 		var_dump($_POST);
+// 		echo "Get = ";
+// 		var_dump($_GET);
+// 		exit;
 
 		if (isset($data['password']) && ($data['password'] != "")) {
 			$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);

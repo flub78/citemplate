@@ -1,0 +1,44 @@
+PHPUNIT and CodeIgniter
+========================
+
+CodeIgniter 3.0 is at least integrated with PHPUNIT
+
+https://github.com/kenjis/ci-phpunit-test
+
+See application/tests for examples of unit tests for controllers, libraries, helpers, models and views.
+
+
+By default form_open generate a POST call
+
+<?= form_open($controller . "/validate/$action", array("class" => "form-register")); ?>
+generates
+
+<form action="http://localhost/citemplate/index.php/users/validate/edit/3" class="form-register" method="post" accept-charset="utf-8">
+
+submit fills data and $_POST
+
+data = array (size=9)
+  'first_name' => string 'admin_firstname_0' (length=17)
+  'last_name' => string 'admin_name_0 modified' (length=21)
+  'email' => string 'user_0@gmail.com' (length=16)
+  'username' => string 'user_0' (length=6)
+  'phone' => string 'testadmin' (length=9)
+  'password' => string 'password' (length=8)
+  'active' => string '1' (length=1)
+  'created_on' => int 1463166677
+  'last_login' => int 1463090400
+
+$_POST = array (size=11)
+  'first_name' => string 'admin_firstname_0' (length=17)
+  'last_name' => string 'admin_name_0 modified' (length=21)
+  'email_value' => string 'user_0@gmail.com' (length=16)
+  'username_value' => string 'user_0' (length=6)
+  'phone' => string 'testadmin' (length=9)
+  'password' => string 'password' (length=8)
+  'confirm-password' => string '' (length=0)
+  'active' => string '1' (length=1)
+  'created_on' => int 1463166677
+  'last_login' => int 1463090400
+  'submit' => string 'submit' (length=6)
+
+See Controller_users_test.php for an example of a complex POST request.

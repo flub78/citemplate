@@ -93,5 +93,67 @@ class Controller_users_test extends TestCase
 		$new_count =  $this->model->count('users');
 		$this->assertEquals($count, $new_count, "One user has been deleted");
 	}
+	
+	/**
+	 * when called by the WEB application:
+	 * 
+	 * users.update id=3
+
+data = array (size=9)
+  'first_name' => string 'admin_firstname_0' (length=17)
+  'last_name' => string 'admin_name_0 modified' (length=21)
+  'email' => string 'user_0@gmail.com' (length=16)
+  'username' => string 'user_0' (length=6)
+  'phone' => string 'testadmin' (length=9)
+  'password' => string 'password' (length=8)
+  'active' => string '1' (length=1)
+  'created_on' => int 1463166677
+  'last_login' => int 1463090400
+
+$_POST = array (size=11)
+  'first_name' => string 'admin_firstname_0' (length=17)
+  'last_name' => string 'admin_name_0 modified' (length=21)
+  'email_value' => string 'user_0@gmail.com' (length=16)
+  'username_value' => string 'user_0' (length=6)
+  'phone' => string 'testadmin' (length=9)
+  'password' => string 'password' (length=8)
+  'confirm-password' => string '' (length=0)
+  'active' => string '1' (length=1)
+  'created_on' => int 1463166677
+  'last_login' => int 1463090400
+  'submit' => string 'submit' (length=6)
+ 
+	 */
+	function test_update() {
+
+		$args = array (
+  			'first_name' => 'admin_firstname_0',
+  			'last_name' => 'admin_name_0 modified',
+  			'email' => 'user_0@gmail.com',
+  			'username' => 'user_0',
+  			'phone' => 'testadmin',
+  			'password' => 'password',
+  			'active' => '1',
+  			'created_on' => 1463166677,
+  			'last_login' => 1463090400);
+		
+		$post = array(
+				"first_name" => "John",
+				"last_name" => "Doe",
+				"username_value" => "test",
+				"company" => "World Wide",
+				"email_value"	=> "test@free.fr",
+				"phone" => "0123456789",
+				'password' => 'password',
+				'confirm-password' => 'password',
+				'active' => '1',
+				'created_on' => 1463166677,
+				'last_login' => 1463090400,
+				'submit' => 'submit'
+		);
+		$output =  $this->request('POST', ['users', 'update', '3', $args], $post);
+		
+		// nothing to test. Only database query may demonstrate that the test is OK
+	}
 
 }
