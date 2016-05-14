@@ -26,4 +26,13 @@ class TestCase extends CIPHPUnitTestCase
 	    }
 	}
 
+	/**
+	 * Save outputs got during tests
+	 * @param unknown $output
+	 * @param unknown $name
+	 */
+	function screenshot($output, $name) {
+		$filename = getcwd() . '/application/tests/build/outputs/' . $name . '.out';
+		file_put_contents($filename, $output);
+	}
 }

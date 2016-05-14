@@ -28,7 +28,9 @@ class Controller_Dev_test extends TestCase
 
 	public function test_phpinfo()
 	{
-		$output = $this->request('GET', ['Dev', 'phpinfo']);
+		//$output = $this->request('GET', ['Dev', 'phpinfo']);
+		$output = $this->request('GET', 'Dev/phpinfo');
+		$this->screenshot($output, "phpinfo");
 		$this->assertContains('PHP Version', $output);
 	}
 
