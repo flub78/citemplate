@@ -32,7 +32,7 @@ class TestCase extends CIPHPUnitTestCase
 	 * @param unknown $name
 	 */
 	function screenshot($output, $name) {
-		$filename = getcwd() . '/application/tests/build/outputs/' . $name . '.out';
+		$filename = getcwd() . '/application/tests/build/outputs/' . $name . '.html';
 		file_put_contents($filename, $output);
 	}
 }

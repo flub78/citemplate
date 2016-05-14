@@ -1,0 +1,1 @@
+This folder contains features tests. Features tests usually involve several controllers and libraries.
