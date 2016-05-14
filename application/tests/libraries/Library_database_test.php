@@ -30,7 +30,7 @@ class Library_Database_test extends TestCase
 
         
         $tables = $this->database->show_tables();
-        $this->assertEquals(7, count($tables), "7 tables loaded from test database");
+        $this->assertEquals(true, count($tables) >= 7, "7 tables loaded from test database");
         
     }
 

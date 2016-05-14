@@ -34,6 +34,8 @@
               <file>../libraries/Unzip.php</file>
               <file>../libraries/Format.php</file>
               <file>../libraries/Ion_auth.php</file>
+              <file>../views/std_footer.php</file>
+              <file>../views/std_header.php</file>
             </exclude>
 		</whitelist>
 	</filter>

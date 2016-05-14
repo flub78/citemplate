@@ -19,8 +19,15 @@ class Model_User_test extends TestCase
     }
 
 
+    public function test_select () {
+    	$select =  $this->model->select('users', 'id', array(), array('start' => '10', 'length' => '10'));
+    	var_dump($select);
+    }
+    
     public function test_selector () {
-    	$selector =  $this->model->selector('users', 'id');
+    	$selector =  $this->model->selector('users', 'id', array(), array('order' => 'asc', 'with' => 'all'));
+    	var_dump($selector);
+    	$selector =  $this->model->selector('users', 'id', array(), array('order' => 'desc', 'with' => 'null'));
     	var_dump($selector);
     }
 
