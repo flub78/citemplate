@@ -340,14 +340,10 @@ CREATE TABLE `meta_test1` (
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`ci3`@`localhost` SQL SECURITY DEFINER VIEW `users_groups_view` AS select `users`.`username` AS `username`,`groups`.`name` AS `groupname` from ((`users` join `users_groups`) join `groups`) where ((`users`.`id` = `users_groups`.`user_id`) and (`groups`.`id` = `users_groups`.`group_id`));
 
-utf8_general_ci;
-
 #
 # TABLE STRUCTURE FOR: users_view
 #
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`ci3`@`localhost` SQL SECURITY DEFINER VIEW `users_view` AS select `users`.`id` AS `id`,`users`.`ip_address` AS `ip_address`,`users`.`username` AS `username`,`users`.`password` AS `password`,`users`.`salt` AS `salt`,`users`.`email` AS `email`,`users`.`activation_code` AS `activation_code`,`users`.`forgotten_password_code` AS `forgotten_password_code`,`users`.`forgotten_password_time` AS `forgotten_password_time`,`users`.`remember_code` AS `remember_code`,`users`.`created_on` AS `created_on`,`users`.`last_login` AS `last_login`,`users`.`active` AS `active`,`users`.`first_name` AS `first_name`,`users`.`last_name` AS `last_name`,`users`.`company` AS `company`,`users`.`phone` AS `phone`,concat(`users`.`first_name`,' ',`users`.`last_name`) AS `image` from `users`;
-
-utf8_general_ci;
 
 
