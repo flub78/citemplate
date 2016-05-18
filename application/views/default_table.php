@@ -52,7 +52,15 @@ $this->load->library ( 'table' );
 
 				<div class="row">
 					<div class="col-lg-6 col-lg-offset-4 text-error">
-						<p class="text"><?php echo isset($message) ? $message : ""; ?></p>
+						<p class="text text-error text-warning"><?php 
+						if (isset($message)) {
+							echo $message;
+						}
+						$flash_data = $this->session->userdata('message');
+						if ($flash_data) {
+							echo $flash_data;
+						}
+						?></p>
 					</div>
 				</div>
 				<div class="row">

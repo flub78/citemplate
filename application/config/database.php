@@ -83,3 +83,7 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+// Application should check for database error and db_debug should be false
+// when true, the database error is display on screen with a message difficult to understand
+// for the end user
+$db['default']['db_debug'] = false;

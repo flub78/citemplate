@@ -120,6 +120,17 @@ class MY_Model extends CI_Model {
     function delete($table, $where = array ()) {
         $this->logger->debug("delete from table=" . $table . ", where=" . var_export($where, true));
         $this->db->delete($table, $where);
+        
+        $error = $this->db->error();
+        
+        if ($error['code']) {
+        	$error = $this->db->error();
+        	$message = "Database error: " . $error['code'] . br();
+        	// $message .= $error['message'] . br();
+        	$message .= "This operation is not authorized as others data depends on it";
+        	
+        	$this->session->set_flashdata('message', $message);
+        }
     }
 
     /**
