@@ -75,3 +75,9 @@ Note on technology:
         
         * It could be done in Ruby outside the project.
         
+Notes on views.
+
+    Push to its limits, the metadata approach would tend to brake the strict MVC model. With the views fetching data to display.
+    
+    I am ready to consider this violation as minor. The only drawback about the approach being a tendency to multiply 
+    requests to fetch data, tendency that can be controlled with a good cache mechanism. 
