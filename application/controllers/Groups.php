@@ -42,7 +42,7 @@ class Groups extends MY_Controller {
 		parent :: __construct();
 		// specific initialization
 		$this->load->model('groups_model', 'model');
-
+		
 	}
 
 }

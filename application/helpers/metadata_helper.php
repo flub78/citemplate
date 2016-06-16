@@ -112,10 +112,11 @@ if (! function_exists ( 'datatable' )) {
 		if (!$data) {
 		    return $res;
 		}
-
+		// var_dump($data);
 		foreach ( $data as $elt ) {
 
 		    $key = table_key ( $table );
+		    // var_dump($elt);
 		    if ($key) {
 		        $id = $elt [$key];
 		        // image is deprecated. In the future the column should exist in the table or view

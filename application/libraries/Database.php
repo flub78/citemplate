@@ -99,6 +99,8 @@ class Database  {
 			$add_drop = TRUE;
 			$add_insert = TRUE;
 			$list = $this->application_tables;
+			// the following line does not work as views should not insert data
+			// $list = array_merge($this->application_tables, $this->application_views);
 		} else
 			if ($type == "structure") {
 			$filename = "structure_$dt.sql";

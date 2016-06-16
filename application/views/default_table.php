@@ -99,7 +99,7 @@ $(document).ready(function(){
 	var ajax_url = $('[name="ajax_url"]').val();
 
 	if (server_side) {
-		// alert("Server side !!!");
+		// alert("Server side !!!, ajax url = " + ajax_url);
 		var table = $('.display').dataTable( {
             stateSave: true,
             dom: 'Blfrtip',

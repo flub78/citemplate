@@ -202,6 +202,7 @@ class Meta {
                     // set the table primary key
                     if ($field->primary_key) {
                         $this->table_keys [$table] = $field->name;
+                        // echo "primary key $table  = " . $field->name .br();
                     }
 
                     // var_dump($field);

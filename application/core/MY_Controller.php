@@ -75,13 +75,14 @@ class MY_Controller extends CI_Controller {
 
         if ($this->server_side) {
             $select = array ();
-            $data ['ajax_url'] = $this->ajax_url;
+            $data ['ajax_url'] = base_url() . $this->ajax_url;
         } else {
             $select = $this->model->select_all($this->default_view);
         }
         $attrs ['fields'] = $this->table_fields;
         $attrs ['controller'] = $this->controller;
         $data ['controller'] = $this->controller;
+        
         $data ['data_table'] = datatable($this->default_view, $select, $attrs);
         $data ['server_side'] = $this->server_side;
 

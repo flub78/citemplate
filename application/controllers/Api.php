@@ -45,7 +45,10 @@ class Api extends REST_Controller {
         $this->methods ['user_get'] ['limit'] = 500; // 500 requests per hour per user/key
         $this->methods ['user_post'] ['limit'] = 100; // 100 requests per hour per user/key
         $this->methods ['user_delete'] ['limit'] = 50; // 50 requests per hour per user/key
-
+        $this->methods ['group_get'] ['limit'] = 500; // 500 requests per hour per group/key
+        $this->methods ['group_post'] ['limit'] = 100; // 100 requests per hour per group/key
+        $this->methods ['group_delete'] ['limit'] = 50; // 50 requests per hour per group/key
+        
         $this->load->model('crud_model', 'model');
 
         if (! $this->ion_auth->logged_in() && false) {
@@ -120,7 +123,7 @@ class Api extends REST_Controller {
      * Fetch group
      */
     function group_get() {
-        $fields = array('name', 'description');
+        $fields = array('id', 'name', 'description');
 
         $params = array (
                 'controller' => 'groups',
@@ -136,6 +139,7 @@ class Api extends REST_Controller {
      * Fetch something
      */
     protected function get_elements($params) {
+    	// var_dump($params);exit;
         $table = $params ['table'];
         $fields = $params ['fields'];
         $display_fields= $params ['display_fields'];
