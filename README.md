@@ -36,6 +36,8 @@ Installation
 * edit application/config/config.php to define the base URL
 * edit application/config/database.php to define the database access parameters
 
+Currently the creation of the uploads/restore directory is not automatic. Do it manually.
+
 Access to the application, the installation is automatic. If the program detects that the installation has not been done, it triggers the process. 
 
 Tests

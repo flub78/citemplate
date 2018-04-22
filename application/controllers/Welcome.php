@@ -53,13 +53,13 @@ class Welcome extends CI_Controller {
 		$errors = array();
 
 		# Check that uploads is writable
-		$uploads = getcwd() . '/uploads';
+		$uploads = join(DIRECTORY_SEPARATOR, array(getcwd(), 'uploads'));
 		if (!is_really_writable($uploads)) {
 			$errors[] =  "$uploads not writable";
 		}
 
 		# Check that uploads/restore is writable
-		$uploads .= '/restore';
+		$uploads = join(DIRECTORY_SEPARATOR, array($uploads, 'restore'));
 		if (!is_really_writable($uploads)) {
 			$errors[] =  "$uploads not writable";
 		}
