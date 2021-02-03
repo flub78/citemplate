@@ -3,6 +3,8 @@ CITEMPLATE
 
 CITEMPLATE is a project framework for CodeIgniter >= 3 
 
+(Projet abandonné), remplacé par la même chose basé sur WEBAPP et le framework Laravel.
+
 It includes:
 * an installation procedure
 * Bootstrap for adaptaion to multiple screen format and menu management
